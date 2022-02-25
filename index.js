@@ -3,7 +3,7 @@ const EnforcerMiddleware = require('openapi-enforcer-middleware');
 const express = require('express');
 require("dotenv").config();
 
-const Communities = require('./controllers/Communities');
+const Communities = require('./controllers/communities');
 const Users = require('./controllers/users');
 
 async function run () {
@@ -19,10 +19,6 @@ async function run () {
     console.error(err);
     process.exit(1);
   }); 
-  
-  app.get("/", (req, res) => {
-    res.json({ message: "Welcome to Community model services" });
-  });
   
   require("./routes/routes")(app);
   const PORT = process.env.NODE_DOCKER_PORT || 3000;

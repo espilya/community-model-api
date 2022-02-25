@@ -7,30 +7,31 @@ module.exports.getCommunities = function getCommunities (req, res, next) {
   Communities.getCommunities()
     .then(function (response) {
       //utils.writeJson(res, response);
-      return response;
+      res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };
 
-module.exports.getCommunityById = function getCommunityById (req, res, next, communityId) {
-  console.log(communityId);
+module.exports.getCommunityById = function getCommunityById (req, res, next) {
+  const communityId = req.enforcer.params['community-id'];
   Communities.getCommunityById(communityId)
     .then(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };
 
-module.exports.listCommunityUsers = function listCommunityUsers (req, res, next, communityId) {
+module.exports.listCommunityUsers = function listCommunityUsers (req, res, next) {
+  const communityId = req.enforcer.params['community-id'];
   Communities.listCommunityUsers(communityId)
     .then(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };

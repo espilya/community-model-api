@@ -15,37 +15,37 @@ exports.getCommunities = function() {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   }, {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   } ],
   "community-type" : "explicit",
   "size" : 5,
   "name" : "elderly",
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "explanation" : "People whose age is above 65",
-  "users" : [ null, null ]
+  "users" : ['23', '24' ]
 }, {
   "contributions" : [ {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   }, {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   } ],
   "community-type" : "explicit",
   "size" : 5,
   "name" : "elderly",
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "explanation" : "People whose age is above 65",
-  "users" : [ null, null ]
+  "users" : ['23', '24' ]
 } ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -71,37 +71,37 @@ exports.getCommunityById = function(communityId) {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   }, {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   } ],
   "community-type" : "explicit",
   "size" : 5,
   "name" : "elderly",
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "explanation" : "People whose age is above 65",
-  "users" : [ null, null ]
+  "users" : [ "22", "23" ]
 }, {
   "contributions" : [ {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   }, {
     "generated-content-id" : "https://...",
     "user-id" : "http://example.com/aeiou",
     "values" : [ "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]", "[\"https://w3id.org/spice/SON/PlutchikEmotion/Amazement\"]" ],
-    "parent-item" : "http://example.com/aeiou"
+    "parent-item-id" : "http://example.com/aeiou"
   } ],
   "community-type" : "explicit",
   "size" : 5,
   "name" : "elderly",
   "id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "explanation" : "People whose age is above 65",
-  "users" : [ null, null ]
+  "users" : [ "22", "23" ]
 } ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
