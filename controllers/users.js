@@ -4,7 +4,6 @@ var utils = require('../utils/writer.js');
 var Users = require('../service/UsersService');
 
 module.exports.updateUsers = function updateUsers (req, res, next) {
-  console.log(req.body);
   Users.updateUsers(req.enforcer.body)
     .then(function (response) {
       res.status(204);
