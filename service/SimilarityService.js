@@ -13,11 +13,11 @@ exports.computeDissimilarity = function(communityId,otherCommunityId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 }, {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 } ];
@@ -42,11 +42,11 @@ exports.computeKmostDissimilar = function(communityId,k) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 }, {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 } ];
@@ -71,11 +71,11 @@ exports.computeKmostSimilar = function(communityId,k) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 }, {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 } ];
@@ -100,11 +100,11 @@ exports.computeSimilarity = function(communityId,otherCommunityId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 }, {
-  "targetCommunityId" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
   "similarity-function" : "similarity-function",
   "value" : 0.8008281904610115
 } ];

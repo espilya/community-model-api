@@ -3,13 +3,15 @@
 var utils = require('../utils/writer.js');
 var Users = require('../service/UsersService');
 
-module.exports.addContribution = function addContribution (req, res, next, body, userId) {
-  Users.addContribution(req.enforcer.body, req.enforcer.params['user-id'])
+module.exports.updateUsers = function updateUsers (req, res, next) {
+  console.log(req.body);
+  Users.updateUsers(req.enforcer.body)
     .then(function (response) {
+      res.status(204);
       res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };
 
@@ -22,6 +24,6 @@ module.exports.listUserCommunities = function listUserCommunities (req, res) {
     })
     .catch(function (response) {
       //utils.writeJson(res, response);
-      console.log(response);
+      res.enforcer.send(response);
     });
 };
