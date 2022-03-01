@@ -7,9 +7,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: v1.0
+  version: v.1.1
 servers:
-- url: https://virtserver.swaggerhub.com/gjimenezUCM/SPICE-CommunityModelAPI/v1.0
+- url: https://virtserver.swaggerhub.com/gjimenezUCM/SPICE-CommunityModelAPI/v.1.1
   description: SwaggerHub API Auto Mocking
 tags:
 - name: communities
@@ -286,7 +286,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/similarityScore'
         "400":
-          description: Invalid communityIds (target or other)
+          description: Invalid community-ids (target or other)
       x-swagger-router-controller: Similarity
 components:
   schemas:
@@ -353,6 +353,9 @@ components:
         users:
           type: array
           description: A list with the users who belong to the community
+          example:
+          - "23"
+          - "24"
           items:
             $ref: '#/components/schemas/id'
       example:
@@ -375,7 +378,6 @@ components:
           type: string
         property_value:
           type: string
-      example: null
     similarityScore_inner:
       type: object
       properties:
@@ -392,6 +394,6 @@ components:
           description: similarity function employed to compute this similarity score
       example:
         target-community-id: d290f1ee-6c54-4b01-90e6-d701748f0851
-        other-community-id: d290f1ee-6c54-4b01-90e6-d701748f0852
+        other-community-id: d290f1ee-6c54-4b01-90e6-d701748f0853
         similarity-function: similarity-function
         value: 0.80082819046101150206595775671303272247314453125
