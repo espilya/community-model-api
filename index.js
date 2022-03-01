@@ -22,6 +22,8 @@ async function run () {
     console.error(err);
     process.exit(1);
   }); 
+
+  app.set("enforcer", enforcerMiddleware);
   // app.use('/docs', enforcerMiddleware.docs({
   //   padding: 0,
   //   preRedocInitScripts: ['/before-init.js'],
