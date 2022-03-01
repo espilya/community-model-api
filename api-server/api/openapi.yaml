@@ -54,8 +54,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: successful operation
@@ -81,8 +80,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: successful operation
@@ -112,8 +110,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: successful operation
@@ -165,8 +162,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       - name: k
         in: query
         description: Size of the result (k most similar communities)
@@ -201,8 +197,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       - name: other-community-id
         in: path
         description: ID of the other community to compute similarity
@@ -210,8 +205,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: A list with one similarity score object between targetCommunity
@@ -239,8 +233,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       - name: k
         in: query
         description: Size of the result (k most dissimilar communities)
@@ -275,8 +268,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       - name: other-community-id
         in: path
         description: ID of the other community to compute dissimilarity
@@ -284,8 +276,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/id'
       responses:
         "200":
           description: A list with one similarity score object between targetCommunity
