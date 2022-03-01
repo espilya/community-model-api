@@ -1,7 +1,6 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Similarity = require('../service/SimilarityService');
+const Similarity = require('../service/SimilarityService');
 
 module.exports.computeDissimilarity = function computeDissimilarity (req, res, next) {
   const communityId = req.enforcer.params['community-id'];
@@ -23,7 +22,7 @@ module.exports.computeKmostDissimilar = function computeKmostDissimilar (req, re
       res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };
 
@@ -35,7 +34,7 @@ module.exports.computeKmostSimilar = function computeKmostSimilar (req, res, nex
       res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };
 
@@ -47,6 +46,6 @@ module.exports.computeSimilarity = function computeSimilarity (req, res, next) {
       res.enforcer.send(response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      res.enforcer.send(response);
     });
 };

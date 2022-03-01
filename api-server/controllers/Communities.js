@@ -1,12 +1,10 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Communities = require('../service/CommunitiesService');
+const Communities = require('../service/CommunitiesService');
 
 module.exports.getCommunities = function getCommunities (req, res, next) {
   Communities.getCommunities()
     .then(function (response) {
-      //utils.writeJson(res, response);
       res.enforcer.send(response);
     })
     .catch(function (response) {
