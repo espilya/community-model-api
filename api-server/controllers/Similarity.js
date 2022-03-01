@@ -1,6 +1,6 @@
 'use strict';
 
-const Similarity = require('../service/SimilarityService');
+const Similarity = require('../service/SimilarityService.js');
 
 module.exports.computeDissimilarity = function computeDissimilarity (req, res, next) {
   const communityId = req.enforcer.params['community-id'];

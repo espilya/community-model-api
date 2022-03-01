@@ -1,6 +1,6 @@
 'use strict';
 
-const Communities = require('../service/CommunitiesService');
+const Communities = require('../service/CommunitiesService.js');
 
 module.exports.getCommunities = function getCommunities (req, res, next) {
   Communities.getCommunities()

@@ -15,6 +15,7 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongoose": "^6.2.4",
     "openapi-enforcer": "^1.17.0",
     "openapi-enforcer-middleware": "^2.2.0"
   },

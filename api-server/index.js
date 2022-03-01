@@ -3,7 +3,7 @@ const EnforcerMiddleware = require('openapi-enforcer-middleware');
 const express = require('express');
 require("dotenv").config();
 
-const apiyaml = "api-server/api/openapi.yaml";
+const apiyaml = "./api/openapi.yaml";
 
 
 
@@ -25,7 +25,7 @@ async function run () {
   }); 
 
   app.set("enforcer", enforcerMiddleware);
-  require("./api-server/routes/routes")(app);
+  require("./routes/routes.js")(app);
 
 
 

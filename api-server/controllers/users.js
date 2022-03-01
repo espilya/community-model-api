@@ -1,6 +1,6 @@
 'use strict';
 
-const Users = require('../service/UsersService');
+const Users = require('../service/UsersService.js');
 
 module.exports.updateUsers = function updateUsers (req, res, next) {
   Users.updateUsers(req.enforcer.body)

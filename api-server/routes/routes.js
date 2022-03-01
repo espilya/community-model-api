@@ -1,9 +1,9 @@
 module.exports = app => {
     
     const customControllers =  {
-        Users: require("../controllers/users"),
-        Communities: require("../controllers/communities"),
-        Similarity: require("../controllers/similarity")
+        Users: require("../controllers/users.js"),
+        Communities: require("../controllers/communities.js"),
+        Similarity: require("../controllers/similarity.js")
     };
 
     const enforcer = app.get("enforcer");
