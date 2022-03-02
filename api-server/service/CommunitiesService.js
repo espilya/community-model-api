@@ -11,7 +11,7 @@ const CommunityDAO = db.communities;
 exports.getCommunities = function() {
   return new Promise(function(resolve, reject) {
     let result = {};
-
+    
     CommunityDAO.all( (communities) => {
       result['application/json'] = communities;
       console.log(result);
@@ -22,8 +22,8 @@ exports.getCommunities = function() {
       }   
     });
   });
-
-}
+  
+};
 
 
 /**
@@ -47,11 +47,12 @@ exports.getCommunityById = function(communityId) {
       },
       error => {
         reject(error);
-      });    
+      }
+    );    
   });  
 };
-
-
+  
+  
 /**
 * Users who belong to a community
 * Returns a list with the ids of the users who belong to a community
@@ -73,18 +74,9 @@ exports.listCommunityUsers = function(communityId) {
       },
       error => {
         reject(error);
-      });    
+      }
+    );    
   });  
-
-
-  // return new Promise(function(resolve, reject) {
-  //   var examples = {};
-  //   examples['application/json'] = [ "d290f1ee-6c54-4b01-90e6-d701748f0851", "d290f1ee-6c54-4b01-90e6-d701748f0851" ];
-  //   if (Object.keys(examples).length > 0) {
-  //     resolve(examples[Object.keys(examples)[0]]);
-  //   } else {
-  //     resolve();
-  //   }
-  // });
-}
-
+};
+    
+    
