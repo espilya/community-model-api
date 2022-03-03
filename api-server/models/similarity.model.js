@@ -18,8 +18,9 @@ module.exports = mongoose => {
   return {
     allForId: function(communityId, onSuccess, onError) {
       Similarity.find({ "target-community-id": communityId }, function(error, data){
-        if (error) {
+        if (error || data.length === 0 ) {
           onError(error);
+          return;
         } else {
           let items= [];
           let i=0;
