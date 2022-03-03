@@ -115,23 +115,52 @@ exports.computeKmostSimilar = function(communityId,k) {
  * otherCommunityId Long ID of the other community to compute similarity
  * returns similarityScore
  **/
-exports.computeSimilarity = function(communityId,otherCommunityId) {
+exports.computeSimilarity = function(targetCommunityId,otherCommunityId) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "similarity-function" : "similarity-function",
-  "value" : 0.8008281904610115
-}, {
-  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "similarity-function" : "similarity-function",
-  "value" : 0.8008281904610115
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+    let result = {};
+    if (targetCommunityId === otherCommunityId) {
+      result['application/json'] = {
+          "target-community-id": targetCommunityId,
+          "other-community-id": targetCommunityId,
+          "similarity-function": "any",
+          value: 1.0
+      };
+      if (Object.keys(result).length > 0) {
+        resolve(result[Object.keys(result)[0]]);
+      } else {
+        resolve();
+      }      
     }
+    SimilarityDAO.getByIds(targetCommunityId, otherCommunityId, 
+      data => {
+        result['application/json'] = data;
+        if (Object.keys(result).length > 0) {
+          resolve(result[Object.keys(result)[0]]);
+        } else {
+          resolve();
+        }
+      },
+      error => {
+        reject(error);
+      }
+    );
   });
-}
+};
+//   return new Promise(function(resolve, reject) {
+//     var examples = {};
+//     examples['application/json'] = [ {
+//   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+//   "similarity-function" : "similarity-function",
+//   "value" : 0.8008281904610115
+// }, {
+//   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+//   "similarity-function" : "similarity-function",
+//   "value" : 0.8008281904610115
+// } ];
+//     if (Object.keys(examples).length > 0) {
+//       resolve(examples[Object.keys(examples)[0]]);
+//     } else {
+//       resolve();
+//     }
+//   });
 

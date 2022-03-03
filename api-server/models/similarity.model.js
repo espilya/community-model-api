@@ -20,7 +20,6 @@ module.exports = mongoose => {
       Similarity.find({ "target-community-id": communityId }, function(error, data){
         if (error || data.length === 0 ) {
           onError(error);
-          return;
         } else {
           let items= [];
           let i=0;
@@ -33,12 +32,12 @@ module.exports = mongoose => {
       }).sort({value: -1});   
       
     },
-    getById: function(id, onSuccess, onError) {
-      Similarity.findOne({_id:id}, function (error, data) {
-        if (error) {
+    getByIds: function(targetCommunityId, otherCommunityId, onSuccess, onError) {
+      Similarity.find({ "target-community-id": targetCommunityId, "other-community-id": otherCommunityId  }, function (error, data) {
+        if (error || data.length === 0 ) {
           onError(error);
         } else {
-          onSuccess(data.toJSON());
+          onSuccess(data[0].toJSON());
         }
       });
     }

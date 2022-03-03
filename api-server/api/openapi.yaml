@@ -178,7 +178,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/similarityScore'
+                type: array
+                items:
+                  $ref: '#/components/schemas/similarityScore'
+                x-content-type: application/json
         "400":
           description: Invalid communityId or query parameters
       x-swagger-router-controller: Similarity
@@ -208,8 +211,7 @@ paths:
           $ref: '#/components/schemas/id'
       responses:
         "200":
-          description: A list with one similarity score object between targetCommunity
-            and otherCommunity
+          description: A similarity score object between targetCommunity and otherCommunity
           content:
             application/json:
               schema:
@@ -249,7 +251,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/similarityScore'
+                type: array
+                items:
+                  $ref: '#/components/schemas/similarityScore'
+                x-content-type: application/json
         "400":
           description: Invalid community-id or query parameters
       x-swagger-router-controller: Similarity
@@ -279,7 +284,7 @@ paths:
           $ref: '#/components/schemas/id'
       responses:
         "200":
-          description: A list with one similarity score object between targetCommunity
+          description: The similarity score object between targetCommunity
             and otherCommunity
           content:
             application/json:
@@ -367,19 +372,8 @@ components:
         - "23"
         - "24"
     similarityScore:
-      type: array
+      type: object
       description: Schema for results that compute similarity values
-      items:
-        $ref: '#/components/schemas/similarityScore_inner'
-    usergeneratedcontent_values:
-      type: object
-      properties:
-        property_name:
-          type: string
-        property_value:
-          type: string
-    similarityScore_inner:
-      type: object
       properties:
         target-community-id:
           $ref: '#/components/schemas/id'
@@ -397,3 +391,11 @@ components:
         other-community-id: d290f1ee-6c54-4b01-90e6-d701748f0853
         similarity-function: similarity-function
         value: 0.80082819046101150206595775671303272247314453125
+    usergeneratedcontent_values:
+      type: object
+      properties:
+        property_name:
+          type: string
+        property_value:
+          type: string
+
