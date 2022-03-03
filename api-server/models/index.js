@@ -6,6 +6,7 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.communityDAO = require("./community.model.js")(mongoose);
+db.similarityDAO = require("./similarity.model.js")(mongoose);
 
 module.exports = {
     init: function() {
@@ -23,5 +24,6 @@ module.exports = {
             process.exit();
         });
     },
-    communities: db.communityDAO
+    communities: db.communityDAO,
+    similarities: db.similarityDAO
 };

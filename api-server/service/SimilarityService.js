@@ -1,5 +1,7 @@
 'use strict';
 
+const db = require("../models");
+const SimilarityDAO = db.similarities;
 
 /**
  * Dissimilarity between two communities
@@ -69,22 +71,39 @@ exports.computeKmostDissimilar = function(communityId,k) {
  **/
 exports.computeKmostSimilar = function(communityId,k) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "similarity-function" : "similarity-function",
-  "value" : 0.8008281904610115
-}, {
-  "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-  "similarity-function" : "similarity-function",
-  "value" : 0.8008281904610115
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+    let result = {};
+    SimilarityDAO.allForId(communityId, 
+      data => {
+        result['application/json'] = data.slice(0, k);
+        if (Object.keys(result).length > 0) {
+          resolve(result[Object.keys(result)[0]]);
+        } else {
+          resolve();
+        }
+      },
+      error => {
+        reject(error);
+      }
+    );    
+  });  
+
+  //   return new Promise(function(resolve, reject) {
+//     var examples = {};
+//     examples['application/json'] = [ {
+//   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+//   "similarity-function" : "similarity-function",
+//   "value" : 0.8008281904610115
+// }, {
+//   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+//   "similarity-function" : "similarity-function",
+//   "value" : 0.8008281904610115
+// } ];
+//     if (Object.keys(examples).length > 0) {
+//       resolve(examples[Object.keys(examples)[0]]);
+//     } else {
+//       resolve();
+//     }
+//   });
 }
 
 

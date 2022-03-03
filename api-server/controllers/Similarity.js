@@ -28,7 +28,7 @@ module.exports.computeKmostDissimilar = function computeKmostDissimilar (req, re
 
 module.exports.computeKmostSimilar = function computeKmostSimilar (req, res, next) {
   const communityId = req.enforcer.params['community-id'];
-  const k = 5;
+  const k = req.enforcer.query['k'];
   Similarity.computeKmostSimilar(communityId, k)
     .then(function (response) {
       res.enforcer.send(response);
