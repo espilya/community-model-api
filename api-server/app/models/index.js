@@ -9,7 +9,7 @@ db.communityDAO = require("./community.model.js")(mongoose);
 db.similarityDAO = require("./similarity.model.js")(mongoose);
 
 module.exports = {
-    init: function() {
+    init: async function(onReady) {
         console.log(db.url);
         db.mongoose
         .connect(db.url, {
@@ -18,6 +18,7 @@ module.exports = {
         })
         .then(() => {
             console.log("Connected to the database!");
+            onReady();
         })
         .catch(err => {
             console.log("Cannot connect to the database!", err);

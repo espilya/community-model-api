@@ -37,19 +37,24 @@ async function initServer() {
   return app;
 }
 
-async function initDatabaseConnection() {
+async function initDatabaseConnection(onReady) {
   const db = require("./models");
-  db.init();
+  await db.init(onReady);
 }
 
 module.exports = {
-  run: async function () {
+  run: async function (onReady) {
     const app = await initServer();
-    await initDatabaseConnection();
-    const PORT = process.env.NODE_DOCKER_PORT || 3000;
-    app.listen(PORT, ()=> {
-      console.log(`Server is running on port ${PORT}.`);
+    app.on ( "ready",()=> {
+      const PORT = process.env.NODE_DOCKER_PORT || 3000;
+      app.listen(PORT, ()=> {
+        console.log(`Server is running on port ${PORT}.`);
+        if (onReady) {
+          onReady();
+        }
+      });
     });
+    await initDatabaseConnection(() => app.emit("ready"));
   }
 };
 
