@@ -1,55 +1,7 @@
-const Enforcer = require('openapi-enforcer');
-const EnforcerMiddleware = require('openapi-enforcer-middleware');
-const express = require('express');
-require("dotenv").config();
-
-const apiyaml = "./app/api/openapi.yaml";
-
-async function initServer() {
-  const app = express();
-  app.use(express.json()); // for parsing application/json
-  app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-  // Any paths defined in your openapi.yml will validate and parse the request
-  // before it calls your route code.
-  const enforcerMiddleware = EnforcerMiddleware(await Enforcer(apiyaml));
-  app.use(enforcerMiddleware.init());
-
-  // Catch errors
-  enforcerMiddleware.on('error', err => {
-    console.error(err);
-    process.exit(1);
-  });
-
-  app.set("enforcer", enforcerMiddleware);
-  require("./app/routes/routes.js")(app);
-
-  app.use((err, req, res, next) => {
-    if (err.statusCode >= 400 && err.statusCode < 500 && err.exception) {
-      res.set('Content-Type', 'text/plain');
-      res.status(err.statusCode);
-      res.send(err.message);
-    } else {
-      console.error(err.stack);
-      res.sendStatus(err.statusCode || 500);
-    }
-  });
-  return app;
+const server = require("./app/server.js");
+if (server) {
+    server.run().catch(console.error);
 }
-
-function initDatabaseConnection() {
-  const db = require("./app/models");
-  db.init();
+else {
+    console.error("Unable to load server");
 }
-
-async function run () {
-  const app = await initServer();
-  initDatabaseConnection();
-  const PORT = process.env.NODE_DOCKER_PORT || 3000;
-  app.listen(PORT, ()=> {
-    console.log(`Server is running on port ${PORT}.`);
-  });
-}
-
-run().catch(console.error);
-
