@@ -20,6 +20,7 @@
     "openapi-enforcer-middleware": "^2.2.0"
   },
   "devDependencies": {
+    "axios": "^0.26.0",
     "js-yaml": "^4.1.0"
   }
 }
