@@ -5,31 +5,7 @@ const mongoose = require("mongoose");
 const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
-db.communities = require("./community.model.js")(mongoose);
-
-const communityDAO = {
-    all: function(onSuccess) {
-        let items= [];
-        db.communities.find({},function(error, data){
-            let i=0;
-            data.forEach(element => {
-              items[i] = element.toJSON();
-              i++;
-            });
-            onSuccess(items);
-        });   
-
-    },
-    getById: function(id, onSuccess, onError) {
-        db.communities.findOne({_id:id}, function (error, data) {
-            if (error) {
-                onError(error);
-            } else {
-                onSuccess(data.toJSON());
-            }
-        });
-    }
-};
+db.communityDAO = require("./community.model.js")(mongoose);
 
 module.exports = {
     init: function() {
@@ -47,5 +23,5 @@ module.exports = {
             process.exit();
         });
     },
-    communities: communityDAO
+    communities: db.communityDAO
 };
