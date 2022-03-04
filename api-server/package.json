@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "swagger"
@@ -20,7 +22,7 @@
     "openapi-enforcer-middleware": "^2.2.0"
   },
   "devDependencies": {
-    "axios": "^0.26.0",
-    "js-yaml": "^4.1.0"
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   }
 }

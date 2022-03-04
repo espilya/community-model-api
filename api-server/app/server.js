@@ -50,9 +50,16 @@ module.exports = {
       app.listen(PORT, ()=> {
         console.log(`Server is running on port ${PORT}.`);
         if (onReady) {
-          onReady();
+          onReady(app);
         }
       });
+    });
+    await initDatabaseConnection(() => app.emit("ready"));
+  },
+  test: async function (onReady) {
+    const app = await initServer();
+    app.on ( "ready",()=> {
+      onReady(app);
     });
     await initDatabaseConnection(() => app.emit("ready"));
   }
