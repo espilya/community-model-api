@@ -35,9 +35,30 @@ module.exports = mongoose => {
           if (error) {
             onError(error);
           } else {
-            onSuccess(data.toJSON());
+            if (data) {
+              onSuccess(data.toJSON());
+            }
+            else {
+              onError(id);
+            }
           }
         });
+      },
+      allWithUserId: function(userId, onSuccess, onError) {
+        let items= [];
+        Communities.find({users: userId},function(error, data){
+          if (data.length>0){
+            let i=0;
+            data.forEach(element => {
+              items[i] = element.toJSON();
+              i++;
+            });
+            onSuccess(items);
+          }
+          else {
+            onError(userId);
+          }
+        }); 
       }
     };
   };

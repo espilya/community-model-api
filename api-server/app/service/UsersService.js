@@ -1,4 +1,6 @@
 'use strict';
+const db = require("../models");
+const CommunityDAO = db.communities;
 
 
 /**
@@ -10,14 +12,22 @@
  **/
 exports.listUserCommunities = function(userId) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "d290f1ee-6c54-4b01-90e6-d701748f0851", "d290f1ee-6c54-4b01-90e6-d701748f0851" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+    let result = {};
+    CommunityDAO.allWithUserId(userId, 
+      data => {
+        // Response only includes ids
+        result['application/json'] = data.map(c => c.id);
+        if (Object.keys(result).length > 0) {
+          resolve(result[Object.keys(result)[0]]);
+        } else {
+          resolve();
+        }
+      },
+      error => {
+        reject(error);
+      }
+    );    
+  });  
 }
 
 
@@ -30,6 +40,7 @@ exports.listUserCommunities = function(userId) {
  **/
 exports.updateUsers = function(body) {
   return new Promise(function(resolve, reject) {
+    // TODO Notify communy model app
     resolve();
   });
 }

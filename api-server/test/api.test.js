@@ -71,9 +71,18 @@ describe ("Test communities endpoint", ()=>{
 describe ("Test users endpoint", ()=>{
     test ("GET /users/{user-id}/communities", (done)=>{
         request(app)
-            .get('/users/821e53cf0aa6aa7517c2afdd/communities')
+            .get('/users/23/communities')
             .expect('Content-Type', /json/)
             .expect(200)
+            .end(function(err, res) {
+                if (err) done(err);
+                else done();
+            });
+    });
+    test ("GET /users/{BADUSERID}/communities", (done)=>{
+        request(app)
+            .get('/users/BADUSERID/communities')
+            .expect(400)
             .end(function(err, res) {
                 if (err) done(err);
                 else done();
@@ -95,15 +104,6 @@ describe ("Test users endpoint", ()=>{
         request(app)
             .post('/users/update-generated-content')
             .set('Content-Type', 'application/json')
-            .expect(400)
-            .end(function(err, res) {
-                if (err) done(err);
-                else done();
-            });
-    });
-    test ("GET /users/{BADUSERID}/communities", (done)=>{
-        request(app)
-            .get('/communities/wrongId/users')
             .expect(400)
             .end(function(err, res) {
                 if (err) done(err);

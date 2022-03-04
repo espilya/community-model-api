@@ -20,6 +20,6 @@ module.exports.listUserCommunities = function listUserCommunities (req, res) {
       res.enforcer.send(response);
     })
     .catch(function (response) {
-      res.enforcer.send(response);
+      res.status(400).enforcer.send("invalid user id");
     });
 };
