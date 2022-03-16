@@ -7,11 +7,11 @@
         {
             "type": "pwa-node",
             "request": "launch",
-            "name": "Launch Server",
+            "name": "Launch API Server",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/index.js",
+            "program": "${workspaceFolder}/api-server/index.js",
             "env": {
                 "NODE_DOCKER_PORT": "3000"
             }
@@ -19,11 +19,11 @@
         {
             "type": "pwa-node",
             "request": "launch",
-            "name": "Tests",
+            "name": "API Server Tests",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/test/apitest.js",
+            "program": "${workspaceFolder}/api-server/test/apitest.js",
             "env": {
                 "NODE_DOCKER_PORT": "3000"
             }
