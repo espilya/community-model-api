@@ -18,27 +18,27 @@ async function initServer() {
   const app = express();
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.set("apiSpec", apiSpec);
 
 
   // Any paths defined in your openapi.yml will validate and parse the request
   // before it calls your route code.
   //const enforcerMiddleware = EnforcerMiddleware(await Enforcer(apiyaml));
   //app.use(enforcerMiddleware.init());
-
-  app.use(
-    openApiMiddleware({
-      apiSpec,
-      validateRequests: true,
-      validateResponses: true, // default false
-      operationHandlers: {
-        // 3. Provide the path to the controllers directory
-        basePath: path.join(__dirname, 'controllers'),
-        // 4. Provide a function responsible for resolving an Express RequestHandler
-        //    function from the current OpenAPI Route object.
-        resolver: resolvers.modulePathResolver,
-      },
-    })
-  );
+  const middleware = openApiMiddleware({
+    apiSpec,
+    validateRequests: true,
+    validateResponses: true, // default false
+    // operationHandlers: {
+    //   // 3. Provide the path to the controllers directory
+    //   basePath: path.join(__dirname, 'controllers'),
+    //   // 4. Provide a function responsible for resolving an Express RequestHandler
+    //   //    function from the current OpenAPI Route object.
+    //   resolver: resolvers.modulePathResolver,
+    // },
+  });
+  app.use( middleware);
+  
 
   // Catch errors
   // enforcerMiddleware.on('error', err => {
@@ -47,7 +47,7 @@ async function initServer() {
   // });
 
   //app.set("enforcer", enforcerMiddleware);
-  //require("./routes/routes.js")(app);
+  require("./routes/routes.js")(app);
 
   app.use((err, req, res, next) => {
     // format errors

@@ -24,7 +24,7 @@ paths:
       - communities
       summary: Communities in the model
       description: Access to a list of the communities in the community model
-      operationId: communities.getCommunities
+      operationId: getCommunities
       responses:
         "200":
           description: A list with the communities in the model
@@ -44,7 +44,7 @@ paths:
       - communities
       summary: community description and explanation
       description: Returns information about a community
-      operationId: communities.getCommunityById
+      operationId: getCommunityById
       parameters:
       - name: communityId
         in: path
@@ -70,7 +70,7 @@ paths:
       - communities
       summary: Users who belong to a community
       description: Returns a list with the ids of the users who belong to a community
-      operationId: communities.listCommunityUsers
+      operationId: listCommunityUsers
       parameters:
       - name: communityId
         in: path
@@ -100,7 +100,7 @@ paths:
       summary: Communities that a user belongs
       description: Returns a list with the ids of the communities that the user belongs
         to
-      operationId: users.listUserCommunities
+      operationId: listUserCommunities
       parameters:
       - name: userId
         in: path
@@ -130,7 +130,7 @@ paths:
       summary: Update community model with new users
       description: This service is employed to inform the Community Model the users
         who where created/updated in the User Model
-      operationId: users.updateUsers
+      operationId: updateUsers
       requestBody:
         description: User generated content object that will be added to the model
         content:
@@ -152,7 +152,7 @@ paths:
       summary: K-most similar communities
       description: Returns a list with the k most similar communities to the chosen
         one in the model.
-      operationId: similarity.computeKmostSimilar
+      operationId: computeKmostSimilar
       parameters:
       - name: communityId
         in: path
@@ -190,7 +190,7 @@ paths:
       - similarity
       summary: Similarity between two communities
       description: Returns a similarity score between two communities.
-      operationId: similarity.computeSimilarity
+      operationId: computeSimilarity
       parameters:
       - name: communityId
         in: path
@@ -225,7 +225,7 @@ paths:
       summary: K-most dissimilar communities
       description: Returns a list with the k most dissimilar communities to the chosen
         one in the model.
-      operationId: similarity.computeKmostDissimilar
+      operationId: computeKmostDissimilar
       parameters:
       - name: communityId
         in: path
@@ -263,7 +263,7 @@ paths:
       - similarity
       summary: Dissimilarity between two communities
       description: Returns the dissimilarity score between two communities
-      operationId: similarity.computeDissimilarity
+      operationId: computeDissimilarity
       parameters:
       - name: communityId
         in: path

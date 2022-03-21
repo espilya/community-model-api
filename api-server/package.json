@@ -7,7 +7,8 @@
     "prestart": "npm install",
     "start": "node index.js",
     "test": "jest --detectOpenHandles",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "build-deploy": "npx webpack -c webpack.prod.config.js"
   },
   "keywords": [
     "swagger"
@@ -19,12 +20,12 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-openapi-validator": "^4.13.6",
-    "mongoose": "^6.2.4",
-    "openapi-enforcer": "^1.17.0",
-    "openapi-enforcer-middleware": "^2.2.0"
+    "js-yaml": "^4.1.0",
+    "mongoose": "^6.2.4"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^10.2.4",
     "jest": "^27.5.1",
     "supertest": "^6.2.2",
     "webpack": "^5.70.0",
