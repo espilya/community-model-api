@@ -69,7 +69,7 @@ describe ("Test communities endpoint", ()=>{
 });
 
 describe ("Test users endpoint", ()=>{
-    test ("GET /users/{user-id}/communities", (done)=>{
+    test ("GET /users/{userId}/communities", (done)=>{
         request(app)
             .get('/users/23/communities')
             .expect('Content-Type', /json/)
@@ -113,7 +113,7 @@ describe ("Test users endpoint", ()=>{
 });
 
 describe ("Test similarity endpoint", ()=>{
-    test ("GET /communities/{community-id}/similarity", (done)=>{
+    test ("GET /communities/{communityId}/similarity", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/similarity')
             .query({ k: '2' })
@@ -124,7 +124,7 @@ describe ("Test similarity endpoint", ()=>{
                 else done();
             });
     });
-    test ("GET /communities/{community-id}/similarity NO QUERY PARAMETER", (done)=>{
+    test ("GET /communities/{communityId}/similarity NO QUERY PARAMETER", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/similarity')
             .expect(400)
@@ -143,7 +143,7 @@ describe ("Test similarity endpoint", ()=>{
                 else done();
             });
     });
-    test ("GET /communities/{community-id}/similarity/{other-community-id}", (done)=>{
+    test ("GET /communities/{communityId}/similarity/{otherCommunityId}", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/similarity/821e53cf0aa6aa7517c2afdd')
             .expect('Content-Type', /json/)
@@ -154,7 +154,7 @@ describe ("Test similarity endpoint", ()=>{
             });
     });
 
-    test ("GET /communities/BADCOMMUNITYID/similarity/{other-community-id}", (done)=>{
+    test ("GET /communities/BADCOMMUNITYID/similarity/{otherCommunityId}", (done)=>{
         request(app)
             .get('/communities/badid/similarity/821e53cf0aa6aa7517c2afdd')
             .expect(400)
@@ -164,7 +164,7 @@ describe ("Test similarity endpoint", ()=>{
             });
     });
 
-    test ("GET /communities/{community-id}/similarity/BADCOMMUNITYID", (done)=>{
+    test ("GET /communities/{communityId}/similarity/BADCOMMUNITYID", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/similarity/badId')
             .expect(400)
@@ -191,7 +191,7 @@ describe ("Test similarity endpoint", ()=>{
 });
 
 describe ("Test dissimilarity endpoint", ()=>{
-    test ("GET /communities/{community-id}/dissimilarity", (done)=>{
+    test ("GET /communities/{communityId}/dissimilarity", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/dissimilarity')
             .query({ k: '2' })
@@ -202,7 +202,7 @@ describe ("Test dissimilarity endpoint", ()=>{
                 else done();
             });
     });
-    test ("GET /communities/{community-id}/dissimilarity NO QUERY PARAMETER", (done)=>{
+    test ("GET /communities/{communityId}/dissimilarity NO QUERY PARAMETER", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/dissimilarity')
             .expect(400)
@@ -221,7 +221,7 @@ describe ("Test dissimilarity endpoint", ()=>{
                 else done();
             });
     });
-    test ("GET /communities/{community-id}/dissimilarity/{other-community-id}", (done)=>{
+    test ("GET /communities/{communityId}/dissimilarity/{otherCommunityId}", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/dissimilarity/821e53cf0aa6aa7517c2afdd')
             .expect('Content-Type', /json/)
@@ -232,7 +232,7 @@ describe ("Test dissimilarity endpoint", ()=>{
             });
     });
 
-    test ("GET /communities/BADCOMMUNITYID/dissimilarity/{other-community-id}", (done)=>{
+    test ("GET /communities/BADCOMMUNITYID/dissimilarity/{otherCommunityId}", (done)=>{
         request(app)
             .get('/communities/badid/dissimilarity/821e53cf0aa6aa7517c2afdd')
             .expect(400)
@@ -242,7 +242,7 @@ describe ("Test dissimilarity endpoint", ()=>{
             });
     });
 
-    test ("GET /communities/{community-id}/dissimilarity/BADCOMMUNITYID", (done)=>{
+    test ("GET /communities/{communityId}/dissimilarity/BADCOMMUNITYID", (done)=>{
         request(app)
             .get('/communities/821e53cf0aa6aa7517c2afdd/dissimilarity/badId')
             .expect(400)

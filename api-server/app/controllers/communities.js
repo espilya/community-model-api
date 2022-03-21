@@ -1,35 +1,34 @@
-'use strict';
-
+const idParam = 'communityId';
 const Communities = require('../service/CommunitiesService.js');
 
 module.exports.getCommunities = function getCommunities (req, res, next) {
   Communities.getCommunities()
     .then(function (response) {
-      res.enforcer.send(response);
+      res.send(response);
     })
     .catch(function (response) {
-      res.enforcer.send(response);
+      res.send(response);
     });
 };
 
 module.exports.getCommunityById = function getCommunityById (req, res, next) {
-  const communityId = req.enforcer.params['community-id'];
+  const communityId = req.params[idParam];
   Communities.getCommunityById(communityId)
     .then(function (response) {
-      res.enforcer.send(response);
+      res.send(response);
     })
     .catch(function (response) {
-      res.status(400).enforcer.send("invalid community id");
+      res.status(400).send("invalid community id");
     });
 };
 
 module.exports.listCommunityUsers = function listCommunityUsers (req, res, next) {
-  const communityId = req.enforcer.params['community-id'];
+  const communityId = req.params[idParam];
   Communities.listCommunityUsers(communityId)
     .then(function (response) {
-      res.enforcer.send(response);
+      res.send(response);
     })
     .catch(function (response) {
-      res.status(400).enforcer.send("invalid community id");
+      res.status(400).send("invalid community id");
     });
 };

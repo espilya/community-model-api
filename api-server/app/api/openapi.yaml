@@ -9,8 +9,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: v.1.1
 servers:
-- url: https://virtserver.swaggerhub.com/gjimenezUCM/SPICE-CommunityModelAPI/v.1.1
-  description: SwaggerHub API Auto Mocking
+- url: /
 tags:
 - name: communities
   description: Operations related to information about communities
@@ -25,7 +24,7 @@ paths:
       - communities
       summary: Communities in the model
       description: Access to a list of the communities in the community model
-      operationId: getCommunities
+      operationId: communities.getCommunities
       responses:
         "200":
           description: A list with the communities in the model
@@ -39,15 +38,15 @@ paths:
         "400":
           description: Community model does not exist
       x-swagger-router-controller: Communities
-  /communities/{community-id}:
+  /communities/{communityId}:
     get:
       tags:
       - communities
       summary: community description and explanation
       description: Returns information about a community
-      operationId: getCommunityById
+      operationId: communities.getCommunityById
       parameters:
-      - name: community-id
+      - name: communityId
         in: path
         description: ID of community to return
         required: true
@@ -65,15 +64,15 @@ paths:
         "400":
           description: invalid community id
       x-swagger-router-controller: Communities
-  /communities/{community-id}/users:
+  /communities/{communityId}/users:
     get:
       tags:
       - communities
       summary: Users who belong to a community
       description: Returns a list with the ids of the users who belong to a community
-      operationId: listCommunityUsers
+      operationId: communities.listCommunityUsers
       parameters:
-      - name: community-id
+      - name: communityId
         in: path
         description: ID of community to return
         required: true
@@ -94,16 +93,16 @@ paths:
         "400":
           description: invalid community id
       x-swagger-router-controller: Communities
-  /users/{user-id}/communities:
+  /users/{userId}/communities:
     get:
       tags:
       - users
       summary: Communities that a user belongs
       description: Returns a list with the ids of the communities that the user belongs
         to
-      operationId: listUserCommunities
+      operationId: users.listUserCommunities
       parameters:
-      - name: user-id
+      - name: userId
         in: path
         description: ID of user
         required: true
@@ -131,7 +130,7 @@ paths:
       summary: Update community model with new users
       description: This service is employed to inform the Community Model the users
         who where created/updated in the User Model
-      operationId: updateUsers
+      operationId: users.updateUsers
       requestBody:
         description: User generated content object that will be added to the model
         content:
@@ -146,16 +145,16 @@ paths:
         "204":
           description: Updated
       x-swagger-router-controller: Users
-  /communities/{community-id}/similarity:
+  /communities/{communityId}/similarity:
     get:
       tags:
       - similarity
       summary: K-most similar communities
       description: Returns a list with the k most similar communities to the chosen
         one in the model.
-      operationId: computeKmostSimilar
+      operationId: similarity.computeKmostSimilar
       parameters:
-      - name: community-id
+      - name: communityId
         in: path
         description: ID of the target community to compute similarity
         required: true
@@ -185,15 +184,15 @@ paths:
         "400":
           description: Invalid communityId or query parameters
       x-swagger-router-controller: Similarity
-  /communities/{community-id}/similarity/{other-community-id}:
+  /communities/{communityId}/similarity/{otherCommunityId}:
     get:
       tags:
       - similarity
       summary: Similarity between two communities
       description: Returns a similarity score between two communities.
-      operationId: computeSimilarity
+      operationId: similarity.computeSimilarity
       parameters:
-      - name: community-id
+      - name: communityId
         in: path
         description: ID of the target community to compute similarity
         required: true
@@ -201,7 +200,7 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/id'
-      - name: other-community-id
+      - name: otherCommunityId
         in: path
         description: ID of the other community to compute similarity
         required: true
@@ -219,16 +218,16 @@ paths:
         "400":
           description: Invalid communityIds (target or other)
       x-swagger-router-controller: Similarity
-  /communities/{community-id}/dissimilarity:
+  /communities/{communityId}/dissimilarity:
     get:
       tags:
       - similarity
       summary: K-most dissimilar communities
       description: Returns a list with the k most dissimilar communities to the chosen
         one in the model.
-      operationId: computeKmostDissimilar
+      operationId: similarity.computeKmostDissimilar
       parameters:
-      - name: community-id
+      - name: communityId
         in: path
         description: ID of the target community to compute dissimilarity
         required: true
@@ -258,15 +257,15 @@ paths:
         "400":
           description: Invalid community-id or query parameters
       x-swagger-router-controller: Similarity
-  /communities/{community-id}/dissimilarity/{other-community-id}:
+  /communities/{communityId}/dissimilarity/{otherCommunityId}:
     get:
       tags:
       - similarity
       summary: Dissimilarity between two communities
       description: Returns the dissimilarity score between two communities
-      operationId: computeDissimilarity
+      operationId: similarity.computeDissimilarity
       parameters:
-      - name: community-id
+      - name: communityId
         in: path
         description: ID of the target community to compute dissimilarity
         required: true
@@ -274,7 +273,7 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/id'
-      - name: other-community-id
+      - name: otherCommunityId
         in: path
         description: ID of the other community to compute dissimilarity
         required: true
@@ -298,7 +297,6 @@ components:
     id:
       type: string
       description: Unique id
-      format: uri
       example: d290f1ee-6c54-4b01-90e6-d701748f0851
     user-generated-content:
       required:
@@ -310,12 +308,10 @@ components:
         user-id:
           type: string
           description: Url to the user model information stored on Linked Data Hub
-          format: uri
         origin-id:
           type: string
           description: "Url to the item (artwork, museum concept...) stored on Linked\
             \ Data Hub"
-          format: uri
         generated-content-id:
           type: string
           description: "Url to complete information stored about the user generated\

@@ -15,14 +15,19 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.19.2",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-openapi-validator": "^4.13.6",
     "mongoose": "^6.2.4",
     "openapi-enforcer": "^1.17.0",
     "openapi-enforcer-middleware": "^2.2.0"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "jest": "^27.5.1",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   }
 }
