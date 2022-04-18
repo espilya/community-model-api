@@ -58,11 +58,7 @@ module.exports = app => {
     
     var router = require("express").Router();
     
-    // Retrieve a single Tutorial with id
-    initRouters(router);
-    //router.get("/users/:userId/communities", Users.listUserCommunities);
-    //router.get("/communities/:communityId", customControllers.Communities.getCommunityById);
-    
+    initRouters(router);  
     app.use("/", router);
 
 };

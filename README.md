@@ -4,14 +4,27 @@ The Community Model supports the social cohesion across groups, by the understan
 
 ## Quick start
 
-You can try the Community Model using Docker:
+1. Create a `.env` file with the following variables:
+
+- MONGO_INITDB_ROOT_USERNAME: Root user name in MongoDB
+- MONGO_INITDB_ROOT_PASSWORD: Password for MongoDB root user
+- MONGODB_DATABASE: Name of the database of the Community Model
+- MONGODB_LOCAL_PORT: MongoDB local port (default: 27017)
+- MONGODB_DOCKER_PORT: Exposed port of MongoDB image (default: 27017)
+- MONGODB_USER: The user employed by the REST API to access MongoDB
+- MONGODB_PASSWORD: Password of the previous user
+- NODE_LOCAL_PORT: Internal port of the REST API (default: 8080)
+- NODE_DOCKER_PORT: Exposed port of the API docker image (default: 8080)
+
+2. Deploy the Community Model using Docker:
 
 ```
 docker compose up
 ```
+
+
 ## Developing
 
-### Built With
 
 #### API server
 
