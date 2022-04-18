@@ -25,7 +25,6 @@ docker compose up
 
 ## Developing
 
-### Built With
 
 #### API server
 
