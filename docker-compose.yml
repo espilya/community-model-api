@@ -4,7 +4,6 @@ services:
   mongodb:
     build: ./db
     restart: unless-stopped
-    env_file: ./.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
@@ -20,7 +19,6 @@ services:
       - mongodb
     build: ./api-server
     restart: unless-stopped
-    env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
@@ -28,9 +26,8 @@ services:
       - DB_USER=$MONGODB_USER
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
-      - DB_PORT=$MONGODB_DOCKER_PORT
-    stdin_open: true
-    tty: true
+      - DB_PORT=$MONGODB_LOCAL_PORT
+      - NODE_DOCKER_PORT=$NODE_DOCKER_PORT
 
 volumes:
   db:
