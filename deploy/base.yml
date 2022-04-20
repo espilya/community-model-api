@@ -1,0 +1,34 @@
+version: "3.3"
+
+networks:
+  spice:
+
+services:
+  mongodb:
+    build: ../db
+    #name: spice/communitymodel/db
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE:-spiceComMod}
+      - MONGODB_USER=${MONGODB_USER:-spice}
+      - MONGODB_PASSWORD=$MONGODB_PASSWORD
+    networks:
+      - spice
+#    user: ${UID:-1000}:${GUID:-1000}
+  app:
+    depends_on:
+      - mongodb
+    build: ../api-server
+    #name: spice/communitymodel/app
+    restart: unless-stopped
+    environment:
+      - DB_HOST=mongodb
+      - DB_USER=${MONGODB_USER:-spice}
+      - DB_PASSWORD=$MONGODB_PASSWORD
+      - DB_NAME=${MONGODB_DATABASE:-spiceComMod}
+      - DB_PORT=27017
+      - NODE_DOCKER_PORT=${APP_CONTAINER_PORT:-8080}
+    networks:
+      - spice

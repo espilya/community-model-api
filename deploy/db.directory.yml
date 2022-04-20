@@ -1,0 +1,12 @@
+# Configura el contenedor de la base de datos para que utilice
+# un directorio del anfitrión como almacén de la base de datos.
+# El nombre del directorio *completo* se debe recibir en la
+# variable de entorno $HOST_DB_PATH
+
+version: '3.3'
+  
+services:
+  mongodb:
+        user: ${HOST_UID:-1000}:${HOST_GUID:-1000}
+        volumes:     
+            - ${HOST_DB_PATH}:/data/db
