@@ -58,7 +58,8 @@ module.exports = {
       new CopyPlugin({
         patterns: [
           { 
-            from: '**/api/*.yaml',
+            from: 'api',
+            to: 'api',
             context: "app/"
           },
         ],

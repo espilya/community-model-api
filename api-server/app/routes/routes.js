@@ -7,13 +7,11 @@ module.exports = app => {
         Communities: require("../controllers/communities.js"),
         Similarity: require("../controllers/similarity.js")
     };
-
-    //const enforcer = app.get("enforcer");
-    //app.use(enforcer.route(customControllers, {xController: "x-swagger-router-controller", xOperation: "operationId"}));
     
     function initRouters(router){
         try {
             const doc = yaml.load(fs.readFileSync(app.get("apiSpec"), 'utf8'));
+            router.path = doc.servers[0].url;
             let routes = [];
             for (let path in doc.paths) {
                 let newPath = transformPath(path);
@@ -24,8 +22,6 @@ module.exports = app => {
                         let service = doc.paths[path][action]['x-swagger-router-controller'];
                         let method = doc.paths[path][action]['operationId'];
                         router[action](newPath, customControllers[service][method]);
-                        console.log(action,newPath,service,customControllers[service][method]);
-                        //push(`router.${action}("${newPath}", ${service}.${method});`);
                     }
                 }
             }
@@ -54,11 +50,12 @@ module.exports = app => {
         return result; 
     }
     
+    const express = require("express");
     
+    var router = express.Router();
     
-    var router = require("express").Router();
-    
-    initRouters(router);  
-    app.use("/", router);
+    initRouters(router);
+    app.use('/', express.static('api'));  
+    app.use(router.path, router);
 
 };
