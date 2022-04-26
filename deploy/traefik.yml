@@ -1,0 +1,39 @@
+# Incorpora a la configuración de Docker Compose etiquetas para Traefik.
+#
+# Es útil si se va a lanzar en un entorno de ejecución en el que Traefik hace
+# de proxy inverso para llegar al servidor.
+#
+# Ten en cuenta que si se incluye este fichero el servidor *tendrá dos redes*,
+# una con la "externa" que se publica para ser usada por Traefik, y otra
+# "interna", en la que estará también conectado el contenedor de la base
+# de datos. Esa red "interna" sería la única red creada para el grupo si
+# no se incluyera este .yml.
+#
+# Las comillas se deben a que ambas tienen realmente la misma
+# importancia desde el punto de vista del contenedor, y, en el servidor,
+# node escuchará en ambas. Externa e interna se refieren a la percepción
+# desde el punto de vista de traefik.
+#
+# Tener las dos redes permite evitar colisiones de nombres en los contenedores
+# interiores. Si no se creara esta nueva red (que se convierte en la "externa"),
+# el contenedor de la base de datos estaría en la misma red visible por
+# traefik en la que, potencialmente, se lanzarán otros servicios. Si otros
+# servicios tuvieran también un contenedor con el mismo nombre que nosotros
+# para la base de datos, tendríamos una colisión de nombres.
+
+version: '3.3'
+
+networks:
+    traefik:
+        external:
+            name: ${TRAEFIK_NETWORK}
+
+services:
+    app:
+        networks:
+            - traefik
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=${TRAEFIK_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_SERVICE_ID}.rule=Host(`${SERVER_PUBLIC_NAME}`)"
+            - "traefik.http.services.${TRAEFIK_SERVICE_ID}.loadbalancer.server.port=${APP_INTERNAL_PORT:-8080}"

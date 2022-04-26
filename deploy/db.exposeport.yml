@@ -1,0 +1,18 @@
+# Ampliación de la configuración de docker compose que
+# publica en el puerto MONGO_HOST_PORT del anfitrión
+# el puerto de Mongo.
+#
+# Seguramente solo quieras usar esto durante el desarrollo
+# si quieres conectarte a Mongo con alguna herramienta
+# gráfica para ver su contenido. En condiciones normales
+# (en una versión desplegada) no lo usarás.
+
+# TODO: esto no está probado ':-D
+
+version: "3.3"
+
+services:
+  mongodb:
+    ports:
+      # Host:container
+      - ${MONGODB_HOST_PORT:-27017}:27017

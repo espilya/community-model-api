@@ -1,0 +1,19 @@
+# Ampliación de la configuración de docker compose que
+# publica en el puerto APP_HOST_PORT del anfitrión
+# la aplicación web de Node.
+#
+# Dependiendo del modo en el que se despliegue la aplicación,
+# el modo de acceso será distinto. La alternativa más simple
+# es exponer en un puerto del anfitrión el puerto del contenedor
+# de node. Es también la forma más habitual durante el desarrollo.
+# En ese caso, incorpora este fichero y define APP_HOST_PORT
+
+# TODO: esto no está probado ':-D
+
+version: "3.3"
+
+services:
+  app:
+    ports:
+      # Host:container
+      - ${APP_HOST_PORT:-8080}:${APP_CONTAINER_PORT:-8080}

@@ -10,7 +10,6 @@ RUN npm install
 COPY ./app app
 COPY ./*.js ./
 RUN npm run build-deploy
-RUN ls -la /build
 # The results is in /build folder
 
 FROM node:16-alpine
@@ -18,5 +17,4 @@ WORKDIR /app
 ENTRYPOINT [ "node", "main.js" ]
 RUN chown node:node .
 USER node
-COPY --from=builder-backend /app/controllers/. ./app/controllers
 COPY --from=builder-backend /build/. ./

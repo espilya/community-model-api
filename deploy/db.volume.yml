@@ -1,0 +1,19 @@
+# Configura el contenedor de la base de datos para que utilice
+# un volumen (de docker) como almacén de la base de datos.
+# El nombre del volumen es fijo, db.
+#
+# Ten en cuenta que usar volúmenes de Docker para guardar los
+# datos dificulta la realización de copias de seguridad, aunque
+# puede resultar cómodo en desplegados de test si se quieren
+# mantener los datos entre desplegados. En ese caso otra opción
+# también sería usar directamente el contenedor de la base de
+# datos como almacén, aunque la información se perdería si se
+# reconstruyera el contenedor.
+
+volumes:
+  db:
+
+services:
+  mongodb:
+    volumes:
+      - db:/data/db
