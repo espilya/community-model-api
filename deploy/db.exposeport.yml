@@ -1,13 +1,6 @@
-# Ampliación de la configuración de docker compose que
-# publica en el puerto MONGO_HOST_PORT del anfitrión
-# el puerto de Mongo.
-#
-# Seguramente solo quieras usar esto durante el desarrollo
-# si quieres conectarte a Mongo con alguna herramienta
-# gráfica para ver su contenido. En condiciones normales
-# (en una versión desplegada) no lo usarás.
-
-# TODO: esto no está probado ':-D
+# Database is *not* exposed in the host, by default. 
+# This extension exposes the MongoDB using the host port MONGO_HOST_PORT
+# Normally, it is employed only for debugging purposes
 
 version: "3.3"
 

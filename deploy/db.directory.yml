@@ -1,7 +1,5 @@
-# Configura el contenedor de la base de datos para que utilice
-# un directorio del anfitrión como almacén de la base de datos.
-# El nombre del directorio *completo* se debe recibir en la
-# variable de entorno $HOST_DB_PATH
+# Extension for storing the database using a host folder. Absolute path to this folder should be defined using 
+# $HOST_DB_PATH variables. HOST_UID and HOST_GUID must have write permissions in this folder.
 
 version: '3.3'
   
