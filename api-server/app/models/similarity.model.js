@@ -1,3 +1,8 @@
+/**
+ * It generates an object with the methods to access a similarity DAO
+ * @param {object} mongoose Mongoose object for accessing mongodb
+ * @returns An object with the DAO functions employed by the SimilarityService
+ */
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
@@ -16,6 +21,13 @@ module.exports = mongoose => {
   const Similarity = mongoose.model("Similarities", schema);
   
   return {
+    /**
+     * Return all similarity values for a communityId, sorted in descending order
+     * Return an error if the DB does not contain this communityId
+     * @param {string} communityId 
+     * @param {function} onSuccess Callback when the request finish succesfully
+     * @param {function} onError Callback when there is an error
+     */
     allForId: function(communityId, onSuccess, onError) {
       Similarity.find({ "target-community-id": communityId }, function(error, data){
         if (error || data.length === 0 ) {
@@ -32,6 +44,14 @@ module.exports = mongoose => {
       }).sort({value: -1});   
       
     },
+    /**
+     * Return the similarity value for sim(communityId,otherCommunityId)
+     * Return an error if the DB does not contain communityId or otherCommunityId
+     * @param {string} communityId 
+     * @param {string} otherCommunityId 
+     * @param {function} onSuccess Callback when the request finish succesfully
+     * @param {function} onError Callback when there is an error
+     */
     getByIds: function(targetCommunityId, otherCommunityId, onSuccess, onError) {
       Similarity.find({ "target-community-id": targetCommunityId, "other-community-id": otherCommunityId  }, function (error, data) {
         if (error || data.length === 0 ) {

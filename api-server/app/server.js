@@ -1,10 +1,6 @@
-//const Enforcer = require('openapi-enforcer');
-//const EnforcerMiddleware = require('openapi-enforcer-middleware');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 require("dotenv").config();
-
 const path = require('path');
 
 const {
@@ -20,35 +16,21 @@ async function initServer() {
   app.use(bodyParser.json());
   app.set("apiSpec", apiSpec);
 
-
-  // Any paths defined in your openapi.yml will validate and parse the request
-  // before it calls your route code.
-  //const enforcerMiddleware = EnforcerMiddleware(await Enforcer(apiyaml));
-  //app.use(enforcerMiddleware.init());
+  // Openapi validator:
+  // Any paths defined in openapi.yml will be
+  // validated and parsed by openapi-validator
+  // before it calls a route code.
   const middleware = openApiMiddleware({
     apiSpec,
     validateRequests: true,
     validateResponses: true, // default false
-    // operationHandlers: {
-    //   // 3. Provide the path to the controllers directory
-    //   basePath: path.join(__dirname, 'controllers'),
-    //   // 4. Provide a function responsible for resolving an Express RequestHandler
-    //   //    function from the current OpenAPI Route object.
-    //   resolver: resolvers.modulePathResolver,
-    // },
   });
   app.use( middleware);
-  
 
-  // Catch errors
-  // enforcerMiddleware.on('error', err => {
-  //   console.error(err);
-  //   process.exit(1);
-  // });
-
-  //app.set("enforcer", enforcerMiddleware);
+  // Create express routes
   require("./routes/routes.js")(app);
 
+  // Handle errors
   app.use((err, req, res, next) => {
     // format errors
     res.status(err.status || 500).json({
@@ -60,12 +42,18 @@ async function initServer() {
   return app;
 }
 
+// Init database connection
 async function initDatabaseConnection(onReady) {
   const db = require("./models");
   await db.init(onReady);
 }
 
+// Server module exports two functions: run and test
 module.exports = {
+  /**
+   * Init the server, connect with the data base and run the callback function
+   * @param {function} onReady callback executed when the server is ready
+   */
   run: async function (onReady) {
     const app = await initServer();
     app.on ( "ready",()=> {
@@ -79,6 +67,11 @@ module.exports = {
     });
     await initDatabaseConnection(() => app.emit("ready"));
   },
+
+  /**
+   * Init the server and run the callback function (only for testing purposes)
+   * @param {function} onReady callback executed when the server is ready
+   */
   test: async function (onReady) {
     const app = await initServer();
     app.on ( "ready",()=> {

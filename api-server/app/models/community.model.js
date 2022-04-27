@@ -1,3 +1,8 @@
+/**
+ * It generates an object with the methods to access a Community DAO
+ * @param {object} mongoose Mongoose object for accessing mongodb
+ * @returns An object with the DAO functions employed by the CommunitiesService
+ */
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
@@ -18,6 +23,10 @@ module.exports = mongoose => {
     
     
     return {
+      /**
+       * Creates a list with all the communities and passes it to the onSuccess callback function
+       * @param {function} onSuccess Callback function invoked if the request was a success
+       */
       all: function(onSuccess) {
         let items= [];
         Communities.find({},function(error, data){
@@ -30,8 +39,15 @@ module.exports = mongoose => {
         });   
         
       },
-      getById: function(id, onSuccess, onError) {
-        Communities.findOne({_id:id}, function (error, data) {
+      /**
+       * Looks for a community characterized by its communityId and passes it to the onSuccess callback function
+       * It invokes onError callback function if the communityId does not exist in the database 
+       * @param {string} communityId
+       * @param {function} onSuccess Callback function invoked if the request was a success
+       * @param {function} onError Callback function invoked if the communityId does not exist in the database
+       */
+      getById: function(communityId, onSuccess, onError) {
+        Communities.findOne({_id:communityId}, function (error, data) {
           if (error) {
             onError(error);
           } else {
@@ -39,11 +55,18 @@ module.exports = mongoose => {
               onSuccess(data.toJSON());
             }
             else {
-              onError(id);
+              onError(communityId);
             }
           }
         });
       },
+      /**
+       * Creates a list wit all the communities that a user belongs to and passes it to the onSuccess callback function
+       * It invokes onError callback function if the userId does not exist in the database 
+       * @param {string} userId
+       * @param {function} onSuccess Callback function invoked if the request was a success
+       * @param {function} onError Callback function invoked if the userId does not exist in the database
+       */
       allWithUserId: function(userId, onSuccess, onError) {
         let items= [];
         Communities.find({users: userId},function(error, data){

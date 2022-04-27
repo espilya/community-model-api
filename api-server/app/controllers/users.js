@@ -1,7 +1,18 @@
+/**
+ * Controller for USER endpoint.
+ * The controller checks some parameter values in the request,
+ * it delegates in UsersService to run the corresponding function
+ * and generates the corresponding responese
+ */
 const Users = require('../service/UsersService.js');
 const userParam = 'userId';
 
-
+/**
+ * Method for resolving POST /users/{userId}/update-generated-content
+ * @param {Object} req Request
+ * @param {Object} res Response
+ * @param {Object} next 
+ */
 module.exports.updateUsers = function updateUsers (req, res, next) {
   let paramUserId = req.params[userParam];
   // Check if the userid in the url and in every object in the list contained in the body are the same
@@ -20,6 +31,11 @@ module.exports.updateUsers = function updateUsers (req, res, next) {
 
 };
 
+/**
+ * Method for resolving GET /users/{userId}/communities
+ * @param {Object} req Request
+ * @param {Object} res Response
+ */
 module.exports.listUserCommunities = function listUserCommunities (req, res) {
   const userId = req.params[userParam];
   Users.listUserCommunities(userId)
