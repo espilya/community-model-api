@@ -1,25 +1,16 @@
-# Incorpora a la configuración de Docker Compose etiquetas para Traefik.
+# Extension for deploying using Traefik as inverse proxy
 #
-# Es útil si se va a lanzar en un entorno de ejecución en el que Traefik hace
-# de proxy inverso para llegar al servidor.
+# If you include this file, the server should have *two networks*, 
+# one "external" network  used by Traefik
+# and one "internal" network that connects the web server with the database.
+# The last is created by default if you do not include this file.
+# Node server will be listening both. External and internal are in terms
+# of Traefik.
 #
-# Ten en cuenta que si se incluye este fichero el servidor *tendrá dos redes*,
-# una con la "externa" que se publica para ser usada por Traefik, y otra
-# "interna", en la que estará también conectado el contenedor de la base
-# de datos. Esa red "interna" sería la única red creada para el grupo si
-# no se incluyera este .yml.
-#
-# Las comillas se deben a que ambas tienen realmente la misma
-# importancia desde el punto de vista del contenedor, y, en el servidor,
-# node escuchará en ambas. Externa e interna se refieren a la percepción
-# desde el punto de vista de traefik.
-#
-# Tener las dos redes permite evitar colisiones de nombres en los contenedores
-# interiores. Si no se creara esta nueva red (que se convierte en la "externa"),
-# el contenedor de la base de datos estaría en la misma red visible por
-# traefik en la que, potencialmente, se lanzarán otros servicios. Si otros
-# servicios tuvieran también un contenedor con el mismo nombre que nosotros
-# para la base de datos, tendríamos una colisión de nombres.
+# Using both networks avoid collisions in the containers. External network is needed
+# because we do not want to expose the database container. Additionally, other
+# services might be available in this external network and we do not want name collisions
+# with the database container.
 
 version: '3.3'
 
