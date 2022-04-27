@@ -40,8 +40,8 @@ npm test
 
 ## Api Reference
 
-Documentation for the Community Model is available at <https://app.swaggerhub.com/apis-docs/gjimenezUCM/SPICE-CommunityModelAPI/v.1.1>
+Documentation for the Community Model is available at <http://spice.fdi.ucm.es/>
 
 ## License
 
-The content of this repository is distributed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+The content of this repository is distributed under [Apache 2.0 License](LICENSE).
