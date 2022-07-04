@@ -1,7 +1,7 @@
 'use strict';
 const db = require("../models");
 const CommunityDAO = db.communities;
-
+const UsersDAO = db.users;
 
 /**
  * Communities that a user belongs
@@ -10,10 +10,10 @@ const CommunityDAO = db.communities;
  * userId Long ID of user
  * returns List
  **/
-exports.listUserCommunities = function(userId) {
-  return new Promise(function(resolve, reject) {
+exports.listUserCommunities = function (userId) {
+  return new Promise(function (resolve, reject) {
     let result = {};
-    CommunityDAO.allWithUserId(userId, 
+    CommunityDAO.allWithUserId(userId,
       data => {
         // Response only includes ids
         result['application/json'] = data.map(c => c.id);
@@ -26,8 +26,8 @@ exports.listUserCommunities = function(userId) {
       error => {
         reject(error);
       }
-    );    
-  });  
+    );
+  });
 }
 
 
@@ -38,10 +38,16 @@ exports.listUserCommunities = function(userId) {
  * body List User generated content object that will be added to the model
  * no response value expected for this operation
  **/
-exports.updateUsers = function(body) {
-  return new Promise(function(resolve, reject) {
-    // TODO Notify communy model app
-    resolve();
+exports.updateUsers = function (body) {
+  return new Promise(function (resolve, reject) {
+    UsersDAO.update(body,
+      data => {
+        resolve();
+      },
+      error => {
+        reject(error);
+      }
+    );
   });
 }
 
