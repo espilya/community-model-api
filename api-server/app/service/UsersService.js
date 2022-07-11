@@ -40,14 +40,35 @@ exports.listUserCommunities = function (userId) {
  **/
 exports.updateUsers = function (body) {
   return new Promise(function (resolve, reject) {
-    UsersDAO.update(body,
-      data => {
-        resolve();
-      },
-      error => {
-        reject(error);
-      }
-    );
+    // try {
+      UsersDAO.update(body,
+        data => {
+          resolve();
+        },
+        error => {
+          reject(error);
+        }
+      );
+        // } catch (error) {
+      // console.error(error);
+    // }
+
+    // try {
+    //   console.log(body);
+    //   console.log("_1_");
+    //   let data = body;
+    //   fetch("http://localhost:8090/", {
+    //     method: "POST",
+    //     headers: {'Content-Type': 'application/json'}, 
+    //     body: JSON.stringify(data)
+    //   }).then(res => {
+    //     console.log("Request complete! response:", res);
+    //   });
+    //   console.log("_2_");
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
   });
 }
 

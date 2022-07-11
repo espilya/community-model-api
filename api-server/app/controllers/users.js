@@ -12,6 +12,7 @@ module.exports.updateUsers = function updateUsers(req, res, next) {
         res.send(response);
       })
       .catch(function (response) {
+        res.status(500);
         res.send(response);
       });
   } else {
