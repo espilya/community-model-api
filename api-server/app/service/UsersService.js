@@ -30,7 +30,7 @@ exports.listUserCommunities = function (userId) {
   });
 }
 
-
+const http = require('http');
 /**
  * Update community model with new users
  * This service is employed to inform the Community Model the users who where created/updated in the User Model
@@ -40,34 +40,50 @@ exports.listUserCommunities = function (userId) {
  **/
 exports.updateUsers = function (body) {
   return new Promise(function (resolve, reject) {
-    // try {
-      UsersDAO.update(body,
-        data => {
-          resolve();
-        },
-        error => {
-          reject(error);
-        }
-      );
-        // } catch (error) {
-      // console.error(error);
-    // }
+    var user = JSON.stringify(body)
 
-    // try {
-    //   console.log(body);
-    //   console.log("_1_");
-    //   let data = body;
-    //   fetch("http://localhost:8090/", {
-    //     method: "POST",
-    //     headers: {'Content-Type': 'application/json'}, 
-    //     body: JSON.stringify(data)
-    //   }).then(res => {
-    //     console.log("Request complete! response:", res);
-    //   });
-    //   console.log("_2_");
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    const options = {
+      hostname: 'host.docker.internal',
+      port: 8090,
+      path: '/',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': user.length,
+      },
+    };
+
+    const req = http.request(options, res => {
+      console.log(`statusCode: ${res.statusCode}`);
+      res.on('data', d => {
+        process.stdout.write(d);
+      });
+
+      res.on('end', () =>{
+        console.log("_end_");
+        resolve()
+      })
+
+      var myStatus = req.status;
+      if(myStatus >= 400){
+        req.on('error', (err) =>{
+          console.error(err);
+        })
+        reject()
+      }
+      // else{
+      //   console.error("ok");
+      //   resolve()
+      // }
+    });
+
+    req.write(user);
+    req.end();
+
+    req.on('error', (err) =>{
+      console.error(err);
+      reject()
+    })
 
   });
 }

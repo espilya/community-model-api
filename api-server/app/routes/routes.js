@@ -3,9 +3,10 @@ module.exports = app => {
     const fs   = require('fs');
 
     const customControllers =  {
-        Users: require("../controllers/users.js"),
         Communities: require("../controllers/communities.js"),
-        Similarity: require("../controllers/similarity.js")
+        Similarity: require("../controllers/similarity.js"),
+        Users: require("../controllers/users.js"),
+        Perspectives: require("../controllers/perspectives.js")
     };
     
     function initRouters(router){

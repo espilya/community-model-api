@@ -2,6 +2,7 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       "community-type": String,
+      perspective: String,
       name: String,
       explanation: String,
       users: [String]

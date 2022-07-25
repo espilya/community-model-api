@@ -25,44 +25,45 @@ module.exports = mongoose => {
 
   return {
     update: function (user, onSuccess, onError) {
-      user = JSON.stringify(user)
-      // console.log("User:");
-      // console.log(users);
+      // user = JSON.stringify(user)
+      // // console.log("User:");
+      // // console.log(users);
 
-      const options = {
-        hostname: 'host.docker.internal',
-        port: 8090,
-        path: '/',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Content-Length': user.length,
-        },
-      };
+      // const options = {
+      //   hostname: 'host.docker.internal',
+      //   port: 8090,
+      //   path: '/',
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Content-Length': user.length,
+      //   },
+      // };
 
-      const req = http.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`);
+      // const req = http.request(options, res => {
+      //   console.log(`statusCode: ${res.statusCode}`);
 
-        res.on('data', d => {
-          process.stdout.write(d);
-        });
-      });
-
-      // onError(user)
-      // req.on('error', error => {
-      //   onError(user)
-      //   console.error(error);
+      //   res.on('data', d => {
+      //     process.stdout.write(d);
+      //   });
       // });
 
-      // TODO:
-      // req.on('error', onError(user))
-      // onError(user)
+      // var a = 2222
+      // req.on('error', function(err) {
+      //   console.error(err);
+      //   a = 4444
+      //   console.log(a);
+      //   throw err;
+      //   onError(err)
+      // });
+      // console.log(a);
+      // // onError(user)
 
-      req.write(user);
-      req.end();
+      // req.write(user);
+      // req.end();
 
-      // req.on('success', onSuccess(""))
-      onSuccess("");
+      // // req.on('success', onSuccess(""))
+      // onSuccess("");
 
 
     }

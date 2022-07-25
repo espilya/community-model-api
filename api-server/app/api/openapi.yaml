@@ -12,6 +12,8 @@ info:
 servers:
 - url: /v1.1/
 tags:
+- name: perspectives
+  description: Operations about computing perspectives among communities(?)
 - name: communities
   description: Operations related to information about communities
 - name: users
@@ -19,6 +21,81 @@ tags:
 - name: similarity
   description: Operations about computing similarity among communities
 paths:
+  /perspectives:
+    get:
+      tags:
+      - perspectives
+      summary: Perspectives in the model
+      description: Access to a list of the perspectives in the community model
+      operationId: getPerspectives
+      responses:
+        "200":
+          description: A list with the perspectives in the model
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/perspective'
+                x-content-type: application/json
+        "400":
+          description: Community model does not exist
+      x-swagger-router-controller: Perspectives
+  /perspectives/{perspectiveId}:
+    get:
+      tags:
+      - perspectives
+      summary: perspective description 
+      description: Returns information about a perspective
+      operationId: getPerspectiveById
+      parameters:
+      - name: perspectiveId
+        in: path
+        description: ID of perspective to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/id'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/perspective'
+        "400":
+          description: invalid perspective id
+      x-swagger-router-controller: Perspectives
+  /perspectives/{perspectiveId}/communities:
+    get:
+      tags:
+      - perspectives
+      summary: Communities with the same perspective
+      description: Returns a list with the communities 
+      operationId: listPerspectiveCommunities
+      parameters:
+      - name: perspectiveId
+        in: path
+        description: ID of the perspective to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/id'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/community'
+                x-content-type: application/json
+        "400":
+          description: invalid community id
+      x-swagger-router-controller: Perspectives
   /communities:
     get:
       tags:
@@ -352,11 +429,83 @@ components:
           type: number
           description: Number of datapoint used to generate this UGC
           example: 0
+    param:
+      type: string
+      description: Param
+      example: param
+    sim_function:
+      type: object
+      title: similarity_function
+      properties:
+        name:
+          type: string
+          description: name
+          example: name
+        weight:
+          type: number
+          description: weight
+          example: 2
+        params:
+              type: array
+              description: Params
+              items:
+                $ref: '#/components/schemas/param'
+              example:
+                - "paramA"
+                - "paramB"
+        on_attribute:
+          type: object
+          title: on_attribute
+          properties:
+            att_name:
+              type: string
+              description: att_name
+              example: att_name
+            att_type:
+              type: string
+              description: att_type
+              example: att_type
+    perspective:
+      required:
+        - id
+        - name
+        - algorithm
+        - similarity_functions
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          type: string
+          description: Perspective name
+          example: name
+        algorithm:
+          type: object
+          title: Algorithm used for this perspective
+          properties:
+            name:
+                type: string
+                description: The name of the algorithm
+                example: optics
+            params:
+              type: array
+              description: Params
+              items:
+                $ref: '#/components/schemas/param'
+              example:
+                - "paramA"
+                - "paramB"
+        similarity_functions:
+          type: array
+          description: similarity_functions
+          items: 
+            $ref: '#/components/schemas/sim_function'
     community:
       required:
         - community-type
         - id
         - name
+        - users
       type: object
       properties:
         id:
@@ -365,6 +514,10 @@ components:
           type: string
           description: Community name
           example: elderly
+        perspective:
+          type: string
+          description: perspective
+          example: perspective
         explanation:
           type: string
           description: community description (maybe empty). It can be computed by the explanation module

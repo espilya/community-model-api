@@ -2,20 +2,74 @@ let spiceUser = _getEnv('MONGODB_USER');
 let spicePwd = _getEnv('MONGODB_PASSWORD');
 let dbName = _getEnv('MONGO_INITDB_DATABASE');
 db = new Mongo().getDB(dbName);
-print("Connected to "+db.getName());
+print("Connected to " + db.getName());
 
 db.createUser({
   user: spiceUser,
   pwd: spicePwd,
   roles: [
-      {
-        role: 'readWrite',
-        db: db.getName()
-      }
+    {
+      role: 'readWrite',
+      db: db.getName()
+    }
   ]
 });
+
+db.createCollection('perspectives', { capped: false });
+// db.perspectives.delete_many({});
+
+db.perspectives.insertMany([{
+    "id": 100,
+    "name": "String",
+    "algorithm": {
+      "name": "String",
+      "params": {
+        "param_a": "String",
+        "param_b": "String"
+      }
+    },
+    "similarity_functions": [{
+      "sim_function": {
+        "name": "String",
+        "params": {
+          "param_a": "String",
+          "param_b": "String"
+        },
+        "on_attribute": {
+          "att_name": "String",
+          "att_type": "String"
+        },
+        "weight": 100
+      }
+    }]
+  }, {
+    "id": 101,
+    "name": "String",
+    "algorithm": {
+      "name": "String",
+      "params": {
+        "param_a": "String",
+        "param_b": "String"
+      }
+    },
+    "similarity_functions": [{
+      "sim_function": {
+        "name": "String",
+        "params": {
+          "param_a": "String",
+          "param_b": "String"
+        },
+        "on_attribute": {
+          "att_name": "String",
+          "att_type": "String"
+        },
+        "weight": 101
+      }
+    }]
+  }]);
+
 db.createCollection('communities', { capped: false });
-db.communities.drop();
+// db.communities.delete_many({});
 
 // db.communities.insertMany( [{
 //     "_id": ObjectId("621e53cf0aa6aa7517c2afdd"),
@@ -47,7 +101,7 @@ db.communities.drop();
 //   }]);
 
 db.createCollection('similarities', { capped: false });
-db.similarities.drop();
+// db.similarities.delete_many({});
 
 // db.similarities.insertMany( [{
 //     "target-community-id": "621e53cf0aa6aa7517c2afdd",
