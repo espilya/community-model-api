@@ -3,6 +3,7 @@ const db = require("../models");
 const PerspectiveDAO = db.perspectives;
 const CommunityDAO = db.communities;
 
+
 /**
 * Perspectives in the model
 * Access to a list of the Perspectives
@@ -62,25 +63,35 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
     let communities = {};
     CommunityDAO.all((com) => {
       communities = com;
-    });
+      if (communities.length == 0) {
+        resolve();
+      }
 
-    if (communities.length == 0) {
-      resolve();
-    }
+      for (var i = 0; i < communities.length; i++) {
+        var community = communities[i]
+        console.log(community);
+        if (community.perspective == perspectiveId) {
+          data.push(community);
+        }
+      }
+      console.log("data:");
+      console.log(data);
+      // communities.forEach(element => {
+      //   var community = JSON.parse(element);
+      //   console.log(community);
+      //   if (community.perspective == perspectiveId) {
+      //     data.push(communities);
+      //   }
+      // });
 
-    communities.forEach(function (community, i, array) {
-      if(community[i].perspective == perspectiveId){
-        data.push(communities)
+      result['application/json'] = data;
+      if (Object.keys(result).length > 0) {
+        resolve(result[Object.keys(result)[0]]);
+      } else {
+        resolve();
       }
     });
 
-    result['application/json'] = data;
-        if (Object.keys(result).length > 0) {
-          resolve(result[Object.keys(result)[0]]);
-        } else {
-          resolve();
-        }
-        
   });
 };
 

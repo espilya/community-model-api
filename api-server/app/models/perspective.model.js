@@ -59,7 +59,6 @@ module.exports = mongoose => {
         if (error) {
           onError(error);
         } else {
-          console.log(data);
           if (data) {
             onSuccess(data.toJSON());
           }

@@ -12,8 +12,6 @@ module.exports.getPerspectives = function getPerspectives (req, res, next) {
 };
 
 module.exports.getPerspectiveById = function getPerspectiveById (req, res, next) {
-  console.log(req)
-  console.log(req.params[idParam])
   const perspectiveId = req.params[idParam];
   Perspectives.getPerspectiveById(perspectiveId)
     .then(function (response) {
