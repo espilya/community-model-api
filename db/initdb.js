@@ -16,11 +16,11 @@ db.createUser({
 });
 
 db.createCollection('perspectives', { capped: false });
-// db.perspectives.delete_many({});
+db.collection("perspectives").delete_many({});
 
 db.perspectives.insertMany([{
     "id": 100,
-    "name": "String",
+    "name": "Perspective_100",
     "algorithm": {
       "name": "String",
       "params": {
@@ -44,7 +44,7 @@ db.perspectives.insertMany([{
     }]
   }, {
     "id": 101,
-    "name": "String",
+    "name": "Perspective_101",
     "algorithm": {
       "name": "String",
       "params": {
@@ -69,68 +69,71 @@ db.perspectives.insertMany([{
   }]);
 
 db.createCollection('communities', { capped: false });
-// db.communities.delete_many({});
+db.collection("communities").delete_many({});
 
-// db.communities.insertMany( [{
-//     "_id": ObjectId("621e53cf0aa6aa7517c2afdd"),
-//     "community-type": "explicit",
-//     "name": "elderly",
-//     "explanation": "People above 65",
-//     "users": [
-//       "23",
-//       "28"
-//     ],
-//   },{
-//     "_id": ObjectId("721e53cf0aa6aa7517c2afdd"),
-//     "community-type": "implicit",
-//     "explanation": "lorem ipsum",
-//     "name": "impl_1",
-//     "users": [
-//       "44",
-//       "23"
-//     ]
-//   }, {
-//     "_id": ObjectId("821e53cf0aa6aa7517c2afdd"),
-//     "community-type": "explicit",
-//     "name": "teenager",
-//     "explanation": "People whose age is between 12 and 17",
-//     "users": [
-//       "44",
-//       "56"
-//     ],
-//   }]);
+db.communities.insertMany([{
+    "_id": ObjectId("621e53cf0aa6aa7517c2afdd"),
+    "community-type": "explicit",
+    "perspective": "Perspective_101",
+    "name": "elderly",
+    "explanation": "People above 65",
+    "users": [
+      "23",
+      "28"
+    ],
+  },{
+    "_id": ObjectId("721e53cf0aa6aa7517c2afdd"),
+    "community-type": "implicit",
+    "perspective": "Perspective_101",
+    "explanation": "lorem ipsum",
+    "name": "impl_1",
+    "users": [
+      "44",
+      "23"
+    ]
+  }, {
+    "_id": ObjectId("821e53cf0aa6aa7517c2afdd"),
+    "community-type": "explicit",
+    "perspective": "Perspective_100",
+    "name": "teenager",
+    "explanation": "People whose age is between 12 and 17",
+    "users": [
+      "44",
+      "56"
+    ],
+  }]);
 
 db.createCollection('similarities', { capped: false });
-// db.similarities.delete_many({});
+db.collection("similarities").delete_many({});
 
-// db.similarities.insertMany( [{
-//     "target-community-id": "621e53cf0aa6aa7517c2afdd",
-//     "other-community-id": "721e53cf0aa6aa7517c2afdd",
-//     "similarity-function": "cosine",
-//     "value": 0.893,
-//   },{
-//     "target-community-id": "721e53cf0aa6aa7517c2afdd",
-//     "other-community-id": "821e53cf0aa6aa7517c2afdd",
-//     "similarity-function": "cosine",
-//     "value": 0.563,
-//   },{
-//     "target-community-id": "621e53cf0aa6aa7517c2afdd",
-//     "other-community-id": "821e53cf0aa6aa7517c2afdd",
-//     "similarity-function": "cosine",
-//     "value": 0.915,
-//   },{
-//     "target-community-id": "721e53cf0aa6aa7517c2afdd",
-//     "other-community-id": "621e53cf0aa6aa7517c2afdd",
-//     "similarity-function": "cosine",
-//     "value": 0.893,
-//   },{
-//     "target-community-id": "821e53cf0aa6aa7517c2afdd",
-//     "other-community-id": "621e53cf0aa6aa7517c2afdd",
-//     "similarity-function": "cosine",
-//     "value": 0.915,
-//   },{
-//     "target-community-id": "821e53cf0aa6aa7517c2afdd",
-//     "other-community-id": "721e53cf0aa6aa7517c2afdd",
-//     "similarity-function": "cosine",
-//     "value": 0.563,
-// }]);
+db.similarities.insertMany( [{
+    "target-community-id": "621e53cf0aa6aa7517c2afdd",
+    "other-community-id": "721e53cf0aa6aa7517c2afdd",
+    "similarity-function": "cosine",
+    "value": 0.893,
+  },{
+    "target-community-id": "721e53cf0aa6aa7517c2afdd",
+    "other-community-id": "821e53cf0aa6aa7517c2afdd",
+    "similarity-function": "cosine",
+    "value": 0.563,
+  },{
+    "target-community-id": "621e53cf0aa6aa7517c2afdd",
+    "other-community-id": "821e53cf0aa6aa7517c2afdd",
+    "similarity-function": "cosine",
+    "value": 0.915,
+  },{
+    "target-community-id": "721e53cf0aa6aa7517c2afdd",
+    "other-community-id": "621e53cf0aa6aa7517c2afdd",
+    "similarity-function": "cosine",
+    "value": 0.893,
+  },{
+    "target-community-id": "821e53cf0aa6aa7517c2afdd",
+    "other-community-id": "621e53cf0aa6aa7517c2afdd",
+    "similarity-function": "cosine",
+    "value": 0.915,
+  },{
+    "target-community-id": "821e53cf0aa6aa7517c2afdd",
+    "other-community-id": "721e53cf0aa6aa7517c2afdd",
+    "similarity-function": "cosine",
+    "value": 0.563,
+}]);

@@ -45,7 +45,7 @@ exports.updateUsers = function (body) {
     const options = {
       hostname: 'host.docker.internal',
       port: 8090,
-      path: '/',
+      path: '/updateUsers',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -96,6 +96,26 @@ paths:
         "400":
           description: invalid community id
       x-swagger-router-controller: Perspectives
+  /perspective:
+    post:
+      tags:
+      - perspectives
+      summary: Add perspective
+      description: Add perspective <description>
+      operationId: perspectivePOST
+      requestBody:
+        description: Perspective
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/perspective'
+        required: true
+      responses:
+        "204":
+          description: Added
+        "400":
+          description: error
+      x-swagger-router-controller: Perspectives
   /communities:
     get:
       tags:
