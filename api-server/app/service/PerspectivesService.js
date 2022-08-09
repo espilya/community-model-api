@@ -70,7 +70,7 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
       for (var i = 0; i < communities.length; i++) {
         var community = communities[i]
         console.log(community);
-        if (community.perspective == perspectiveId) {
+        if (community.perspectiveId == perspectiveId) {
           data.push(community);
         }
       }

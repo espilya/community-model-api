@@ -534,10 +534,10 @@ components:
           type: string
           description: Community name
           example: elderly
-        perspective:
+        perspectiveId:
           type: string
-          description: perspective
-          example: perspective
+          description: perspectiveId
+          example: perspectiveId
         explanation:
           type: string
           description: community description (maybe empty). It can be computed by the explanation module
@@ -562,6 +562,7 @@ components:
         name: elderly
         id: d290f1ee-6c54-4b01-90e6-d701748f0851
         explanation: People whose age is above 65
+        perspectiveId: "101"
         users:
         - "23"
         - "24"
