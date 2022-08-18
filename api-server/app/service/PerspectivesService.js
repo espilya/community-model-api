@@ -120,13 +120,13 @@ exports.perspectivePOST = function (body) {
     };
 
     const req = http.request(options, res => {
-      console.log(`statusCode: ${res.statusCode}`);
+
       res.on('data', d => {
         process.stdout.write(d);
       });
 
       res.on('end', () =>{
-        console.log("_end_");
+        // console.log("_end_");
         resolve()
       })
 

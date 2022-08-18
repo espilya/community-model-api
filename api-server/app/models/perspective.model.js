@@ -1,12 +1,5 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
-  //   {
-  //     id: Number,
-  //     name: String,
-  //     algorithm: String,
-  //     similarity_functions: String
-  //   }
-  // );
     {
       id: String,
       name: String,
@@ -34,7 +27,7 @@ module.exports = mongoose => {
 
   schema.method("toJSON", function () {
     const { __v, _id, ...object } = this.toObject();
-    object.id = _id.toString();
+    // object.id = _id.toString();
     return object;
   });
 
@@ -44,7 +37,7 @@ module.exports = mongoose => {
   return {
     all: function (onSuccess) {
       let items = [];
-      Perspectives.find({}, function (error, data) {
+      Perspectives.find({}, {projection: {_id: 0}}, function (error, data) {
         let i = 0;
         data.forEach(element => {
           items[i] = element.toJSON();
@@ -55,11 +48,12 @@ module.exports = mongoose => {
 
     },
     getById: function (id, onSuccess, onError) {
-      Perspectives.findOne({ "id": id }, function (error, data) {
+      Perspectives.findOne({ "id": id }, {projection: {_id: 0}}, function (error, data) {
         if (error) {
           onError(error);
         } else {
           if (data) {
+            console.log(data.toJSON());
             onSuccess(data.toJSON());
           }
           else {

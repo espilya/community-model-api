@@ -1,6 +1,7 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
+      id: String,
       "community-type": String,
       perspectiveId: String,
       name: String,
@@ -11,7 +12,7 @@ module.exports = mongoose => {
     
     schema.method("toJSON", function() {
       const { __v, _id, ...object } = this.toObject();
-      object.id = _id.toString();
+      // object.id = _id.toString();
       return object;
     });
     
@@ -21,7 +22,7 @@ module.exports = mongoose => {
     return {
       all: function(onSuccess) {
         let items= [];
-        Communities.find({},function(error, data){
+        Communities.find({}, {projection: {_id: 0}},function(error, data){
           let i=0;
           data.forEach(element => {
             items[i] = element.toJSON();
@@ -32,7 +33,7 @@ module.exports = mongoose => {
         
       },
       getById: function(id, onSuccess, onError) {
-        Communities.findOne({_id:id}, function (error, data) {
+        Communities.findOne({id:id}, {projection: {_id: 0}}, function (error, data) {
           if (error) {
             onError(error);
           } else {
@@ -47,7 +48,7 @@ module.exports = mongoose => {
       },
       allWithUserId: function(userId, onSuccess, onError) {
         let items= [];
-        Communities.find({users: userId},function(error, data){
+        Communities.find({users: userId}, {projection: {_id: 0}},function(error, data){
           if (data.length>0){
             let i=0;
             data.forEach(element => {
