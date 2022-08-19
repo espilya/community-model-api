@@ -1,5 +1,6 @@
 'use strict';
 const db = require("../models");
+var post = require('./post');
 const PerspectiveDAO = db.perspectives;
 const CommunityDAO = db.communities;
 
@@ -12,6 +13,7 @@ const CommunityDAO = db.communities;
 **/
 exports.getPerspectives = function () {
   return new Promise(function (resolve, reject) {
+    post.update_CM();
     let result = {};
     PerspectiveDAO.all((perspectives) => {
       result['application/json'] = perspectives;
@@ -31,6 +33,7 @@ exports.getPerspectives = function () {
 **/
 exports.getPerspectiveById = function (perspectiveId) {
   return new Promise(function (resolve, reject) {
+    post.update_CM();
     let result = {};
     PerspectiveDAO.getById(perspectiveId,
       data => {
@@ -50,11 +53,7 @@ exports.getPerspectiveById = function (perspectiveId) {
 
 
 /**
-* Users who belong to a community
-* Returns a list with the ids of the users who belong to a community
-*
-* communityId Long ID of community to return
-* returns List
+* Returns list with communities that have the same perspectiveId
 **/
 exports.listPerspectiveCommunities = function (perspectiveId) {
   return new Promise(function (resolve, reject) {
@@ -97,13 +96,7 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
 
 
 const http = require('http');
-/**
- * Update community model with new users
- * This service is employed to inform the Community Model the users who where created/updated in the User Model
- *
- * body List User generated content object that will be added to the model
- * no response value expected for this operation
- **/
+
 exports.perspectivePOST = function (body) {
   return new Promise(function (resolve, reject) {
     var user = JSON.stringify(body)
