@@ -4,13 +4,16 @@ The Community Model supports the social cohesion across groups, by the understan
 
 ## Quick start
 
-1. Create a `.env` file in the `deploy` folder using the `env.template` file and following the instructions in it
+~~1. Create a `.env` file in the `deploy` folder using the `env.template` file and following the instructions in it~~
+~~2. Deploy the Community Model using Docker:~~
 
-2. Deploy the Community Model using Docker:
+- Windows:
+Execute `docker compose --env-file .env build && docker compose up`  from `deploy` folder.
+- Linux (mac):
+Replace **`;`** with**`:`** in the last lines of the `/deploy/.env` file
+Execute `docker compose --env-file .env build && docker compose up`  from `deploy` folder.
 
-```
-docker-compose up
-```
+Use `docker compose` or `docker-compose`. It does not matter
 
 ## Developing
 
