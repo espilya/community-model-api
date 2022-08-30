@@ -10,19 +10,26 @@ const CommunityDAO = db.communities;
 * returns List
 **/
 exports.getCommunities = function() {
-  return new Promise(function(resolve, reject) {
-    post.update_CM();
-    let result = {};    
-    CommunityDAO.all( (communities) => {
-      result['application/json'] = communities;
-      if (Object.keys(result).length > 0) {
-        resolve(result[Object.keys(result)[0]]);
-      } else {
-        resolve();
-      }   
-    });
-  });
-  
+  try {
+      return new Promise(function(resolve, reject) {
+        post.update_CM();
+        // console.log(result);
+    
+
+        let result = {};    
+        CommunityDAO.all( (communities) => {
+          result['application/json'] = communities;
+          if (Object.keys(result).length > 0) {
+            console.log("resolve")
+            resolve(result[Object.keys(result)[0]]);
+          } else {
+            resolve();
+          }   
+        });
+      });
+    } catch (error) {
+      console.error("ERROR:" + error);
+    }
 };
 
 

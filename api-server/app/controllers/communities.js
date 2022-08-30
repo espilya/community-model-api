@@ -4,10 +4,10 @@ const Communities = require('../service/CommunitiesService.js');
 module.exports.getCommunities = function getCommunities (req, res, next) {
   Communities.getCommunities()
     .then(function (response) {
-      res.send(response);
+      res.status(200).send(response);
     })
     .catch(function (response) {
-      res.send(response);
+      res.status(400).send(response);
     });
 };
 

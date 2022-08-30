@@ -1,6 +1,6 @@
 'use strict';
 const db = require("../models");
-var post = require('./post');
+
 const PerspectiveDAO = db.perspectives;
 const CommunityDAO = db.communities;
 
@@ -13,7 +13,7 @@ const CommunityDAO = db.communities;
 **/
 exports.getPerspectives = function () {
   return new Promise(function (resolve, reject) {
-    post.update_CM();
+
     let result = {};
     PerspectiveDAO.all((perspectives) => {
       result['application/json'] = perspectives;
@@ -33,7 +33,7 @@ exports.getPerspectives = function () {
 **/
 exports.getPerspectiveById = function (perspectiveId) {
   return new Promise(function (resolve, reject) {
-    post.update_CM();
+
     let result = {};
     PerspectiveDAO.getById(perspectiveId,
       data => {
@@ -96,7 +96,7 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
 
 
 const http = require('http');
-
+// TODO: devolver error si la dao no pudo meterla 
 exports.perspectivePOST = function (body) {
   return new Promise(function (resolve, reject) {
     var user = JSON.stringify(body)
@@ -113,13 +113,13 @@ exports.perspectivePOST = function (body) {
     };
 
     const req = http.request(options, res => {
-
       res.on('data', d => {
+        console.log(`BODY: ${d}`);
         process.stdout.write(d);
       });
 
       res.on('end', () =>{
-        // console.log("_end_");
+        console.log("_end_");
         resolve()
       })
 
@@ -143,6 +143,6 @@ exports.perspectivePOST = function (body) {
       console.error(err);
       reject()
     })
-
+    
   });
 }
