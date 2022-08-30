@@ -8,10 +8,10 @@ The Community Model supports the social cohesion across groups, by the understan
 ~~2. Deploy the Community Model using Docker:~~
 
 - Windows:
-Execute `docker compose --env-file .env build && docker compose up`  from `deploy` folder.
+  - Execute `docker compose --env-file .env build && docker compose up`  from `deploy` folder.
 - Linux (mac):
-Replace **`;`** with**`:`** in the last lines of the `/deploy/.env` file
-Execute `docker compose --env-file .env build && docker compose up`  from `deploy` folder.
+  - Replace **`;`** with**`:`** in the last lines of the `/deploy/.env` file
+  - Execute `docker compose --env-file .env build && docker compose up`  from `deploy` folder.
 
 Use `docker compose` or `docker-compose`. It does not matter
 
