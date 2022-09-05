@@ -185,3 +185,7 @@ db.similarities.insertMany([{
   "similarity-function": "cosine",
   "value": 0.563,
 }]);
+
+db.createCollection('flags', { capped: false });
+db.flags.deleteMany({});
+db.flags.insertOne({ "flag" : true});

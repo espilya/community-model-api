@@ -56,7 +56,7 @@ function oldPost(){
       hostname: 'host.docker.internal',
       port: 8090,
       path: '/update_CM',
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': user.length,
@@ -119,19 +119,6 @@ async function postData(url = '', data = "hi") {
 
 module.exports = {
     update_CM:  function () {
-      // console.log("update cm 1")
-
-      // const url ='http://localhost:8090/update_CM'
-      // try {
-      //   axios({ url: url, method: 'post', data: {hi: "hi"} })
-      //   .then(data => console.log(data))
-      //   .then(err => console.log(err))
-      // } catch (error) {
-      //   console.error(error)
-      // }
-     
-      
-              
-      // console.log("update cm 2")
+      oldPost()
     }
   };

@@ -1,6 +1,6 @@
 'use strict';
 const db = require("../models");
-var post = require('./post');
+
 const CommunityDAO = db.communities;
 
 /**
@@ -12,7 +12,7 @@ const CommunityDAO = db.communities;
 exports.getCommunities = function() {
   try {
       return new Promise(function(resolve, reject) {
-        post.update_CM();
+
         // console.log(result);
     
 
@@ -42,7 +42,7 @@ exports.getCommunities = function() {
 **/
 exports.getCommunityById = function(communityId) {
   return new Promise(function(resolve, reject) {
-    post.update_CM();
+
     let result = {};
     CommunityDAO.getById(communityId, 
       data => {

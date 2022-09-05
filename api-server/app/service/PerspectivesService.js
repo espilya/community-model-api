@@ -37,6 +37,7 @@ exports.getPerspectiveById = function (perspectiveId) {
     let result = {};
     PerspectiveDAO.getById(perspectiveId,
       data => {
+        // console.log(data)
         result['application/json'] = data;
         if (Object.keys(result).length > 0) {
           resolve(result[Object.keys(result)[0]]);
@@ -68,13 +69,10 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
 
       for (var i = 0; i < communities.length; i++) {
         var community = communities[i]
-        console.log(community);
         if (community.perspectiveId == perspectiveId) {
           data.push(community);
         }
       }
-      console.log("data:");
-      console.log(data);
       // communities.forEach(element => {
       //   var community = JSON.parse(element);
       //   console.log(community);
@@ -100,7 +98,7 @@ const http = require('http');
 exports.perspectivePOST = function (body) {
   return new Promise(function (resolve, reject) {
     var user = JSON.stringify(body)
-    
+
     const options = {
       hostname: 'host.docker.internal',
       port: 8090,
@@ -118,14 +116,14 @@ exports.perspectivePOST = function (body) {
         process.stdout.write(d);
       });
 
-      res.on('end', () =>{
+      res.on('end', () => {
         console.log("_end_");
         resolve()
       })
 
       var myStatus = req.status;
-      if(myStatus >= 400){
-        req.on('error', (err) =>{
+      if (myStatus >= 400) {
+        req.on('error', (err) => {
           console.error(err);
         })
         reject()
@@ -139,10 +137,10 @@ exports.perspectivePOST = function (body) {
     req.write(user);
     req.end();
 
-    req.on('error', (err) =>{
+    req.on('error', (err) => {
       console.error(err);
       reject()
     })
-    
+
   });
 }

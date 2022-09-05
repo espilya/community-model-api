@@ -93,6 +93,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/community'
                 x-content-type: application/json
+        "202":
+          description: job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/job'
         "400":
           description: invalid community id
       x-swagger-router-controller: Perspectives
@@ -485,6 +491,15 @@ components:
               type: string
               description: att_type
               example: att_type
+    job:
+      required:
+        - path
+      type: object
+      properties:
+        path:
+          type: string
+          description: job
+          example: aaa
     perspective:
       required:
         - id

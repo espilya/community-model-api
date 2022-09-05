@@ -9,6 +9,7 @@ db.communityDAO = require("./community.model.js")(mongoose);
 db.similarityDAO = require("./similarity.model.js")(mongoose);
 db.usersDAO = require("./users.model.js")(mongoose);
 db.perspectivesDAO = require("./perspective.model.js")(mongoose);
+db.flagDAO = require("./flag.model.js")(mongoose);
 
 module.exports = {
     init: async function (onReady) {
@@ -30,5 +31,6 @@ module.exports = {
     communities: db.communityDAO,
     similarities: db.similarityDAO,
     users: db.usersDAO,
-    perspectives: db.perspectivesDAO
+    perspectives: db.perspectivesDAO,
+    flag: db.flagDAO
 };
