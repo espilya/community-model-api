@@ -1,3 +1,8 @@
+/**
+ * Jobs queue manager.
+ * Contains a list with jobs. Used to add, remove and read for specific job
+ */
+
 var jobsList = []
 
 getJob = function (jobId) {
@@ -21,6 +26,10 @@ removeJob = function (jobId) {
     }
 };
 
+/**
+ * Generates non-repeating random job id
+ * @returns id
+ */
 generateId = function (jobId) {
     var id = 0;
     var ok = false;

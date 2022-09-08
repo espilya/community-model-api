@@ -54,8 +54,9 @@ module.exports = app => {
     const express = require("express");
     
     var router = express.Router();
-    var jobsRouter = require("../controllers/jobsRoute/jobs.js")
+    var jobsRouter = require("../controllers/jobsRoute/jobsManager.js")
     
+    // Adds jobs and api routes to the server
     app.use('/jobs', jobsRouter);  
     initRouters(router);
     app.use('/', express.static('api'));  

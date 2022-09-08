@@ -16,7 +16,7 @@ var router = express.Router();
 
 // en desarrollo
 
-
+/**Responses templates */
 var jobStarted_Template = {
     "job": {
         "@uri": "/jobs/xxxxxxxx",
@@ -70,7 +70,11 @@ var jobCompleted = {
 }
 
 
-
+/**
+ * Returns filled response template 
+ * @param {Job id} jobId 
+ * @returns Completed response
+ */
 function generateCompletedResponse(jobId, data) {
     var response = jobCompleted;
     response["job"]["@uri"] = "/jobs/" + jobId;
@@ -79,6 +83,11 @@ function generateCompletedResponse(jobId, data) {
     return response
 }
 
+/**
+ * Returns filled response template 
+ * @param {string} jobId 
+ * @returns Progress response
+ */
 function generateProgressResponse(jobId) {
     var response = jobStarted;
     response["job"]["@uri"] = "/jobs/" + jobId;
@@ -86,6 +95,12 @@ function generateProgressResponse(jobId) {
     return response
 }
 
+
+/**
+ * /jobs/:job_id GET request
+ * Allows to monitor job status and get data if CM update is finished.
+ * 
+ */
 router.get('/:job_id', function (req, res, next) {
     var jobId = req.params.job_id
     var job = jobManager.getJob(req.params.job_id)
@@ -98,6 +113,7 @@ router.get('/:job_id', function (req, res, next) {
         var request = job.request;
         console.log("Monitoring Job: <" + jobId + ">, from request: <" + request + ">, with param: <" + param + ">");
 
+        // Checks for specific flags
         Flags.getFlags(param)
             .then(function (data) {
                 if (data.flag) {
@@ -108,7 +124,7 @@ router.get('/:job_id', function (req, res, next) {
                             jobManager.removeJob(jobId);
                         })
                         .catch(function (data) {
-                            res.status(404).send("JobsManager: generateCompletedResponse exception");
+                            res.status(404).send("JobsManager: getData exception");
                         });
                 }
                 else {
@@ -122,6 +138,12 @@ router.get('/:job_id', function (req, res, next) {
     }
 });
 
+/**
+ * Reads data from MongoDB
+ * @param {string} request request type
+ * @param {string} param parameters
+ * @returns requested data
+ */
 function getData(request, param) {
     return new Promise(function (resolve, reject) {
         if (request == "listPerspectiveCommunities") {
