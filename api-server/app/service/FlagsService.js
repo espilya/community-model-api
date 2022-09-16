@@ -4,10 +4,10 @@ const db = require("../models");
 const FlagDAO = db.flag;
 
 /**
-* Communities in the model
-* Access to a list of the communities in the community model
+* Flags
+* Access to specific flag to check it
 *
-* returns List
+* returns flag document
 **/
 exports.getFlags = function (flagId) {
     return new Promise(function (resolve, reject) {

@@ -1,9 +1,7 @@
 'use strict';
-const db = require("../../models");
 const Perspectives = require('../../service/PerspectivesService.js');
 const Flags = require('../../service/FlagsService.js');
 
-const FlagDAO = db.flag;
 
 var jobManager = require('./jobsQueue');
 
@@ -16,7 +14,7 @@ var router = express.Router();
 
 // en desarrollo
 
-/**Responses templates */
+/**Response templates */
 var jobStarted_Template = {
     "job": {
         "@uri": "/jobs/xxxxxxxx",
@@ -50,7 +48,7 @@ var jobCompleted_Template = {
 
 var jobStarted = {
     "job": {
-        "@uri": "xxx",
+        "path": "xxx",
         "jobId": "xx",
         "name": "CM Update",
         "job-state": "STARTED",
@@ -60,7 +58,7 @@ var jobStarted = {
 }
 var jobCompleted = {
     "job": {
-        "@uri": "",
+        "path": "",
         "jobId": "",
         "name": "CM Update",
         "job-state": "COMPLETED",
@@ -77,7 +75,7 @@ var jobCompleted = {
  */
 function generateCompletedResponse(jobId, data) {
     var response = jobCompleted;
-    response["job"]["@uri"] = "/jobs/" + jobId;
+    response["job"]["path"] = "/jobs/" + jobId;
     response["job"]["jobId"] = jobId;
     response["job"]["data"] = data
     return response
@@ -90,7 +88,7 @@ function generateCompletedResponse(jobId, data) {
  */
 function generateProgressResponse(jobId) {
     var response = jobStarted;
-    response["job"]["@uri"] = "/jobs/" + jobId;
+    response["job"]["path"] = "/jobs/" + jobId;
     response["job"]["jobId"] = jobId;
     return response
 }
@@ -113,11 +111,12 @@ router.get('/:job_id', function (req, res, next) {
         var request = job.request;
         console.log("Monitoring Job: <" + jobId + ">, from request: <" + request + ">, with param: <" + param + ">");
 
-        // Checks for specific flags
+        // Checks for specific flag
         Flags.getFlags(param)
             .then(function (data) {
                 if (data.flag) {
                     var data = {};
+                    // Get data from mongodb id flag it positive
                     getData(request, param)
                         .then(function (data) {
                             res.status(200).send(generateCompletedResponse(jobId, data));

@@ -1,8 +1,7 @@
 const idParam = 'perspectiveId';
 const Perspectives = require('../service/PerspectivesService.js');
 const Flags = require('../service/FlagsService.js');
-var post = require('./jobsRoute/post');
-
+var post = require('./post');
 var jobManager = require('./jobsRoute/jobsQueue');
 
 module.exports.getPerspectives = function getPerspectives(req, res, next) {
@@ -28,7 +27,10 @@ module.exports.getPerspectiveById = function getPerspectiveById(req, res, next) 
 
 module.exports.listPerspectiveCommunities = function listPerspectiveCommunities(req, res, next) {
   const perspectiveId = req.params[idParam];
+  // TODO: Fix bug. Check if requested perspective exisr before creating new jobs for inexisting perspectives
 
+  // Check flag, if true then access mongodb and return data
+  // if false then create new job and return 202 and link to that job
   Flags.getFlags(idParam)
     .then(function (response) {
       var flag = response.flag
@@ -63,6 +65,7 @@ module.exports.listPerspectiveCommunities = function listPerspectiveCommunities(
 
 };
 
+// redirect post request to api_loader
 module.exports.perspectivePOST = function perspectivePOST(req, res, next) {
   Perspectives.perspectivePOST(req.body)
     .then(function (response) {

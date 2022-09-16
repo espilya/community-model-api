@@ -1,3 +1,7 @@
+/**
+ * _____Actualmente sin uso_____
+ */
+
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
@@ -21,49 +25,9 @@ module.exports = mongoose => {
   });
 
 
-  const http = require('http');
-
   return {
     update: function (user, onSuccess, onError) {
-      // user = JSON.stringify(user)
-      // // console.log("User:");
-      // // console.log(users);
-
-      // const options = {
-      //   hostname: 'host.docker.internal',
-      //   port: 8090,
-      //   path: '/',
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Content-Length': user.length,
-      //   },
-      // };
-
-      // const req = http.request(options, res => {
-      //   console.log(`statusCode: ${res.statusCode}`);
-
-      //   res.on('data', d => {
-      //     process.stdout.write(d);
-      //   });
-      // });
-
-      // var a = 2222
-      // req.on('error', function(err) {
-      //   console.error(err);
-      //   a = 4444
-      //   console.log(a);
-      //   throw err;
-      //   onError(err)
-      // });
-      // console.log(a);
-      // // onError(user)
-
-      // req.write(user);
-      // req.end();
-
-      // // req.on('success', onSuccess(""))
-      // onSuccess("");
+     // 
 
 
     }

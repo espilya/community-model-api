@@ -20,12 +20,42 @@ tags:
   description: Operations related to users in communities
 - name: similarity
   description: Operations about computing similarity among communities
+- name: jobs monitor
+  description: Monitor the status of a job
 paths:
+  /jobs/{jobId}:
+    get:
+      tags:
+      - jobs monitor
+      summary: Job status
+      description: Monitor the status of a job. Shows if the status of the job is finished or in progress, and returns data if it is finished.
+      operationId: none
+      parameters:
+      - name: jobId
+        in: path
+        description: ID of the job to monitor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/jobId'
+      responses:
+        "200":
+          description: Job status
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/jobStarted'
+                  - $ref: '#/components/schemas/jobCompleted'
+        "400":
+          description: Job does not exist
+      x-content-type: application/json
   /perspectives:
     get:
       tags:
       - perspectives
-      summary: Perspectives in the model
+      summary: Get all perspectives in the model
       description: Access to a list of the perspectives in the community model
       operationId: getPerspectives
       responses:
@@ -45,7 +75,7 @@ paths:
     get:
       tags:
       - perspectives
-      summary: perspective description 
+      summary: Get one perspective  
       description: Returns information about a perspective
       operationId: getPerspectiveById
       parameters:
@@ -94,7 +124,7 @@ paths:
                   $ref: '#/components/schemas/community'
                 x-content-type: application/json
         "202":
-          description: job
+          description: Job accepted. Updating CM before returning requested data. Redirecting to jobs monitor
           content:
             application/json:
               schema:
@@ -126,7 +156,7 @@ paths:
     get:
       tags:
       - communities
-      summary: Communities in the model
+      summary: Get all communities in the model
       description: Access to a list of the communities in the community model
       operationId: getCommunities
       responses:
@@ -146,7 +176,7 @@ paths:
     get:
       tags:
       - communities
-      summary: community description and explanation
+      summary: Get community description and explanation
       description: Returns information about a community
       operationId: getCommunityById
       parameters:
@@ -405,6 +435,81 @@ paths:
       x-swagger-router-controller: Similarity
 components:
   schemas:
+    jobId:
+      type: string
+      description: Unique job id
+      example: 4351
+    jobStarted:
+      type: object
+      title: jobStarted
+      properties:
+        job:
+          type: object
+          title: job
+          properties:
+            path:
+              type: string
+              description: path
+              example: /jobs/4351
+            jobId:
+              $ref: '#/components/schemas/jobId'
+            name:
+              type: string
+              description: name
+              example: CM Update
+            job-state:
+              type: string
+              description: job state
+              example: STARTED
+            job-status:
+              type: string
+              description: job status
+              example: INPROGRESS
+            data:
+              type: object
+              description: The job is not done yet
+    jobCompleted:
+      type: object
+      title: jobCompleted
+      properties:
+        job:
+          type: object
+          title: job
+          properties:
+            path:
+              type: string
+              description: path
+              example: /jobs/4351
+            jobId:
+              $ref: '#/components/schemas/jobId'
+            name:
+              type: string
+              description: name
+              example: CM Update
+            job-state:
+              type: string
+              description: job state
+              example: COMPLETED
+            job-status:
+              type: string
+              description: job status
+              example: SUCCESS
+            data:
+              oneOf:
+                - $ref: '#/components/schemas/perspective'
+                - $ref: '#/components/schemas/community'
+                - $ref: '#/components/schemas/listPerspectives'
+                - $ref: '#/components/schemas/listCommunities'
+    listPerspectives:
+      type: array
+      description: List of perspectives
+      items:
+        $ref: '#/components/schemas/perspective'
+    listCommunities:
+      type: array
+      description: List of communities
+      items:
+        $ref: '#/components/schemas/community'
     id:
       type: string
       description: Unique id
@@ -499,7 +604,7 @@ components:
         path:
           type: string
           description: job
-          example: aaa
+          example: /jobs/{jobId}
     perspective:
       required:
         - id
@@ -549,6 +654,10 @@ components:
           type: string
           description: Community name
           example: elderly
+        jobId:
+          type: string
+          description: jobId
+          example: jobId
         perspectiveId:
           type: string
           description: perspectiveId

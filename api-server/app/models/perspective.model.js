@@ -33,7 +33,7 @@ module.exports = mongoose => {
 
   const Perspectives = mongoose.model("Perspectives", schema);
 
-
+  // Access mongobd and retrieve requested data
   return {
     all: function (onSuccess) {
       let items = [];

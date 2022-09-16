@@ -1,14 +1,20 @@
 /**
  * Jobs queue manager.
- * Contains a list with jobs. Used to add, remove and read for specific job
+ * Contains a list with jobs, and basic CRUD operations. Used to add, remove and read for specific job
  */
 
 var jobsList = []
 
+/**
+ * Returns requested job by id
+ */
 getJob = function (jobId) {
     return jobsList.find(element => element.jobId == jobId);
 };
 
+/**
+ * Adds new job to the job list
+ */
 addJob = function (jobId, request, param) {
     var job = {
         jobId: jobId,
@@ -18,6 +24,9 @@ addJob = function (jobId, request, param) {
     jobsList.push(job);
 };
 
+/**
+ * Removes job by id
+ */
 removeJob = function (jobId) {
     var job = jobsList.find(element => element.jobId == jobId);
     const index = array.indexOf(job);

@@ -30,6 +30,9 @@ exports.getPerspectives = function () {
 
 /**
 * Returns information about a perspective
+*
+* perspectiveId Long ID of perspective to return
+* returns perspective
 **/
 exports.getPerspectiveById = function (perspectiveId) {
   return new Promise(function (resolve, reject) {
@@ -55,9 +58,13 @@ exports.getPerspectiveById = function (perspectiveId) {
 
 /**
 * Returns list with communities that have the same perspectiveId
+*
+* perspectiveId Long ID of perspective 
+* returns List
 **/
 exports.listPerspectiveCommunities = function (perspectiveId) {
   return new Promise(function (resolve, reject) {
+    // obtains all communities and then filter them by perspectiveId
     let result = {};
     let data = []
     let communities = {};
@@ -95,6 +102,13 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
 
 const http = require('http');
 // TODO: devolver error si la dao no pudo meterla 
+
+/**
+ * Redirects POST request to api_loader
+ * Used to inform the community model about new perspectives 
+ * 
+ * no response value expected for this operation
+ */
 exports.perspectivePOST = function (body) {
   return new Promise(function (resolve, reject) {
     var user = JSON.stringify(body)

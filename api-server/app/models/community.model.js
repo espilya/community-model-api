@@ -18,7 +18,7 @@ module.exports = mongoose => {
     
     const Communities = mongoose.model("Communities", schema);
     
-    
+    // Access mongobd and retrieve requested data
     return {
       all: function(onSuccess) {
         let items= [];

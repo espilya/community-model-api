@@ -15,6 +15,7 @@ module.exports = mongoose => {
 
   const Similarity = mongoose.model("Similarities", schema);
   
+  // Access mongobd and retrieve requested data
   return {
     allForId: function(communityId, onSuccess, onError) {
       Similarity.find({ "target-community-id": communityId }, function(error, data){

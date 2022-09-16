@@ -14,6 +14,7 @@ module.exports = mongoose => {
   
     const flag = mongoose.model("Flags", schema);
     
+    // Access mongobd and retrieve requested flag
     return {
       checkFlag: function(id, onSuccess, onError) {
         flag.findOne({}, function(error, data){

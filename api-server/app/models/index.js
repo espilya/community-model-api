@@ -11,6 +11,7 @@ db.usersDAO = require("./users.model.js")(mongoose);
 db.perspectivesDAO = require("./perspective.model.js")(mongoose);
 db.flagDAO = require("./flag.model.js")(mongoose);
 
+// Connects to mongoDB
 module.exports = {
     init: async function (onReady) {
         console.log(db.url);

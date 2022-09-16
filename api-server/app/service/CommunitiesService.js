@@ -12,10 +12,7 @@ const CommunityDAO = db.communities;
 exports.getCommunities = function() {
   try {
       return new Promise(function(resolve, reject) {
-
         // console.log(result);
-    
-
         let result = {};    
         CommunityDAO.all( (communities) => {
           result['application/json'] = communities;
