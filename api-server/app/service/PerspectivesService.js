@@ -109,7 +109,7 @@ const http = require('http');
  * 
  * no response value expected for this operation
  */
-exports.perspectivePOST = function (body) {
+exports.PostPerspective = function (body) {
   return new Promise(function (resolve, reject) {
     var user = JSON.stringify(body)
 

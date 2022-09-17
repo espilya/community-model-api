@@ -1,164 +1,73 @@
-'use strict';
-const Perspectives = require('../../service/PerspectivesService.js');
-const Flags = require('../../service/FlagsService.js');
-
-
-var jobManager = require('./jobsQueue');
-
-
-
-var express = require('express');
-const { response } = require("express");
-var router = express.Router();
-
-
-// en desarrollo
-
-/**Response templates */
-var jobStarted_Template = {
-    "job": {
-        "@uri": "/jobs/xxxxxxxx",
-        "id": "2130040",
-        "name": "Update Community Model",
-        "job-state": "STARTED",
-        "job-status": "INPROGRESS",
-        "percent-complete": "30",
-        "scheduled-start-time": "01-01-2013 10:50:45 PM GMT",
-        "start-time": "01-01-2013 10:50:55 PM GMT",
-        "end-time": "",
-        "owner": "Admin",
-        "summary": "random text"
-    }
-}
-var jobCompleted_Template = {
-    "job": {
-        "@uri": "/api/company/job-management/jobs/2130040",
-        "id": "2130040",
-        "name": "Update Resource",
-        "job-state": "COMPLETED",
-        "job-status": "SUCCESS",
-        "percent-complete": "100",
-        "scheduled-start-time": "01-01-2013 10:50:45 PM GMT",
-        "start-time": "01-01-2013 10:50:55 PM GMT",
-        "end-time": "01-01-2013 10:52:18 PM GMT",
-        "owner": "Admin",
-        "summary": "random text"
-    }
-}
-
-var jobStarted = {
-    "job": {
-        "path": "xxx",
-        "jobId": "xx",
-        "name": "CM Update",
-        "job-state": "STARTED",
-        "job-status": "INPROGRESS",
-        "data": {}
-    }
-}
-var jobCompleted = {
-    "job": {
-        "path": "",
-        "jobId": "",
-        "name": "CM Update",
-        "job-state": "COMPLETED",
-        "job-status": "SUCCESS",
-        "data": {}
-    }
-}
-
-
 /**
- * Returns filled response template 
- * @param {Job id} jobId 
- * @returns Completed response
+ * Jobs queue manager.
+ * Contains a list with jobs, and basic CRUD operations. Used to add, remove and read for specific job
  */
-function generateCompletedResponse(jobId, data) {
-    var response = jobCompleted;
-    response["job"]["path"] = "/jobs/" + jobId;
-    response["job"]["jobId"] = jobId;
-    response["job"]["data"] = data
-    return response
+
+var jobsList = []
+
+
+createJob = function (perspectiveId, requestTypeName) {
+    var jobId = generateId()
+    console.log("<JobsQueue> generateId: " + jobId)
+    console.log("<JobsQueue> perspectiveId: " + perspectiveId)
+    addJob(jobId, requestTypeName, perspectiveId);
+    var path = "/jobs/" + jobId
+    var data = {
+        "path": path
+    }
+    return data;
 }
 
 /**
- * Returns filled response template 
- * @param {string} jobId 
- * @returns Progress response
+ * Returns requested job by id
  */
-function generateProgressResponse(jobId) {
-    var response = jobStarted;
-    response["job"]["path"] = "/jobs/" + jobId;
-    response["job"]["jobId"] = jobId;
-    return response
-}
-
+getJob = function (jobId) {
+    return jobsList.find(element => element.jobId == jobId);
+};
 
 /**
- * /jobs/:job_id GET request
- * Allows to monitor job status and get data if CM update is finished.
- * 
+ * Adds new job to the job list
  */
-router.get('/:job_id', function (req, res, next) {
-    var jobId = req.params.job_id
-    var job = jobManager.getJob(req.params.job_id)
-
-    if (job == null) {
-        res.status(404).send("JobsManager: Job not found");
+addJob = function (jobId, request, param) {
+    var job = {
+        jobId: jobId,
+        request: request,
+        param: param
     }
-    else {
-        var param = job.param;
-        var request = job.request;
-        console.log("Monitoring Job: <" + jobId + ">, from request: <" + request + ">, with param: <" + param + ">");
-
-        // Checks for specific flag
-        Flags.getFlags(param)
-            .then(function (data) {
-                if (data.flag) {
-                    var data = {};
-                    // Get data from mongodb id flag it positive
-                    getData(request, param)
-                        .then(function (data) {
-                            res.status(200).send(generateCompletedResponse(jobId, data));
-                            jobManager.removeJob(jobId);
-                        })
-                        .catch(function (data) {
-                            res.status(404).send("JobsManager: getData exception");
-                        });
-                }
-                else {
-                    res.send(generateProgressResponse(jobId));
-                }
-            })
-            .catch(function (data) {
-                res.status(404).send("JobsManager: flag not found");
-            });
-
-    }
-});
+    jobsList.push(job);
+};
 
 /**
- * Reads data from MongoDB
- * @param {string} request request type
- * @param {string} param parameters
- * @returns requested data
+ * Removes job by id
  */
-function getData(request, param) {
-    return new Promise(function (resolve, reject) {
-        if (request == "listPerspectiveCommunities") {
-            Perspectives.listPerspectiveCommunities(param)
-                .then(function (response) {
-                    resolve(response);
-                })
-                .catch(function (response) {
-                    reject("JobsManager: MongoBD access error");
-                });
-        }
-        else if (request == "a") {
-            // ...
-        }
-    });
-}
+removeJob = function (jobId) {
+    var job = jobsList.find(element => element.jobId == jobId);
+    const index = array.indexOf(job);
+    if (index > -1) { // only splice array when item is found
+        array.splice(index, 1); // 2nd parameter means remove one item only
+    }
+};
+
+/**
+ * Generates non-repeating random job id
+ * @returns id
+ */
+generateId = function (jobId) {
+    var id = 0;
+    var ok = false;
+    while (!ok) {
+        id = Math.floor(
+            Math.random() * (9999 - 1000) + 1000
+        );
+        if (jobsList.find(element => element.jobId == jobId) == null)
+            ok = true;
+    }
+    return id;
+};
 
 
-module.exports = router;
+exports.createJob = createJob;
+exports.getJob = getJob;
+exports.addJob = addJob;
+exports.removeJob = removeJob;
+exports.generateId = generateId; 

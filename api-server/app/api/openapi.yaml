@@ -68,6 +68,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/perspective'
                 x-content-type: application/json
+        "202":
+          description: Job accepted. Updating CM before returning requested data. Redirecting to jobs monitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/job'
         "400":
           description: Community model does not exist
       x-swagger-router-controller: Perspectives
@@ -94,6 +100,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/perspective'
+        "202":
+          description: Job accepted. Updating CM before returning requested data. Redirecting to jobs monitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/job'
         "400":
           description: invalid perspective id
       x-swagger-router-controller: Perspectives
@@ -138,7 +150,7 @@ paths:
       - perspectives
       summary: Add perspective
       description: Add perspective <description>
-      operationId: perspectivePOST
+      operationId: PostPerspective
       requestBody:
         description: Perspective
         content:
@@ -169,6 +181,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/community'
                 x-content-type: application/json
+        "202":
+          description: Job accepted. Updating CM before returning requested data. Redirecting to jobs monitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/job'
         "400":
           description: Community model does not exist
       x-swagger-router-controller: Communities
@@ -195,6 +213,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/community'
+        "202":
+          description: Job accepted. Updating CM before returning requested data. Redirecting to jobs monitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/job'
         "400":
           description: invalid community id
       x-swagger-router-controller: Communities
@@ -224,6 +248,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/id'
                 x-content-type: application/json
+        "202":
+          description: Job accepted. Updating CM before returning requested data. Redirecting to jobs monitor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/job'
         "400":
           description: invalid community id
       x-swagger-router-controller: Communities

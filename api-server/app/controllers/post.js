@@ -6,8 +6,8 @@
 
 const http = require('http');
 
-function oldPost() {
-  var user = "hi"
+function oldPost(data = "empty") {
+
   const options = {
     hostname: 'host.docker.internal',
     port: 8090,
@@ -15,7 +15,7 @@ function oldPost() {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Content-Length': user.length,
+      'Content-Length': data.length,
     },
   };
   const req = http.request(options, res => {
@@ -46,7 +46,7 @@ function oldPost() {
     }
   });
 
-  req.write(user);
+  req.write(data);
   req.end();
 
   req.on('error', (err) => {
@@ -57,7 +57,8 @@ function oldPost() {
 
 
 module.exports = {
-  update_CM: function () {
-    oldPost()
+  update_CM: function (data) {
+    console.log("data" + data)
+    oldPost(data)
   }
 };

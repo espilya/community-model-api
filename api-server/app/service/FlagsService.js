@@ -9,9 +9,22 @@ const FlagDAO = db.flag;
 *
 * returns flag document
 **/
-exports.getFlags = function (flagId) {
+exports.getFlags = function () {
     return new Promise(function (resolve, reject) {
-        FlagDAO.checkFlag(flagId,
+        FlagDAO.checkFlag(
+            data => {
+                resolve(data)
+            },
+            error => {
+                console.log("flagService error: " + error);
+                reject(error)
+            })
+    });
+};
+
+exports.getFlagsById = function (perspectiveId) {
+    return new Promise(function (resolve, reject) {
+        FlagDAO.checkFlagById(perspectiveId,
             data => {
                 resolve(data)
             },
