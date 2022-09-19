@@ -17,7 +17,7 @@ from dao.dao_json import DAO_json
 #from dao.deleteAndLoadDefaultData import deleteAndLoad
 import time
 
-# from communityModel.hecht import CommunityModel
+from communityModel.hecht import CommunityModel
 
 API_PORT = 8090
 
@@ -131,8 +131,8 @@ class Handler(BaseHTTPRequestHandler):
 
                 print("data from post requets: ", post_data)
                 # Call to the community model
-                # communityModel = CommunityModel(perspective)
-                # communityModel.start()
+                communityModel = CommunityModel(perspective)
+                communityModel.start()
                 
                 print("community model end")
                 
