@@ -1,5 +1,7 @@
 'use strict';
 const db = require("../models");
+var postData = require('./postData.js');
+
 const CommunityDAO = db.communities;
 const UsersDAO = db.users;
 
@@ -31,60 +33,18 @@ exports.listUserCommunities = function (userId) {
 }
 
 const http = require('http');
+const { post } = require("../controllers/jobsRoute/jobsRoute");
 /**
  * Update community model with new users
+ * Redirects POST request to api_loader
  * This service is employed to inform the Community Model the users who where created/updated in the User Model
  *
  * body List User generated content object that will be added to the model
  * no response value expected for this operation
  **/
 exports.updateUsers = function (body) {
-  return new Promise(function (resolve, reject) {
-    var user = JSON.stringify(body)
-
-    const options = {
-      hostname: 'host.docker.internal',
-      port: 8090,
-      path: '/updateUsers',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': user.length,
-      },
-    };
-
-    const req = http.request(options, res => {
-
-      res.on('data', d => {
-        process.stdout.write(d);
-      });
-
-      res.on('end', () =>{
-        // console.log("_end_");
-        resolve()
-      })
-
-      var myStatus = req.status;
-      if(myStatus >= 400){
-        req.on('error', (err) =>{
-          console.error(err);
-        })
-        reject()
-      }
-      // else{
-      //   console.error("ok");
-      //   resolve()
-      // }
-    });
-
-    req.write(user);
-    req.end();
-
-    req.on('error', (err) =>{
-      console.error(err);
-      reject()
-    })
-
-  });
+  // return new Promise(function (resolve, reject) {
+  postData.post_data(body, "/updateUsers")
+  // });
 }
 

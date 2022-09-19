@@ -2,6 +2,12 @@ version: "3.3"
 
 networks:
   spice:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
+
 
 services:
   mongodb:
@@ -15,7 +21,8 @@ services:
       - MONGODB_USER=${MONGODB_USER:-spice}
       - MONGODB_PASSWORD=$MONGODB_PASSWORD
     networks:
-      - spice
+      spice:
+        ipv4_address: 172.20.0.3
 #    user: ${UID:-1000}:${GUID:-1000}
   app:
     depends_on:
@@ -31,4 +38,15 @@ services:
       - DB_PORT=27017
       - NODE_DOCKER_PORT=${APP_CONTAINER_PORT:-8080}
     networks:
-      - spice
+      spice:
+        ipv4_address: 172.20.0.2
+  cm:
+    depends_on:
+      - mongodb
+    image: cm
+    build: ../server-loader
+    ports:
+      - 8090:8090
+    networks:
+      spice:
+        ipv4_address: 172.20.0.4

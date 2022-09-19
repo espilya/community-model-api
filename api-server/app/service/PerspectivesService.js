@@ -1,5 +1,6 @@
 'use strict';
 const db = require("../models");
+var postData = require('./postData.js');
 
 const PerspectiveDAO = db.perspectives;
 const CommunityDAO = db.communities;
@@ -107,54 +108,11 @@ const http = require('http');
  * Redirects POST request to api_loader
  * Used to inform the community model about new perspectives 
  * 
+ * body perspective object that will be added to the model
  * no response value expected for this operation
  */
 exports.PostPerspective = function (body) {
-  return new Promise(function (resolve, reject) {
-    var user = JSON.stringify(body)
-
-    const options = {
-      hostname: 'host.docker.internal',
-      port: 8090,
-      path: '/perspective',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': user.length,
-      },
-    };
-
-    const req = http.request(options, res => {
-      res.on('data', d => {
-        console.log(`BODY: ${d}`);
-        process.stdout.write(d);
-      });
-
-      res.on('end', () => {
-        console.log("_end_");
-        resolve()
-      })
-
-      var myStatus = req.status;
-      if (myStatus >= 400) {
-        req.on('error', (err) => {
-          console.error(err);
-        })
-        reject()
-      }
-      // else{
-      //   console.error("ok");
-      //   resolve()
-      // }
-    });
-
-    req.write(user);
-    req.end();
-
-    req.on('error', (err) => {
-      console.error(err);
-      reject()
-    })
-
-  });
+  // return new Promise(function (resolve, reject) {
+  postData.post_data(body, "/perspective")
+  // });
 }

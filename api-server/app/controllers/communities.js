@@ -1,7 +1,7 @@
 const idParam = 'communityId';
 const Communities = require('../service/CommunitiesService.js');
 const Flags = require('../service/FlagsService.js');
-var post = require('./post');
+var post = require('./postUpdateCM');
 var jobManager = require('./jobsRoute/jobsManager.js');
 
 module.exports.getCommunities = function getCommunities(req, res, next) {

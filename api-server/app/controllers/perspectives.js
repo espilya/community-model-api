@@ -1,7 +1,7 @@
 const idParam = 'perspectiveId';
 const Perspectives = require('../service/PerspectivesService.js');
 const Flags = require('../service/FlagsService.js');
-var post = require('./post');
+var post = require('./postUpdateCM');
 var jobManager = require('./jobsRoute/jobsManager.js');
 
 // check if flag exist
