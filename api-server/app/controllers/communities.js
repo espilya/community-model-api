@@ -69,7 +69,7 @@ module.exports.listCommunityUsers = function listCommunityUsers(req, res, next) 
                 res.status(200).send(users);
               }
               else { //flag exist
-                post.update_CM(community.perspectiveI);
+                post.update_CM(community.perspectiveId);
                 var data = jobManager.createJob(communityId, "listCommunityUsers")
                 res.status(202).send(data);
               }
