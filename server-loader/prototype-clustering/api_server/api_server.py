@@ -1,8 +1,4 @@
-"""
-Very simple HTTP server in python for logging requests
-Usage::
-    ./server.py [<port>]
-"""
+import os
 import pymongo
 from bson.json_util import dumps, loads
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -17,9 +13,16 @@ from dao.dao_json import DAO_json
 #from dao.deleteAndLoadDefaultData import deleteAndLoad
 import time
 
-from communityModel.hecht import CommunityModel
+# from communityModel.hecht import CommunityModel
 
 API_PORT = 8090
+db_host = os.environ['DB_HOST']
+db_user = os.environ['DB_USER']
+db_password = os.environ['DB_PASSWORD']
+db_name = os.environ['DB_NAME']
+db_port = os.environ['DB_PORT']
+
+
 
 class Handler(BaseHTTPRequestHandler):
 
@@ -85,7 +88,7 @@ class Handler(BaseHTTPRequestHandler):
         first_arg = request[1]
         if first_arg == "perspective":
             perspective = loads(post_data.decode('utf-8'))
-            daoPerspective = DAO_db_perspectives("localhost", 27018, "spice", "spicepassword")
+            daoPerspective = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
             ok = daoPerspective.insertPerspective(perspective)
             # <Update Community Model>
             # TODO: Hacer Llamada al Community Model
@@ -93,12 +96,12 @@ class Handler(BaseHTTPRequestHandler):
             # </Update Community Model>
         elif first_arg == "updateUsers":
             users = loads(post_data.decode('utf-8'))
-            daoUsers = DAO_db_users("localhost", 27018, "spice", "spicepassword")
+            daoUsers = DAO_db_users(db_host, db_port, db_user, db_password, db_name)
             ok = daoUsers.insertUser_API(users)
             
             # Activate flags associated to user/perspective pair (perspective makes use of one of the user's attributes (pname))
-            daoPerspectives = DAO_db_perspectives("localhost", 27018, "spice", "spicepassword")
-            daoFlags = DAO_db_flags("localhost", 27018, "spice", "spicepassword")
+            daoPerspectives = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
+            daoFlags = DAO_db_flags(db_host, db_port, db_user, db_password, db_name)
             
             perspectives = daoPerspectives.getPerspectives()
             
@@ -120,8 +123,8 @@ class Handler(BaseHTTPRequestHandler):
             # UPDATE CM 
             
             # Check if there is an update flag
-            daoPerspectives = DAO_db_perspectives("localhost", 27018, "spice", "spicepassword")
-            daoFlags = DAO_db_flags("localhost", 27018, "spice", "spicepassword")
+            daoPerspectives = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
+            daoFlags = DAO_db_flags(db_host, db_port, db_user, db_password, db_name)
 
             flags = daoFlags.getFlags()
             for flag in flags:
@@ -131,8 +134,8 @@ class Handler(BaseHTTPRequestHandler):
 
                 print("data from post requets: ", post_data)
                 # Call to the community model
-                communityModel = CommunityModel(perspective)
-                communityModel.start()
+                # communityModel = CommunityModel(perspective)
+                # communityModel.start()
                 
                 print("community model end")
                 
@@ -142,7 +145,7 @@ class Handler(BaseHTTPRequestHandler):
             # END UPDATE CM
             ok = True
                 
-            
+        print("response: " + self.path)
         if ok:
             self.__set_response(204)
             self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
@@ -156,14 +159,14 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def __getIndex(self):
-        dao = DAO_db_community("localhost", 27018, "spice", "spicepassword")
+        dao = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
         data = dao.getFileIndex()
         print(data)
         self.__set_response(200, 'application/json')
         self.wfile.write(dumps(data).encode(encoding='utf_8'))
 
     def __getPerspertives(self, request):
-        dao = DAO_db_perspectives("localhost", 27018, "spice", "spicepassword")
+        dao = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
         perspectiveId = request[2]
         if perspectiveId == "all":
             data = dao.getPerspectives()
@@ -173,7 +176,7 @@ class Handler(BaseHTTPRequestHandler):
             if len(request) == 4 and request[3] == "communities":
                 # perspectives/{perspectiveId}/communities
                 result = []
-                coms = DAO_db_community("localhost", 27018, "spice", "spicepassword").getCommunities()
+                coms = DAO_db_community(db_host, db_port, db_user, db_password, db_name).getCommunities()
                 for com in coms:
                     if com["perspectiveId"] == perspectiveId:
                         result.append(com)
@@ -190,7 +193,7 @@ class Handler(BaseHTTPRequestHandler):
                     self.wfile.write("File not found\nGET request for {}".format(self.path).encode('utf-8'))
 
     def __getFile(self, fileId):
-        dao = DAO_db_community("localhost", 27018, "spice", "spicepassword")
+        dao = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
         if fileId == "all":
             data = dao.getFileLists()
             self.__set_response(200, 'application/json')
@@ -207,7 +210,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def run(server_class=HTTPServer, handler_class=Handler, port=API_PORT):
     logging.basicConfig(level=logging.INFO)
-    server_address = ('localhost', port)
+    server_address = ('0.0.0.0', port)
     httpd = server_class(server_address, handler_class)
     logging.info('Starting httpd...\n')
     try:
@@ -224,10 +227,10 @@ def importData():
     json6 = DAO_json("data/6.json").getData()
     jsonAll = DAO_json("data/Allperspectives.json").getData()
 
-    daoC = DAO_db_community("localhost", 27018, "spice", "spicepassword")
+    daoC = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
     daoC.insertFileList("5", json5)
     daoC.insertFileList("6", json6)
-    daoP = DAO_db_perspectives("localhost", 27018, "spice", "spicepassword")
+    daoP = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
     daoP.insertPerspective(jsonAll)
 
 if __name__ == '__main__':
@@ -241,9 +244,6 @@ if __name__ == '__main__':
     print("Your Computer Name is: "+hostname)   
     print("Your Computer IP Address is: "+IPAddr) 
 
-    from ping3 import ping, verbose_ping
-    print(ping('172.20.0.2:8080'))  # Returns delay in seconds.
-    print(ping('172.20.0.3'))
 
     if len(argv) == 2:
         run(port=int(argv[1]))

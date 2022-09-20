@@ -102,7 +102,6 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
 
 
 const http = require('http');
-// TODO: devolver error si la dao no pudo meterla 
 
 /**
  * Redirects POST request to api_loader
@@ -113,6 +112,10 @@ const http = require('http');
  */
 exports.PostPerspective = function (body) {
   // return new Promise(function (resolve, reject) {
-  postData.post_data(body, "/perspective")
+  // try {
+  return postData.post_data(body, "/perspective")
+  // } catch (error) {
+  //   console.log(error)
+  // }
   // });
 }

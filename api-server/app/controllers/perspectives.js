@@ -86,7 +86,8 @@ module.exports.listPerspectiveCommunities = function listPerspectiveCommunities(
 
 // redirect post request to api_loader
 module.exports.PostPerspective = function PostPerspective(req, res, next) {
-  Perspectives.PostPerspective(req.body)
+  try {
+    Perspectives.PostPerspective(req.body)
     .then(function (response) {
       res.status(204);
       res.send(response);
@@ -95,4 +96,7 @@ module.exports.PostPerspective = function PostPerspective(req, res, next) {
       res.status(501);
       res.send(response);
     });
+  } catch (error) {
+    console.error(error)
+  }
 };

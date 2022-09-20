@@ -44,7 +44,11 @@ const { post } = require("../controllers/jobsRoute/jobsRoute");
  **/
 exports.updateUsers = function (body) {
   // return new Promise(function (resolve, reject) {
-  postData.post_data(body, "/updateUsers")
+  // try {
+  return postData.post_data(body, "/updateUsers")
+  // } catch (error) {
+  //   console.log(error)
+  // }
   // });
 }
 

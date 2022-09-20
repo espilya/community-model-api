@@ -11,26 +11,26 @@ const SimilarityDAO = db.similarities;
  * otherCommunityId Long ID of the other community to compute dissimilarity
  * returns similarityScore
  **/
-exports.computeDissimilarity = function(targetCommunityId,otherCommunityId) {
-  return new Promise(function(resolve, reject) {
+exports.computeDissimilarity = function (targetCommunityId, otherCommunityId) {
+  return new Promise(function (resolve, reject) {
     let result = {};
     if (targetCommunityId === otherCommunityId) {
       result['application/json'] = {
-          "target-community-id": targetCommunityId,
-          "other-community-id": targetCommunityId,
-          "similarity-function": "any",
-          value: 0.0
+        "target-community-id": targetCommunityId,
+        "other-community-id": targetCommunityId,
+        "similarity-function": "any",
+        value: 0.0
       };
       if (Object.keys(result).length > 0) {
         resolve(result[Object.keys(result)[0]]);
       } else {
         resolve();
-      }      
+      }
     }
-    SimilarityDAO.getByIds(targetCommunityId, otherCommunityId, 
+    SimilarityDAO.getByIds(targetCommunityId, otherCommunityId,
       data => {
         // TODO: Dissimilarity must be computed in Community Model
-        data.value = 1-data.value;
+        data.value = 1 - data.value;
         result['application/json'] = data;
         if (Object.keys(result).length > 0) {
           resolve(result[Object.keys(result)[0]]);
@@ -54,14 +54,14 @@ exports.computeDissimilarity = function(targetCommunityId,otherCommunityId) {
  * k Integer Size of the result (k most dissimilar communities)
  * returns similarityScore
  **/
-exports.computeKmostDissimilar = function(communityId,k) {
-  return new Promise(function(resolve, reject) {
+exports.computeKmostDissimilar = function (communityId, k) {
+  return new Promise(function (resolve, reject) {
     let result = {};
-    SimilarityDAO.allForId(communityId, 
+    SimilarityDAO.allForId(communityId,
       data => {
-          // TODO: Dissimilarity must be computed in Community Model
+        // TODO: Dissimilarity must be computed in Community Model
         data.forEach((element) => {
-          element.value = 1-element.value;
+          element.value = 1 - element.value;
         });
         result['application/json'] = data.slice(0, k);
         if (Object.keys(result).length > 0) {
@@ -73,8 +73,8 @@ exports.computeKmostDissimilar = function(communityId,k) {
       error => {
         reject(error);
       }
-    );    
-  });  
+    );
+  });
 }
 
 
@@ -86,10 +86,10 @@ exports.computeKmostDissimilar = function(communityId,k) {
  * k Integer Size of the result (k most similar communities)
  * returns similarityScore
  **/
-exports.computeKmostSimilar = function(communityId,k) {
-  return new Promise(function(resolve, reject) {
+exports.computeKmostSimilar = function (communityId, k) {
+  return new Promise(function (resolve, reject) {
     let result = {};
-    SimilarityDAO.allForId(communityId, 
+    SimilarityDAO.allForId(communityId,
       data => {
         result['application/json'] = data.slice(0, k);
         if (Object.keys(result).length > 0) {
@@ -101,26 +101,26 @@ exports.computeKmostSimilar = function(communityId,k) {
       error => {
         reject(error);
       }
-    );    
-  });  
+    );
+  });
 
   //   return new Promise(function(resolve, reject) {
-//     var examples = {};
-//     examples['application/json'] = [ {
-//   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//   "similarity-function" : "similarity-function",
-//   "value" : 0.8008281904610115
-// }, {
-//   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
-//   "similarity-function" : "similarity-function",
-//   "value" : 0.8008281904610115
-// } ];
-//     if (Object.keys(examples).length > 0) {
-//       resolve(examples[Object.keys(examples)[0]]);
-//     } else {
-//       resolve();
-//     }
-//   });
+  //     var examples = {};
+  //     examples['application/json'] = [ {
+  //   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  //   "similarity-function" : "similarity-function",
+  //   "value" : 0.8008281904610115
+  // }, {
+  //   "target-community-id" : "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  //   "similarity-function" : "similarity-function",
+  //   "value" : 0.8008281904610115
+  // } ];
+  //     if (Object.keys(examples).length > 0) {
+  //       resolve(examples[Object.keys(examples)[0]]);
+  //     } else {
+  //       resolve();
+  //     }
+  //   });
 }
 
 
@@ -132,23 +132,23 @@ exports.computeKmostSimilar = function(communityId,k) {
  * otherCommunityId Long ID of the other community to compute similarity
  * returns similarityScore
  **/
-exports.computeSimilarity = function(targetCommunityId,otherCommunityId) {
-  return new Promise(function(resolve, reject) {
+exports.computeSimilarity = function (targetCommunityId, otherCommunityId) {
+  return new Promise(function (resolve, reject) {
     let result = {};
     if (targetCommunityId === otherCommunityId) {
       result['application/json'] = {
-          "target-community-id": targetCommunityId,
-          "other-community-id": targetCommunityId,
-          "similarity-function": "any",
-          value: 1.0
+        "target-community-id": targetCommunityId,
+        "other-community-id": targetCommunityId,
+        "similarity-function": "any",
+        value: 1.0
       };
       if (Object.keys(result).length > 0) {
         resolve(result[Object.keys(result)[0]]);
       } else {
         resolve();
-      }      
+      }
     }
-    SimilarityDAO.getByIds(targetCommunityId, otherCommunityId, 
+    SimilarityDAO.getByIds(targetCommunityId, otherCommunityId,
       data => {
         result['application/json'] = data;
         if (Object.keys(result).length > 0) {

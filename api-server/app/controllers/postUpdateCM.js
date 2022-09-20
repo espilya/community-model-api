@@ -21,15 +21,15 @@ function oldPost(data = "empty") {
   const req = http.request(options, res => {
 
     res.on('data', d => {
-      console.log(req.status)
+      // console.log(req.status)
       if (req.status != 102) {
         process.stdout.write(d);
-        console.log(`BODY: ${d}`);
+        // console.log(`BODY: ${d}`);
       }
     });
 
     res.on('end', () => {
-      console.log("_end_");
+      // console.log("_end_");
     })
 
     var myStatus = req.status;
@@ -39,10 +39,10 @@ function oldPost(data = "empty") {
       })
     }
     else if (myStatus == 102) {
-      console.log("Received 102 Processing Status Code. Waiting...");
+      // console.log("Received 102 Processing Status Code. Waiting...");
     }
     else if (myStatus == 200) {
-      console.log("Received 200. OK.");
+      // console.log("Received 200. OK.");
     }
   });
 

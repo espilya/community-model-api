@@ -38,13 +38,9 @@ module.exports = {
                     })
                     reject()
                 }
-                // else{
-                //   console.error("ok");
-                //   resolve()
-                // }
             });
 
-            req.write(user);
+            req.write(data);
             req.end();
 
             req.on('error', (err) => {
