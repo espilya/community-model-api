@@ -25,7 +25,6 @@ db_name = os.environ['DB_NAME']
 db_port = os.environ['DB_PORT']
 
 
-
 class Handler(BaseHTTPRequestHandler):
 
     # TODO:
@@ -47,7 +46,8 @@ class Handler(BaseHTTPRequestHandler):
         - POST:
         Used only for redirection of POST requests from API Spice and access DB from here
         """
-        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
+        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n",
+                     str(self.path), str(self.headers))
         try:
             request = self.path.split("/")
             print("Request GET: ", request)
@@ -68,7 +68,8 @@ class Handler(BaseHTTPRequestHandler):
             print(e)
             if str(e) != "pymongo.errors.ServerSelectionTimeoutError":
                 self.__set_response(500)
-                self.wfile.write("-Error-\nGET request for {}".format(self.path).encode('utf-8'))
+                self.wfile.write(
+                    "-Error-\nGET request for {}".format(self.path).encode('utf-8'))
                 # raise
             else:
                 self.__set_response(500)
@@ -80,8 +81,10 @@ class Handler(BaseHTTPRequestHandler):
         _post handler_
 
         """
-        content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
-        post_data = self.rfile.read(content_length)  # <--- Gets the data itself
+        content_length = int(
+            self.headers['Content-Length'])  # <--- Gets the size of data
+        # <--- Gets the data itself
+        post_data = self.rfile.read(content_length)
         post_data = post_data.decode('utf-8')
         logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
                      str(self.path), str(self.headers), post_data)
@@ -90,50 +93,67 @@ class Handler(BaseHTTPRequestHandler):
         print("Request POST: ", request)
         first_arg = request[1]
         if first_arg == "perspective":
+            # add new perspective
             perspective = loads(post_data)
-            daoPerspective = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
+            daoPerspective = DAO_db_perspectives(
+                db_host, db_port, db_user, db_password, db_name)
             ok = daoPerspective.insertPerspective(perspective)
-            # <Update Community Model>
-            # TODO: Hacer Llamada al Community Model
-            # Esta hecho, solo que falta juntarlo
-            # </Update Community Model>
+
+            newFlag = {
+                "perspective": perspective["id"],
+                "userId": ""
+            }
+            daoFlags = DAO_db_flags(
+                db_host, db_port, db_user, db_password, db_name)
+            daoFlags.insertFlag(newFlag)
+
         elif first_arg == "updateUsers":
+            # add or update user
             users = loads(post_data)
-            daoUsers = DAO_db_users(db_host, db_port, db_user, db_password, db_name)
+            daoUsers = DAO_db_users(
+                db_host, db_port, db_user, db_password, db_name)
             ok = daoUsers.insertUser_API(users)
-            
+
             # Activate flags associated to user/perspective pair (perspective makes use of one of the user's attributes (pname))
-            daoPerspectives = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
-            daoFlags = DAO_db_flags(db_host, db_port, db_user, db_password, db_name)
-            
+            daoPerspectives = DAO_db_perspectives(
+                db_host, db_port, db_user, db_password, db_name)
+            daoFlags = DAO_db_flags(
+                db_host, db_port, db_user, db_password, db_name)
+
             perspectives = daoPerspectives.getPerspectives()
-            
+
             for user in users:
                 for perspective in perspectives:
                     for similarityFunction in perspective['similarity_functions']:
                         if (similarityFunction['sim_function']['on_attribute']['att_name'] == user['pname']):
-                            flag = {'perspective': perspective['id'], 'userid': user['userid'], 'flag': True}
+                            flag = {
+                                'perspective': perspective['id'], 'userid': user['userid'], 'flag': True}
                             daoFlags.updateFlag(flag)
 
         elif first_arg == "update_CM":
             print("update_CM")
             ok = "updateCM"
-                
+
         if ok == "updateCM":
             self.__set_response(204)
-            self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+            self.wfile.write("POST request for {}".format(
+                self.path).encode('utf-8'))
             self.__updateCM(post_data)
         elif ok:
             self.__set_response(204)
-            self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+            self.wfile.write("POST request for {}".format(
+                self.path).encode('utf-8'))
         else:
             self.__set_response(500)
-            self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+            self.wfile.write("POST request for {}".format(
+                self.path).encode('utf-8'))
 
     def __updateCM(self, post_data):
-                    # Check if there is an update flag
-        daoPerspectives = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
-        daoFlags = DAO_db_flags(db_host, db_port, db_user, db_password, db_name)
+        # Check if there is an update flag
+        daoPerspectives = DAO_db_perspectives(
+            db_host, db_port, db_user, db_password, db_name)
+        daoFlags = DAO_db_flags(
+            db_host, db_port, db_user, db_password, db_name)
 
         flags = daoFlags.getFlags()
         for flag in flags:
@@ -145,9 +165,9 @@ class Handler(BaseHTTPRequestHandler):
             # Call to the community model
             communityModel = CommunityModel(perspective)
             communityModel.start()
-                
+
             print("community model end")
-                
+
             # Remove flag
             daoFlags.deleteFlag(flag)
 
@@ -164,7 +184,8 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(dumps(data).encode(encoding='utf_8'))
 
     def __getPerspertives(self, request):
-        dao = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
+        dao = DAO_db_perspectives(
+            db_host, db_port, db_user, db_password, db_name)
         perspectiveId = request[2]
         if perspectiveId == "all":
             data = dao.getPerspectives()
@@ -174,7 +195,8 @@ class Handler(BaseHTTPRequestHandler):
             if len(request) == 4 and request[3] == "communities":
                 # perspectives/{perspectiveId}/communities
                 result = []
-                coms = DAO_db_community(db_host, db_port, db_user, db_password, db_name).getCommunities()
+                coms = DAO_db_community(
+                    db_host, db_port, db_user, db_password, db_name).getCommunities()
                 for com in coms:
                     if com["perspectiveId"] == perspectiveId:
                         result.append(com)
@@ -188,7 +210,8 @@ class Handler(BaseHTTPRequestHandler):
                     self.wfile.write(dumps(data).encode(encoding='utf_8'))
                 else:
                     self.__set_response(404)
-                    self.wfile.write("File not found\nGET request for {}".format(self.path).encode('utf-8'))
+                    self.wfile.write("File not found\nGET request for {}".format(
+                        self.path).encode('utf-8'))
 
     def __getFile(self, fileId):
         dao = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
@@ -203,7 +226,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.wfile.write(dumps(data).encode(encoding='utf_8'))
             else:
                 self.__set_response(404)
-                self.wfile.write("File not found\nGET request for {}".format(self.path).encode('utf-8'))
+                self.wfile.write("File not found\nGET request for {}".format(
+                    self.path).encode('utf-8'))
 
 
 def run(server_class=HTTPServer, handler_class=Handler):
@@ -231,11 +255,12 @@ def importData():
     daoP = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
     daoP.insertPerspective(jsonAll)
 
+
 if __name__ == '__main__':
     from sys import argv
 
-    #deleteAndLoad()
-    #importData()
+    # deleteAndLoad()
+    # importData()
 
     if len(argv) == 2:
         run(port=int(argv[1]))
