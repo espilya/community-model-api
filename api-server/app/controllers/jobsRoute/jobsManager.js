@@ -35,6 +35,8 @@ addJob = function (jobId, request, param) {
         param: param
     }
     jobsList.push(job);
+
+    setTimeout(removeTimeout, 1800000, jobId, jobsList); //1800000 = 30 minutes
 };
 
 /**
@@ -42,11 +44,22 @@ addJob = function (jobId, request, param) {
  */
 removeJob = function (jobId) {
     var job = jobsList.find(element => element.jobId == jobId);
-    const index = array.indexOf(job);
-    if (index > -1) { // only splice array when item is found
-        array.splice(index, 1); // 2nd parameter means remove one item only
+    if (job != undefined) { //if still not removed removed by timeout
+        const index = jobsList.indexOf(job);
+        if (index > -1) { // only splice array when item is found
+            jobsList.splice(index, 1); // 2nd parameter means remove one item only
+        }
     }
 };
+
+removeTimeout = function (jobId, jobsList) {
+    console.log(`<JobsQueue> auto removing job => ${jobId}`);
+    try {
+        removeJob(jobId)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 /**
  * Generates non-repeating random job id

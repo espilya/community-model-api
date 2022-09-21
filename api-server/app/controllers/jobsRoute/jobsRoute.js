@@ -130,8 +130,8 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                res.status(200).send(generateCompletedResponse(jobId, data));
                                 jobManager.removeJob(jobId);
+                                res.status(200).send(generateCompletedResponse(jobId, data));
                             })
                             .catch(function (data) {
                                 res.status(404).send("JobsManager: getData exception");
@@ -153,8 +153,8 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                res.status(200).send(generateCompletedResponse(jobId, data));
                                 jobManager.removeJob(jobId);
+                                res.status(200).send(generateCompletedResponse(jobId, data));
                             })
                             .catch(function (data) {
                                 res.status(404).send("JobsManager: getData exception");

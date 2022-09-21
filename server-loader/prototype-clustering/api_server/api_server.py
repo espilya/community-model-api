@@ -13,9 +13,11 @@ from dao.dao_json import DAO_json
 #from dao.deleteAndLoadDefaultData import deleteAndLoad
 import time
 
-# from communityModel.hecht import CommunityModel
+from communityModel.hecht import CommunityModel
 
-API_PORT = 8090
+server_loader_port = 8090
+server_loader_ip = "0.0.0.0"
+
 db_host = os.environ['DB_HOST']
 db_user = os.environ['DB_USER']
 db_password = os.environ['DB_PASSWORD']
@@ -80,14 +82,15 @@ class Handler(BaseHTTPRequestHandler):
         """
         content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
         post_data = self.rfile.read(content_length)  # <--- Gets the data itself
+        post_data = post_data.decode('utf-8')
         logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
-                     str(self.path), str(self.headers), post_data.decode('utf-8'))
+                     str(self.path), str(self.headers), post_data)
         ok = False
         request = self.path.split("/")
         print("Request POST: ", request)
         first_arg = request[1]
         if first_arg == "perspective":
-            perspective = loads(post_data.decode('utf-8'))
+            perspective = loads(post_data)
             daoPerspective = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
             ok = daoPerspective.insertPerspective(perspective)
             # <Update Community Model>
@@ -95,7 +98,7 @@ class Handler(BaseHTTPRequestHandler):
             # Esta hecho, solo que falta juntarlo
             # </Update Community Model>
         elif first_arg == "updateUsers":
-            users = loads(post_data.decode('utf-8'))
+            users = loads(post_data)
             daoUsers = DAO_db_users(db_host, db_port, db_user, db_password, db_name)
             ok = daoUsers.insertUser_API(users)
             
@@ -113,45 +116,40 @@ class Handler(BaseHTTPRequestHandler):
                             daoFlags.updateFlag(flag)
 
         elif first_arg == "update_CM":
-            # data = loads(post_data.decode('utf-8'))
             print("update_CM")
-            # <Update Community Model>
-            # TODO: Hacer Llamada al Community Model
-            # Esta hecho, solo que falta juntarlo
-            # </Update Community Model>
-            
-            # UPDATE CM 
-            
-            # Check if there is an update flag
-            daoPerspectives = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
-            daoFlags = DAO_db_flags(db_host, db_port, db_user, db_password, db_name)
-
-            flags = daoFlags.getFlags()
-            for flag in flags:
-                print(flag)
-                perspective = daoPerspectives.getPerspective(flag["perspectiveId"])
-                print("community model start")
-
-                print("data from post requets: ", post_data)
-                # Call to the community model
-                # communityModel = CommunityModel(perspective)
-                # communityModel.start()
+            ok = "updateCM"
                 
-                print("community model end")
-                
-                # Remove flag
-                daoFlags.deleteFlag(flag)
-            
-            # END UPDATE CM
-            ok = True
-                
-        print("response: " + self.path)
-        if ok:
+        if ok == "updateCM":
+            self.__set_response(204)
+            self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+            self.__updateCM(post_data)
+        elif ok:
             self.__set_response(204)
             self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
         else:
             self.__set_response(500)
             self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+
+    def __updateCM(self, post_data):
+                    # Check if there is an update flag
+        daoPerspectives = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
+        daoFlags = DAO_db_flags(db_host, db_port, db_user, db_password, db_name)
+
+        flags = daoFlags.getFlags()
+        for flag in flags:
+            print(flag)
+            perspective = daoPerspectives.getPerspective(flag["perspective"])
+            print("community model start")
+
+            print("data from post requets: ", post_data)
+            # Call to the community model
+            communityModel = CommunityModel(perspective)
+            communityModel.start()
+                
+            print("community model end")
+                
+            # Remove flag
+            daoFlags.deleteFlag(flag)
 
     def __set_response(self, code, dataType='text/html'):
         self.send_response(code)
@@ -208,17 +206,17 @@ class Handler(BaseHTTPRequestHandler):
                 self.wfile.write("File not found\nGET request for {}".format(self.path).encode('utf-8'))
 
 
-def run(server_class=HTTPServer, handler_class=Handler, port=API_PORT):
+def run(server_class=HTTPServer, handler_class=Handler):
     logging.basicConfig(level=logging.INFO)
-    server_address = ('0.0.0.0', port)
+    server_address = (server_loader_ip, server_loader_port)
     httpd = server_class(server_address, handler_class)
-    logging.info('Starting httpd...\n')
+    logging.info('Starting server-loader...\n')
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         pass
     httpd.server_close()
-    logging.info('Stopping httpd...\n')
+    logging.info('Stopping server-loader...\n')
 
 
 def importData():
@@ -238,12 +236,6 @@ if __name__ == '__main__':
 
     #deleteAndLoad()
     #importData()
-    import socket   
-    hostname=socket.gethostname()   
-    IPAddr=socket.gethostbyname(hostname)   
-    print("Your Computer Name is: "+hostname)   
-    print("Your Computer IP Address is: "+IPAddr) 
-
 
     if len(argv) == 2:
         run(port=int(argv[1]))
