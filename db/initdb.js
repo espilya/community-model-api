@@ -67,89 +67,72 @@ db.createCollection('perspectives', { capped: false });
 db.perspectives.deleteMany({});
 
 db.perspectives.insertMany([{
-  "id": "100",
-  "name": "Perspective_100",
+  "id": "1000",
+  "name": "HEHCT Perspective",
   "algorithm": {
-    "name": "String",
-    "params": {
-      "param_a": "String",
-      "param_b": "String"
-    }
+    "name": "agglomerative",
+    "params": [
+    ]
   },
-  "similarity_functions": [{
-    "sim_function": {
-      "name": "String",
-      "params": {
-        "param_a": "String",
-        "param_b": "String"
-      },
-      "on_attribute": {
-        "att_name": "String",
-        "att_type": "String"
-      },
-      "weight": 100
+  "similarity_functions": [
+    {
+      "sim_function": {
+        "name": "TableSimilarityDAO",
+        "params": [
+        ],
+        "on_attribute": {
+          "att_name": "beleifR",
+          "att_type": "String"
+        },
+        "weight": 0.8
+      }
+    },
+    {
+      "sim_function": {
+        "name": "TableSimilarityDAO",
+        "params": [
+        ],
+        "on_attribute": {
+          "att_name": "beliefJ",
+          "att_type": "String"
+        },
+        "weight": 0.6
+      }
+    },
+    {
+      "sim_function": {
+        "name": "TableSimilarityDAO",
+        "params": [
+        ],
+        "on_attribute": {
+          "att_name": "DemographicReligous",
+          "att_type": "String"
+        },
+        "weight": 0.2
+      }
+    },
+    {
+      "sim_function": {
+        "name": "TableSimilarityDAO",
+        "params": [
+        ],
+        "on_attribute": {
+          "att_name": "DemographicPolitics",
+          "att_type": "String"
+        },
+        "weight": 0.2
+      }
     }
-  }]
-}, {
-  "id": "101",
-  "name": "Perspective_101",
-  "algorithm": {
-    "name": "String",
-    "params": {
-      "param_a": "String",
-      "param_b": "String"
-    }
-  },
-  "similarity_functions": [{
-    "sim_function": {
-      "name": "String",
-      "params": {
-        "param_a": "String",
-        "param_b": "String"
-      },
-      "on_attribute": {
-        "att_name": "String",
-        "att_type": "String"
-      },
-      "weight": 101
-    }
-  }]
-}]);
+  ]
+}
+
+]);
+
+db.createCollection('communitiesVisualization', { capped: false });
+db.communitiesVisualization.deleteMany({});
 
 db.createCollection('communities', { capped: false });
 db.communities.deleteMany({});
-
-db.communities.insertMany([{
-  "id": "621e53cf0aa6aa7517c2afdd",
-  "community-type": "explicit",
-  "name": "elderly",
-  "perspectiveId": "101",
-  "explanation": "People above 65",
-  "users": [
-    "23",
-    "28"
-  ],
-}, {
-  "id": "721e53cf0aa6aa7517c2afdd",
-  "community-type": "implicit",
-  "explanation": "lorem ipsum",
-  "perspectiveId": "101",
-  "name": "impl_1",
-  "users": [
-    "44",
-    "23"
-  ]
-}, {
-  "id": "821e53cf0aa6aa7517c2afdd",
-  "community-type": "explicit",
-  "name": "teenager",
-  "perspectiveId": "100",
-  "explanation": "People whose age is between 12 and 17",
-  "users": [
-    "44",
-    "56"
-  ],
-}]);
 
 db.createCollection('similarities', { capped: false });
 db.similarities.deleteMany({});
@@ -189,3 +172,10 @@ db.similarities.insertMany([{
 db.createCollection('flags', { capped: false });
 db.flags.deleteMany({});
 db.flags.insertOne({ "flag" : true});
+
+
+db.createCollection('distanceMatrixes', { capped: false });
+db.distanceMatrixes.deleteMany({});
+
+
+
