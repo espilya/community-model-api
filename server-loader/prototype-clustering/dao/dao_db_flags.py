@@ -2,7 +2,7 @@ from bson.json_util import dumps, loads
 
 
 from context import dao
-from dao.dao_class import DAO
+from dao.dao_db import DAO_db
 
 from copy import copy, deepcopy
 
@@ -10,27 +10,22 @@ import pymongo
 from pymongo import MongoClient
 
 
-class DAO_db_flags(DAO):
+class DAO_db_flags(DAO_db):
     """
     DAO for accessing flag related data in MongoDB
     """
 
-    def __init__(self, MONGO_HOST="localhost", MONGO_PORT=27018, MONGO_USER="", MONGO_PASS="", MONGO_DB="spiceComMod"):
+    #def __init__(self, db_host="mongodb", db_port=27017, db_user="spice", db_password="spicepassword", db_name="spiceComMod"):
+    def __init__(self):
         """
         :Parameters:
-            MONGO_HOST: mongodb address, Default value: "localhost"
-            MONGO_PORT: mongodb port, Default value: 27018
-            MONGO_USER: mongodb user, Default value: ""
-            MONGO_PASS: mongodb pass, Default value: ""
-            MONGO_DB: mongodb db name, Default value: "spiceComMod"
+            db_host: mongodb address, Default value: "localhost"
+            db_port: mongodb port, Default value: 27017
+            db_user: mongodb user, Default value: ""
+            db_password: mongodb pass, Default value: ""
+            db_name: mongodb db name, Default value: "spiceComMod"
         """
-        super().__init__(MONGO_HOST)
-        # print("mongodb://{}:{}@{}:{}/".format(username, password, self.route, port))
-        uri = "mongodb://{}:{}@{}:{}/?authMechanism=DEFAULT&authSource=spiceComMod".format(MONGO_USER, MONGO_PASS,
-                                                                                           MONGO_HOST, MONGO_PORT)
-        self.mongo = MongoClient(uri)
-        # self.mongo = MongoClient('mongodb://%s:%s@127.0.0.1' % (username, password)) #MongoClient("mongodb://{}:{}@{}:{}/".format(username, password, self.route, port))
-
+        super().__init__()
         self.db_flags = self.mongo.spiceComMod.flags
 
 
@@ -48,12 +43,7 @@ class DAO_db_flags(DAO):
         dataList = loads(dumps(list(dataList)))
         return dataList[0]
 
-    def deleteFlag(self, flagJSON):
-        """
-        :Parameters:
-            flagJSON: Flag/s, Type: <class 'dict'> OR List[<class 'dict'>]
-        """
-        self.db_flags.delete_one(flagJSON)
+    
         
 
     def drop(self):
@@ -74,7 +64,7 @@ class DAO_db_flags(DAO):
             self.db_flags.insert_one(temp)
             
     def updateFlag(self, flagJSON):
-        key = {'perspective': flagJSON['perspective'], 'userId': flagJSON['userId']}
+        key = {'perspectiveId': flagJSON['perspectiveId'], 'userid': flagJSON['userid']}
         self.db_flags.update_one(key,{"$set": flagJSON},upsert=True)
  
     def getFlags(self):
@@ -85,11 +75,12 @@ class DAO_db_flags(DAO):
         data = self.db_flags.find({}, {"_id": 0})
         return loads(dumps(list(data)))
         
-    def deleteFlag(self, flagId):
+    def deleteFlag(self, flagJSON):
         """
         :Parameters:
-            flagId: Type: <class 'str'>
+            flagJSON: Flag/s, Type: <class 'dict'> OR List[<class 'dict'>]
         """
-        self.db_flags.delete_one({'id': flagId})
+        self.db_flags.delete_one(flagJSON)
+        #self.db_flags.delete_one({'id': flagId})
         
         

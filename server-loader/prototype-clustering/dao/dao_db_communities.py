@@ -4,32 +4,29 @@ from pymongo import MongoClient
 from copy import copy, deepcopy
 
 from context import dao
-from dao.dao_class import DAO
+from dao.dao_db import DAO_db
 
 
 
-class DAO_db_community(DAO):
+class DAO_db_community(DAO_db):
     """
     DAO for accessing community related data in MongoDB
     Contains basics CRUD operations and some operations to manage 'Files'
     """
 
-    def __init__(self, MONGO_HOST="localhost", MONGO_PORT=27018, MONGO_USER="", MONGO_PASS="", MONGO_DB="spiceComMod"):
+    #def __init__(self, db_host="mongodb", db_port=27017, db_user="spice", db_password="spicepassword", db_name="spiceComMod"):
+    def __init__(self):
         """
         :Parameters:
-            MONGO_HOST: mongodb address, Default value: "localhost"
-            MONGO_PORT: mongodb port, Default value: 27018
-            MONGO_USER: mongodb user, Default value: ""
-            MONGO_PASS: mongodb pass, Default value: ""
-            MONGO_DB: mongodb db name, Default value: "spiceComMod"
+            db_host: mongodb address, Default value: "localhost"
+            db_port: mongodb port, Default value: 27017
+            db_user: mongodb user, Default value: ""
+            db_password: mongodb pass, Default value: ""
+            db_name: mongodb db name, Default value: "spiceComMod"
         """
-        super().__init__(MONGO_HOST)
-
-        uri = "mongodb://{}:{}@{}:{}/?authMechanism=DEFAULT&authSource=spiceComMod".format(MONGO_USER, MONGO_PASS,
-                                                                                           MONGO_HOST, MONGO_PORT)
-        self.mongo = MongoClient(uri, serverSelectionTimeoutMS=5000)
+        super().__init__()
         self.db_communities = self.mongo.spiceComMod.communities
-        self.db_fullListCommunities = self.mongo.spiceComMod["Full JSON List"]
+        self.db_fullListCommunities = self.mongo.spiceComMod["communitiesVisualization"]
 
     def getData(self):
         return self.getCommunities()
@@ -182,14 +179,14 @@ class DAO_db_community(DAO):
         self.drop()
         self.dropFullList()
 
-    def drop(self):
+    def drop(self,dropFilter = {}):
         """
             Mongo DB Drop all documents in db_communities collection
         """
-        self.db_communities.delete_many({})
+        self.db_communities.delete_many(dropFilter)
 
-    def dropFullList(self):
+    def dropFullList(self,dropFilter = {}):
         """
             Mongo DB Drop all documents in db_fullListCommunities collection
         """
-        self.db_fullListCommunities.delete_many({})
+        self.db_fullListCommunities.delete_one(dropFilter)

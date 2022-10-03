@@ -16,6 +16,11 @@ from requests.auth import HTTPBasicAuth
 
 from bson.json_util import dumps, loads
 
+"""
+TODO
+Anadir datos de prueba, por fin finalizar el repositorio y dejarselo a marco
+"""
+
 
 def main():
     # ## Delete old data and load default values

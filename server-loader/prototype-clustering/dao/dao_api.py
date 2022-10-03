@@ -65,11 +65,25 @@ class DAO_api(DAO):
         return self.data, response
         
     """__API for perspectives__"""
+    def perspectiveList(self):
+        response = requests.get("http://localhost:8080/v1.1/perspectives")
+        self.responseProcessing(response)
+        return self.data, response
+        
     def perspectiveCommunities(self,perspectiveId):
         print( "http://localhost:8080/v1.1/perspectives/{}/communities".format(perspectiveId) )
         response = requests.get("http://localhost:8080/v1.1/perspectives/{}/communities".format(perspectiveId))
         self.responseProcessing(response)
         return self.data, response
     
-    
-    
+    """__API for similarities__"""
+    def similarityCommunities(self,communityId,otherCommunityId):
+        response = requests.get("http://localhost:8080/v1.1/communities/{}/similarity/{}".format(communityId,otherCommunityId))
+        self.responseProcessing(response)
+        return self.data, response
+        
+    def dissimilarityCommunities(self,communityId,otherCommunityId):
+        response = requests.get("http://localhost:8080/v1.1/communities/{}/dissimilarity/{}".format(communityId,otherCommunityId))
+        self.responseProcessing(response)
+        return self.data, response
+        

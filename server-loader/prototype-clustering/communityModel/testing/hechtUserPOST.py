@@ -31,8 +31,8 @@ def main():
     #    remove users from database
     #--------------------------------------------------------------------------------------------------------------------------
       
-    daoU = DAO_db_users("localhost", 27018, "spice", "spicepassword")
-    daoU.drop()
+    daoU = DAO_db_users()
+    #daoU.drop()
     
     daoAPI = DAO_api()
 

@@ -7,14 +7,17 @@ import math
 
 class CommunityJsonGenerator:
 
-    def __init__(self, data, communityDetection, n_communities, percentageDefault, distanceMatrix,answer_binary=False, skipPropertyValue = False):
+    def __init__(self, data, communityDetection, n_communities, percentageDefault, distanceMatrix, perspectiveId, medoids_communities, answer_binary=False, skipPropertyValue = False):
         self.json_df = data
         self.community_detection = communityDetection
         self.n_communities = n_communities
+        self.medoids_communities = medoids_communities
         self.percentageDefault = percentageDefault
         self.distanceMatrix = distanceMatrix
+        self.perspectiveId = perspectiveId
         self.answerBinary = answer_binary
         self.skipPropertyValue = skipPropertyValue
+        
     
     def generateJSON(self,filename):
         # Export community information to JSON format
@@ -24,24 +27,39 @@ class CommunityJsonGenerator:
         self.userJSON()
         self.similarityJSON()
         
-       # return self.communityJSON
+        print("\n\n")
+        print("generate json " + filename)
+        print(self.communityJson)
+        print("\n\n")
         
+        """
         with open(filename, "w") as outfile:
             json.dump(self.communityJson, outfile, indent=4)
+        """
         
         return self.communityJson
         
     def communityJSON(self):
         # Community Data
+        self.communityJson['perspectiveId'] = self.perspectiveId
         self.communityJson['communities'] = []
+
 
         for c in range(self.n_communities):
             community_data = self.community_detection.get_community(c, answer_binary=self.answerBinary, percentage=self.percentageDefault)
-
+            
+            print("\n")
+            print("json generator")
+            print(self.medoids_communities[c])
+            
             communityDictionary = {}
-            communityDictionary['id'] = str(c)
+            communityDictionary['id'] = self.perspectiveId + "-" + str(c)
+            communityDictionary['perspectiveId'] = self.perspectiveId
             communityDictionary['community-type'] = 'implicit'
             communityDictionary['name'] = 'Community ' + str(c)
+            communityDictionary['medoid'] = self.medoids_communities[c]
+            
+            # communityDictionary['representative'] = self.medoids_communities[c].iloc[0]['user']
             
             if len(community_data['members']) > 1:
                 communityPropertiesList = []

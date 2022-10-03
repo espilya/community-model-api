@@ -20,7 +20,7 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
         self.data = data
         self.distanceMatrix = distanceMatrix
 
-    def search_all_communities(self, answer_binary=False, percentage=1.0, finishSearchSet = False):
+    def search_all_communities(self, answer_binary=False, percentage=1.0):
         """Method to search all explainable communities.
 
         Args:
@@ -34,24 +34,24 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
             dict: Dictionary where each user is assigned to a community.
         """
         n_communities = 2
-        n_communities = 7
+        #n_communities = 7
         finish_search = False
         
 
         while not finish_search:
-            """
-            print("\n")
-            print("n_communities")
-            print("\n")
-            print(n_communities)
-            print("\n")
-            """
-            
-            
-            
             community_detection = self.algorithm(self.data)
             result = community_detection.calculate_communities(metric = self.distanceMatrix, n_clusters=n_communities)
-
+            
+            # Asignamos a cada elemento su cluster/comunidad correspondiente (fix this later)
+            ids_communities = {}
+            for i in range(len(self.data.index)):
+                ids_communities[self.data.index[i]] = result[i]
+                
+            result2 = result
+            result = ids_communities
+            
+            # 
+            
             complete_data = self.data.copy()
             complete_data['community'] = result.values()
 
@@ -59,39 +59,19 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
             explainables = []
             self.communities = complete_data.groupby(by='community')
             
-            """
-            print("\n")
-            print("complete_data[community]")
-            print("\n")
-            print(complete_data['community'])
-            print("\n")
-            
-            print("\n")
-            print("self.communities")
-            print("\n")
-            print(self.communities)
-            print("\n")
-            """
-            
-            
-            
-            
             for c in range(n_communities):
-                #print("community " + str(c))
                 community = self.communities.get_group(c)
-                #print("community end  " + str(c))
                 explainables.append(self.is_explainable(community, answer_binary, percentage))
 
             finish_search = sum(explainables) == n_communities
-            
-            # extra fix for now
-            if finishSearchSet:
-                finish_search = finishSearchSet
 
             if not finish_search:
                 n_communities += 1
         
-        return n_communities, result
+        # Get medoids
+        medoids_communities = self.getMedoidsCommunities(result2)
+        
+        return n_communities, result, medoids_communities
     
     def get_community(self, id_community, answer_binary=False, percentage=1.0):
         """Method to obtain all information about a community.
@@ -156,6 +136,48 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
                     explainable_community |= (len(community[col]) * percentage) <= community[col].value_counts().max()
         
         return explainable_community
-        
+    
+    
+    def getMedoidsCommunities(self, clusteringResult):
+        """
+        Calculates the community medoid (Representative member)
+            
+        Parameters
+        ----------
+            clusteringResult [array]
+                Array with the communities each data.row belongs to
 
+        Returns
+        -------
+            communitiesMedoids [<class 'dict'>]
+                Dictionary with keys (community id) and values (pandas dataframe with the medoid row)
+        """
+        
+        # Get cluster representative (medoid)
+        # The one with the smallest distance to each other datapoint in the cluster
+        communities_members = {}
+        for i in range(len(clusteringResult)):
+            communities_members.setdefault(clusteringResult[i],[]).append(i)
+        
+        medoids_communities = {}
+        for key in communities_members.keys():
+            clusterIxgrid = np.ix_(communities_members[key],communities_members[key])
+            clusterDistanceMatrix = self.distanceMatrix[clusterIxgrid]
+            clusterRepresentativeIndex = np.argmin(np.sum(clusterDistanceMatrix, axis=1))
+            clusterRepresentative = communities_members[key][clusterRepresentativeIndex]
+            
+            medoids_communities[key] = self.data.index[clusterRepresentative]
+
+        return medoids_communities
+    
+    # Get the percentage of most frequent value for each feature.
+    def secondExplanation():
+        pass
+    
+    
+    
+    
+    
+    
+    
         

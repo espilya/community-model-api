@@ -8,12 +8,12 @@ from dao.dao_api import DAO_api
 import pandas as pd
 
 def main():
-
+    
     #--------------------------------------------------------------------------------------------------------------------------
-    #    Read HECHT user data: last user
+    #    Read HECHT user data: all users except the last one
     #--------------------------------------------------------------------------------------------------------------------------
-
-    route = "data/hecht users last.csv"
+    
+    route = "data/hecht users 3.csv"
     df = pd.read_csv(route)
     
     #--------------------------------------------------------------------------------------------------------------------------
@@ -30,13 +30,11 @@ def main():
     #--------------------------------------------------------------------------------------------------------------------------
     #    remove users from database
     #--------------------------------------------------------------------------------------------------------------------------
-
+      
     daoU = DAO_db_users()
-    daoU.deleteUser('PH248703')
-    daoU.deleteUser('PH248704')
     
     daoAPI = DAO_api()
-    
+
     #--------------------------------------------------------------------------------------------------------------------------
     #    perform post requests with user information
     #--------------------------------------------------------------------------------------------------------------------------
@@ -58,9 +56,10 @@ def main():
         
         # Split user information into user model dict
         usersAPI = daoU.userToPostAPIFormat(user)
-        
+
         for user in usersAPI:
             postUserData = [user]
-            response = daoAPI.updateUser(user['userid'],postUserData)           
+            response = daoAPI.updateUser(user['userid'],postUserData)
+
     
 main()

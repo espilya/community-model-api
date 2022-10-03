@@ -76,6 +76,11 @@ class SimilarityDAO:
         for p in pairs:
             dist = self.distance(users[p[0]], users[p[1]])
             matrix[p[0], p[1]] = dist
+            """
+            print("user1: " + str(users[p[0]]))
+            print("user2: " + str(users[p[1]]))
+            print("distance: " + str(dist))
+            """
 
 
         # Reduce the matrix to 2 decimals
@@ -84,13 +89,69 @@ class SimilarityDAO:
         self.distanceMatrix = matrix
 
         return matrix
+        
+    def updateDistanceMatrix(self, userIds, distanceMatrix):
+        """
+        Method to update the distance matrix with the new elements included in the data.
+            
+        Parameters
+        ----------
+            distanceMatrix : np.ndarray
+                Previous distance matrix 
+            userIds : list
+                Includes the ids of the users to update.
+
+        Returns
+        -------
+            np.ndarray
+                Matrix that contains all distance values.
+        """
+        print("update distance matrix")
+        # https://www.geeksforgeeks.org/python-make-pair-from-two-list-such-that-elements-are-not-same-in-pairs/
+        # https://www.statology.org/numpy-add-column/
+        # https://stackoverflow.com/questions/8486294/how-do-i-add-an-extra-column-to-a-numpy-array
+        # https://www.statology.org/pandas-get-index-of-row/
+        # https://www.geeksforgeeks.org/python-program-to-get-all-pairwise-combinations-from-a-list/
+        indexes = self.data.index
+        updateIndexes = self.data[self.data['userid'].isin(userIds)].index #.tolist()
+        pairs = product(indexes,updateIndexes)
+        
+        #print(self.data)
+        
+        matrix = np.zeros((len(indexes), len(indexes)))
+        matrix[0:distanceMatrix.shape[0],0:distanceMatrix.shape[1]] = distanceMatrix
+        
+        #print(matrix)
+        
+        for p in pairs:
+            """
+            print("\n")
+            print("pairs")
+            print(p[0])
+            print(p[1])
+            print("\n")
+            """
+            dist = self.distance(p[0],p[1])
+            matrix[p[0], p[1]] = dist
+            matrix[p[1],p[0]] = dist
+        
+        
+        
+        # Reduce the matrix to 2 decimals
+        matrix = np.round(matrix,2)
+        self.distanceMatrix = matrix
+        
+        print(matrix)
+        
+        return matrix
+
 
     def matrix_similarity(self):
         """Method to calculate the matrix of similarity between all element included in data.
 
         Returns
         -------
-        np.array
+        np.ndarray
             Matrix that contains all similarity values.
         """
         users = self.data.index

@@ -20,8 +20,10 @@ from bson.json_util import dumps, loads
 
 
 def main():
-
-    dao = DAO_db_users("localhost", 27018, "spice", "spicepassword")
+    
+    dao = DAO_db_users()
+    
+    #dao = DAO_db_users("localhost", 27018, "spice", "spicepassword")
     # dao = DAO_db_community("localhost", 27018, "spice", "XXX")
 
     dao.drop()
@@ -54,21 +56,23 @@ def main():
         'religion': 'AA'
         # ,'_id': "xxx"
     }
-    # dao.insertUser(user1)
+    dao.insertUser(user1)
     # print(dao.getUsers())
     # print(dao.getUser("001"))
     # dao.updateUser(dao.getUser("001"))
     #
     # # print(dao.getUser("001"))
     # print(dao.getUsers())
-
-    daoF = DAO_db_flags("localhost", 27018, "spice", "spicepassword")
+    
+    """
+    daoF = DAO_db_flags()
     daoF.insertFlag(False)
     data = daoF.getFlag()
     print(data)
     daoF.invertFlag()
     data = daoF.getFlag()
     print(data)
+    """
 
 
 main()

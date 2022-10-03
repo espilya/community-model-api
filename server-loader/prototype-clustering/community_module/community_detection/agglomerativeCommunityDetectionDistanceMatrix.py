@@ -11,7 +11,19 @@ SKLEARN_METRICS = ['euclidean', 'l1', 'l2', 'manhattan', 'cosine']
 
 # https://stackoverflow.com/questions/46027996/why-doesnt-sklearn-cluster-agglomerativeclustering-give-us-the-distances-betwee
 # https://scikit-learn.org/stable/auto_examples/cluster/plot_agglomerative_dendrogram.html
+# https://stackoverflow.com/questions/51729851/distance-between-clusters-kmeans-sklearn-python
 # To get distances between clusters
+# Show distances between clusters with the attribute _distances
+# https://scikit-learn.org/stable/modules/generated/sklearn.cluster.AgglomerativeClustering.html
+
+
+# Calculate medoid for the elements in the cluster
+# Get medoid cluster
+# https://stats.stackexchange.com/questions/137398/pick-representative-element-from-each-cluster
+
+
+
+# https://stackoverflow.com/questions/19161512/numpy-extract-submatrix
 from scipy.cluster.hierarchy import dendrogram
 
 from sklearn.neighbors import NearestCentroid
@@ -58,85 +70,9 @@ class AgglomerativeCommunityDetectionDistanceMatrix:
             
             #alg = AgglomerativeClustering(n_clusters=n_clusters, affinity='precomputed', linkage='average')
             result = alg.fit_predict(metric)
-        
-        #print(result)
-        """
-        #TODO: Llamar a función de similitud y crear la matriz de distancias
-        if callable(metric):
-            sim = metric(self.data)
-            distances = sim.matrix_distance()
-            result = alg.fit_predict(distances)
-        """               
-                
-            
-        # Asignamos a cada elemento su cluster/comunidad correspondiente
-        ids_communities = {}
-        for i in range(len(self.data.index)):
-            ids_communities[self.data.index[i]] = result[i]
-        
-        
-        """
-        #added now for testing
-        self.result = result
-        
-        
-        #https://stackoverflow.com/questions/56456572/how-to-get-agglomerative-clustering-centroid-in-python-scikit-learn        
-        # try to find centroid
-        #y_predict = clusterer.fit_predict(X)
-        #...
-        clf = NearestCentroid()
-        clf.fit(metric, result)
-        print(clf.centroids_)
-        """
-        
-        """
-        # get distances
-        distance, weight = self.get_distances(metric,alg)
-        linkage_matrix = np.column_stack([alg.children_, distance, weight]).astype(float)
-        print(linkage_matrix)
-        """
-        
-        """
-        plt.figure(figsize=(20,10))
-        dendrogram(linkage_matrix)
-        plt.show()
-        """
-        
-        """
-        #print(alg.children_)
-        print("\n")
-        print(alg.distances_)
-        print("\n")
-        print(alg.labels_)
-        print("a")
-        
-        
-        print(len(ids_communities))
-        print(len(alg.labels_))
-        print(len(alg.children_))
-        print(len(alg.distances_))
-        
-        # Get distance between clusters
-        #self.communitiesDistance(alg)
-        # plot the top three levels of the dendrogram
-        #plot_dendrogram(model, truncate_mode="level", p=3)
-        
-        
-        # plot the top three levels of the dendrogram
-        self.plot_dendrogram(alg, truncate_mode="level", p=3)
-        plt.xlabel("Number of points in node (or index of point if no parenthesis).")
-        plt.show()
-        """
-        
-        """
-        print("\n")
-        print("ids_communities")
-        print("\n")
-        print(ids_communities)
-        print("\n")
-        """
-        return ids_communities
-    
+
+        return result
+
     def get_distances(self,X,model,mode='l2'):
         distances = []
         weights = []
