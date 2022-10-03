@@ -14,10 +14,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 
-COPY /prototype-clustering /app/prototype-clustering
 # Install pip requirements
-RUN python -m pip install --upgrade pip
-RUN python -m pip install -r /app/prototype-clustering/requirements.txt
+# RUN python -m pip install --upgrade pip
+COPY /prototype-clustering/requirements.txt /app/prototype-clustering/requirements.txt
+RUN --mount=type=cache,target=/root/.cache pip install -r /app/prototype-clustering/requirements.txt
 
 COPY . /app
 
