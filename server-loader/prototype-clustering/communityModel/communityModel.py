@@ -23,12 +23,6 @@ from communityModel.communityJsonGenerator import CommunityJsonGenerator
 
 # similarity measures
 from community_module.similarity.complexSimilarityDAO import ComplexSimilarityDAO
-from community_module.similarity.hechtBeliefRSimilarityDAO import HechtBeliefRSimilarityDAO
-from community_module.similarity.hechtBeliefJSimilarityDAO import HechtBeliefJSimilarityDAO
-from community_module.similarity.hechtDemographicReligiousSimilarityDAO import HechtDemographicReligiousSimilarityDAO
-from community_module.similarity.hechtDemographicPoliticsSimilarityDAO import HechtDemographicPoliticsSimilarityDAO
-
-
 from community_module.similarity.tableSimilarityDAO import TableSimilarityDAO
 
 # In[175]:
