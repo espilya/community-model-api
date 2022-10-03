@@ -15,7 +15,7 @@ import time
 
 from communityModel.communityModel import CommunityModel
 
-server_loader_port = 8090
+server_loader_port = int(os.environ['CM_DOCKER_PORT'])
 server_loader_ip = "0.0.0.0"
 
 db_host = os.environ['DB_HOST']

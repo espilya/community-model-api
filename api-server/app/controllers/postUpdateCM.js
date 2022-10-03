@@ -4,13 +4,15 @@
  * Sends a POST request to api_loader.py to update CM clustering 
  */
 
+
+
 const http = require('http');
 
 function oldPost(data = "empty") {
 
   const options = {
     host: '172.20.0.4',
-    port: 8090,
+    port: process.env.CM_DOCKER_PORT || 8090,
     path: '/update_CM',
     method: 'POST',
     headers: {

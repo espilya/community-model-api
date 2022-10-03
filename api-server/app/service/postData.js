@@ -13,7 +13,7 @@ module.exports = {
             const options = {
                 // hostname: '172.20.0.4',
                 host: '172.20.0.4',
-                port: 8090,
+                port: process.env.CM_DOCKER_PORT || 8090,
                 path: path,
                 method: 'POST',
                 headers: {
