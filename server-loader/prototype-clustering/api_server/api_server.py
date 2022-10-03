@@ -2,6 +2,8 @@ import os
 import pymongo
 from bson.json_util import dumps, loads
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import ForkingMixIn
+
 import logging
 
 from context import dao
@@ -215,10 +217,15 @@ class Handler(BaseHTTPRequestHandler):
                 self.wfile.write("File not found\nGET request for {}".format(self.path).encode('utf-8'))
 
 
+class ForkingHTTPServer(ForkingMixIn, HTTPServer):
+    def finish_request(self, request, client_address):
+        request.settimeout(30)
+        HTTPServer.finish_request(self, request, client_address)
+
 def run(server_class=HTTPServer, handler_class=Handler):
     logging.basicConfig(level=logging.INFO)
     server_address = (server_loader_ip, server_loader_port)
-    httpd = server_class(server_address, handler_class)
+    httpd = ForkingHTTPServer(server_address, handler_class)
     logging.info('Starting server-loader...\n')
     try:
         httpd.serve_forever()
@@ -228,17 +235,17 @@ def run(server_class=HTTPServer, handler_class=Handler):
     logging.info('Stopping server-loader...\n')
 
 
-def importData():
-    json5 = DAO_json("data/5.json")
-    json5 = json5.getData()
-    json6 = DAO_json("data/6.json").getData()
-    jsonAll = DAO_json("data/Allperspectives.json").getData()
+# def importData():
+#     json5 = DAO_json("data/5.json")
+#     json5 = json5.getData()
+#     json6 = DAO_json("data/6.json").getData()
+#     jsonAll = DAO_json("data/Allperspectives.json").getData()
 
-    daoC = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
-    daoC.insertFileList("5", json5)
-    daoC.insertFileList("6", json6)
-    daoP = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
-    daoP.insertPerspective(jsonAll)
+#     daoC = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
+#     daoC.insertFileList("5", json5)
+#     daoC.insertFileList("6", json6)
+#     daoP = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
+#     daoP.insertPerspective(jsonAll)
 
 if __name__ == '__main__':
     from sys import argv
