@@ -6,47 +6,26 @@ import os
 
 import pandas as pd
 import numpy as np
+import importlib
 from context import community_module
 
-from communityModel.debug import Debugger
-# json
+# Community model tools
 from communityModel.communityJsonGenerator import CommunityJsonGenerator
 
-# In[96]:
-
-
-
-
-
-# In[157]:
-
+# clustering algorithms
+from community_module.community_detection.explainedCommunitiesDetection import ExplainedCommunitiesDetection
 
 # similarity measures
 from community_module.similarity.complexSimilarityDAO import ComplexSimilarityDAO
-from community_module.similarity.tableSimilarityDAO import TableSimilarityDAO
 
-# In[175]:
-
-
+# dao
 from dao.dao_csv import DAO_csv
 from dao.dao_db_users import DAO_db_users
-#import dao.import_data_api
-
 from dao.dao_db_distanceMatrixes import DAO_db_distanceMatrixes
-
-
-from community_module.community_detection.agglomerativeCommunityDetectionDistanceMatrix import AgglomerativeCommunityDetectionDistanceMatrix
-from community_module.community_detection.explainedCommunitiesDetectionDistanceMatrix import ExplainedCommunitiesDetectionDistanceMatrix
-
-
-
-# dao community & visualization
 from dao.dao_db_communities import DAO_db_community
-#from dao.dao_visualization import DAO_visualization
 
-
-
-import json
+# json
+#import json
 
 
 #--------------------------------------------------------------------------------------------------------------------------
@@ -134,11 +113,15 @@ class CommunityModel():
         percentageDefault = 0.78
         percentageDefault = 0.5
         
-        # For now required to get users in community information (JSON)
+        algorithmName = self.perspective['algorithm']['name'] + "CommunityDetection"
+        algorithmFile = "community_module.community_detection." + algorithmName 
+        algorithmModule = importlib.import_module(algorithmFile)
+        algorithmClass = getattr(algorithmModule,algorithmName[0].upper() + algorithmName[1:])
+        
         community_detection_df = similarityMeasure.data.set_index('user')
 
         distanceMatrix = self.similarityMeasure.distanceMatrix
-        community_detection = ExplainedCommunitiesDetectionDistanceMatrix(AgglomerativeCommunityDetectionDistanceMatrix, community_detection_df, distanceMatrix)
+        community_detection = ExplainedCommunitiesDetection(algorithmClass, community_detection_df, distanceMatrix, self.perspective)
 
         n_communities, users_communities, self.medoids_communities = community_detection.search_all_communities(percentage=percentageDefault) 
 
@@ -147,31 +130,6 @@ class CommunityModel():
         hecht_beliefR_pivot_df2['community'] = users_communities.values()
         hecht_beliefR_pivot_df2.reset_index(inplace=True)
         hecht_beliefR_pivot_df2
-        
-        
-        # Explicamos comunidades
-        """
-        users_without_community = []
-
-        for c in range(n_communities):
-                community_data = community_detection.get_community(c, percentage=percentageDefault)
-                
-                if len(community_data['members']) > 1:
-                
-                    print('---------------------')
-                    print('COMMUNITY -', community_data['name'])
-                    print('\t- N. Members:', len(community_data['members']))
-                    print('\t- Properties:')
-
-                    for k in community_data['properties'].keys():
-                        print('\t\t-', k, community_data['properties'][k])
-                else:
-                    users_without_community.extend(community_data['members'])
-                    
-                    
-        print('---------------------')
-        print('N. USERS WITHOUT COMMUNITY -', len(users_without_community))
-        """
         
         # Export to json
         self.exportCommunityClusteringJSON(hecht_beliefR_pivot_df2,community_detection,n_communities,percentageDefault,distanceMatrix)
@@ -188,6 +146,7 @@ class CommunityModel():
         json_df = json_df.rename(columns={"community":"group"})
         columns = ['DemographicPolitics','DemographicReligous']
         columns = ['DemographicPolitics','DemographicReligous','beleifR','beliefJ']
+        columns = self.perspective['user_attributes']
         json_df['explicit_community'] = json_df[columns].to_dict(orient='records')
         json_df
 

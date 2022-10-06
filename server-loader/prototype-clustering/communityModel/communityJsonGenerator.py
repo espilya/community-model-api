@@ -63,18 +63,19 @@ class CommunityJsonGenerator:
             
             if len(community_data['members']) > 1:
                 communityPropertiesList = []
-                for k in community_data['properties'].keys():
+                for k in community_data['explanation'][0].keys():
                     #print('\t\t-', k)
                     #communityProperties += '\t\t-' + ' ' + str(k) + ' ' + community_data['properties'][k] + '\n'
 
                     if (self.skipPropertyValue):
                         communityPropertiesList.append("'" + str(k) + "'")
                     else:
-                        communityPropertiesList.append("'" + str(k) + "'"  + ': ' + "'" + str(community_data['properties'][k]) + "'")
+                        communityPropertiesList.append("'" + str(k) + "'"  + ': ' + "'" + str(community_data['explanation'][0][k]) + "'")
                 
                 #communityProperties = 'Similar dominant emotions while interacting with the following artworks: {'
                 #communityProperties = 'Artworks the community members interacted with: {'
-                communityProperties = 'Representative Properties: {'
+                communityProperties = 'Minimum percentage of users with the representative properties: ' + community_data['percentage'] + "; "
+                communityProperties += 'Representative Properties: {'
                 
                 communityProperties += '; '.join(communityPropertiesList)
                 communityProperties += '}'
@@ -82,7 +83,9 @@ class CommunityJsonGenerator:
             else:
                 communityProperties = 'Users without community'
                 
-            communityDictionary['explanation'] = communityProperties
+            communityDictionary['explanation'] = []
+            communityDictionary['explanation'].append(communityProperties)
+            communityDictionary['explanation'].append(community_data['explanation'][1])
             #communityDictionary[name]['users'] = 
             
             
