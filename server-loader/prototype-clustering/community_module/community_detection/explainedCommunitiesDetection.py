@@ -1,12 +1,12 @@
-# Authors: Jose Luis Jorro-Aragoneses
+# Authors: José Ángel Sánchez Martín, Jose Luis Jorro-Aragoneses
 import numpy as np
 
-class ExplainedCommunitiesDetectionDistanceMatrix:
+class ExplainedCommunitiesDetection:
     """Class to search all communities that all members have a common
     propertie. This algorithm works with clustering techniques.
     """
 
-    def __init__(self, algorithm, data, distanceMatrix):
+    def __init__(self, algorithm, data, distanceMatrix, perspective):
         """Method to configure the detection algorithm.
 
         Args:
@@ -19,6 +19,14 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
         self.algorithm = algorithm
         self.data = data
         self.distanceMatrix = distanceMatrix
+        self.perspective = perspective
+        
+        self.explanaible_attributes = []
+        for similarityFunction in self.perspective['similarity_functions']:
+            self.explanaible_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])   
+        
+        self.user_attributes = self.perspective['user_attributes']
+        
 
     def search_all_communities(self, answer_binary=False, percentage=1.0):
         """Method to search all explainable communities.
@@ -40,7 +48,7 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
 
         while not finish_search:
             community_detection = self.algorithm(self.data)
-            result = community_detection.calculate_communities(metric = self.distanceMatrix, n_clusters=n_communities)
+            result = community_detection.calculate_communities(distanceMatrix = self.distanceMatrix, n_clusters=n_communities)
             
             # Asignamos a cada elemento su cluster/comunidad correspondiente (fix this later)
             ids_communities = {}
@@ -49,8 +57,6 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
                 
             result2 = result
             result = ids_communities
-            
-            # 
             
             complete_data = self.data.copy()
             complete_data['community'] = result.values()
@@ -70,7 +76,7 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
         
         # Get medoids
         medoids_communities = self.getMedoidsCommunities(result2)
-        
+
         return n_communities, result, medoids_communities
     
     def get_community(self, id_community, answer_binary=False, percentage=1.0):
@@ -90,43 +96,47 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
                     the common value in this column.
         """
         community = self.communities.get_group(id_community)
-       # print(community.columns.values)
-
+        community_user_attributes = community[self.user_attributes]
 
         community_data = {'name': id_community}
-        community_data['percentage'] = percentage
-        community_data['members'] = list(community.index.values)
+        community_data['percentage'] = str(percentage * 100) + " %"
+        community_data['members'] = list(community_user_attributes.index.values)
 
-        community_data['properties'] = dict()       
-        
-        #print(community)
-        #print(community.columns)
-       
+        explainedCommunityProperties = dict()       
 
-        for col in community.columns.values:
+        #for col in community.columns.values:
+        for col in self.explanaible_attributes:
             if col != 'community':
                # print(community)
                 #print(len(community[col]))
                 #print('-', col, community[col].value_counts().index[0])
                 if answer_binary:
                     if (len(community[col]) * percentage) <= community[col].sum():
-                        community_data['properties'][col] = community[col].value_counts().index[0]
+                        explainedCommunityProperties[col] = community[col].value_counts().index[0]
                         # print('-', col, community[col].value_counts().index[0])
                 else:
                     
                     if (len(community[col]) * percentage) <= community[col].value_counts().max():
-                        community_data['properties'][col] = community[col].value_counts().index[0]
+                        explainedCommunityProperties[col] = community[col].value_counts().index[0]
                         # Add the predominant emotion
                         #print('-', col, community[col].value_counts().index[0])
                         
                         # print('-', col, community[col].value_counts().index[0])
-
+                        
+                        
+        # Second explanation   
+        community_data['explanation'] = []
+        community_data['explanation'].append(explainedCommunityProperties)
+        community_data['explanation'].append(self.secondExplanation(community))
+            
+            
         return community_data
 
     def is_explainable(self, community, answer_binary=False, percentage=1.0):
         explainable_community = False
 
-        for col in community.columns.values:
+        #for col in community.columns.values:
+        for col in self.explanaible_attributes:
             if col != 'community':
                 # https://www.alphacodingskills.com/python/notes/python-operator-bitwise-or-assignment.php
                 # (x |= y) is equivalent to (x = x | y)
@@ -171,10 +181,17 @@ class ExplainedCommunitiesDetectionDistanceMatrix:
         return medoids_communities
     
     # Get the percentage of most frequent value for each feature.
-    def secondExplanation():
-        pass
+    def secondExplanation(self,community):
+        modePropertiesCommunity = {}
+
+        for attribute in self.explanaible_attributes:
+            counts = community[attribute].value_counts(normalize=True).mul(100)
+            modeAttribute = community[attribute].value_counts().idxmax()
+            modePropertiesCommunity[attribute] = {}
+            modePropertiesCommunity[attribute]['representative'] = modeAttribute
+            modePropertiesCommunity[attribute]['percentage'] = counts[modeAttribute]
     
-    
+        return modePropertiesCommunity
     
     
     

@@ -1,62 +1,68 @@
-# Authors: Jose Luis Jorro-Aragoneses
-
+# Authors: José Ángel Sánchez Martín
 import networkx as nx
-from networkx.algorithms import community
-import markov_clustering as mc
-
-ALGORITHMS = ['Markov', 'Greedy']
+from itertools import product
 
 class GraphCommunityDetection:
 
-    def __init__(self, graph):
-        """Construct of GraphCommunityDetection objects
+    def __init__(self, data):
+        """Construct of SimilariyCommunityDetection objects.
 
         Parameters
         ----------
-        graph : nx.Graph
-            Graph object where nodes are elements to search communities and
-            edges are the relationships between nodes in graph.
+        data : pd.DataFrame
+            Dataframe where index is ids of elements, columns a list of attributes names and
+            values contain the attribute values for each element.
         """
-        self.graph = graph
-
-    def calculate_communities(self, algorithm):
-        """Method to calculate the communities of elements from graph.
-
+        self.data = data
+        
+    def generateGraph(self, elements, distanceMatrix):
+        """
+        Generates the nx.graph encoding the data used to calculate communities
+        
         Parameters
         ----------
-        algorithm : str
-            Algorithm used to calculate the communities contained in
-            a graph.
-
+        elements : np.array
+            List of datapoints (self.data.index)
+        distanceMatrix : np.ndarray
+            Square matrix encoding the distance between datapoints
+            
         Returns
         -------
-        dict
-            Dictionary with all elements and its corresponding community.
+        graph : nx.Graph
+            Graph object where nodes are elements to search communities and
+            edges are the relationships (distances) between nodes in graph.
+            
         """
-
-        if algorithm == 'Markov':
-
-            # Get adjacency matrix of graph
-            A = nx.to_numpy_matrix(self.graph)
-
-            # Apply Markov Clustering algorithm
-            result = mc.run_mcl(A)
-            clusters = mc.get_clusters(result)
-
-            # Assign to each node its community id
-            ids_communities = {}
-            for i in range(len(clusters)):
-                for node in clusters[i]:
-                    ids_communities[node] = i
+        # Step 3: Convert information in Graph object
+        nodes = []
+        edges = []
+        print("len distance matrix")
+        print(distanceMatrix)
+        print(len(distanceMatrix))
+        print(range(len(distanceMatrix)))
         
-        if algorithm == 'Greedy':
-            # Apply Markov Clustering algorithm
-            communities_greedy = community.greedy_modularity_communities(self.graph)
-
-            # Assign to each node its community id
-            ids_communities = {}
-            for i in range(len(communities_greedy)):
-                for node in communities_greedy[i]:
-                    ids_communities[node] = i
-
-        return ids_communities
+        pairs = product(range(len(distanceMatrix)),range(len(distanceMatrix)))
+        print("graph generate graph")
+        print(pairs)
+        for p in pairs:
+            print(p[0])
+            print(p[1])
+            from_id = elements[p[0]]
+            to_id = elements[p[1]]
+            print(from_id)
+            print(to_id)
+            print("\n")
+            
+            if not (from_id in nodes):
+                nodes.append(from_id)
+                
+            if not (to_id in nodes):
+                nodes.append(to_id)
+            
+            edges.append((from_id, to_id))
+        
+        G = nx.Graph()
+        G.add_nodes_from(nodes)
+        G.add_edges_from(edges)
+        
+        return G
