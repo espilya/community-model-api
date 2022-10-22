@@ -7,12 +7,12 @@ from socketserver import ForkingMixIn
 import logging
 
 from context import dao
-from dao.dao_db_perspectives import DAO_db_perspectives
 from dao.dao_db_users import DAO_db_users
 from dao.dao_db_communities import DAO_db_community
+from dao.dao_db_similarities import DAO_db_similarity
+from dao.dao_db_perspectives import DAO_db_perspectives
 from dao.dao_db_flags import DAO_db_flags
 from dao.dao_json import DAO_json
-#from dao.deleteAndLoadDefaultData import deleteAndLoad
 import time
 
 from communityModel.communityModel import CommunityModel
@@ -234,24 +234,35 @@ def run(server_class=HTTPServer, handler_class=Handler):
     httpd.server_close()
     logging.info('Stopping server-loader...\n')
 
+def removeData():
+    daoP = DAO_db_perspectives()
+    daoP.drop()
+    daoC = DAO_db_community()
+    daoC.drop()
+    daoC.dropFullList()
+    daoS = DAO_db_similarity()
+    daoS.drop()
 
-# def importData():
-#     json5 = DAO_json("data/5.json")
-#     json5 = json5.getData()
-#     json6 = DAO_json("data/6.json").getData()
-#     jsonAll = DAO_json("data/Allperspectives.json").getData()
+def importData():
 
-#     daoC = DAO_db_community(db_host, db_port, db_user, db_password, db_name)
-#     daoC.insertFileList("5", json5)
-#     daoC.insertFileList("6", json6)
-#     daoP = DAO_db_perspectives(db_host, db_port, db_user, db_password, db_name)
-#     daoP.insertPerspective(jsonAll)
+
+
+    json5 = DAO_json("app/prototype-clustering/api_server/data/5.json").getData()
+    json6 = DAO_json("app/prototype-clustering/api_server/data/6.json").getData()
+
+    daoC = DAO_db_community()
+    daoC.insertFileList("5", json5)
+    daoC.insertFileList("6", json6)
+    
+    # jsonAll = DAO_json("app/prototype-clustering/api_server/data/Allperspectives.json").getData()
+    # daoP = DAO_db_perspectives()
+    # daoP.insertPerspective(jsonAll)
 
 if __name__ == '__main__':
     from sys import argv
 
-    # deleteAndLoad()
-    # importData()
+    removeData()
+    importData()
 
     if len(argv) == 2:
         run(port=int(argv[1]))

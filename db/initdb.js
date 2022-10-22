@@ -171,7 +171,7 @@ db.similarities.insertMany([{
 
 db.createCollection('flags', { capped: false });
 db.flags.deleteMany({});
-db.flags.insertOne({ "flag" : true});
+// db.flags.insertOne({ "flag" : true});
 
 
 db.createCollection('distanceMatrixes', { capped: false });
