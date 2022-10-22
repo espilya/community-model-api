@@ -26,6 +26,7 @@ class CommunityJsonGenerator:
         self.communityJSON()
         self.userJSON()
         self.similarityJSON()
+        self.artworksrelacionadasconlaperspectiva()
         
         print("\n\n")
         print("generate json " + filename)
@@ -101,7 +102,8 @@ class CommunityJsonGenerator:
         # User Data
         self.communityJson["users"] = []
         self.communityJson['users'] = self.json_df[['id','label','group','explicit_community']].to_dict('records')
-        #self.communityJson
+        self.communityJson['users']["interactions"] = self.interactionsJSON()
+        
     
     def similarityJSON(self):
         # Similarity Data
@@ -114,9 +116,14 @@ class CommunityJsonGenerator:
                 dicti['u2'] = str(self.json_df.iloc[j]['label'])
                 #dicti['value'] = similarityMatrix[i][j]
                 dicti['value'] = round(1 - self.distanceMatrix[i][j],2)
-                self.communityJson['similarity'].append(dicti)           
+                self.communityJson['similarity'].append(dicti)
+
+    def interactionsJSON(self):
+        interactions_df = pd.DataFrame()
+        return interactions_df
                     
-            
+    def artworksrelacionadasconlaperspectiva(self):
+        self.communityJson['artworks'] = []
             
             
             
