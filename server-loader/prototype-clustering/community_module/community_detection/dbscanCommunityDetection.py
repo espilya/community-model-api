@@ -44,7 +44,7 @@ class DbscanCommunityDetection:
             print(clusters)
             print("\n")
             # run dbscan
-            dbscan = DBSCAN( metric='precomputed', eps = epsParameter, min_samples = 1)
+            dbscan = DBSCAN(metric='precomputed', eps = epsParameter, min_samples = 1)
             result = dbscan.fit(distanceMatrix)
 
             # Get clusters
