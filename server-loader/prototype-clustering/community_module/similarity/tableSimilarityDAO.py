@@ -10,6 +10,8 @@ from inspect import getsourcefile
 from context import dao
 from dao.dao_csv import DAO_csv
 
+import numpy as np
+
 class TableSimilarityDAO(SimilarityDAO):
 
     def __init__(self, dao, similarityFunction):
@@ -47,8 +49,13 @@ class TableSimilarityDAO(SimilarityDAO):
         double
             Distance between the two elements.
         """
+        
         valueA = self.data.loc[elemA][self.similarityCol]
         valueB = self.data.loc[elemB][self.similarityCol]
+        
+        # Property was not given (nan)
+        if (valueA != valueA or valueB != valueB):
+            return 1.0
         
         distance = self.similarityTable.loc[valueA][valueB]
         return distance
