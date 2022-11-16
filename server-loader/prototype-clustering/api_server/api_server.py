@@ -3,6 +3,7 @@ import pymongo
 from bson.json_util import dumps, loads
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ForkingMixIn
+from bson.objectid import ObjectId
 
 import logging
 
@@ -98,18 +99,24 @@ class Handler(BaseHTTPRequestHandler):
         print("Request POST: ", request)
         first_arg = request[1]
         if first_arg == "perspective":
-            # add new perspective
-            perspective = loads(post_data)
-            daoPerspective = DAO_db_perspectives(
-                db_host, db_port, db_user, db_password, db_name)
-            ok = daoPerspective.insertPerspective(perspective)
+            perspectiveId = loads(post_data)
+            print(perspectiveId)
+            print("\n\n")
+
+            # retrive perspective from db
+            daoPerspective = DAO_db_perspectives()
+            perspective = daoPerspective.getPerspective(
+                ObjectId(perspectiveId))
+            print("perspective: ", perspective)
+
+            # ok = daoPerspective.insertPerspective(perspective)
             
-            newFlag = {
-                "perspectiveId": perspective["id"],
-                "userId": ""
-            }
-            daoFlags = DAO_db_flags()
-            daoFlags.updateFlag(newFlag)
+            # newFlag = {
+            #     "perspectiveId": perspective["id"],
+            #     "userId": ""
+            # }
+            # daoFlags = DAO_db_flags()
+            # daoFlags.updateFlag(newFlag)
 
         elif first_arg == "updateUsers":
             # add or update user
@@ -301,6 +308,10 @@ def initializeDatabase():
     file.close()
     
     daoPerspectives.insertPerspective(perspectives)
+
+    users = [{"userid": "001", "pname":""}, {"userid": "002", "pname":""}]
+    daoUsers = DAO_db_users()
+    print(daoUsers.insertUser_API(users))
 
 if __name__ == '__main__':
     from sys import argv

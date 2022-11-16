@@ -20,75 +20,27 @@ from requests.auth import HTTPBasicAuth
 from bson.json_util import dumps, loads
 
 
+# Daos
+# from dao.dao_db_interactionData import DAO_db_interactionDatas
+
+
 
 def main():
-    daoUsers = DAO_db_users("localhost", 27018, "spice", "spicepassword")
-    daoUsers.drop()
 
-    user = [
-        {
-            "id": "11541",
-            "userid": "1",
-            "origin": "90e6d701748f08514b01",
-            "source_id": "90e6d701748f08514b01",
-            "source": "Content description",
-            "pname": "DemographicGender",
-            "pvalue": "F (for Female value)",
-            "context": "application P:DemographicsPrep",
-            "datapoints": 0
-        },
-        {
-            "id": "11541",
-            "userid": "1",
-            "origin": "90e6d701748f08514b01",
-            "source_id": "90e6d701748f08514b01",
-            "source": "Content description",
-            "pname": "Age",
-            "pvalue": "22",
-            "context": "application P:DemographicsPrep",
-            "datapoints": 0
-        }
-    ]
+    route1 = r"../communityModel/data/new-annotated-stories.json"
+    # route2 = r"test/data/parser_output.json"
+    route2 = r"../communityModel/perspectives/GAM similar user emotions in similar artworks (iconclass) annotated-stories.json"
+    annotatedStories = DAO_json(route1).getData()
+    perspective = DAO_json(route2).getData()
 
-    perspective = {
-          "id": "99",
-          "name": "Perspective_99",
-          "algorithm": {
-            "name": "String",
-            "params": [
-              "param_a",
-              "param_b"
-            ]
-          },
-          "similarity_functions": [
-            {
-              "sim_function": {
-                "name": "String",
-                "params": [
-                  "param_a",
-                  "param_b"
-                ],
-                "on_attribute": {
-                  "att_name": "String",
-                  "att_type": "String"
-                },
-                "weight": 100
-              }
-            }
-          ]
-        }
+    # api = DAO_api()
 
-    dao = DAO_api()
-    # Hacemos post a la API. La API lo guarda en la db
-    # response = dao.updateUser(1, user)
-    response = dao.addPerspective(perspective)
-    # response = dao.updateUser("1", user)
-    print(response.status_code)
+    # a = requests.post("http://localhost:8080/v1.1/dataInput", json = annotatedStories)
+    # print(a)
+    # print(a.text)
 
-
-    # Pedimos los datos desde la DAO Users, la DAO lee de db
-    # daoUsers = DAO_db_users("localhost", 27018, "spice", "spicepassword")
-    # print(daoUsers.getUser("1"))
-
+    b = requests.post("http://localhost:8080/v1.1/perspective", json = perspective)
+    print(b)
+    print(b.text)
 
 main()

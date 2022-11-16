@@ -69,7 +69,7 @@ class DAO_db_perspectives(DAO_db):
             perspective, Type: <class 'dict'>
         """
         data = {}
-        data = self.db_perspectives.find({"id": perspectiveId}, {"_id": 0})
+        data = self.db_perspectives.find({"_id": perspectiveId})
 
         data = loads(dumps(list(data)))
         if len(data) == 0:

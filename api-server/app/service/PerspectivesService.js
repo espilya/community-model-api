@@ -4,6 +4,8 @@ var postData = require('./postData.js');
 
 const PerspectiveDAO = db.perspectives;
 const CommunityDAO = db.communities;
+const UsersDAO = db.users;
+const FlagDAO = db.flag;
 
 
 /**
@@ -101,7 +103,7 @@ exports.listPerspectiveCommunities = function (perspectiveId) {
 };
 
 
-const http = require('http');
+
 
 /**
  * Redirects POST request to api_loader
@@ -111,11 +113,58 @@ const http = require('http');
  * no response value expected for this operation
  */
 exports.PostPerspective = function (body) {
-  // return new Promise(function (resolve, reject) {
-  // try {
-  return postData.post_data(body, "/perspective")
-  // } catch (error) {
-  //   console.log(error)
-  // }
-  // });
+  try {
+    return new Promise(function (resolve, reject) {
+      // insert perspective
+      PerspectiveDAO.insertPerspective(body,
+        data => {
+          resolve(data);
+        },
+        error => {
+          console.error("PostPerspective-PerspectiveDAO.insertPerspective error: " + error);
+          reject(error)
+        })
+    })
+      .then((perspectiveId) => {
+        // create flag
+        var json = {
+          perspectiveId: perspectiveId,
+          userId: "",
+          data: ""
+        };
+        FlagDAO.insertFlag(json,
+          data => {
+          },
+          error => {
+            console.log("PostPerspective-FlagDAO.insertFlag perspective error: " + error);
+          })
+
+        // create flags for users
+        UsersDAO.all(
+          users => {
+            for (const user of users) {
+              var json = {
+                perspectiveId: perspectiveId,
+                userId: user.userid,
+                data: ""
+              };
+              FlagDAO.insertFlag(json,
+                data => {
+                },
+                error => {
+                  console.log("PostPerspective-FlagDAO.insertFlag user error: " + error);
+                })
+            }
+          }
+        )
+        // post cm
+        return postData.post_data(perspectiveId, "/perspective");
+      })
+      .catch(function (error) {
+        console.error("PerspectiveDAO.insertPerspective.promise1: " + error)
+      });
+  } catch (error) {
+    console.log("PostPerspective error:" + error)
+  }
+
 }

@@ -26,6 +26,22 @@ module.exports = mongoose => {
         att_name: String,
         att_type: String
       }],
+      interaction_similarity_functions: [{
+        sim_function: {
+          name: String,
+          params: [
+            String
+          ],
+          on_attribute: {
+            att_name: String,
+            att_type: String
+          },
+          interaction_object: {
+            att_name: String,
+            att_type: String
+          }
+        }
+      }]
     }
   );
 
@@ -39,6 +55,18 @@ module.exports = mongoose => {
 
   // Access mongobd and retrieve requested data
   return {
+    insertPerspective: function (data, onSuccess, onError) {
+      // console.log(json);
+      Perspectives.create(data, function (err, res) {
+        if (err) {
+          console.log("insertPerspective: error");
+          onError(err);
+        }
+        else {
+          onSuccess(res._id.toString());
+        }
+      });
+    },
     all: function (onSuccess) {
       let items = [];
       Perspectives.find({}, { projection: { _id: 0 } }, function (error, data) {
