@@ -96,7 +96,12 @@ class CommunityModel():
         self.similarityMeasure.updateDistanceMatrix([self.flag['userid']], distanceMatrix)
 
         # Drop irrelevant parameters to explain communities
-        self.similarityMeasure.data.drop(['origin','source_id', '_id'], axis=1, inplace=True)
+        print("self similarityMeasure data")
+        print(self.similarityMeasure.data)
+        print(self.similarityMeasure.data.columns)
+        print("\n\n\n")
+        #self.similarityMeasure.data.drop(['origin','source_id', '_id'], axis=1, inplace=True)
+        self.similarityMeasure.data.drop(['origin','source_id'], axis=1, inplace=True)
         self.similarityMeasure.data = self.similarityMeasure.data.rename(columns={"userid":"user"})
         
         return self.similarityMeasure.distanceMatrix
@@ -139,6 +144,8 @@ class CommunityModel():
 #--------------------------------------------------------------------------------------------------------------------------
 
     def exportCommunityClusteringJSON(self, hecht_beliefR_pivot_df2,community_detection,n_communities,percentageDefault,distanceMatrix):
+        
+        
         # Group explicit community properties in one column
         json_df = hecht_beliefR_pivot_df2.copy()
         json_df['id'] = json_df['user']
@@ -147,6 +154,13 @@ class CommunityModel():
         columns = ['DemographicPolitics','DemographicReligous']
         columns = ['DemographicPolitics','DemographicReligous','beleifR','beliefJ']
         columns = self.perspective['user_attributes']
+        
+        print("export Community Clustering JSON")
+        print(columns)
+        print("\n")
+        print(json_df)
+        print("\n\n")
+        
         json_df['explicit_community'] = json_df[columns].to_dict(orient='records')
         json_df
 

@@ -102,7 +102,7 @@ class CommunityJsonGenerator:
         # User Data
         self.communityJson["users"] = []
         self.communityJson['users'] = self.json_df[['id','label','group','explicit_community']].to_dict('records')
-        self.communityJson['users']["interactions"] = self.interactionsJSON()
+        #self.communityJson['users']["interactions"] = self.interactionsJSON()
         
     
     def similarityJSON(self):
