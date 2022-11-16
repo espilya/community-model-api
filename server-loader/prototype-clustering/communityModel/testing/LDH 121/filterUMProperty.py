@@ -3,7 +3,7 @@ import json
 # https://stackoverflow.com/questions/27189892/how-to-filter-json-array-in-python
 
 filename = "data/Hecht_DEGARI_emotions.json"
-filename = "data/1.json"
+#filename = "data/1.json"
 
 # Perspective (user attributes, artworks similarity features, emotion similarity on plutchik emotions similar artworks)
 with open(filename, 'r', encoding='utf8') as f:
@@ -25,6 +25,9 @@ for x in input_dict:
 #output_dict = [x for x in input_dict if x['_doctype'] == 'SPICEUMProperty']
 #output_dict = [x for x in input_dict if x["doctype"] == 'PH236328']
 output_dict = [x for x in input_dict if 'SPICEUMProperty' in x['_id']]
+
+# emotions in "SPICEUMUGC"
+
 
 
 # Transform python object back into json

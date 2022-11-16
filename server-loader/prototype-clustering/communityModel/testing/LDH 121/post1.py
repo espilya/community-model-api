@@ -47,6 +47,9 @@ def main():
         #json.dump(user_interactions.to_dict('records'), outfile, indent=4)
         json.dump(parsed, outfile, indent=4)
     
+    
+    #return
+    
     """
     #--------------------------------------------------------------------------------------------------------------------------
     #    fill NaN values
