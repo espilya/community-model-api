@@ -42,7 +42,7 @@ class ExplainedCommunitiesDetection:
             dict: Dictionary where each user is assigned to a community.
         """
         n_communities = 2
-        #n_communities = 7
+        maxCommunities = len(self.data)
         finish_search = False
         
 
@@ -65,11 +65,23 @@ class ExplainedCommunitiesDetection:
             explainables = []
             self.communities = complete_data.groupby(by='community')
             
-            for c in range(n_communities):
-                community = self.communities.get_group(c)
-                explainables.append(self.is_explainable(community, answer_binary, percentage))
+            #for c in range(n_communities):
+            n_clusters = min(n_communities,len(set(result2)))
+            
+            # Cannot be explained with implicit
+            if (n_clusters < n_communities):
+                finish_search = True 
+                n_communities = n_clusters
+            else:
+                for c in range(n_communities):
+                    community = self.communities.get_group(c)
+                    explainables.append(self.is_explainable(community, answer_binary, percentage))
 
-            finish_search = sum(explainables) == n_communities
+                finish_search = sum(explainables) == n_communities
+                
+            # Each datapoint belongs to a different cluster  
+            if (n_communities == maxCommunities):
+                finish_search = True
 
             if not finish_search:
                 n_communities += 1
@@ -183,8 +195,11 @@ class ExplainedCommunitiesDetection:
     # Get the percentage of most frequent value for each feature.
     def secondExplanation(self,community):
         modePropertiesCommunity = {}
+        
+        # To avoid nan values
+        community.fillna('unknown',inplace=True)
 
-        for attribute in self.explanaible_attributes:
+        for attribute in self.explanaible_attributes:         
             counts = community[attribute].value_counts(normalize=True).mul(100)
             modeAttribute = community[attribute].value_counts().idxmax()
             modePropertiesCommunity[attribute] = {}
