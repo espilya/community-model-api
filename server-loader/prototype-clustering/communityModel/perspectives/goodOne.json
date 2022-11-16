@@ -9,7 +9,7 @@
   "similarity_functions": [
     {
       "sim_function": {
-        "name": "HechtBeliefRSimilarityDAO",
+        "name": "TableSimilarityDAO",
         "params": [
         ],
         "on_attribute": {
@@ -21,7 +21,7 @@
     },
     {
       "sim_function": {
-        "name": "HechtBeliefJSimilarityDAO",
+        "name": "TableSimilarityDAO",
         "params": [
         ],
         "on_attribute": {
