@@ -12,10 +12,15 @@ from dao.dao_db_communities import DAO_db_community
 from dao.dao_db_similarities import DAO_db_similarity
 from dao.dao_db_perspectives import DAO_db_perspectives
 from dao.dao_db_flags import DAO_db_flags
+from dao.dao_db_distanceMatrixes import DAO_db_distanceMatrixes
+import json
+
 from dao.dao_json import DAO_json
 import time
 
 from communityModel.communityModel import CommunityModel
+from communityModel.dataLoader import DataLoader
+
 
 server_loader_port = int(os.environ['CM_DOCKER_PORT'])
 server_loader_ip = "0.0.0.0"
@@ -151,6 +156,7 @@ class Handler(BaseHTTPRequestHandler):
         daoFlags = DAO_db_flags()
 
         flags = daoFlags.getFlags()
+        
         for flag in flags:
             perspective = daoPerspectives.getPerspective(flag["perspectiveId"])
 
@@ -257,12 +263,55 @@ def importData():
     # jsonAll = DAO_json("app/prototype-clustering/api_server/data/Allperspectives.json").getData()
     # daoP = DAO_db_perspectives()
     # daoP.insertPerspective(jsonAll)
+    
+def clearDatabase():
+    print("1")
+    daoF = DAO_db_flags()
+    print("1a")
+    #flags = daoF.getFlags()
+    #print(flags)
+    daoF.drop()
+    
+    print("2")
+    daoC = DAO_db_community()
+    daoC.drop()
+    daoC.dropFullList()
+    
+    print("3")
+    daoU = DAO_db_users()
+    daoU.drop()
+    
+    print("4")
+    daoDistanceMatrixes = DAO_db_distanceMatrixes()
+    daoDistanceMatrixes.drop()
+    
+    print("5")
+    daoSimilarity = DAO_db_similarity()
+    #daoSimilarities.drop()
+    
+
+def initializeDatabase():
+    daoPerspectives = DAO_db_perspectives()
+    daoPerspectives.drop()
+    
+    route = DataLoader().fileRoute("perspectives/hecht agglomerative.json")
+    file = open(route)
+    perspectives = json.load(file)
+    print(perspectives)
+    file.close()
+    
+    daoPerspectives.insertPerspective(perspectives)
 
 if __name__ == '__main__':
     from sys import argv
-
-    removeData()
-    importData()
+    
+    # For now, we are not using it
+    #removeData()
+    #importData()
+    
+    # To prepare things
+    clearDatabase()
+    initializeDatabase()
 
     if len(argv) == 2:
         run(port=int(argv[1]))
