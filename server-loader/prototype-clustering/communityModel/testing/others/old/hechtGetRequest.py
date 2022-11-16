@@ -4,7 +4,7 @@ import sys
 
 from context import dao
 
-from dao.dao_db_users_postapi import DAO_db_users_postapi
+#from dao.dao_db_users_postapi import DAO_db_users_postapi
 from dao.dao_api import DAO_api
 from dao.dao_db_communities import DAO_db_community
 import pandas as pd
@@ -43,8 +43,8 @@ def main():
         ],
     }]
     
-    daoC = DAO_db_community()
-    daoC.drop()
+    #daoC = DAO_db_community()
+    #daoC.drop()
     #daoC.dropFullList()
     #daoC.insertCommunity(communities)
     

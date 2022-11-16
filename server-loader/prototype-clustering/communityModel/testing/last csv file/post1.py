@@ -3,7 +3,7 @@ import os
 import sys
 
 from context import dao
-from dao.dao_db_users import DAO_db_users
+from dao.dao_db_users_testing import DAO_db_users
 from dao.dao_api import DAO_api
 import pandas as pd
 
@@ -44,23 +44,30 @@ def main():
     for ind in df.index:
         # print(df[' '][ind], df['beleifR'][ind], df['DemographicPolitics'][ind], df['DemographicReligous'][ind])
         user = {}
-        user["userid"] = df['user'][ind]
+        user["userid"] = df['userid'][ind]
         user['_id'] = user["userid"]
         user["origin"] = ""
         user["source_id"] = ""
-        user["participantType"] = str(df["Participant type"][ind]) # Participant type
-        user["beleifR"] = df['beliefR'][ind]  # beleifR
+        user["ParticipantType"] = str(df["ParticipantType"][ind]) # Participant type
+        user["beliefR"] = df['beliefR'][ind]  # beleifR
         user["beliefJ"] = df['beliefJ'][ind]  # beliefJ
         user["beliefE"] = df['beliefE'][ind]  # beliefE
-        user["DemographicPolitics"] = df['DemographicsPolitics'][ind]  # DemographicPolitics
-        user["DemographicReligous"] = df['DemographicsReligous'][ind]  # DemographicReligous
+        user["DemographicsPolitics"] = df['DemographicsPolitics'][ind]  # DemographicPolitics
+        user["DemographicsReligous"] = df['DemographicsReligous'][ind]  # DemographicReligous
         
         # Split user information into user model dict
         usersAPI = daoU.userToPostAPIFormat(user)
+        #print(usersAPI)
+        usersAPI = [usersAPI[0]]
 
         for user in usersAPI:
             postUserData = [user]
-            response = daoAPI.updateUser(user['userid'],postUserData)
+            userModelData = user
+            print("userModel inserts " + str(userModelData))
+            print(userModelData['userid'])
+            print("\n")
+            
+            #response = daoAPI.updateUser(user['userid'],postUserData)
 
     
 main()

@@ -12,23 +12,33 @@ from dao.dao_linkedDataHub import DAO_linkedDataHub
 
 from dao.dao_db_flags import DAO_db_flags
 
+from communityModel.testing.dataLoader import DataLoader
+
 
 import json
 
 def clear():
+    print("1")
     daoF = DAO_db_flags()
+    print("1a")
+    #flags = daoF.getFlags()
+    #print(flags)
     daoF.drop()
     
+    print("2")
     daoC = DAO_db_community()
     daoC.drop()
     daoC.dropFullList()
     
+    print("3")
     daoU = DAO_db_users()
     daoU.drop()
     
+    print("4")
     daoDistanceMatrixes = DAO_db_distanceMatrixes()
     daoDistanceMatrixes.drop()
     
+    print("5")
     daoSimilarity = DAO_db_similarity()
     #daoSimilarities.drop()
     
@@ -37,12 +47,17 @@ def initialize():
     daoPerspectives = DAO_db_perspectives()
     daoPerspectives.drop()
     
-    file = open("../perspectives/all.json")
+    route = DataLoader().fileRoute("../perspectives/all.json")
+    file = open(route)
     perspectives = json.load(file)
     print(perspectives)
     file.close()
     
     daoPerspectives.insertPerspective(perspectives)
+    
+def prepareDatabase():
+    clear()
+    initialize()
     
 
 clear()
