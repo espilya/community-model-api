@@ -1,18 +1,27 @@
+
+#--------------------------------------------------------------------------------------------------------------------------
+#    Python libraries
+#--------------------------------------------------------------------------------------------------------------------------
+
 import os
-
-#--------------------------------------------------------------------------------------------------------------------------
-#    Import
-#--------------------------------------------------------------------------------------------------------------------------
-
 import pandas as pd
 import numpy as np
 import importlib
+
+from inspect import getsourcefile
+from os.path import abspath
+import sys
+
+#--------------------------------------------------------------------------------------------------------------------------
+#    Custom Class
+#--------------------------------------------------------------------------------------------------------------------------
+
 from context import community_module
 
 # Community model tools
 from communityModel.communityJsonGenerator import CommunityJsonGenerator
 
-# clustering algorithms
+# Community detection
 from community_module.community_detection.explainedCommunitiesDetection import ExplainedCommunitiesDetection
 
 # similarity measures
@@ -20,12 +29,10 @@ from community_module.similarity.complexSimilarityDAO import ComplexSimilarityDA
 
 # dao
 from dao.dao_csv import DAO_csv
+from dao.dao_json import DAO_json
 from dao.dao_db_users import DAO_db_users
 from dao.dao_db_distanceMatrixes import DAO_db_distanceMatrixes
 from dao.dao_db_communities import DAO_db_community
-
-# json
-#import json
 
 
 #--------------------------------------------------------------------------------------------------------------------------
@@ -50,11 +57,12 @@ class CommunityModel():
         """
         self.perspective = perspective
         self.flag = flag
+        self.percentageExplainability = 0.5
         
     def start(self):
         self.similarityMeasure = self.initializeComplexSimilarityMeasure()
         self.distanceMatrix = self.computeDistanceMatrix()
-        self.clustering(self.similarityMeasure)
+        self.clustering()
     
     def initializeComplexSimilarityMeasure(self):
         """
@@ -67,6 +75,9 @@ class CommunityModel():
         -------
             similarityMeasure: ComplexSimilarityDAO
         """
+        print("initialize complex similarity")
+        print(self.perspective)
+        print(self.perspective['similarity_functions'])
         daoCommunityModel = DAO_db_users()
         similarityDict = self.perspective['similarity_functions']
         similarityMeasure = ComplexSimilarityDAO(daoCommunityModel,similarityDict)
@@ -96,10 +107,6 @@ class CommunityModel():
         self.similarityMeasure.updateDistanceMatrix([self.flag['userid']], distanceMatrix)
 
         # Drop irrelevant parameters to explain communities
-        print("self similarityMeasure data")
-        print(self.similarityMeasure.data)
-        print(self.similarityMeasure.data.columns)
-        print("\n\n\n")
         #self.similarityMeasure.data.drop(['origin','source_id', '_id'], axis=1, inplace=True)
         self.similarityMeasure.data.drop(['origin','source_id'], axis=1, inplace=True)
         self.similarityMeasure.data = self.similarityMeasure.data.rename(columns={"userid":"user"})
@@ -107,7 +114,7 @@ class CommunityModel():
         return self.similarityMeasure.distanceMatrix
         
             
-    def clustering(self,similarityMeasure):
+    def clusteringOLD(self):
         """
         Performs clustering using the distance matrix and the algorithm specified by the perspective object.
 
@@ -123,9 +130,9 @@ class CommunityModel():
         algorithmModule = importlib.import_module(algorithmFile)
         algorithmClass = getattr(algorithmModule,algorithmName[0].upper() + algorithmName[1:])
         
-        community_detection_df = similarityMeasure.data.set_index('user')
+        community_detection_df = self.similarityMeasure.data.set_index('user')
 
-        distanceMatrix = self.similarityMeasure.distanceMatrix
+        distanceMatrix = self.self.similarityMeasure.distanceMatrix
         community_detection = ExplainedCommunitiesDetection(algorithmClass, community_detection_df, distanceMatrix, self.perspective)
 
         n_communities, users_communities, self.medoids_communities = community_detection.search_all_communities(percentage=percentageDefault) 
@@ -138,47 +145,67 @@ class CommunityModel():
         
         # Export to json
         self.exportCommunityClusteringJSON(hecht_beliefR_pivot_df2,community_detection,n_communities,percentageDefault,distanceMatrix)
-        
-#--------------------------------------------------------------------------------------------------------------------------
-#    Complex similarity (HECHT) - Export JSON (with file)
-#--------------------------------------------------------------------------------------------------------------------------
-
-    def exportCommunityClusteringJSON(self, hecht_beliefR_pivot_df2,community_detection,n_communities,percentageDefault,distanceMatrix):
-        
-        
-        # Group explicit community properties in one column
-        json_df = hecht_beliefR_pivot_df2.copy()
-        json_df['id'] = json_df['user']
-        json_df['label'] = json_df['user']
-        json_df = json_df.rename(columns={"community":"group"})
-        columns = ['DemographicPolitics','DemographicReligous']
-        columns = ['DemographicPolitics','DemographicReligous','beleifR','beliefJ']
-        columns = self.perspective['user_attributes']
-        
-        print("export Community Clustering JSON")
-        print(columns)
-        print("\n")
-        print(json_df)
-        print("\n\n")
-        
-        json_df['explicit_community'] = json_df[columns].to_dict(orient='records')
-        json_df
-
-
-        # In[205]:
-
-
-        jsonGenerator = CommunityJsonGenerator(json_df,community_detection,n_communities,percentageDefault,distanceMatrix,self.perspective['id'], self.medoids_communities)
-        #jsonCommunity = jsonGenerator.generateJSON("../jsonVisualization/HECHT.json")
-
-        #jsonCommunity = jsonGenerator.generateJSON("/app/prototype-clustering/examples/jsonVisualization/clustering.json")
-        #jsonCommunity = jsonGenerator.generateJSON("/app/prototype-clustering/communityModel/jsonVisualization/clustering.json")       
-        
-        jsonCommunity = jsonGenerator.generateJSON("clustering.json")       
-        
-        # Community jsons (visualization)
-        self.saveDatabase(jsonCommunity)
     
+
+    def clusteringExportFileRoute(self, percentageExplainability):
+        abspath = os.path.dirname(__file__)
+        #relpath = "clustering/" + self.perspective['name'] + " " + "(" + self.perspective['algorithm']['name'] + ")" 
+        #relpath = "clustering/" + '(GAMGame_stories_RN_UNITO) ' + self.perspective['name'] + " "
+        # relpath = "clustering/" + '(GAM RN) ' + self.perspective['name'] + " "
+        relpath = "clustering/" 
+        #relpath += "clusters generated/" + self.perspective["algorithm"]["name"] + "/"
+        # relpath += "clusters Mine/" + self.perspective["algorithm"]["name"] + "/"
+
+        relpath += self.perspective['name'] + " "
+        relpath += " (" + str(percentageExplainability) + ")"
+        relpath += ".json"
+        route = os.path.normpath(os.path.join(abspath, relpath))
+        
+        return route
+        
+    def clustering(self, exportFile = "clustering.json"):
+        """
+        Performs clustering using the distance matrix and the algorithm specified by the perspective object.
+
+        Parameters
+        ----------
+            percentageExplainability: minimum percentage of the most frequent value among 1+ main similarity features.
+            
+        """
+        percentageExplainability = self.percentageExplainability
+        
+        # Initialize data
+        algorithm = self.initializeAlgorithm()
+        data = self.similarityMeasure.data
+        data = data.set_index('user')
+        
+        #interactionObjectData = self.similarityMeasure.getInteractionObjectData()
+        interactionObjectData = pd.DataFrame()
+        
+        # Get results
+        community_detection = ExplainedCommunitiesDetection(algorithm, data, self.distanceMatrix, self.perspective)
+        communityDict = community_detection.search_all_communities(percentage=percentageExplainability) 
+        communityDict['perspective'] = self.perspective
+        
+        # Export to json
+        data.reset_index(inplace=True)
+        exportFile = self.clusteringExportFileRoute(percentageExplainability)
+        jsonGenerator = CommunityJsonGenerator(interactionObjectData, data, self.distanceMatrix, communityDict, community_detection, self.perspective)
+        jsonCommunity = jsonGenerator.generateJSON(exportFile)       
+        
+        # Save data to database
+        insertedId = self.saveDatabase(jsonCommunity)
+        
+        return insertedId
+    
+    def initializeAlgorithm(self):
+        algorithmName = self.perspective['algorithm']['name'] + "CommunityDetection"
+        algorithmFile = "community_module.community_detection." + algorithmName 
+        algorithmModule = importlib.import_module(algorithmFile)
+        algorithmClass = getattr(algorithmModule,algorithmName[0].upper() + algorithmName[1:])
+        
+        return algorithmClass    
+        
 
 #--------------------------------------------------------------------------------------------------------------------------
 #    Community jsons (visualization)
