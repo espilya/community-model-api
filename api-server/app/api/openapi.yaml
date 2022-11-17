@@ -689,7 +689,6 @@ components:
       required:
         - id
         - name
-        - explanation
         - perspectiveId
         - users
       type: object
@@ -704,9 +703,9 @@ components:
           type: string
           description: perspectiveId
           example: perspectiveId
-        explanation:
-          type: string
-          description: community description (maybe empty). It can be computed by the explanation module
+        explanations:
+          type: array
+          description: a list of community descriptions (maybe empty). It can be computed by the explanation module
           example: People whose age is above 65
         users:
           type: array
