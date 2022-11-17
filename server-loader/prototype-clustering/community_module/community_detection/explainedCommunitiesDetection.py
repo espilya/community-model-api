@@ -1,12 +1,13 @@
-# Authors: José Ángel Sánchez Martín, Jose Luis Jorro-Aragoneses
+# Authors: José Ángel Sánchez Martín
 import numpy as np
+import statistics
 
 class ExplainedCommunitiesDetection:
     """Class to search all communities that all members have a common
     propertie. This algorithm works with clustering techniques.
     """
 
-    def __init__(self, algorithm, data, distanceMatrix, perspective):
+    def __init__(self, algorithm, data, distanceMatrix, perspective = {}):
         """Method to configure the detection algorithm.
 
         Args:
@@ -17,15 +18,23 @@ class ExplainedCommunitiesDetection:
             technique. Defaults to 'euclidean'.
         """
         self.algorithm = algorithm
-        self.data = data
+        self.data = data.copy()
         self.distanceMatrix = distanceMatrix
         self.perspective = perspective
         
-        self.explanaible_attributes = []
-        for similarityFunction in self.perspective['similarity_functions']:
-            self.explanaible_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])   
+        if (len(self.perspective) == 0):
+            self.explanaible_attributes = self.data.columns
+            self.user_attributes = []
+        else:
         
-        self.user_attributes = self.perspective['user_attributes']
+            self.explanaible_attributes = []
+            for similarityFunction in self.perspective['similarity_functions']:
+            #for similarityFunction in self.perspective['interaction_similarity_functions']:
+                self.explanaible_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])   
+            
+            self.user_attributes = []
+            for userAttribute in self.perspective['user_attributes']:
+                self.user_attributes.append(userAttribute['att_name'])
         
 
     def search_all_communities(self, answer_binary=False, percentage=1.0):
@@ -60,6 +69,7 @@ class ExplainedCommunitiesDetection:
             
             complete_data = self.data.copy()
             complete_data['community'] = result.values()
+            self.complete_data = complete_data
 
             # Comprobamos que para cada grupo existe al menos una respuesta en común
             explainables = []
@@ -75,81 +85,102 @@ class ExplainedCommunitiesDetection:
             else:
                 for c in range(n_communities):
                     community = self.communities.get_group(c)
+                    community = self.simplifyInteractionAttributes(community)
                     explainables.append(self.is_explainable(community, answer_binary, percentage))
 
                 finish_search = sum(explainables) == n_communities
-                
+            
             # Each datapoint belongs to a different cluster  
             if (n_communities == maxCommunities):
                 finish_search = True
-
+                
             if not finish_search:
                 n_communities += 1
+            
+            
+            
+        
         
         # Get medoids
         medoids_communities = self.getMedoidsCommunities(result2)
-
-        return n_communities, result, medoids_communities
+        
+        communityDict = {}
+        communityDict['number'] = n_communities
+        communityDict['users'] = result
+        communityDict['medoids'] = medoids_communities
+        communityDict['percentage'] = percentage
+        communityDict['userAttributes'] = self.user_attributes
+        
+        return communityDict
     
-    def get_community(self, id_community, answer_binary=False, percentage=1.0):
-        """Method to obtain all information about a community.
-
-        Args:
-            id_community (int): Id or name of community returned by detection method.
-            answer_binary (bool, optional): True to indicate that a common property
-            occurs only when all answers are 1.0. Defaults to False. Defaults to False.
-
-        Returns:
-            dict: All data that describes the community:
-                - name: name of community.
-                - members: list of index included in this community.
-                - properties: common properties of community. It is a dictionary where:
-                    each property is identified by column_name of data, and the value is
-                    the common value in this column.
+    def explainInteractionAttributes(self):
+        return len(self.perspective['interaction_similarity_functions']) > 0
+            
+    def simplifyInteractionAttributes(self, community, printing = False):
         """
-        community = self.communities.get_group(id_community)
-        community_user_attributes = community[self.user_attributes]
+        Method to obtain the dominant value in the list of interaction attribute values with the other community members.
+        
+        Parameters
+        ----------
+        community : pd.dataframe
+            Community member information
 
-        community_data = {'name': id_community}
-        community_data['percentage'] = str(percentage * 100) + " %"
-        community_data['members'] = list(community_user_attributes.index.values)
-
-        explainedCommunityProperties = dict()       
-
-        #for col in community.columns.values:
-        for col in self.explanaible_attributes:
-            if col != 'community':
-               # print(community)
-                #print(len(community[col]))
-                #print('-', col, community[col].value_counts().index[0])
-                if answer_binary:
-                    if (len(community[col]) * percentage) <= community[col].sum():
-                        explainedCommunityProperties[col] = community[col].value_counts().index[0]
-                        # print('-', col, community[col].value_counts().index[0])
-                else:
+        Returns
+        -------
+        community: pd.dataframe
+            Updated dataframe including the dominant value for each user-interaction attribute pair in new columns.
+            Column name = community_ + 'interaction attribute label'
+        """
+        if (self.explainInteractionAttributes() == False):
+            return community
+        else:
                     
-                    if (len(community[col]) * percentage) <= community[col].value_counts().max():
-                        explainedCommunityProperties[col] = community[col].value_counts().index[0]
-                        # Add the predominant emotion
-                        #print('-', col, community[col].value_counts().index[0])
-                        
-                        # print('-', col, community[col].value_counts().index[0])
-                        
-                        
-        # Second explanation   
-        community_data['explanation'] = []
-        community_data['explanation'].append(explainedCommunityProperties)
-        community_data['explanation'].append(self.secondExplanation(community))
-            
-            
-        return community_data
+            df = community.copy()
+            for col in self.explanaible_attributes:
+                col2 = col + 'DominantInteractionGenerated'
 
+                # Get row index of community members
+                communityMemberIndexes = np.nonzero(np.in1d(self.data.index,community.index))[0]
+                communityMemberIndexes = np.nonzero(np.in1d(self.data.index,self.data.index))[0]
+                
+                """
+                if (printing):
+                    print("col2: " + str(col2))
+                    print(df[col2])
+                    print("self.data.index: " + str(self.data.index))
+                    print("community.index: " + str(community.index))
+                    print("community member indexes: " + str(communityMemberIndexes))
+                    print("\n\n")
+                """   
+                
+                # From the attribute list, consider only the ones between the members of the community
+                # https://stackoverflow.com/questions/23763591/python-selecting-elements-in-a-list-by-indices
+                # Transform attribute list to fit community members
+                df.loc[:, ('community_' + col)] = community.apply(lambda row: self.extractDominantInteractionAttribute(row, col2, communityMemberIndexes), axis = 1)
+                # df.loc[:, ('community_' + col)] = community.apply(lambda row: statistics.mode([row[col2][i] for i in communityMemberIndexes if row[col2][i] != '']), axis = 1)
+
+            return df
+    
+    def extractDominantInteractionAttribute(self, row, col2, communityMemberIndexes):
+        communityMembers_interactionAttributeList = [row[col2][i] for i in communityMemberIndexes if row[col2][i] != '']
+        if (len(communityMembers_interactionAttributeList) > 0):
+            return statistics.mode(communityMembers_interactionAttributeList)
+        else:
+            return ''
+        
+    
+        
     def is_explainable(self, community, answer_binary=False, percentage=1.0):
         explainable_community = False
-
+        
         #for col in community.columns.values:
-        for col in self.explanaible_attributes:
-            if col != 'community':
+        for col2 in self.explanaible_attributes:
+            if col2 != 'community':
+                if (self.explainInteractionAttributes()):
+                    col = "community_" + col2
+                else:
+                    col = col2
+                
                 # https://www.alphacodingskills.com/python/notes/python-operator-bitwise-or-assignment.php
                 # (x |= y) is equivalent to (x = x | y)
                 if answer_binary:
@@ -158,6 +189,8 @@ class ExplainedCommunitiesDetection:
                     explainable_community |= (len(community[col]) * percentage) <= community[col].value_counts().max()
         
         return explainable_community
+    
+    
     
     
     def getMedoidsCommunities(self, clusteringResult):
@@ -195,11 +228,8 @@ class ExplainedCommunitiesDetection:
     # Get the percentage of most frequent value for each feature.
     def secondExplanation(self,community):
         modePropertiesCommunity = {}
-        
-        # To avoid nan values
-        community.fillna('unknown',inplace=True)
 
-        for attribute in self.explanaible_attributes:         
+        for attribute in self.explanaible_attributes:
             counts = community[attribute].value_counts(normalize=True).mul(100)
             modeAttribute = community[attribute].value_counts().idxmax()
             modePropertiesCommunity[attribute] = {}
@@ -209,6 +239,95 @@ class ExplainedCommunitiesDetection:
         return modePropertiesCommunity
     
     
+    
+    def get_community(self, id_community, answer_binary=False, percentage=1.0):
+        """Method to obtain all information about a community.
+
+        Args:
+            id_community (int): Id or name of community returned by detection method.
+            answer_binary (bool, optional): True to indicate that a common property
+            occurs only when all answers are 1.0. Defaults to False. Defaults to False.
+
+        Returns:
+            dict: All data that describes the community:
+                - name: name of community.
+                - members: list of index included in this community.
+                - properties: common properties of community. It is a dictionary where:
+                    each property is identified by column_name of data, and the value is
+                    the common value in this column.
+        """
+        try:
+            
+            community = self.communities.get_group(id_community)
+            community = self.simplifyInteractionAttributes(community)
+
+            community_user_attributes = community[self.user_attributes]
+
+            community_data = {'name': id_community}
+            community_data['percentage'] = str(percentage * 100) + " %"
+            community_data['members'] = list(community_user_attributes.index.values)
+
+            explainedCommunityProperties = dict()       
+
+            #for col in community.columns.values:
+            for col2 in self.explanaible_attributes:
+                if col2 != 'community':
+                    if (self.explainInteractionAttributes()):
+                        col = "community_" + col2
+                    else:
+                        col = col2
+                   # print(community)
+                    #print(len(community[col]))
+                    #print('-', col, community[col].value_counts().index[0])
+                    if answer_binary:
+                        if (len(community[col]) * percentage) <= community[col].sum():
+                            explainedCommunityProperties[col] = community[col].value_counts().index[0]
+                            # print('-', col, community[col].value_counts().index[0])
+                    else:
+                        
+                        if (len(community[col]) * percentage) <= community[col].value_counts().max():
+                            # Returns dominant one
+                            # explainedCommunityProperties[col] = community[col].value_counts().index[0]
+                            
+                            # Returns the values for each of them
+                            percentageColumn = community[col].value_counts(normalize=True) * 100
+                            explainedCommunityProperties[col] = percentageColumn.to_string()
+                            #explainedCommunityProperties[col] = percentageColumn.to_dict('records')
+                            
+                            
+                            
+                            
+                            
+                            # Add the predominant emotion
+                            #print('-', col, community[col].value_counts().index[0])
+                            
+                            # print('-', col, community[col].value_counts().index[0])
+                            
+                            
+            # Second explanation  
+            #print(explainedCommunityProperties)    
+            """
+            community_data['explanation'] = []
+            community_data['explanation'].append(explainedCommunityProperties)
+            """
+            
+            community_data['explanation'] = explainedCommunityProperties
+            
+            
+            #community_data['explanation'].append(self.secondExplanation(community))
+            
+        except Exception as e:
+            
+            print(str(e))
+            raise Exception("Exception retrieving community " + str(id_community))
+
+            
+            return -1
+            
+        
+            
+            
+        return community_data
     
     
     
