@@ -56,7 +56,11 @@ class TableSimilarityDAO(SimilarityDAO):
         # Property was not given (nan)
         if (valueA != valueA or valueB != valueB):
             return 1.0
-        
+            
+        # Key doesnt exist in the table
+        if ({valueA, valueB}.issubset(self.similarityTable.columns) == False):
+            return 1.0
+            
         distance = self.similarityTable.loc[valueA][valueB]
         return distance
 
