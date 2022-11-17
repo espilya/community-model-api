@@ -3,7 +3,7 @@ module.exports = mongoose => {
     {
       id: String,
       name: String,
-      explanation: String,
+      explanations: [String],
       perspectiveId: String,
       users: [String]
     }
