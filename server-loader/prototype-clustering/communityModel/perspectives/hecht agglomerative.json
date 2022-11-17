@@ -45,6 +45,16 @@
       }
     }
   ],
-  "user_attributes": ["DemographicsReligous","DemographicsPolitics"]
+  "user_attributes": [
+    {
+        "att_name": "DemographicsReligous",
+        "att_type": "String"
+    },
+    {
+        "att_name": "DemographicsPolitics",
+        "att_type": "String"
+    }
+  ],
+  "interaction_similarity_functions": []
 }
 ]
