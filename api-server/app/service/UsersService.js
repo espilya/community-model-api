@@ -32,8 +32,6 @@ exports.listUserCommunities = function (userId) {
   });
 }
 
-const http = require('http');
-const { post } = require("../controllers/jobsRoute/jobsRoute");
 /**
  * Update community model with new users
  * Redirects POST request to api_loader

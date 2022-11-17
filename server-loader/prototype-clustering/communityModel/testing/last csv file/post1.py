@@ -69,6 +69,7 @@ def main():
             
             print("post api " + str(postUserData))
             print(response)
+            print(response.text)
             print("\n\n")
 
     

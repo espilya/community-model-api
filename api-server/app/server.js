@@ -21,14 +21,17 @@ async function initServer() {
   app.set("apiSpec", apiSpec);
 
 
+  const cors = require('cors');
+  app.use(cors());
+
   // Any paths defined in your openapi.yml will validate and parse the request
   // before it calls your route code.
   //const enforcerMiddleware = EnforcerMiddleware(await Enforcer(apiyaml));
   //app.use(enforcerMiddleware.init());
   const middleware = openApiMiddleware({
     apiSpec,
-    validateRequests: true,
-    validateResponses: true, // default false
+    validateRequests: false,
+    validateResponses: false, // default false
     // operationHandlers: {
     //   // 3. Provide the path to the controllers directory
     //   basePath: path.join(__dirname, 'controllers'),
@@ -37,8 +40,8 @@ async function initServer() {
     //   resolver: resolvers.modulePathResolver,
     // },
   });
-  app.use( middleware);
-  
+  app.use(middleware);
+
 
   // Catch errors
   // enforcerMiddleware.on('error', err => {
@@ -68,9 +71,9 @@ async function initDatabaseConnection(onReady) {
 module.exports = {
   run: async function (onReady) {
     const app = await initServer();
-    app.on ( "ready",()=> {
+    app.on("ready", () => {
       const PORT = process.env.NODE_DOCKER_PORT || 3000;
-      app.listen(PORT, ()=> {
+      app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}.`);
         if (onReady) {
           onReady(app);
@@ -81,7 +84,7 @@ module.exports = {
   },
   test: async function (onReady) {
     const app = await initServer();
-    app.on ( "ready",()=> {
+    app.on("ready", () => {
       onReady(app);
     });
     await initDatabaseConnection(() => app.emit("ready"));
