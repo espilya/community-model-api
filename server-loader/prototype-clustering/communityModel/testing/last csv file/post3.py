@@ -13,10 +13,7 @@ def main():
     #    Read HECHT user data: all users except the last one
     #--------------------------------------------------------------------------------------------------------------------------
     
-    route = "data/hecht users.csv"
-    # route = "data/hecht users one user.csv"
-    #route = "data/HECHT 20221018.csv"
-    #route = "data/hecht users 50.csv"
+    route = "data/hecht users 3.csv"
     df = pd.read_csv(route)
     
     #--------------------------------------------------------------------------------------------------------------------------
@@ -55,13 +52,11 @@ def main():
         user["beliefR"] = df['beliefR'][ind]  # beleifR
         user["beliefJ"] = df['beliefJ'][ind]  # beliefJ
         user["beliefE"] = df['beliefE'][ind]  # beliefE
-        user["DemographicsPolitics"] = df['DemographicsPolitics'][ind]  # DemographicPolitics
-        user["DemographicsReligous"] = df['DemographicsReligous'][ind]  # DemographicReligous
+        user["DemographicPolitics"] = df['DemographicsPolitics'][ind]  # DemographicPolitics
+        user["DemographicReligous"] = df['DemographicsReligous'][ind]  # DemographicReligous
         
         # Split user information into user model dict
         usersAPI = daoU.userToPostAPIFormat(user)
-        #print(usersAPI)
-        #usersAPI = [usersAPI[0]]
 
         for user in usersAPI:
             postUserData = [user]

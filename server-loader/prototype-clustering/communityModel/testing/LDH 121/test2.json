@@ -1,0 +1,6764 @@
+{
+  "_id": {
+    "$oid": "63758a48817903d11476315f"
+  },
+  "name": "HEHCT Perspective (agglomerative)",
+  "perspectiveId": "1000-agglomerative",
+  "communities": [
+    {
+      "id": "1000-agglomerative-0",
+      "community-type": "implicit",
+      "name": "Community 0",
+      "explanations": [
+        {
+          "explanation_type": "medoid",
+          "explanation_data": {
+            "id": "AL125209"
+          },
+          "visible": true
+        },
+        {
+          "explanation_type": "implicit_attributes",
+          "explanation_data": {
+            "label": "Percentage distribution of the implicit attribute (beliefR):",
+            "data": {
+              "CRealisticPro": 57.142857,
+              "ANatPridePro": 23.809524,
+              "DK": 14.285714,
+              "BReligousPro": 4.761905,
+              "CantJudge": 52.380952,
+              "Traitor": 28.571429,
+              "NotTraitor": 19.047619,
+              "NoOpinion": 61.904762,
+              "Oppose": 23.809524,
+              "Balanced": 9.52381,
+              "Justify": 4.761905
+            }
+          },
+          "visible": true
+        },
+        {
+          "explanation_type": "explicit_attributes",
+          "explanation_data": {},
+          "visible": true
+        }
+      ],
+      "users": [
+        "AL111479",
+        "AL112330",
+        "AL125209",
+        "AL12964",
+        "AL13805",
+        "AL138958",
+        "AL141761",
+        "AL143951",
+        "AL146531",
+        "AL146802",
+        "AL212652",
+        "AL218049",
+        "AL218967",
+        "AL221199",
+        "AL224157",
+        "AL22433",
+        "AL225908",
+        "AL227166",
+        "AL227637",
+        "AL232064",
+        "AL233418"
+      ]
+    },
+    {
+      "id": "1000-agglomerative-1",
+      "community-type": "implicit",
+      "name": "Community 1",
+      "explanations": [
+        {
+          "explanation_type": "medoid",
+          "explanation_data": {
+            "id": "AL115245"
+          },
+          "visible": true
+        },
+        {
+          "explanation_type": "implicit_attributes",
+          "explanation_data": {
+            "label": "Percentage distribution of the implicit attribute (beliefR):",
+            "data": {
+              "FRealisticNeg": 82.758621,
+              "DExtremistNeg": 17.241379
+            }
+          },
+          "visible": true
+        },
+        {
+          "explanation_type": "explicit_attributes",
+          "explanation_data": {},
+          "visible": true
+        }
+      ],
+      "users": [
+        "AL111552",
+        "AL11162",
+        "AL115129",
+        "AL115245",
+        "AL115709",
+        "AL119967",
+        "AL122986",
+        "AL125076",
+        "AL127150",
+        "AL127472",
+        "AL128344",
+        "AL128705",
+        "AL134098",
+        "AL135843",
+        "AL135850",
+        "AL136592",
+        "AL138476",
+        "AL141426",
+        "AL142046",
+        "AL142721",
+        "AL214462",
+        "AL215239",
+        "AL215426",
+        "AL216171",
+        "AL218705",
+        "AL222580",
+        "AL22427",
+        "AL225536",
+        "AL226198"
+      ]
+    }
+  ],
+  "numberOfCommunities": 2,
+  "users": [
+    {
+      "id": "AL111479",
+      "label": "AL111479",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "R",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL111552",
+      "label": "AL111552",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL11162",
+      "label": "AL11162",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL112330",
+      "label": "AL112330",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL115129",
+      "label": "AL115129",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL115245",
+      "label": "AL115245",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL115709",
+      "label": "AL115709",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL119967",
+      "label": "AL119967",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "L"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL122986",
+      "label": "AL122986",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL125076",
+      "label": "AL125076",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL125209",
+      "label": "AL125209",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "VR"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL127150",
+      "label": "AL127150",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "L"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL127472",
+      "label": "AL127472",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "C"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL128344",
+      "label": "AL128344",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL128705",
+      "label": "AL128705",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL12964",
+      "label": "AL12964",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL134098",
+      "label": "AL134098",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL135843",
+      "label": "AL135843",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL135850",
+      "label": "AL135850",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL136592",
+      "label": "AL136592",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "L"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL13805",
+      "label": "AL13805",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL138476",
+      "label": "AL138476",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "C"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL138958",
+      "label": "AL138958",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL141426",
+      "label": "AL141426",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "R",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL141761",
+      "label": "AL141761",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL142046",
+      "label": "AL142046",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL142721",
+      "label": "AL142721",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL143951",
+      "label": "AL143951",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "L"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL146531",
+      "label": "AL146531",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL146802",
+      "label": "AL146802",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "C"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL212652",
+      "label": "AL212652",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "C"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL214462",
+      "label": "AL214462",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL215239",
+      "label": "AL215239",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "R",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL215426",
+      "label": "AL215426",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL216171",
+      "label": "AL216171",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL218049",
+      "label": "AL218049",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL218705",
+      "label": "AL218705",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL218967",
+      "label": "AL218967",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL221199",
+      "label": "AL221199",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL222580",
+      "label": "AL222580",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL224157",
+      "label": "AL224157",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL22427",
+      "label": "AL22427",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL22433",
+      "label": "AL22433",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "R",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL225536",
+      "label": "AL225536",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "DK"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL225908",
+      "label": "AL225908",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL226198",
+      "label": "AL226198",
+      "group": 1,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "C"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL227166",
+      "label": "AL227166",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL227637",
+      "label": "AL227637",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "M",
+        "DemographicsPolitics": "R"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL232064",
+      "label": "AL232064",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "VL"
+      },
+      "interactions": {}
+    },
+    {
+      "id": "AL233418",
+      "label": "AL233418",
+      "group": 0,
+      "explicit_community": {
+        "DemographicsReligous": "S",
+        "DemographicsPolitics": "C"
+      },
+      "interactions": {}
+    }
+  ],
+  "similarity": [
+    {
+      "u1": "AL111479",
+      "u2": "AL111552",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL11162",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL112330",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL115129",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL115245",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL115709",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL119967",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL122986",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL125076",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL125209",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL127150",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL127472",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL128344",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL128705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL12964",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL134098",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL135843",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL135850",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL136592",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL13805",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL138476",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL138958",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL141426",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL141761",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL142046",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL142721",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL143951",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL146531",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL146802",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL212652",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL214462",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL215239",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL215426",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL216171",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL218049",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL218967",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL221199",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL222580",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL224157",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL22427",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL22433",
+      "value": 0.85
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL225536",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL225908",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL226198",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL227166",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL227637",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL232064",
+      "value": 1
+    },
+    {
+      "u1": "AL111479",
+      "u2": "AL233418",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL11162",
+      "value": 0.85
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL112330",
+      "value": 0.1
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL115129",
+      "value": 0.55
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL115245",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL115709",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL119967",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL122986",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL125076",
+      "value": 1
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL125209",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL127150",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL127472",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL128344",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL128705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL12964",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL134098",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL135843",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL135850",
+      "value": 1
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL136592",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL13805",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL138476",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL138958",
+      "value": 0.4
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL141761",
+      "value": 0.1
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL142046",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL142721",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL143951",
+      "value": 0.35
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL212652",
+      "value": 0.2
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL214462",
+      "value": 1
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL215239",
+      "value": 0.8
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL215426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL216171",
+      "value": 0.7
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL225536",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL226198",
+      "value": 0.9
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL227166",
+      "value": 0.2
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL227637",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL111552",
+      "u2": "AL233418",
+      "value": 0.2
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL112330",
+      "value": 0.25
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL115129",
+      "value": 0.7
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL115245",
+      "value": 0.9
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL115709",
+      "value": 0.8
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL119967",
+      "value": 0.9
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL122986",
+      "value": 0.9
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL125076",
+      "value": 0.85
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL125209",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL127150",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL127472",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL128344",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL128705",
+      "value": 0.9
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL12964",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL134098",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL135843",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL135850",
+      "value": 0.85
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL136592",
+      "value": 0.65
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL13805",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL138476",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL138958",
+      "value": 0.25
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL141426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL141761",
+      "value": 0.25
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL142046",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL142721",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL143951",
+      "value": 0.5
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL146531",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL146802",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL212652",
+      "value": 0.35
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL214462",
+      "value": 0.85
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL215239",
+      "value": 0.65
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL215426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL216171",
+      "value": 0.85
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL218049",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL218705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL218967",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL221199",
+      "value": 0.25
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL222580",
+      "value": 0.7
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL224157",
+      "value": 0.4
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL22427",
+      "value": 0.7
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL225536",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL225908",
+      "value": 0.15
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL226198",
+      "value": 0.75
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL227166",
+      "value": 0.35
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL227637",
+      "value": 0.35
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL11162",
+      "u2": "AL233418",
+      "value": 0.35
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL115129",
+      "value": 0.35
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL115245",
+      "value": 0.35
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL115709",
+      "value": 0.25
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL119967",
+      "value": 0.35
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL122986",
+      "value": 0.25
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL125076",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL125209",
+      "value": 0.85
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL127150",
+      "value": 0.2
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL127472",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL128344",
+      "value": 0.5
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL128705",
+      "value": 0.35
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL12964",
+      "value": 0.85
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL134098",
+      "value": 0.4
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL135843",
+      "value": 0.2
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL135850",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL136592",
+      "value": 0.4
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL13805",
+      "value": 0.85
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL138476",
+      "value": 0.5
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL138958",
+      "value": 0.7
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL141426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL141761",
+      "value": 0.8
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL142046",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL142721",
+      "value": 0.4
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL143951",
+      "value": 0.55
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL146531",
+      "value": 0.85
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL146802",
+      "value": 0.65
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL212652",
+      "value": 0.9
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL214462",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL215239",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL215426",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL216171",
+      "value": 0.4
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL218049",
+      "value": 0.75
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL218705",
+      "value": 0.5
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL218967",
+      "value": 0.85
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL221199",
+      "value": 0.8
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL222580",
+      "value": 0.25
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL224157",
+      "value": 0.75
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL22427",
+      "value": 0.35
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL22433",
+      "value": 0.45
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL225536",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL226198",
+      "value": 0.1
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL227166",
+      "value": 0.9
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL227637",
+      "value": 0.6
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL112330",
+      "u2": "AL233418",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL115245",
+      "value": 0.8
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL115709",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL119967",
+      "value": 0.8
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL122986",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL125076",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL125209",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL127150",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL127472",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL128344",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL128705",
+      "value": 0.8
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL12964",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL134098",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL135843",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL135850",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL136592",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL13805",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL138476",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL138958",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL141426",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL141761",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL142046",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL142721",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL143951",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL146531",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL146802",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL212652",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL214462",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL215239",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL215426",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL216171",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL218049",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL218705",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL218967",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL221199",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL222580",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL224157",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL22427",
+      "value": 1
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL225536",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL226198",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115129",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL115709",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL119967",
+      "value": 1
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL122986",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL125076",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL125209",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL127150",
+      "value": 0.85
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL127472",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL128344",
+      "value": 0.85
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL128705",
+      "value": 1
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL12964",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL134098",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL135843",
+      "value": 0.85
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL135850",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL136592",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL13805",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL138476",
+      "value": 0.85
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL138958",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL141426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL141761",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL142046",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL142721",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL143951",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL146531",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL146802",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL212652",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL214462",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL215239",
+      "value": 0.55
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL215426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL216171",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL218049",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL218705",
+      "value": 0.85
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL218967",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL221199",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL222580",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL224157",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL22427",
+      "value": 0.8
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL225536",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL225908",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL226198",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115245",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL119967",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL122986",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL125076",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL125209",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL127150",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL127472",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL128344",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL128705",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL12964",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL134098",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL135843",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL135850",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL136592",
+      "value": 0.45
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL13805",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL138476",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL138958",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL141426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL141761",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL142046",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL142721",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL143951",
+      "value": 0.3
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL146531",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL146802",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL212652",
+      "value": 0.15
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL214462",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL215239",
+      "value": 0.45
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL215426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL216171",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL218049",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL218705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL218967",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL221199",
+      "value": 0.25
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL222580",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL224157",
+      "value": 0.4
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL22427",
+      "value": 0.7
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL225536",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL225908",
+      "value": 0.35
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL226198",
+      "value": 0.75
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL227166",
+      "value": 0.15
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL227637",
+      "value": 0.15
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL115709",
+      "u2": "AL233418",
+      "value": 0.15
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL122986",
+      "value": 0.9
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL125076",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL125209",
+      "value": 0.5
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL127150",
+      "value": 0.85
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL127472",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL128344",
+      "value": 0.85
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL128705",
+      "value": 1
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL12964",
+      "value": 0.5
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL134098",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL135843",
+      "value": 0.85
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL135850",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL136592",
+      "value": 0.55
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL13805",
+      "value": 0.5
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL138476",
+      "value": 0.85
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL138958",
+      "value": 0.35
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL141426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL141761",
+      "value": 0.35
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL142046",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL142721",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL143951",
+      "value": 0.4
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL146531",
+      "value": 0.5
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL146802",
+      "value": 0.5
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL212652",
+      "value": 0.25
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL214462",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL215239",
+      "value": 0.55
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL215426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL216171",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL218049",
+      "value": 0.4
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL218705",
+      "value": 0.85
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL218967",
+      "value": 0.5
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL221199",
+      "value": 0.35
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL222580",
+      "value": 0.7
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL224157",
+      "value": 0.4
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL22427",
+      "value": 0.8
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL225536",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL225908",
+      "value": 0.25
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL226198",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL119967",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL125076",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL125209",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL127150",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL127472",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL128344",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL128705",
+      "value": 0.9
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL12964",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL134098",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL135843",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL135850",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL136592",
+      "value": 0.55
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL13805",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL138476",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL138958",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL141426",
+      "value": 1
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL141761",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL142046",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL142721",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL143951",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL146531",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL146802",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL212652",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL214462",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL215239",
+      "value": 0.55
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL215426",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL216171",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL218049",
+      "value": 0.5
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL218705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL218967",
+      "value": 0.4
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL221199",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL222580",
+      "value": 0.8
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL224157",
+      "value": 0.5
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL22427",
+      "value": 0.7
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL225536",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL225908",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL226198",
+      "value": 0.85
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL122986",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL125209",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL127150",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL127472",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL128344",
+      "value": 0.6
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL128705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL12964",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL134098",
+      "value": 0.6
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL135843",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL135850",
+      "value": 1
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL136592",
+      "value": 0.5
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL13805",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL138476",
+      "value": 0.6
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL138958",
+      "value": 0.4
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL141761",
+      "value": 0.1
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL142046",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL142721",
+      "value": 0.6
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL143951",
+      "value": 0.35
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL212652",
+      "value": 0.2
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL214462",
+      "value": 1
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL215239",
+      "value": 0.8
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL215426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL216171",
+      "value": 0.7
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL225536",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL226198",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL227166",
+      "value": 0.2
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL227637",
+      "value": 0.5
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL125076",
+      "u2": "AL233418",
+      "value": 0.2
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL127150",
+      "value": 0.35
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL127472",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL128344",
+      "value": 0.35
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL128705",
+      "value": 0.5
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL12964",
+      "value": 1
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL134098",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL135843",
+      "value": 0.35
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL135850",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL136592",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL13805",
+      "value": 1
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL138476",
+      "value": 0.35
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL138958",
+      "value": 0.85
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL141426",
+      "value": 0.4
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL141761",
+      "value": 0.65
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL142046",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL142721",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL143951",
+      "value": 0.7
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL146531",
+      "value": 1
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL146802",
+      "value": 0.8
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL212652",
+      "value": 0.75
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL214462",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL215239",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL215426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL216171",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL218049",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL218705",
+      "value": 0.35
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL218967",
+      "value": 1
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL221199",
+      "value": 0.65
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL224157",
+      "value": 0.9
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL22427",
+      "value": 0.5
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL125209",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL127472",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL128344",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL128705",
+      "value": 0.85
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL12964",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL134098",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL135843",
+      "value": 1
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL135850",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL136592",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL13805",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL138476",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL138958",
+      "value": 0.5
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL141761",
+      "value": 0.2
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL142046",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL142721",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL146531",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL146802",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL212652",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL214462",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL215239",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL215426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL216171",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL218705",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL218967",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL221199",
+      "value": 0.2
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL22427",
+      "value": 0.65
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL22433",
+      "value": 0.75
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL225536",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL226198",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127150",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL128344",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL128705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL12964",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL134098",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL135843",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL135850",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL136592",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL13805",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL138476",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL138958",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL141426",
+      "value": 0.85
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL141761",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL142046",
+      "value": 1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL142721",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL212652",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL214462",
+      "value": 0.9
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL215239",
+      "value": 0.7
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL215426",
+      "value": 1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL216171",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL218049",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL222580",
+      "value": 0.65
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL224157",
+      "value": 0.35
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL225536",
+      "value": 1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL226198",
+      "value": 1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL127472",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL128705",
+      "value": 0.85
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL12964",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL134098",
+      "value": 0.9
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL135843",
+      "value": 0.7
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL135850",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL136592",
+      "value": 0.7
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL13805",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL138476",
+      "value": 1
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL138958",
+      "value": 0.2
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL141761",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL142046",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL142721",
+      "value": 0.9
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL146531",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL146802",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL212652",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL214462",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL215239",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL215426",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL216171",
+      "value": 0.9
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL218705",
+      "value": 1
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL218967",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL221199",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL22427",
+      "value": 0.65
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL22433",
+      "value": 0.45
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL225536",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL225908",
+      "value": 0.1
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL226198",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL227166",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL227637",
+      "value": 0.1
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128344",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL12964",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL134098",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL135843",
+      "value": 0.85
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL135850",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL136592",
+      "value": 0.55
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL13805",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL138476",
+      "value": 0.85
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL138958",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL141426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL141761",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL142046",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL142721",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL143951",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL146531",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL146802",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL212652",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL214462",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL215239",
+      "value": 0.55
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL215426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL216171",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL218049",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL218705",
+      "value": 0.85
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL218967",
+      "value": 0.5
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL221199",
+      "value": 0.35
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL222580",
+      "value": 0.7
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL224157",
+      "value": 0.4
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL22427",
+      "value": 0.8
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL225536",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL225908",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL226198",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL128705",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL134098",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL135843",
+      "value": 0.35
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL135850",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL136592",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL13805",
+      "value": 1
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL138476",
+      "value": 0.35
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL138958",
+      "value": 0.85
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL141426",
+      "value": 0.4
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL141761",
+      "value": 0.65
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL142046",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL142721",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL143951",
+      "value": 0.7
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL146531",
+      "value": 1
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL146802",
+      "value": 0.8
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL212652",
+      "value": 0.75
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL214462",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL215239",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL215426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL216171",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL218049",
+      "value": 0.9
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL218705",
+      "value": 0.35
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL218967",
+      "value": 1
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL221199",
+      "value": 0.65
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL224157",
+      "value": 0.9
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL22427",
+      "value": 0.5
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL12964",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL135843",
+      "value": 0.6
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL135850",
+      "value": 0.6
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL136592",
+      "value": 0.7
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL13805",
+      "value": 0.25
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL138476",
+      "value": 0.9
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL138958",
+      "value": 0.1
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL141426",
+      "value": 0.85
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL141761",
+      "value": 0.4
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL142046",
+      "value": 0.7
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL142721",
+      "value": 1
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL212652",
+      "value": 0.4
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL214462",
+      "value": 0.6
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL215239",
+      "value": 0.4
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL215426",
+      "value": 0.7
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL216171",
+      "value": 0.9
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL218049",
+      "value": 0.35
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL218705",
+      "value": 0.9
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL221199",
+      "value": 0.4
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL222580",
+      "value": 0.65
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL224157",
+      "value": 0.35
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL22433",
+      "value": 0.35
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL225536",
+      "value": 0.7
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL225908",
+      "value": 0.1
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL226198",
+      "value": 0.7
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL227166",
+      "value": 0.4
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL227637",
+      "value": 0.1
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL134098",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL135850",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL136592",
+      "value": 0.4
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL13805",
+      "value": 0.35
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL138476",
+      "value": 0.7
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL138958",
+      "value": 0.5
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL141761",
+      "value": 0.2
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL142046",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL142721",
+      "value": 0.6
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL146531",
+      "value": 0.35
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL146802",
+      "value": 0.35
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL212652",
+      "value": 0.1
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL214462",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL215239",
+      "value": 0.7
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL215426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL216171",
+      "value": 0.6
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL218705",
+      "value": 0.7
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL218967",
+      "value": 0.35
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL221199",
+      "value": 0.2
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL22427",
+      "value": 0.65
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL22433",
+      "value": 0.75
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL225536",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL226198",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL135843",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL136592",
+      "value": 0.5
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL13805",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL138476",
+      "value": 0.6
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL138958",
+      "value": 0.4
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL141761",
+      "value": 0.1
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL142046",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL142721",
+      "value": 0.6
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL143951",
+      "value": 0.35
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL212652",
+      "value": 0.2
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL214462",
+      "value": 1
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL215239",
+      "value": 0.8
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL215426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL216171",
+      "value": 0.7
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL225536",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL226198",
+      "value": 0.9
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL227166",
+      "value": 0.2
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL227637",
+      "value": 0.5
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL135850",
+      "u2": "AL233418",
+      "value": 0.2
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL13805",
+      "value": 0.25
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL138476",
+      "value": 0.7
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL138958",
+      "value": 0.1
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL141426",
+      "value": 0.55
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL141761",
+      "value": 0.4
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL142046",
+      "value": 0.4
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL142721",
+      "value": 0.7
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL143951",
+      "value": 0.35
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL212652",
+      "value": 0.5
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL214462",
+      "value": 0.5
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL215239",
+      "value": 0.7
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL215426",
+      "value": 0.4
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL216171",
+      "value": 0.8
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL218705",
+      "value": 0.7
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL221199",
+      "value": 0.4
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL222580",
+      "value": 0.75
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL22427",
+      "value": 0.75
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL22433",
+      "value": 0.35
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL225536",
+      "value": 0.4
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL225908",
+      "value": 0.05
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL226198",
+      "value": 0.4
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL227166",
+      "value": 0.5
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL227637",
+      "value": 0.2
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL136592",
+      "u2": "AL233418",
+      "value": 0.5
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL138476",
+      "value": 0.35
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL138958",
+      "value": 0.85
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL141426",
+      "value": 0.4
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL141761",
+      "value": 0.65
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL142046",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL142721",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL143951",
+      "value": 0.7
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL146531",
+      "value": 1
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL146802",
+      "value": 0.8
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL212652",
+      "value": 0.75
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL214462",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL215239",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL215426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL216171",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL218049",
+      "value": 0.9
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL218705",
+      "value": 0.35
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL218967",
+      "value": 1
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL221199",
+      "value": 0.65
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL224157",
+      "value": 0.9
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL22427",
+      "value": 0.5
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL13805",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL138958",
+      "value": 0.2
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL141426",
+      "value": 0.75
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL141761",
+      "value": 0.5
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL142046",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL142721",
+      "value": 0.9
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL146531",
+      "value": 0.35
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL146802",
+      "value": 0.35
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL212652",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL214462",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL215239",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL215426",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL216171",
+      "value": 0.9
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL218705",
+      "value": 1
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL218967",
+      "value": 0.35
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL221199",
+      "value": 0.5
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL22427",
+      "value": 0.65
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL22433",
+      "value": 0.45
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL225536",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL225908",
+      "value": 0.1
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL226198",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL227166",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL227637",
+      "value": 0.1
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138476",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL141426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL141761",
+      "value": 0.5
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL142046",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL142721",
+      "value": 0.1
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL143951",
+      "value": 0.55
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL146531",
+      "value": 0.85
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL146802",
+      "value": 0.65
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL212652",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL214462",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL215239",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL215426",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL216171",
+      "value": 0.1
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL218049",
+      "value": 0.75
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL218705",
+      "value": 0.2
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL218967",
+      "value": 0.85
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL221199",
+      "value": 0.5
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL222580",
+      "value": 0.25
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL224157",
+      "value": 0.75
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL22427",
+      "value": 0.35
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL22433",
+      "value": 0.75
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL225536",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL225908",
+      "value": 0.7
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL226198",
+      "value": 0.4
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL227166",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL227637",
+      "value": 0.9
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL138958",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL141761",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL142046",
+      "value": 0.85
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL142721",
+      "value": 0.85
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL143951",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL146531",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL146802",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL212652",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL214462",
+      "value": 0.75
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL215239",
+      "value": 0.55
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL215426",
+      "value": 0.85
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL216171",
+      "value": 0.75
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL218049",
+      "value": 0.5
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL218705",
+      "value": 0.75
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL218967",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL221199",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL222580",
+      "value": 0.8
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL224157",
+      "value": 0.5
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL22427",
+      "value": 0.7
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL225536",
+      "value": 0.85
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL225908",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL226198",
+      "value": 0.85
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL141426",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL142046",
+      "value": 0.1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL142721",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL143951",
+      "value": 0.75
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL146531",
+      "value": 0.65
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL146802",
+      "value": 0.85
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL212652",
+      "value": 0.7
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL214462",
+      "value": 0.1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL215239",
+      "value": 0.1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL215426",
+      "value": 0.1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL216171",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL218049",
+      "value": 0.55
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL218705",
+      "value": 0.5
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL218967",
+      "value": 0.65
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL221199",
+      "value": 1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL222580",
+      "value": 0.25
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL224157",
+      "value": 0.55
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL22427",
+      "value": 0.35
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL22433",
+      "value": 0.45
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL225536",
+      "value": 0.1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL225908",
+      "value": 0.5
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL226198",
+      "value": 0.1
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL227166",
+      "value": 0.7
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL141761",
+      "u2": "AL233418",
+      "value": 0.9
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL142721",
+      "value": 0.7
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL212652",
+      "value": 0.1
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL214462",
+      "value": 0.9
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL215239",
+      "value": 0.7
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL215426",
+      "value": 1
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL216171",
+      "value": 0.6
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL218049",
+      "value": 0.35
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL222580",
+      "value": 0.65
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL224157",
+      "value": 0.35
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL225536",
+      "value": 1
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL226198",
+      "value": 1
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL142046",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL143951",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL146531",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL146802",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL212652",
+      "value": 0.4
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL214462",
+      "value": 0.6
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL215239",
+      "value": 0.4
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL215426",
+      "value": 0.7
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL216171",
+      "value": 0.9
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL218049",
+      "value": 0.35
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL218705",
+      "value": 0.9
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL221199",
+      "value": 0.4
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL222580",
+      "value": 0.65
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL224157",
+      "value": 0.35
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL22433",
+      "value": 0.35
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL225536",
+      "value": 0.7
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL225908",
+      "value": 0.1
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL226198",
+      "value": 0.7
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL227166",
+      "value": 0.4
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL227637",
+      "value": 0.1
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL142721",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL146531",
+      "value": 0.7
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL146802",
+      "value": 0.9
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL212652",
+      "value": 0.65
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL214462",
+      "value": 0.35
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL215239",
+      "value": 0.35
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL215426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL216171",
+      "value": 0.35
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL218049",
+      "value": 0.7
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL218705",
+      "value": 0.25
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL218967",
+      "value": 0.7
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL221199",
+      "value": 0.75
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL224157",
+      "value": 0.7
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL22427",
+      "value": 0.4
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL227166",
+      "value": 0.65
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL227637",
+      "value": 0.65
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL143951",
+      "u2": "AL233418",
+      "value": 0.85
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL146802",
+      "value": 0.8
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL212652",
+      "value": 0.75
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL214462",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL215239",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL215426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL216171",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL218049",
+      "value": 0.9
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL218705",
+      "value": 0.35
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL218967",
+      "value": 1
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL221199",
+      "value": 0.65
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL224157",
+      "value": 0.9
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL22427",
+      "value": 0.5
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL146531",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL212652",
+      "value": 0.55
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL214462",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL215239",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL215426",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL216171",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL218049",
+      "value": 0.7
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL218705",
+      "value": 0.35
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL218967",
+      "value": 0.8
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL221199",
+      "value": 0.85
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL224157",
+      "value": 0.7
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL22427",
+      "value": 0.5
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL225908",
+      "value": 0.65
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL227166",
+      "value": 0.55
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL227637",
+      "value": 0.55
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL146802",
+      "u2": "AL233418",
+      "value": 0.75
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL214462",
+      "value": 0.2
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL215239",
+      "value": 0.2
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL215426",
+      "value": 0.1
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL216171",
+      "value": 0.5
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL218049",
+      "value": 0.75
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL218705",
+      "value": 0.4
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL218967",
+      "value": 0.75
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL221199",
+      "value": 0.7
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL222580",
+      "value": 0.25
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL224157",
+      "value": 0.75
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL22427",
+      "value": 0.25
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL22433",
+      "value": 0.35
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL225536",
+      "value": 0.1
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL226198",
+      "value": 0.1
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL227166",
+      "value": 1
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL227637",
+      "value": 0.7
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL212652",
+      "u2": "AL233418",
+      "value": 0.8
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL215239",
+      "value": 0.8
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL215426",
+      "value": 0.9
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL216171",
+      "value": 0.7
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL225536",
+      "value": 0.9
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL226198",
+      "value": 0.9
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL227166",
+      "value": 0.2
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL227637",
+      "value": 0.5
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL214462",
+      "u2": "AL233418",
+      "value": 0.2
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL215426",
+      "value": 0.7
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL216171",
+      "value": 0.5
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL218705",
+      "value": 0.4
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL222580",
+      "value": 0.75
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL22427",
+      "value": 0.75
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL225536",
+      "value": 0.7
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL225908",
+      "value": 0.35
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL226198",
+      "value": 0.7
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL227166",
+      "value": 0.2
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL227637",
+      "value": 0.5
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL215239",
+      "u2": "AL233418",
+      "value": 0.2
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL216171",
+      "value": 0.6
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL218049",
+      "value": 0.35
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL218705",
+      "value": 0.6
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL221199",
+      "value": 0.1
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL222580",
+      "value": 0.65
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL224157",
+      "value": 0.35
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL22433",
+      "value": 0.65
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL225536",
+      "value": 1
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL226198",
+      "value": 1
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL215426",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL218049",
+      "value": 0.25
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL218705",
+      "value": 0.9
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL218967",
+      "value": 0.25
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL221199",
+      "value": 0.4
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL22427",
+      "value": 0.55
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL22433",
+      "value": 0.35
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL225536",
+      "value": 0.6
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL225908",
+      "value": 0
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL226198",
+      "value": 0.6
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL227166",
+      "value": 0.5
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL227637",
+      "value": 0.2
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL216171",
+      "u2": "AL233418",
+      "value": 0.5
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL218705",
+      "value": 0.25
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL218967",
+      "value": 0.9
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL221199",
+      "value": 0.55
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL222580",
+      "value": 0.5
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL224157",
+      "value": 1
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL22427",
+      "value": 0.4
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL225536",
+      "value": 0.35
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL226198",
+      "value": 0.35
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL218049",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL218967",
+      "value": 0.35
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL221199",
+      "value": 0.5
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL222580",
+      "value": 0.55
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL224157",
+      "value": 0.25
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL22427",
+      "value": 0.65
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL22433",
+      "value": 0.45
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL225536",
+      "value": 0.6
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL225908",
+      "value": 0.1
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL226198",
+      "value": 0.6
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL227166",
+      "value": 0.4
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL227637",
+      "value": 0.1
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL218705",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL221199",
+      "value": 0.65
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL222580",
+      "value": 0.4
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL224157",
+      "value": 0.9
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL22427",
+      "value": 0.5
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL225536",
+      "value": 0.25
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL226198",
+      "value": 0.25
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL218967",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL222580",
+      "value": 0.25
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL224157",
+      "value": 0.55
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL22427",
+      "value": 0.35
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL22433",
+      "value": 0.45
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL225536",
+      "value": 0.1
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL225908",
+      "value": 0.5
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL226198",
+      "value": 0.1
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL227166",
+      "value": 0.7
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL232064",
+      "value": 0.6
+    },
+    {
+      "u1": "AL221199",
+      "u2": "AL233418",
+      "value": 0.9
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL224157",
+      "value": 0.5
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL22427",
+      "value": 0.9
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL225536",
+      "value": 0.65
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL226198",
+      "value": 0.65
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL222580",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL22427",
+      "value": 0.4
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL22433",
+      "value": 0.5
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL225536",
+      "value": 0.35
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL225908",
+      "value": 0.55
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL226198",
+      "value": 0.35
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL227166",
+      "value": 0.75
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL227637",
+      "value": 0.75
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL232064",
+      "value": 0.65
+    },
+    {
+      "u1": "AL224157",
+      "u2": "AL233418",
+      "value": 0.55
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL22433",
+      "value": 0.6
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL225536",
+      "value": 0.55
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL225908",
+      "value": 0.3
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL226198",
+      "value": 0.55
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL227166",
+      "value": 0.25
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL227637",
+      "value": 0.25
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL232064",
+      "value": 0.75
+    },
+    {
+      "u1": "AL22427",
+      "u2": "AL233418",
+      "value": 0.25
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL225536",
+      "value": 0.65
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL225908",
+      "value": 0.65
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL226198",
+      "value": 0.65
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL227166",
+      "value": 0.35
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL227637",
+      "value": 0.65
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL232064",
+      "value": 0.85
+    },
+    {
+      "u1": "AL22433",
+      "u2": "AL233418",
+      "value": 0.35
+    },
+    {
+      "u1": "AL225536",
+      "u2": "AL225908",
+      "value": 0.4
+    },
+    {
+      "u1": "AL225536",
+      "u2": "AL226198",
+      "value": 1
+    },
+    {
+      "u1": "AL225536",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL225536",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL225536",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL225536",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL225908",
+      "u2": "AL226198",
+      "value": 0.4
+    },
+    {
+      "u1": "AL225908",
+      "u2": "AL227166",
+      "value": 0.3
+    },
+    {
+      "u1": "AL225908",
+      "u2": "AL227637",
+      "value": 0.6
+    },
+    {
+      "u1": "AL225908",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL225908",
+      "u2": "AL233418",
+      "value": 0.4
+    },
+    {
+      "u1": "AL226198",
+      "u2": "AL227166",
+      "value": 0.1
+    },
+    {
+      "u1": "AL226198",
+      "u2": "AL227637",
+      "value": 0.4
+    },
+    {
+      "u1": "AL226198",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL226198",
+      "u2": "AL233418",
+      "value": 0.1
+    },
+    {
+      "u1": "AL227166",
+      "u2": "AL227637",
+      "value": 0.7
+    },
+    {
+      "u1": "AL227166",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL227166",
+      "u2": "AL233418",
+      "value": 0.8
+    },
+    {
+      "u1": "AL227637",
+      "u2": "AL232064",
+      "value": 0.5
+    },
+    {
+      "u1": "AL227637",
+      "u2": "AL233418",
+      "value": 0.5
+    },
+    {
+      "u1": "AL232064",
+      "u2": "AL233418",
+      "value": 0.5
+    }
+  ],
+  "artworks": {},
+  "fileId": ""
+}
