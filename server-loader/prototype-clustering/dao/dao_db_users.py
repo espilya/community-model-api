@@ -123,12 +123,8 @@ class DAO_db_users(DAO_db):
             List with all users, Type: json List[<class 'dict'>]
         """
         # data = self.db_users.find({}, {"_id": 0})
-        print("get users 82901380")
         dataList = self.db_users.find({})
-        print("get users")
-        print(dataList)
         dataList = loads(dumps(list(dataList)))
-        print(dataList)
         listUsersId = []
         # guardamos los id's de los usuarios
         for i in dataList:
@@ -147,8 +143,8 @@ class DAO_db_users(DAO_db):
         :Return:
             User, Type: json <class 'dict'>
         """
-        # data = self.db_users.find({"userid": userId}, {"_id": 0})
-        data = self.db_users.find({"userid": userId})
+        data = self.db_users.find({"userid": userId}, {"_id": 0})
+        #data = self.db_users.find({"userid": userId})
         data = loads(dumps(list(data)))
         if len(data) == 0:
             return {}
