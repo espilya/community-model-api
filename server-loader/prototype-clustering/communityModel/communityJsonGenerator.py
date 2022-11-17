@@ -33,9 +33,10 @@ class CommunityJsonGenerator:
         if (len(self.perspective['interaction_similarity_functions']) > 0):
             self.generateUserInteractionColumn()
         else:
-            self.json_df['interactions'] = [{}] * self.json_df.shape[0]
+            #self.json_df['interactions'] = [{}] * self.json_df.shape[0
+            self.json_df['interactions'] = [[]] * self.json_df.shape[0]
 
-        
+                                                   
         """
         # Extra to make it work with Marco Visualization
         self.io_df['Year'] = self.io_df['Year'].astype(str)
@@ -370,7 +371,7 @@ class CommunityJsonGenerator:
             io_df2 = self.io_df[self.io_df['id'].isin(interactedIO)]
             self.communityJson['artworks'] = io_df2.to_dict('records')
         else:
-            self.communityJson['artworks'] = {}
+            self.communityJson['artworks'] = []
         
 
         

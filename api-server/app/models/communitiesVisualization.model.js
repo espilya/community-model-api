@@ -24,9 +24,10 @@ module.exports = mongoose => {
                 "group": Number,
                 "interactions": [
                     {
+                        _id: false,
                         "artwork_id": String,
                         "feelings": String,
-                        "extracted_emotions": { type: mongoose.Mixed, default: {} }
+                        "extracted_emotions": mongoose.Mixed
                     }
                 ]
             }],
