@@ -18,22 +18,12 @@ def main():
     route = 'data/Hecht_DEGARI_emotions SPICEUMProperty.json'
     df = pd.read_json(route)
     
-    """
-    print(df.loc[df['userid'] == 'PH236328'])
-    print("\n\n")
-    """
     
     #--------------------------------------------------------------------------------------------------------------------------
     #    Fill NaN values
     #--------------------------------------------------------------------------------------------------------------------------
     
-    df.fillna('',inplace=True)
-    
-    """
-    print(df.loc[df['userid'] == 'PH236328'])
-    print(df.loc[df['userid'] == 'PH236328'].columns)
-    print(df.loc[df['userid'] == 'PH236328'][['beliefJ']])
-    """
+    df.fillna('unknown',inplace=True)
     
     
     #--------------------------------------------------------------------------------------------------------------------------
@@ -47,21 +37,6 @@ def main():
         #json.dump(user_interactions.to_dict('records'), outfile, indent=4)
         json.dump(parsed, outfile, indent=4)
     
-    
-    #return
-    
-    """
-    #--------------------------------------------------------------------------------------------------------------------------
-    #    fill NaN values
-    #--------------------------------------------------------------------------------------------------------------------------
-    
-    # Fill NaN values with default ones (center value or dont know if exists)
-    df['beliefR'].fillna('DK',inplace=True)
-    df['beliefJ'].fillna('CantJudge',inplace=True)
-    df['beliefE'].fillna('NoOpinion',inplace=True)
-    df['DemographicsPolitics'].fillna('DK',inplace=True)
-    df['DemographicsReligous'].fillna('R',inplace=True)
-    """
     
     #--------------------------------------------------------------------------------------------------------------------------
     #    Read HECHT user data: all users except the last one
@@ -82,17 +57,6 @@ def main():
     #data = [data[0]]
     
     for userModelData in data:
-        #userModelData = dict([(x, y) for x, y in userModelData.items() if not x.startswith('_timestamp')])
-        #userModelData = dict([(x, y) for x, y in userModelData.items() if not x.startswith('_')])
-        
-        """
-        userModelData.pop("_id", "")
-        userModelData.pop("doctype", "")
-        userModelData.pop("category", "")
-        userModelData.pop("createAt", "")
-        userModelData.pop("updatedAt", "")
-        userModelData.pop("_timestamp", "")
-        """
         
         # For some reason it doesnt work without adding these three keys
         userModelData['id'] = 'xxx'
@@ -101,14 +65,12 @@ def main():
         
         
         
-        print("userModel inserts " + str(userModelData))
-        print("\n")
-        print(userModelData['userid'])
+        
         postUserData = [userModelData]
         response = daoAPI.updateUser(userModelData['userid'],postUserData) 
-        print("\n")
+
+        print("post api " + str(postUserData))
         print(response)
-        print("inserted successfully")
         print("\n\n")
 
 

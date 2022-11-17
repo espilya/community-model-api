@@ -66,6 +66,10 @@ def main():
         for user in usersAPI:
             postUserData = [user]
             response = daoAPI.updateUser(user['userid'],postUserData)
+            
+            print("post api " + str(postUserData))
+            print(response)
+            print("\n\n")
 
     
 main()
