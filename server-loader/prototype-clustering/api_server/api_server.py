@@ -309,10 +309,6 @@ def initializeDatabase():
     
     daoPerspectives.insertPerspective(perspectives)
 
-    users = [{"userid": "001", "pname":""}, {"userid": "002", "pname":""}]
-    daoUsers = DAO_db_users()
-    print(daoUsers.insertUser_API(users))
-
 if __name__ == '__main__':
     from sys import argv
     
