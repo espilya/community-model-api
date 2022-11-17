@@ -2,12 +2,13 @@ module.exports = mongoose => {
     var schema = mongoose.Schema(
         {
             id: String,
-            fileId: String,
+            name: String,
+            perspectiveId: String,
             communities: [{
                 _id: false,
                 "id": String,
                 "name": String,
-                "explanations": [String],
+                "explanation": String,
                 "users": [String]
             }],
             users: [{
@@ -45,7 +46,7 @@ module.exports = mongoose => {
 
     schema.method("toJSON", function () {
         const { __v, _id, ...object } = this.toObject();
-        // object.id = _id.toString();
+        object.id = _id.toString();
         return object;
     });
 
@@ -59,23 +60,27 @@ module.exports = mongoose => {
     return {
         getIndex: function (onSuccess, onError) {
             let items = [];
-            CommunitiesVis.find({}, { fileId: 1 }, function (error, data) {
+            CommunitiesVis.find({}, { perspectiveId: 1, name: 1 }, function (error, data) {
                 let i = 0;
                 data.forEach(element => {
-                    items[i] = element.toJSON();
-                    items[i] = items[i]["fileId"]
+                    let e = element.toJSON();
+                    e.id = e.perspectiveId
+                    delete e.perspectiveId
+                    // console.log(e);
+                    items[i] = e;
                     i++;
                 });
                 onSuccess(items);
             });
         },
         getById: function (id, onSuccess, onError) {
-            CommunitiesVis.findOne({ fileId: id }, { projection: { _id: 0 } }, function (error, data) {
+            CommunitiesVis.findOne({ perspectiveId: id }, { projection: { _id: 0 } }, function (error, data) {
+                // CommunitiesVis.findOne({ perspectiveId: id }, {}, function (error, data) {
                 if (error) {
                     onError(error);
                 } else {
                     if (data) {
-                        console.log(data)
+                        // console.log(data)
                         onSuccess(data.toJSON());
                     }
                     else {
