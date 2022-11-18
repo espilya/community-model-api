@@ -2,7 +2,7 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       perspectiveId: String,
-      userId: String
+      userid: String
     }
   );
 
