@@ -2,7 +2,6 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       perspectiveId: String,
-      data: mongoose.Mixed,
       userId: String
     }
   );

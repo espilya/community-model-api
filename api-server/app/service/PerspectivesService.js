@@ -129,8 +129,7 @@ exports.PostPerspective = function (body) {
         // create flag
         var json = {
           perspectiveId: perspectiveId,
-          userId: "",
-          data: ""
+          userid: "flagAllUsers"
         };
         FlagDAO.insertFlag(json,
           data => {
@@ -139,24 +138,6 @@ exports.PostPerspective = function (body) {
             console.log("PostPerspective-FlagDAO.insertFlag perspective error: " + error);
           })
 
-        // create flags for users
-        UsersDAO.all(
-          users => {
-            for (const user of users) {
-              var json = {
-                perspectiveId: perspectiveId,
-                userId: user.userid,
-                data: ""
-              };
-              FlagDAO.insertFlag(json,
-                data => {
-                },
-                error => {
-                  console.log("PostPerspective-FlagDAO.insertFlag user error: " + error);
-                })
-            }
-          }
-        )
         // post cm
         return postData.post_data(perspectiveId, "/perspective");
       })

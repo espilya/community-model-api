@@ -8,6 +8,7 @@ from bson.objectid import ObjectId
 import logging
 
 from context import dao
+from dao.dao_db import DAO_db
 from dao.dao_db_users import DAO_db_users
 from dao.dao_db_communities import DAO_db_community
 from dao.dao_db_similarities import DAO_db_similarity
@@ -65,6 +66,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.__getPerspertives(request)
             elif first_arg == "index":
                 self.__getIndex()
+            elif first_arg == "dump":
+                self.__getDump()
             else:
                 print("-Error-")
                 self.__set_response(404)
@@ -185,6 +188,12 @@ class Handler(BaseHTTPRequestHandler):
         print(data)
         self.__set_response(200, 'application/json')
         self.wfile.write(dumps(data).encode(encoding='utf_8'))
+    
+    def __getDump(self):
+        dump = DAO_db().dumpDB()
+        # print(data)
+        self.__set_response(200, 'application/json')
+        self.wfile.write(dumps(dump).encode(encoding='utf_8'))
 
     def __getPerspertives(self, request):
         dao = DAO_db_perspectives()
