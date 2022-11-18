@@ -60,6 +60,18 @@ class CommunityModel():
         self.percentageExplainability = 0.5
         
     def start(self):
+        print("flag: " + str(self.flag))
+        
+        # Perspective was not found
+        if (len(self.perspective) <= 0):
+            return
+        
+        """
+        if (self.flag['userid'] == ""):
+            print("not doing the one that is added by default")
+            return
+        """   
+            
         self.similarityMeasure = self.initializeComplexSimilarityMeasure()
         self.distanceMatrix = self.computeDistanceMatrix()
         self.clustering()
@@ -103,15 +115,20 @@ class CommunityModel():
         else:
             distanceMatrix = np.asarray(distanceMatrixJSON['distanceMatrix'])
         
-        # Update distance matrix
-        self.similarityMeasure.updateDistanceMatrix([self.flag['userid']], distanceMatrix)
+        # Update distance matrix for all users (recalculate distance matrix)
+        if (self.flag['userid'] == "flagAllUsers"):
+            distanceMatrix = self.similarityMeasure.matrix_distance()
+        # Update distance matrix for a user
+        else:
+            distanceMatrix = self.similarityMeasure.updateDistanceMatrix([self.flag['userid']], distanceMatrix)
 
         # Drop irrelevant parameters to explain communities
         #self.similarityMeasure.data.drop(['origin','source_id', '_id'], axis=1, inplace=True)
         self.similarityMeasure.data.drop(['origin','source_id'], axis=1, inplace=True)
         self.similarityMeasure.data = self.similarityMeasure.data.rename(columns={"userid":"user"})
         
-        return self.similarityMeasure.distanceMatrix
+        #return self.similarityMeasure.distanceMatrix
+        return distanceMatrix
         
             
     def clusteringOLD(self):
