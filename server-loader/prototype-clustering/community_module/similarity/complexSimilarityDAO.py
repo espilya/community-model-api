@@ -33,7 +33,7 @@ class ComplexSimilarityDAO(SimilarityDAO):
             similarityModule = importlib.import_module(similarityFile)
             similarityClass = getattr(similarityModule,similarityName)
             similarityMeasure = similarityClass(dao,similarityFunction['sim_function'])
-            self.similarityDict[similarityMeasure] = similarityFunction['sim_function']['weight']
+            self.similarityDict[similarityMeasure] = similarityFunction['sim_function'].get('weight',0.5)
         
     def distance(self,elemA, elemB):
         """Method to obtain the distance between two element.
