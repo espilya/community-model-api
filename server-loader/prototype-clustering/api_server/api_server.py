@@ -108,8 +108,10 @@ class Handler(BaseHTTPRequestHandler):
 
             # retrive perspective from db
             daoPerspective = DAO_db_perspectives()
-            perspective = daoPerspective.getPerspective(
-                ObjectId(perspectiveId))
+            #perspective = daoPerspective.getPerspective(
+                #ObjectId(perspectiveId))
+                
+            perspective = daoPerspective.getPerspective(perspectiveId)
             print("perspective: ", perspective)
 
             # ok = daoPerspective.insertPerspective(perspective)

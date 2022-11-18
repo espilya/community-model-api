@@ -42,7 +42,7 @@ module.exports = mongoose => {
           }
         }
       }]
-    }
+    }, { minimize: false }
   );
 
   schema.method("toJSON", function () {
@@ -63,7 +63,7 @@ module.exports = mongoose => {
           onError(err);
         }
         else {
-          onSuccess(res._id.toString());
+          onSuccess(res.id.toString());
         }
       });
     },
