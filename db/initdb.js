@@ -18,57 +18,13 @@ db.createUser({
 db.createCollection('users', { capped: false });
 db.users.deleteMany({});
 
-db.users.insertMany([{
-  "id": "1",
-  "userid": "23",
-  "origin": "a",
-  "source_id": "b",
-  "source": "c description",
-  "pname": "DemographicGender",
-  "pvalue": "F (for Female value)",
-  "context": "application P:DemographicsPrep",
-  "datapoints": 0
-},
-{
-  "id": "2",
-  "userid": "28",
-  "origin": "a",
-  "source_id": "b",
-  "source": "Content description",
-  "pname": "Age",
-  "pvalue": "28",
-  "context": "application P:DemographicsPrep",
-  "datapoints": 0
-},
-{
-  "id": "3",
-  "userid": "44",
-  "origin": "90e6d701748f08514b01",
-  "source_id": "90e6d701748f08514b01",
-  "source": "Content description",
-  "pname": "DemographicGender",
-  "pvalue": "M (for Female value)",
-  "context": "application P:DemographicsPrep",
-  "datapoints": 0
-},
-{
-  "id": "4",
-  "userid": "56",
-  "origin": "90e6d701748f08514b01",
-  "source_id": "90e6d701748f08514b01",
-  "source": "Content description",
-  "pname": "Age",
-  "pvalue": "56",
-  "context": "application P:DemographicsPrep",
-  "datapoints": 0
-}])
-
 db.createCollection('perspectives', { capped: false });
 db.perspectives.deleteMany({});
 
-db.perspectives.insertMany([{
-  "id": "1000",
-  "name": "HEHCT Perspective",
+db.perspectives.insertMany([
+{
+  "id": "1000-agglomerative",
+  "name": "HEHCT Perspective (agglomerative)",
   "algorithm": {
     "name": "agglomerative",
     "params": [
@@ -81,10 +37,10 @@ db.perspectives.insertMany([{
         "params": [
         ],
         "on_attribute": {
-          "att_name": "beleifR",
+          "att_name": "beliefR",
           "att_type": "String"
         },
-        "weight": 0.8
+        "weight": 0.5
       }
     },
     {
@@ -96,7 +52,7 @@ db.perspectives.insertMany([{
           "att_name": "beliefJ",
           "att_type": "String"
         },
-        "weight": 0.6
+        "weight": 0.3
       }
     },
     {
@@ -105,27 +61,25 @@ db.perspectives.insertMany([{
         "params": [
         ],
         "on_attribute": {
-          "att_name": "DemographicReligous",
-          "att_type": "String"
-        },
-        "weight": 0.2
-      }
-    },
-    {
-      "sim_function": {
-        "name": "TableSimilarityDAO",
-        "params": [
-        ],
-        "on_attribute": {
-          "att_name": "DemographicPolitics",
+          "att_name": "beliefE",
           "att_type": "String"
         },
         "weight": 0.2
       }
     }
-  ]
+  ],
+  "user_attributes": [
+    {
+        "att_name": "DemographicsReligous",
+        "att_type": "String"
+    },
+    {
+        "att_name": "DemographicsPolitics",
+        "att_type": "String"
+    }
+  ],
+  "interaction_similarity_functions": []
 }
-
 ]);
 
 db.createCollection('communitiesVisualization', { capped: false });
@@ -136,38 +90,6 @@ db.communities.deleteMany({});
 
 db.createCollection('similarities', { capped: false });
 db.similarities.deleteMany({});
-
-db.similarities.insertMany([{
-  "target-community-id": "621e53cf0aa6aa7517c2afdd",
-  "other-community-id": "721e53cf0aa6aa7517c2afdd",
-  "similarity-function": "cosine",
-  "value": 0.893,
-}, {
-  "target-community-id": "721e53cf0aa6aa7517c2afdd",
-  "other-community-id": "821e53cf0aa6aa7517c2afdd",
-  "similarity-function": "cosine",
-  "value": 0.563,
-}, {
-  "target-community-id": "621e53cf0aa6aa7517c2afdd",
-  "other-community-id": "821e53cf0aa6aa7517c2afdd",
-  "similarity-function": "cosine",
-  "value": 0.915,
-}, {
-  "target-community-id": "721e53cf0aa6aa7517c2afdd",
-  "other-community-id": "621e53cf0aa6aa7517c2afdd",
-  "similarity-function": "cosine",
-  "value": 0.893,
-}, {
-  "target-community-id": "821e53cf0aa6aa7517c2afdd",
-  "other-community-id": "621e53cf0aa6aa7517c2afdd",
-  "similarity-function": "cosine",
-  "value": 0.915,
-}, {
-  "target-community-id": "821e53cf0aa6aa7517c2afdd",
-  "other-community-id": "721e53cf0aa6aa7517c2afdd",
-  "similarity-function": "cosine",
-  "value": 0.563,
-}]);
 
 db.createCollection('flags', { capped: false });
 db.flags.deleteMany({});
