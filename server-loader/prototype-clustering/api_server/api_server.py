@@ -175,10 +175,10 @@ class Handler(BaseHTTPRequestHandler):
             # Call to the community model
             communityModel = CommunityModel(perspective,flag)
             communityModel.start()
-
+            
             # Remove flag
             daoFlags.deleteFlag(flag)
-        
+                    
     def __set_response(self, code, dataType='text/html'):
         self.send_response(code)
         self.send_header('Content-type', dataType)
@@ -304,8 +304,8 @@ def clearDatabase():
     daoDistanceMatrixes.drop()
     
     print("5")
-    daoSimilarity = DAO_db_similarity()
-    #daoSimilarities.drop()
+    daoSimilarities = DAO_db_similarity()
+    daoSimilarities.drop()
     
 
 def initializeDatabase():
