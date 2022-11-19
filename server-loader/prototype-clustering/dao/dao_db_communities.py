@@ -103,7 +103,15 @@ class DAO_db_community(DAO_db):
         """
         data = self.db_communities.find({}, {"_id": 0})
         return loads(dumps(list(data)))
-
+    
+    def getCommunitiesPerspective(self, perspectiveId):
+        """
+        :Return:
+            Communities, Type: List[<class 'dict'>]
+        """
+        data = self.db_communities.find({"perspectiveId": perspectiveId}, {"_id": 0})
+        return loads(dumps(list(data)))
+        
     def getCommunity(self, communityId):
         """
         :Parameters:

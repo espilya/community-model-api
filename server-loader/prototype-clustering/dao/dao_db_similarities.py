@@ -93,6 +93,7 @@ class DAO_db_similarity(DAO_db):
 
             newJSON: JSON value, Type: <class 'dict'>
         """
+        """
         response = ""
         temp = copy(newJSON)
         if target_community_id != "":
@@ -100,6 +101,14 @@ class DAO_db_similarity(DAO_db):
         if other_community_id != "":
             response = self.db_similarities.replace_one({"other-community-id": other_community_id}, temp)
         return response
+        """
+        
+        key = {'target-community_id': target_community_id, 'other-community_id': other_community_id}
+        response = self.db_similarities.update_one(key,{"$set": newJSON},upsert=True)
+        
+        print("json inserted: " )
+        print(newJSON)
+        print("\n")
 
 
     def drop(self):

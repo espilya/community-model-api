@@ -312,12 +312,17 @@ class CommunityJsonGenerator:
         # Add users without community
         if (len(usersWithoutCommunity) > 0):
             communityJson = {}
-            communityJson['id'] = self.communityDict['perspective']['id'] + "-" + str(len(self.communityJson['communities'])) + ' (Users without community)'
+            communityJson['id'] = self.communityDict['perspective']['id'] + "-" + str(len(self.communityJson['communities'])) #+ '-(Users_without_community)'
             communityJson['perspectiveId'] = self.communityDict['perspective']['id']
             communityJson['community-type'] = 'inexistent'
             communityJson['name'] = 'Community ' + str(len(self.communityJson['communities'])) + ' (Users without community)'
             communityJson['explanations'] = []
             communityJson['users'] = usersWithoutCommunity
+            
+            # Add a dummy medoid for integration purposes
+            medoid = usersWithoutCommunity[0]
+            medoidJson = {'explanation_type': 'medoid', 'explanation_data': {'id': medoid}, 'visible': False}
+            communityJson['explanations'].append(medoidJson)
             
             self.communityJson['communities'].append(communityJson)
         
