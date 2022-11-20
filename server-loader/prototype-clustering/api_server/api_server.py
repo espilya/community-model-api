@@ -183,7 +183,11 @@ class Handler(BaseHTTPRequestHandler):
             
             # Remove flag
             daoFlags.deleteFlag(flag)
-                    
+        
+        # Compute the similarity between the new communities generated with self.perspective and all the other communities
+        communityModel.updateCommunitiesSimilarityCollection()
+
+        
     def __set_response(self, code, dataType='text/html'):
         self.send_response(code)
         self.send_header('Content-type', dataType)

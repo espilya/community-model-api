@@ -77,7 +77,7 @@ class CommunityModel():
         self.distanceMatrix = self.computeDistanceMatrix()
         self.clustering()
         # Compute the similarity between the new communities generated with self.perspective and all the other communities
-        self.updateCommunitiesSimilarityCollection()
+        #self.updateCommunitiesSimilarityCollection()
     
     def initializeComplexSimilarityMeasure(self):
         """
