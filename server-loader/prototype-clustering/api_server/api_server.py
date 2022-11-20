@@ -174,8 +174,11 @@ class Handler(BaseHTTPRequestHandler):
 
         flags = daoFlags.getFlags()
         
+        perspectives = []
+        
         for flag in flags:
             perspective = daoPerspectives.getPerspective(flag["perspectiveId"])
+            perspectives.append(perspective)
 
             # Call to the community model
             communityModel = CommunityModel(perspective,flag)
@@ -185,7 +188,16 @@ class Handler(BaseHTTPRequestHandler):
             daoFlags.deleteFlag(flag)
         
         # Compute the similarity between the new communities generated with self.perspective and all the other communities
-        communityModel.updateCommunitiesSimilarityCollection()
+        """
+        daoPerspectives = DAO_db_perspectives()
+        perspectives = daoPerspectives.getPerspectives()
+        
+        
+        """   
+        perspectives = set(perspectives)
+        for perspective in perspectives:
+            communityModel = CommunityModel(perspective, {}) 
+            communityModel.updateCommunitiesSimilarityCollection()
 
         
     def __set_response(self, code, dataType='text/html'):
