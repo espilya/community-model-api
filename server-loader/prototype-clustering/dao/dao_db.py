@@ -55,3 +55,31 @@ class DAO_db(DAO):
 
 
 
+    def loadDB(self, data):
+        client = self.mongo
+        database = client[self.db_name]
+        collections = database.list_collection_names()
+        # print("Collections: ", collections)
+
+        # print("drop")
+        # drop
+        for i, collection_name in enumerate(collections):
+            col = getattr(database, collections[i])
+            collection = col.delete_many({})
+            
+        # print("insert")
+        # insert
+        for name in data:
+            for e in data[name]:
+                database[name].insert_one(e)
+            
+        # for e in data[collection[i]]:
+        #     collections.insert_one(e)
+
+        # for i, collection_name in enumerate(collections):
+        #     col = getattr(database, collections[i])
+        #     # collection = col.find()
+        #     # dump[collections[i]] = collection
+        # # print(dump)
+
+

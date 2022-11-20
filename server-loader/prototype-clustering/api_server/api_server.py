@@ -147,6 +147,11 @@ class Handler(BaseHTTPRequestHandler):
             data = "1000"
             print("update_CM")
             ok = "updateCM"
+
+        elif first_arg == "load":
+            data = loads(post_data)
+            DAO_db().loadDB(data)
+            ok = True
             
         if ok == "updateCM":
             self.__set_response(204)

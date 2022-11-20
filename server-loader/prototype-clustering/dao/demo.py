@@ -27,11 +27,12 @@ from bson.json_util import dumps, loads
 
 def main():
 
-    route1 = r"../communityModel/data/new-annotated-stories.json"
-    # route2 = r"test/data/parser_output.json"
-    route2 = r"../communityModel/perspectives/GAM similar user emotions in similar artworks (iconclass) annotated-stories.json"
-    annotatedStories = DAO_json(route1).getData()
-    perspective = DAO_json(route2).getData()
+    # route1 = r"../communityModel/data/new-annotated-stories.json"
+    # # route2 = r"test/data/parser_output.json"
+    # route2 = r"../communityModel/perspectives/GAM similar user emotions in similar artworks (iconclass) annotated-stories.json"
+    routeDump = r"../dao/test/data/dump.json"
+    dump = DAO_json(routeDump).getData()
+    # perspective = DAO_json(route2).getData()
 
     # api = DAO_api()
 
@@ -39,7 +40,7 @@ def main():
     # print(a)
     # print(a.text)
 
-    b = requests.post("http://localhost:8080/v1.1/perspective", json = perspective)
+    b = requests.post("http://localhost:8080/databaseController/load", json = dump)
     print(b)
     print(b.text)
 

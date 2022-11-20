@@ -20,4 +20,15 @@ router.get('/dump', function (req, res, next) {
 });
 
 
+router.post('/load', function (req, res, next) {
+    DatabaseContrl.postLoad(req.body)
+        .then(function (response) {
+            res.status(200).send(response);
+        })
+        .catch(function (response) {
+            res.status(400).send(response);
+        });
+});
+
+
 module.exports = router;
