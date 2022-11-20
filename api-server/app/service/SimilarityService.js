@@ -63,6 +63,7 @@ exports.computeKmostDissimilar = function (communityId, k) {
         data.forEach((element) => {
           element.value = 1 - element.value;
         });
+        data.reverse();
         result['application/json'] = data.slice(0, k);
         if (Object.keys(result).length > 0) {
           resolve(result[Object.keys(result)[0]]);
