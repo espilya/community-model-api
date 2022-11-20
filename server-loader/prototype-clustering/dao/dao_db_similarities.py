@@ -103,7 +103,7 @@ class DAO_db_similarity(DAO_db):
         return response
         """
         
-        key = {'target-community_id': target_community_id, 'other-community_id': other_community_id}
+        key = {'target-community-id': target_community_id, 'other-community-id': other_community_id}
         response = self.db_similarities.update_one(key,{"$set": newJSON},upsert=True)
         
         print("json inserted: " )
