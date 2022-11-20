@@ -76,8 +76,9 @@ class CommunityModel():
         self.similarityMeasure = self.initializeComplexSimilarityMeasure()
         self.distanceMatrix = self.computeDistanceMatrix()
         self.clustering()
-        # Compute the similarity between the new communities generated with self.perspective and all the other communities
-        #self.updateCommunitiesSimilarityCollection()
+        
+    def getData(self):
+        return self.similarityMeasure.data
     
     def initializeComplexSimilarityMeasure(self):
         """
@@ -252,128 +253,4 @@ class CommunityModel():
         #daoCommunityModelCommunity.dropFullList()
         # add new data
         daoCommunityModelCommunity.insertFileList("", jsonCommunity)
-        
-#--------------------------------------------------------------------------------------------------------------------------
-#   Compute similarity between communities
-#--------------------------------------------------------------------------------------------------------------------------
-    
-    def updateCommunitiesSimilarityCollection(self):
-        daoSimilarities = DAO_db_similarity()
-        daoCommunities = DAO_db_community()
-        
-        # Get all the communities associated to the new perspective (A)
-        communitiesA = daoCommunities.getCommunitiesPerspective(self.perspective["id"])
-        
-        # Get all the communities (B)
-        communitiesB = daoCommunities.getCommunities()
-        
-        # Get index of the medoid explanation
-        indexMedoidExplanation = self.getIndexMedoidExplanation(communitiesB)
-        
-        print("index medoid explanation is : " + str(indexMedoidExplanation))
-
-        # Compute similarity between the communities in A and the communities in B
-        for communityA in communitiesA:
-            for communityB in communitiesB:
-                similarityCommunities = self.computeCommunitiesSimilarity(communityA, communityB, indexMedoidExplanation)
-                # Insert it in the two different orders
-                similarityJson = {
-                    "similarity-function": "similarityMedoidCommunitiesDAO",
-                    "value": similarityCommunities,
-                }
-                daoSimilarities.updateSimilarity(communityA['id'], communityB['id'], similarityJson)
-                
-                similarityJson = {
-                    "similarity-function": "similarityMedoidCommunitiesDAO",
-                    "value": similarityCommunities,
-                }
-                daoSimilarities.updateSimilarity(communityB['id'], communityA['id'], similarityJson)
-
-    
-    def getIndexMedoidExplanation(self, communitiesB):
-        if (len(communitiesB) <= 0):
-            return 0
-        else:
-            community = communitiesB[0]
-            indexMedoidExplanation = 0
-            index = 0
-            found = False
-            
-            while found == False and index < len(community['explanations']):
-                explanation = community['explanations'][index]
-                if (explanation['explanation_type'] == 'medoid'):
-                    found = True
-                    indexMedoidExplanation = index
-                index += 1
-            
-            return indexMedoidExplanation
-    
-    def computeCommunitiesSimilarity(self, communityA, communityB, indexMedoidExplanation):
-        # Get distance matrixes between communities
-        perspectiveA = communityA["perspectiveId"]
-        perspectiveB = communityB["perspectiveId"]
-        
-        daoDistanceMatrixes = DAO_db_distanceMatrixes()
-        
-        distanceMatrixAJSON = daoDistanceMatrixes.getDistanceMatrix(perspectiveA)
-        distanceMatrixA = np.asarray(distanceMatrixAJSON['distanceMatrix'])
-        
-        distanceMatrixBJSON = daoDistanceMatrixes.getDistanceMatrix(perspectiveB)
-        distanceMatrixB = np.asarray(distanceMatrixBJSON['distanceMatrix'])
-        
-        
-        
-        # Get medoids (dm: distance matrix)
-        medoidA = communityA['explanations'][indexMedoidExplanation]['explanation_data']['id']
-        medoidB = communityB['explanations'][indexMedoidExplanation]['explanation_data']['id']
-        
-        print("data: \n\n\n")
-        print(self.similarityMeasure.data)
-        print("\n\n")
-        print(self.similarityMeasure.data.index)
-        print("\n\n")
-        
-        userList = self.similarityMeasure.data['user'].to_list()
-        dmIndexA = userList.index(medoidA)
-        dmIndexB = userList.index(medoidB)
-        
-        print("index 1: " + str(dmIndexA))
-        print("index 2: " + str(dmIndexB))
-        print("\n")
-        
-        # Get distance between medoids (by distanceMatrixA and distanceMatrixB)
-        print("distance matrix A")
-        print(distanceMatrixA)
-        print("\n")
-        print("distance matrix B")
-        print(distanceMatrixB)
-        print("\n")
-        
-        distanceA = distanceMatrixA[dmIndexA,dmIndexB]
-        distanceB = distanceMatrixB[dmIndexA,dmIndexB]
-        
-        print("distanceA: " + str(distanceA))
-        print("distanceB: " + str(distanceB))
-        
-        distanceCommunities = (distanceA + distanceB) / 2
-        print("distanceCommunities: " + str(distanceCommunities))
-        distanceCommunities = int(distanceCommunities * 100) / 100
-        print("distanceCommunities: " + str(distanceCommunities))
-        similarityCommunities = 1 - distanceCommunities
-        
-        print("similarity between communities: " + str(similarityCommunities))
-        
-        return similarityCommunities
-        
-        
-        
-               
-        
-        
-        
-        
-
-        
-    
-    
-    
+ 

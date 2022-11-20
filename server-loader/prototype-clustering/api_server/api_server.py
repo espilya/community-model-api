@@ -21,6 +21,8 @@ from dao.dao_json import DAO_json
 import time
 
 from communityModel.communityModel import CommunityModel
+from communityModel.communitiesSimilarityModel import CommunitiesSimilarityModel
+
 from communityModel.dataLoader import DataLoader
 
 
@@ -174,11 +176,11 @@ class Handler(BaseHTTPRequestHandler):
 
         flags = daoFlags.getFlags()
         
-        perspectives = []
+        perspectivesId = []
         
         for flag in flags:
             perspective = daoPerspectives.getPerspective(flag["perspectiveId"])
-            perspectives.append(perspective)
+            perspectivesId.append(flag["perspectiveId"])
 
             # Call to the community model
             communityModel = CommunityModel(perspective,flag)
@@ -188,16 +190,10 @@ class Handler(BaseHTTPRequestHandler):
             daoFlags.deleteFlag(flag)
         
         # Compute the similarity between the new communities generated with self.perspective and all the other communities
-        """
-        daoPerspectives = DAO_db_perspectives()
-        perspectives = daoPerspectives.getPerspectives()
-        
-        
-        """   
-        perspectives = set(perspectives)
-        for perspective in perspectives:
-            communityModel = CommunityModel(perspective, {}) 
-            communityModel.updateCommunitiesSimilarityCollection()
+        perspectivesId = set(perspectivesId)
+        data = communityModel.getData()
+        for perspectiveId in perspectivesId:
+            communitiesSimilarityModel = CommunitiesSimilarityModel(perspectiveId,data)
 
         
     def __set_response(self, code, dataType='text/html'):
