@@ -142,6 +142,7 @@ class Handler(BaseHTTPRequestHandler):
                     for similarityFunction in perspective['similarity_functions']:
                         if (similarityFunction['sim_function']['on_attribute']['att_name'] == user['pname']):
                             flag = {'perspectiveId': perspective['id'], 'userid': user['userid'], 'flag': True}
+                            #flag = {'perspectiveId': perspective['id'], 'userid': 'flagAllUsers', 'flag': True}
                             daoFlags.updateFlag(flag)
 
         elif first_arg == "update_CM":
@@ -176,25 +177,30 @@ class Handler(BaseHTTPRequestHandler):
 
         flags = daoFlags.getFlags()
         
-        perspectivesId = []
-        
+        # Sort all flags by perspectiveId
+        perspectiveFlagsDict = {}
         for flag in flags:
-            perspective = daoPerspectives.getPerspective(flag["perspectiveId"])
-            perspectivesId.append(flag["perspectiveId"])
+            if flag["perspectiveId"] not in perspectiveFlagsDict:
+                perspectiveFlagsDict[flag["perspectiveId"]] = []
+            perspectiveFlagsDict[flag["perspectiveId"]].append(flag['userid'])
 
+            
+        # Update each perspective communities
+        for perspectiveId in perspectiveFlagsDict:
+            perspective = daoPerspectives.getPerspective(perspectiveId)
+            
             # Call to the community model
-            communityModel = CommunityModel(perspective,flag)
+            communityModel = CommunityModel(perspective,perspectiveFlagsDict[perspectiveId])
             communityModel.start()
             
+            # Compute the similarity between the new communities generated with self.perspective and all the other communities
+            data = communityModel.getData()
+            communitiesSimilarityModel = CommunitiesSimilarityModel(perspectiveId,data)
+        
+        # Delete updated flags (cannot delete the whole collection because new flags may have been added while CM was updating)
+        for flag in flags:
             # Remove flag
             daoFlags.deleteFlag(flag)
-        
-        # Compute the similarity between the new communities generated with self.perspective and all the other communities
-        perspectivesId = set(perspectivesId)
-        data = communityModel.getData()
-        for perspectiveId in perspectivesId:
-            communitiesSimilarityModel = CommunitiesSimilarityModel(perspectiveId,data)
-
         
     def __set_response(self, code, dataType='text/html'):
         self.send_response(code)

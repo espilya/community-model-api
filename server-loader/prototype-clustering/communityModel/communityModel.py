@@ -42,7 +42,7 @@ from dao.dao_db_similarities import DAO_db_similarity
 
 class CommunityModel():
 
-    def __init__(self,perspective,flag):
+    def __init__(self,perspective,updateUsers = []):
         """
         Construct of Community Model objects.
 
@@ -57,11 +57,10 @@ class CommunityModel():
                 userid: user to update
         """
         self.perspective = perspective
-        self.flag = flag
+        self.updateUsers = updateUsers
         self.percentageExplainability = 0.5
         
     def start(self):
-        print("flag: " + str(self.flag))
         
         # Perspective was not found
         if (len(self.perspective) <= 0):
@@ -120,11 +119,11 @@ class CommunityModel():
             distanceMatrix = np.asarray(distanceMatrixJSON['distanceMatrix'])
         
         # Update distance matrix for all users (recalculate distance matrix)
-        if (self.flag['userid'] == "flagAllUsers"):
+        if ("flagAllUsers" in self.updateUsers):
             distanceMatrix = self.similarityMeasure.matrix_distance()
         # Update distance matrix for a user
         else:
-            distanceMatrix = self.similarityMeasure.updateDistanceMatrix([self.flag['userid']], distanceMatrix)
+            distanceMatrix = self.similarityMeasure.updateDistanceMatrix(self.updateUsers, distanceMatrix)
 
         # Drop irrelevant parameters to explain communities
         #self.similarityMeasure.data.drop(['origin','source_id', '_id'], axis=1, inplace=True)
