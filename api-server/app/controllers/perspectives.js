@@ -87,15 +87,24 @@ module.exports.listPerspectiveCommunities = function listPerspectiveCommunities(
 // redirect post request to api_loader
 module.exports.PostPerspective = function PostPerspective(req, res, next) {
   try {
-    Perspectives.PostPerspective(req.body)
-    .then(function (response) {
-      res.status(204);
-      res.send(response);
+      
+    Perspectives.getPerspectiveById(req.body.id)
+    .then(function (response) { // Perspective with that id exists
+      res.status(409).send(response);
     })
-    .catch(function (response) {
-      res.status(501);
-      res.send(response);
+    .catch(function (response) { // Perspective with that id doesnt exist (it can be inserted)
+      Perspectives.PostPerspective(req.body)
+        .then(function (response) {
+          res.status(204);
+          res.send(response);
+        })
+        .catch(function (response) {
+          res.status(501);
+          res.send(response);
+        });
     });
+    
+    
   } catch (error) {
     console.error(error)
   }
