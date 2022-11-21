@@ -41,11 +41,6 @@ services:
     networks:
       spice:
         ipv4_address: 172.20.1.2
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
   cm:
     depends_on:
       - mongodb
