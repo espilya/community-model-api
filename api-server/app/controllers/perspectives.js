@@ -48,7 +48,7 @@ module.exports.getPerspectiveById = function getPerspectiveById(req, res, next) 
       }
       else {
         post.update_CM(perspectiveId);
-        var data = jobManager.createJob(0, "getPerspectives")
+        var data = jobManager.createJob(perspectiveId, "getPerspectiveById")
         res.status(202).send(data);
       }
     })
@@ -99,7 +99,7 @@ module.exports.PostPerspective = function PostPerspective(req, res, next) {
           res.send(response);
         })
         .catch(function (response) {
-          res.status(501);
+          res.status(400);
           res.send(response);
         });
     });

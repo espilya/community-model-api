@@ -53,6 +53,8 @@ var jobStarted = {
         "name": "CM Update",
         "job-state": "STARTED",
         "job-status": "INPROGRESS",
+        "start-time": "",
+        "time-to-autoremove-job": "",
         "data": {}
     }
 }
@@ -63,6 +65,8 @@ var jobCompleted = {
         "name": "CM Update",
         "job-state": "COMPLETED",
         "job-status": "SUCCESS",
+        "start-time": "",
+        "time-to-autoremove-job": "",
         "data": {}
     }
 }
@@ -73,11 +77,15 @@ var jobCompleted = {
  * @param {Job id} jobId 
  * @returns Completed response
  */
-function generateCompletedResponse(jobId, data) {
+function generateCompletedResponse(job, data) {
     var response = jobCompleted;
-    response["job"]["path"] = "/jobs/" + jobId;
-    response["job"]["jobId"] = jobId;
-    response["job"]["data"] = data
+    response["job"]["path"] = "/jobs/" + job.jobId;
+    response["job"]["jobId"] = job.jobId;
+    response["job"]["data"] = data;
+    response["job"]["start-time"] = job["start-time"];
+    var timeLeft = (job["start-time"].getTime() + (5 * 60 * 1000)) - (new Date().getTime());
+    response["job"]["time-to-autoremove-job"] = timeLeft / (1000 * 60) + " minutes";
+
     return response
 }
 
@@ -86,10 +94,14 @@ function generateCompletedResponse(jobId, data) {
  * @param {string} jobId 
  * @returns Progress response
  */
-function generateProgressResponse(jobId) {
+function generateProgressResponse(job) {
     var response = jobStarted;
-    response["job"]["path"] = "/jobs/" + jobId;
-    response["job"]["jobId"] = jobId;
+    response["job"]["path"] = "/jobs/" + job.jobId;
+    response["job"]["jobId"] = job.jobId;
+    response["job"]["start-time"] = job["start-time"];
+    var timeLeft = (job["start-time"].getTime() + (30 * 60 * 1000)) - (new Date().getTime());
+    response["job"]["time-to-autoremove-job"] = timeLeft / (1000 * 60) + " minutes";
+
     return response
 }
 
@@ -100,6 +112,7 @@ function generateProgressResponse(jobId) {
  * 
  */
 router.get('/:job_id', function (req, res, next) {
+    console.log(jobManager.getJobs())
     var jobId = req.params.job_id
     var job = jobManager.getJob(req.params.job_id)
 
@@ -128,15 +141,15 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                jobManager.removeJob(jobId);
-                                res.status(200).send(generateCompletedResponse(jobId, data));
+                                jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                res.status(200).send(generateCompletedResponse(job, data));
                             })
                             .catch(function (data) {
                                 res.status(404).send("JobsManager: getData exception");
                             });
                     }
                     else {
-                        res.send(generateProgressResponse(jobId));
+                        res.send(generateProgressResponse(job));
                     }
                 })
                 .catch(function (data) {
@@ -151,15 +164,15 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                jobManager.removeJob(jobId);
-                                res.status(200).send(generateCompletedResponse(jobId, data));
+                                jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                res.status(200).send(generateCompletedResponse(job, data));
                             })
-                            .catch(function (data) {
-                                res.status(404).send("JobsManager: getData exception");
+                            .catch(function (error) {
+                                res.status(404).send("JobsManager: getData error: " + error);
                             });
                     }
                     else {
-                        res.send(generateProgressResponse(jobId));
+                        res.send(generateProgressResponse(job));
                     }
                 })
                 .catch(function (data) {

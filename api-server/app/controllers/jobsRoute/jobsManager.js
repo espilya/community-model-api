@@ -26,17 +26,25 @@ getJob = function (jobId) {
 };
 
 /**
+ * Returns jobs
+ */
+getJobs = function () {
+    return jobsList;
+};
+
+/**
  * Adds new job to the job list
  */
 addJob = function (jobId, request, param) {
     var job = {
         jobId: jobId,
         request: request,
-        param: param
+        param: param,
+        "start-time": new Date() 
     }
     jobsList.push(job);
 
-    setTimeout(removeTimeout, 1800000, jobId, jobsList); //1800000 = 30 minutes
+    removeJobWithTimeout(jobId, 60*30); // 30 min
 };
 
 /**
@@ -52,14 +60,18 @@ removeJob = function (jobId) {
     }
 };
 
-removeTimeout = function (jobId, jobsList) {
-    console.log(`<JobsQueue> auto removing job => ${jobId}`);
-    try {
-        removeJob(jobId)
-    } catch (error) {
-        console.log(error)
-    }
+removeJobWithTimeout = removeTimeout = function (jobId, seconds) {
+    setTimeout(() => {
+        console.log(`<JobsQueue> auto-removing job => ${jobId}`);
+        try {
+            removeJob(jobId)
+        } catch (error) {
+            console.log(error)
+        }
+    }, seconds * 1000, jobId, jobsList);
+
 }
+
 
 /**
  * Generates non-repeating random job id
@@ -79,8 +91,11 @@ generateId = function (jobId) {
 };
 
 
+
 exports.createJob = createJob;
 exports.getJob = getJob;
+exports.getJobs = getJobs
 exports.addJob = addJob;
 exports.removeJob = removeJob;
+exports.removeJobWithTimeout = removeJobWithTimeout;
 exports.generateId = generateId; 

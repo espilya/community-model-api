@@ -18,7 +18,7 @@ module.exports.getCommunities = function getCommunities(req, res, next) {
       }
       else {
         post.update_CM("allPerspectives");
-        var data = jobManager.createJob(0, "getPerspectives")
+        var data = jobManager.createJob(0, "getCommunities")
         res.status(202).send(data);
       }
     })

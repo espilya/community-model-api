@@ -15,7 +15,7 @@ def main():
     
     route = "data/hecht users.csv"
     # route = "data/hecht users one user.csv"
-    #route = "data/HECHT 20221018.csv"
+    # route = "data/HECHT 20221018.csv"
     #route = "data/hecht users 50.csv"
     df = pd.read_csv(route)
     
