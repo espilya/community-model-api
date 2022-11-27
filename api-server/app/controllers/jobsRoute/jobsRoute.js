@@ -2,6 +2,7 @@
 const Perspectives = require('../../service/PerspectivesService.js');
 const Communities = require('../../service/CommunitiesService');
 const Flags = require('../../service/FlagsService.js');
+const CommunitiesVis = require('../../service/CommunitiesVisualizationService.js');
 
 
 var jobManager = require('./jobsManager.js');
@@ -132,8 +133,8 @@ router.get('/:job_id', function (req, res, next) {
         //     checkState = Flags.getFlagsById(param);
         // }
         // Checks for specific flag
-
-        if (request == "getPerspectives" || request == "getCommunities") {
+        let filter = ["getPerspectives", "getCommunities", "getFilesIndex"]
+        if (request in filter) {
             Flags.getFlags()
                 .then(function (data) {
                     if (data == null) {
@@ -141,7 +142,9 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                if (!job.autoremove) {
+                                    jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                }
                                 res.status(200).send(generateCompletedResponse(job, data));
                             })
                             .catch(function (data) {
@@ -164,7 +167,9 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                if (!job.autoremove) {
+                                    jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                }
                                 res.status(200).send(generateCompletedResponse(job, data));
                             })
                             .catch(function (error) {
@@ -176,7 +181,7 @@ router.get('/:job_id', function (req, res, next) {
                     }
                 })
                 .catch(function (data) {
-                    res.status(404).send("JobsManager: flag not found");
+                    res.status(404).send("JobsManager: flag not found: " + data);
                 });
         }
 
@@ -208,6 +213,12 @@ function getData(request, param) {
             break;
         case "listCommunityUsers":
             return Communities.listCommunityUsers(param);
+            break;
+        case "getFilesIndex":
+            return CommunitiesVis.getIndex();
+            break;
+        case "getFileById":
+            return CommunitiesVis.getById(param);
             break;
         default:
             break;

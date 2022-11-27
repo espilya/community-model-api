@@ -40,11 +40,12 @@ addJob = function (jobId, request, param) {
         jobId: jobId,
         request: request,
         param: param,
-        "start-time": new Date() 
+        "start-time": new Date(),
+        autoremove: false
     }
     jobsList.push(job);
 
-    removeJobWithTimeout(jobId, 60*30); // 30 min
+    removeJobWithTimeout(jobId, 60 * 30); // 30 min
 };
 
 /**
@@ -61,14 +62,17 @@ removeJob = function (jobId) {
 };
 
 removeJobWithTimeout = removeTimeout = function (jobId, seconds) {
-    setTimeout(() => {
-        console.log(`<JobsQueue> auto-removing job => ${jobId}`);
-        try {
-            removeJob(jobId)
-        } catch (error) {
-            console.log(error)
-        }
-    }, seconds * 1000, jobId, jobsList);
+    if (!getJob(jobId).autoremove) {
+        getJob(jobId).autoremove = true;
+        setTimeout(() => {
+            console.log(`<JobsQueue> auto-removing job => ${jobId}`);
+            try {
+                removeJob(jobId)
+            } catch (error) {
+                console.log(error)
+            }
+        }, seconds * 1000, jobId, jobsList);
+    }
 
 }
 
