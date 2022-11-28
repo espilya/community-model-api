@@ -1,7 +1,7 @@
 [
 {
   "id": "1000-agglomerative",
-  "name": "HEHCT Perspective (agglomerative)",
+  "name": "HECHT Perspective (agglomerative)",
   "algorithm": {
     "name": "agglomerative",
     "params": [
