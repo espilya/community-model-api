@@ -9,7 +9,7 @@ class SimilarityDAO:
     the similarity between elements.
     """
     
-    def __init__(self,dao):
+    def __init__(self, dao, similarityFunction = {}):
         """Construct of Similarity objects.
 
         Parameters
@@ -19,10 +19,41 @@ class SimilarityDAO:
         
         """
         self.dao = dao
+        self.similarityFunction = similarityFunction
+        if (len(similarityFunction) > 0):
+            self.similarityColumn = similarityFunction['on_attribute']['att_name']
+        else:
+            self.similarityColumn = ""
+
         #self.data = self.dao.pandasData()
 
         self.data = self.dao.getPandasDataframe()
         #self.data = self.data.dropna()
+        
+    def distanceValues(self, valueA, valueB):
+        """
+        Method to obtain the distance between two valid values given by the similarity measure.
+        e.g., sadness vs fear in plutchickEmotionSimilarity
+
+        Parameters
+        ----------
+        valueA : object
+            Value of first element corresponding to elemA in self.data
+        valueB : object
+            Value of first element corresponding to elemB in self.data
+
+        Returns
+        -------
+        double
+            Distance between the two values.
+        """
+        return 1.0
+        
+    def dissimilarFlag(self, distance):
+        if ('dissimilar' in self.similarityFunction):
+            distance = 1 - distance
+            
+        return distance
         
 
     def distance(self,elemA, elemB):
@@ -40,7 +71,10 @@ class SimilarityDAO:
         double
             Distance between the two elements.
         """
-        pass
+        valueA = self.data.loc[elemA][self.similarityColumn]
+        valueB = self.data.loc[elemB][self.similarityColumn]
+        
+        return self.distanceValues(valueA, valueB)
 
     def similarity(self,elemA, elemB):
         """Method to obtain the similarity between two element.
