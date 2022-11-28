@@ -30,8 +30,8 @@ class NumberSimilarityDAO (SimilarityDAO):
         """
         # https://math.stackexchange.com/questions/1481401/how-to-compute-similarity-between-two-numbers
         try:
-            valueA = int(valueA)
-            valueB = int(valueB)
+            #valueA = int(valueA)
+            #valueB = int(valueB)
             
             distance = (abs(valueA - valueB)) / max(valueA,valueB)
             similarity = 1 - distance
