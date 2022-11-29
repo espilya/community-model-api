@@ -19,7 +19,8 @@ module.exports = mongoose => {
           on_attribute: {
             att_name: String,
             att_type: String
-          }
+          },
+          dissimilar: Boolean
         }
       }],
       user_attributes: [{
@@ -63,6 +64,7 @@ module.exports = mongoose => {
           onError(err);
         }
         else {
+          // console.log(res.id.toString())
           onSuccess(res.id.toString());
         }
       });
@@ -85,7 +87,7 @@ module.exports = mongoose => {
           onError(error);
         } else {
           if (data) {
-            console.log(data.toJSON());
+            // console.log(data.toJSON());
             onSuccess(data.toJSON());
           }
           else {

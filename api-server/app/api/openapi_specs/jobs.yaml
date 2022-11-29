@@ -28,6 +28,14 @@ jobStarted:
           type: string
           description: job status
           example: INPROGRESS
+        start-time:
+          type: string
+          description: job start time
+          example: INPROGRESS
+        time-to-autoremove-job:
+          type: string
+          description: time left for autoremove the job
+          example: INPROGRESS
         data:
           type: object
           description: The job is not done yet
@@ -57,6 +65,14 @@ jobCompleted:
           type: string
           description: job status
           example: SUCCESS
+        start-time:
+          type: string
+          description: job start time
+          example: INPROGRESS
+        time-to-autoremove-job:
+          type: string
+          description: time left for autoremove the job
+          example: INPROGRESS
         data:
           oneOf: 
             - $ref: './perspective.yaml#/perspective'
@@ -65,6 +81,8 @@ jobCompleted:
             - $ref: '#/listCommunities'
             - type: string
               description: perspectiveId
+            - type: string
+              description: Visfile
 listPerspectives:
   type: array
   description: List of perspectives

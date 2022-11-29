@@ -104,6 +104,7 @@ class Handler(BaseHTTPRequestHandler):
         print("Request POST: ", request)
         first_arg = request[1]
         if first_arg == "perspective":
+            ok = True
             perspectiveId = loads(post_data)
             print(perspectiveId)
             print("\n\n")

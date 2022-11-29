@@ -90,12 +90,14 @@ module.exports.PostPerspective = function PostPerspective(req, res, next) {
       
     Perspectives.getPerspectiveById(req.body.id)
     .then(function (response) { // Perspective with that id exists
-      res.status(409).send(response);
+      res.status(409).send({insertedPerspectiveId: "-Error, perspective already exist-"});
     })
     .catch(function (response) { // Perspective with that id doesnt exist (it can be inserted)
       Perspectives.PostPerspective(req.body)
-        .then(function (response) {
-          res.status(204);
+        .then(function (perspectiveId) {
+          console.log(perspectiveId)
+          var response = { insertedPerspectiveId: perspectiveId };
+          res.status(202);
           res.send(response);
         })
         .catch(function (response) {

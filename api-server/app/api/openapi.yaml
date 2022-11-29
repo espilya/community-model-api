@@ -12,6 +12,8 @@ info:
 servers:
 - url: /v1.1/
 tags:
+- name: Config Tool
+  description: Configuration Tool App
 - name: perspectives
   description: Operations about computing perspectives among communities(?)
 - name: communities
@@ -23,6 +25,23 @@ tags:
 - name: jobs monitor
   description: Monitor the status of a job
 paths:
+  /seed:
+    get:
+      tags:
+      - Config Tool
+      summary: Get seed
+      description: Returns seed config gile
+      operationId: getSeed
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './openapi_specs/seedFile.yaml#/seedFile'
+        "400":
+          description: invalid seed id
+      x-swagger-router-controller: DataInput
   /jobs/{jobId}:
     get:
       tags:

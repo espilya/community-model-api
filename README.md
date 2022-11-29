@@ -36,17 +36,11 @@ Database is implemented using [MongoDB](https://www.mongodb.com/)
 
 Are implemented using [Python](https://www.python.org)
 
-## Tests
+## Demo
 
-### API server
-
-WIP
-
-~~The CM API server is tested using [Jest](https://jestjs.io/) and [supertest](https://www.npmjs.com/package/supertest). To run the tests, mongodb must be launched, and run the following command in `api-server` folder:~~
-
-```
-npm test
-```
+Demo files are located inside /Demo folder. There are 2 demo files. \
+Test 0: Makes Posts requests with users from one if the data file.  \
+Test 1: Makes Get request to communities and Get request to monitor the job status.
 
 ## Api Reference
 
