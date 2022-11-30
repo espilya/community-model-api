@@ -1,13 +1,5 @@
 # Authors: José Ángel Sánchez Martín
-import numpy as np
-import pandas as pd
-# Import math library
-import math
-
-import importlib
-
 from community_module.similarity.similarityDAO import SimilarityDAO
-
 
 class ComplexSimilarityDAO(SimilarityDAO):
 
@@ -59,7 +51,3 @@ class ComplexSimilarityDAO(SimilarityDAO):
         complexDistance = complexDistance / complexWeight
         
         return complexDistance
-        
-        
-
-        
