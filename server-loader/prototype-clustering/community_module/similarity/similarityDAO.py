@@ -1,8 +1,8 @@
 # Authors: José Ángel Sánchez Martín
-
 from itertools import product
 import numpy as np
-
+import importlib
+import json
 
 class SimilarityDAO:
     """Class to define the functions to be implemented to calculate
