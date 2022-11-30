@@ -111,7 +111,7 @@ class DAO_db_users(DAO_db):
         """
         try:
             for userD in userJSON:
-                self.db_users.update_one({"userid": userD["userid"], "pname": userD["pname"]}, {"$set": userD},
+                self.db_users.update_one({"userid": userD["userid"], "pname": userD["pname"], "category": userD["category"], "origin": userD["origin"]}, {"$set": userD},
                                          upsert=True)
             return True
         except:
