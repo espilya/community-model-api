@@ -24,11 +24,8 @@ class SimilarityDAO:
             self.similarityColumn = similarityFunction['on_attribute']['att_name']
         else:
             self.similarityColumn = ""
-
-        #self.data = self.dao.pandasData()
-
+            
         self.data = self.dao.getPandasDataframe()
-        #self.data = self.data.dropna()
         
     def distanceValues(self, valueA, valueB):
         """
@@ -198,4 +195,88 @@ class SimilarityDAO:
 
         return matrix
     
+
+#-------------------------------------------------------------------------------------------------------------------------------
+#   Auxiliar functions
+#-------------------------------------------------------------------------------------------------------------------------------
+
+    def initializeFromPerspective(self, dao, similarityFunction):
+        similarityName = similarityFunction['sim_function']['name']
+        similarityFile = "community_module.similarity." + similarityName[0].lower() + similarityName[1:]
+        similarityModule = importlib.import_module(similarityFile)
+        similarityClass = getattr(similarityModule,similarityName)
+        similarityMeasure = similarityClass(dao,similarityFunction['sim_function'])
+        
+        return similarityMeasure
     
+    def exchangeElements(self, elemA, elemB):
+        aux = elemA
+        elemA = elemB
+        elemB = aux
+        
+        return elemA, elemB
+    
+    def exportDistanceMatrix(self, distanceMatrix, exportFile):
+        distanceMatrix = distanceMatrix.tolist()
+        
+        with open(exportFile, "w") as outfile:
+            json.dump(distanceMatrix, outfile, indent=4)    
+    
+    def importDistanceMatrix(self, importFile):
+        with open(importFile, 'r', encoding='utf8') as f:
+            distanceMatrix = json.load(f)
+                
+        return np.asarray(distanceMatrix)
+        
+        
+        
+        
+#-------------------------------------------------------------------------------------------------------------------------------
+#   To calculate dominant value in interaction attributes (always dict)
+#-------------------------------------------------------------------------------------------------------------------------------
+       
+    def dominantInteractionAttribute(self, dictA, dictB):
+        """
+        Method to obtain the dominant sentiment for A and B
+        Parameters
+        ----------
+        dictA : dict
+            Keys: String
+            Values: double
+                Confidence Level
+        dictB : dict
+            Keys: String
+
+            Values: double
+                Confidence Level
+
+        Returns
+        -------
+        String
+            Dominant key
+        """
+        if (len(dictA) <= 0):
+            keyA = ""
+        else:
+            keyA = max(dictA, key=dictA.get).lower()
+            
+        if (len(dictB) <= 0):
+            keyB = ""
+        else:
+            keyB = max(dictB, key=dictB.get).lower()
+        
+        return keyA, keyB
+    
+#-------------------------------------------------------------------------------------------------------------------------------
+#   To calculate dominant value between two values (in order to explain communities)
+#-------------------------------------------------------------------------------------------------------------------------------
+    
+    def dominantElemValue(self, elemA, elemB):
+        valueA = self.data.loc[elemA][self.similarityColumn]
+        valueB = self.data.loc[elemB][self.similarityColumn]
+        
+        return self.dominantValue(valueA,valueB)
+        
+    def dominantValue(self, valueA, valueB):
+        return valueA
+         

@@ -1,5 +1,4 @@
 # Authors: José Ángel Sánchez Martín
-
 import numpy as np
 import pandas as pd
 # Import math library
@@ -9,8 +8,6 @@ import importlib
 
 from community_module.similarity.similarityDAO import SimilarityDAO
 
-
-HECHT_BELIEFS_R = ['ANatPridePro','BReligousPro','CRealisticPro','DExtremistNeg','EReligousNeg','FRealisticNeg']
 
 class ComplexSimilarityDAO(SimilarityDAO):
 
@@ -28,13 +25,9 @@ class ComplexSimilarityDAO(SimilarityDAO):
         
         self.similarityDict = {}
         for similarityFunction in similarityDict:
-            similarityName = similarityFunction['sim_function']['name']
-            similarityFile = "community_module.similarity." + similarityName[0].lower() + similarityName[1:]
-            similarityModule = importlib.import_module(similarityFile)
-            similarityClass = getattr(similarityModule,similarityName)
-            similarityMeasure = similarityClass(dao,similarityFunction['sim_function'])
-            self.similarityDict[similarityMeasure] = similarityFunction['sim_function'].get('weight',0.5)
-        
+            similarityMeasure = self.initializeFromPerspective(dao,similarityFunction)
+            self.similarityDict[similarityMeasure] = similarityFunction['sim_function']
+
     def distance(self,elemA, elemB):
         """Method to obtain the distance between two element.
 
@@ -52,8 +45,12 @@ class ComplexSimilarityDAO(SimilarityDAO):
         """
         complexDistance = 0
         complexWeight = 0
-        for similarity, weight in self.similarityDict.items():
-            simDistance = similarity.distance(elemA,elemB) 
+        for similarity, similarityFunction in self.similarityDict.items():
+            weight = similarityFunction.get('weight',0.5)
+            
+            simDistance = similarity.distance(elemA,elemB)
+            # Different mode (return 1 - originalDistance)
+            simDistance = similarity.dissimilarFlag(simDistance)
             simDistance2 = simDistance * weight
             
             complexDistance += simDistance2
@@ -62,6 +59,7 @@ class ComplexSimilarityDAO(SimilarityDAO):
         complexDistance = complexDistance / complexWeight
         
         return complexDistance
+        
         
 
         
