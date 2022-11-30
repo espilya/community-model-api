@@ -140,8 +140,14 @@ class Handler(BaseHTTPRequestHandler):
             
             for user in users:
                 for perspective in perspectives:
-                    for similarityFunction in perspective['similarity_functions']:
-                        if (similarityFunction['sim_function']['on_attribute']['att_name'] == user['pname']):
+                    for similarityFunction in perspective['similarity_functions'] + perspective['interaction_similarity_functions']:
+                        """
+                        print("checking similarity function")
+                        print("att_name: " + str(similarityFunction['sim_function']['on_attribute']['att_name']))
+                        print("pname: " + str(user['pname']))
+                        """
+                        attributeLabel = user["category"] + "." + user["pname"]
+                        if (similarityFunction['sim_function']['on_attribute']['att_name'] == attributeLabel):
                             flag = {'perspectiveId': perspective['id'], 'userid': user['userid'], 'flag': True}
                             #flag = {'perspectiveId': perspective['id'], 'userid': 'flagAllUsers', 'flag': True}
                             daoFlags.updateFlag(flag)
@@ -336,7 +342,8 @@ def initializeDatabase():
     daoPerspectives = DAO_db_perspectives()
     daoPerspectives.drop()
     
-    route = DataLoader().fileRoute("perspectives/hecht agglomerative.json")
+    #route = DataLoader().fileRoute("perspectives/hecht agglomerative.json")
+    route = DataLoader().fileRoute("perspectives/GAM/GAM similar user emotions in similar artworks (iconclass) annotated-stories.json")
     file = open(route)
     perspectives = json.load(file)
     print(perspectives)
