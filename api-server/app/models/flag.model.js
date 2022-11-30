@@ -21,7 +21,7 @@ module.exports = mongoose => {
       Flags.create(data, function (err, res) {
         if (err) {
           console.log("insertFlag: error");
-          onError(user);
+          onError("insertFlag:" + user);
         }
         else {
           onSuccess(res._id.toString());
@@ -32,8 +32,7 @@ module.exports = mongoose => {
       Flags.findOne({}, function (error, data) {
         // var res = JSON.stringify(data)
         if (error) {
-          console.log("errorHere")
-          onError(error);
+          onError("checkFlag:" + error);
         } else {
           if (data) {
             console.log(data.toJSON())
@@ -50,7 +49,7 @@ module.exports = mongoose => {
       Flags.findOne({ "perspectiveId": id }, { projection: { _id: 0 } }, function (error, data) {
         if (error) {
           console.log("errorHere")
-          onError(error);
+          onError("checkFlagById:" + error);
         } else {
           if (data) {
             console.log(data.toJSON())

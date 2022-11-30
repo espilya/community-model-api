@@ -10,6 +10,7 @@ module.exports = mongoose => {
         ],
       },
       similarity_functions: [{
+        _id: false,
         sim_function: {
           name: String,
           weight: Number,
@@ -24,10 +25,12 @@ module.exports = mongoose => {
         }
       }],
       user_attributes: [{
+        _id: false,
         att_name: String,
         att_type: String
       }],
       interaction_similarity_functions: [{
+        _id: false,
         sim_function: {
           name: String,
           params: [
@@ -45,6 +48,12 @@ module.exports = mongoose => {
       }]
     }, { minimize: false }
   );
+
+  // PRE MIDDLEWARE
+  schema.pre('save', function (next) {
+    this.id = this._id;
+    next();
+  });
 
   schema.method("toJSON", function () {
     const { __v, _id, ...object } = this.toObject();
