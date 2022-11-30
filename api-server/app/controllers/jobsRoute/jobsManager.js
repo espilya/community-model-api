@@ -78,7 +78,7 @@ removeJobWithTimeout = removeTimeout = function (jobId, seconds) {
 
 
 /**
- * Generates non-repeating random job id
+ * Generates non-repeating random 4-digit job id
  * @returns id
  */
 generateId = function (jobId) {
