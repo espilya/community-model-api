@@ -55,7 +55,7 @@
                 "name": "HechtExtendedPlutchikEmotionSimilarityDAO",
                 "params": [],
                 "on_attribute": {
-                    "att_name": "emotion.Exhibition_Curation",
+                    "att_name": "emotion._Exhibition_Curation",
                     "att_type": "String"
                 }
             }
@@ -85,7 +85,7 @@
                 "name": "HechtSentimentSimilarityDAO",
                 "params": [],
                 "on_attribute": {
-                    "att_name": "sentiment.Exhibition_Curation",
+                    "att_name": "sentiment._Exhibition_Curation",
                     "att_type": "String"
                 }
             }
