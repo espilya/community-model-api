@@ -307,18 +307,6 @@ class DAO_db_users(DAO_db):
         # Normal users
         users = self.getUsers()
         
-        # Update 20221130 (users with interaction data)
-        abspath = os.path.dirname(__file__)
-        relpath = "dao_log/users.json"
-        route = os.path.normpath(os.path.join(abspath, relpath))
-        
-        with open(route, "w") as outfile:
-            #json.dump(user_interactions.to_dict('records'), outfile, indent=4)
-            json.dump(users, outfile, indent=4)
-
-        
-        
-        
         data = json.dumps(users)
 
         return pd.read_json(data)
