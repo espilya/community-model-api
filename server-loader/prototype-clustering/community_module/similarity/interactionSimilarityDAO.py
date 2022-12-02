@@ -104,6 +104,9 @@ class InteractionSimilarityDAO(SimilarityDAO):
             # Remove NaN values
             df3 = df3.dropna(subset=[self.interactionAttribute])
             
+            # Remove False emotion
+            
+            
             print("df3 sim column after removing NaN")
             print(df3[['userid', self.similarityColumn]])
             print("\n")
@@ -452,6 +455,7 @@ class InteractionSimilarityDAO(SimilarityDAO):
                     interactionFeatureB = userInteractionB[self.similarityColumn][objectIndexB]
                     
                     """
+                    print("self.interaction similarity measure: " + str(self.interactionSimilarityMeasure))
                     print("interactionFeatureA: " + str(interactionFeatureA))
                     print("interactionFeatureB: " + str(interactionFeatureB))
                     
@@ -552,6 +556,7 @@ class InteractionSimilarityDAO(SimilarityDAO):
             """
             print("distanceTotal (FINAL) (" + str(userInteractionA['userid']) + "; " + str(userInteractionB['userid']) + "): " + str(distanceTotal))
             print("\n\n")
+            
             """
             
              

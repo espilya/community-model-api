@@ -47,7 +47,8 @@ class SimilarityDAO:
         return 1.0
         
     def dissimilarFlag(self, distance):
-        if ('dissimilar' in self.similarityFunction):
+        if ('dissimilar' in self.similarityFunction and self.similarityFunction['dissimilar'] == True):
+            print("apply dissimilar")
             distance = 1 - distance
             
         return distance
