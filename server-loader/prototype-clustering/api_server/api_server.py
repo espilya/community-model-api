@@ -205,9 +205,9 @@ class Handler(BaseHTTPRequestHandler):
             communitiesSimilarityModel = CommunitiesSimilarityModel(perspectiveId,data)
         
         # Delete updated flags (cannot delete the whole collection because new flags may have been added while CM was updating)
-        for flag in flags:
-            # Remove flag
-            daoFlags.deleteFlag(flag)
+        # for flag in flags:
+            # # Remove flag
+            # daoFlags.deleteFlag(flag)
         
     def __set_response(self, code, dataType='text/html'):
         self.send_response(code)
@@ -337,20 +337,53 @@ def clearDatabase():
     daoSimilarities = DAO_db_similarity()
     daoSimilarities.drop()
     
+    daoPerspectives = DAO_db_perspectives()
+    daoPerspectives.drop()
+    
 
 def initializeDatabase():
     daoPerspectives = DAO_db_perspectives()
     daoPerspectives.drop()
     
-    #route = DataLoader().fileRoute("perspectives/hecht agglomerative.json")
-    route = DataLoader().fileRoute("perspectives/GAM/GAM similar user emotions in similar artworks (iconclass) annotated-stories.json")
+    route = DataLoader().fileRoute("perspectives/HECHT/hecht agglomerative.json")
+    #route = DataLoader().fileRoute("perspectives/GAM/GAM similar user emotions in similar artworks (iconclass) annotated-stories.json")
     file = open(route)
     perspectives = json.load(file)
     print(perspectives)
     file.close()
     
+
+    
     daoPerspectives.insertPerspective(perspectives)
 
+
+def importDatabase():
+    route = DataLoader().fileRoute("databases/database.json")
+    file = open(route)
+    database = json.load(file)
+    
+    for key in database:
+        for data in database[key]:
+            data.pop("_id", "")
+
+    # daos
+    daoFlags = DAO_db_flags()
+    daoSimilarities = DAO_db_similarity()
+    daoCommunities = DAO_db_community()
+    daoUsers = DAO_db_users()
+    daoPerspectives = DAO_db_perspectives()
+    daoMatrixes = DAO_db_distanceMatrixes()
+    
+    #daoFlags.insertFlag(database['flags'])
+    #daoSimilarities.insertSimilarity(database['similarities'])
+    for data in database['communitiesVisualization']:
+        daoCommunities.insertFileList("", data)
+    daoUsers.insertUser(database['users'])  
+    daoPerspectives.insertPerspective(database['perspectives']) 
+    daoMatrixes.insertDistanceMatrix(database['distanceMatrixes'])       
+        
+    
+    
 if __name__ == '__main__':
     from sys import argv
     
@@ -358,9 +391,12 @@ if __name__ == '__main__':
     #removeData()
     #importData()
     
+    
     # To prepare things
-    clearDatabase()
-    initializeDatabase()
+    #clearDatabase()
+    # initializeDatabase()
+    
+    #importDatabase()
 
     if len(argv) == 2:
         run(port=int(argv[1]))
