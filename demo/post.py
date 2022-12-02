@@ -1,7 +1,6 @@
 from context import dao
 # First one is for local, second one for remote.
 from dao.dao_api import DAO_api
-from dao.dao_api_remote import DAO_api_remote
 
 import requests
 
@@ -25,6 +24,9 @@ def main():
     
     museum = 'HECHT'
     filename = 'linked data hub.json'
+    
+    museum = 'GAM'
+    filename = 'ugcUsers.json'
     
     #--------------------------------------------------------------------------------------------------------------------------
     #    Read data
