@@ -1,5 +1,0 @@
-userid,ParticipantType,School,RHMSPrep,RHMSPost,RHMSChange,AOTPrep,AOTPost,AOTChange,beliefR,beliefJ,beliefE,DemographicsEducationType,DemographicsGender,DemographicsGrade,DemographicsIdentity,DemographicsPolitics,DemographicsReligous
-AL122986,2,AL,3.875,4.25,0.375,3.692307692,2.538461538,-1.153846154,FRealisticNeg,CantJudge,Balanced,GJ,F,11,J,R,M
-AL125076,2,AL,4.625,4.25,-0.375,3.923076923,2.769230769,-1.153846154,FRealisticNeg,NotTraitor,Oppose,GJ,M,11,J,R,S
-AL125209,2,AL,5.625,4.375,-1.25,4.461538462,3.307692308,-1.153846154,CRealisticPro,CantJudge,NoOpinion,GJ,M,11,J,VR,M
-AL127150,2,AL,4.875,4.75,-0.125,4.076923077,3.384615385,-0.692307692,FRealisticNeg,NotTraitor,NoOpinion,GJ,M,11,J,L,S
