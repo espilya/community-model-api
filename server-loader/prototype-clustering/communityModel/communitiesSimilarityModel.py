@@ -151,8 +151,12 @@ class CommunitiesSimilarityModel():
         """
         
         userList = self.data['userid'].to_list()
-        dmIndexA = userList.index(medoidA)
-        dmIndexB = userList.index(medoidB)
+        try:
+            dmIndexA = userList.index(medoidA)
+            dmIndexB = userList.index(medoidB)
+        except Exception as e:
+            dmIndexA = len(userList) + 5
+            dmIndexB = len(userList) + 5
         
         """
         print("index 1: " + str(dmIndexA))
@@ -170,9 +174,15 @@ class CommunitiesSimilarityModel():
         print("\n")
         """
         
-        distanceA = distanceMatrixA[dmIndexA,dmIndexB]
-        distanceB = distanceMatrixB[dmIndexA,dmIndexB]
-        
+        # Distance matrixes should also save the userid to avoid this.
+        try:
+            distanceA = distanceMatrixA[dmIndexA,dmIndexB]
+            distanceB = distanceMatrixB[dmIndexA,dmIndexB]
+        except Exception as e:
+            distanceA = 1.0
+            distanceB = 1.0
+            
+            
         """
         print("distanceA: " + str(distanceA))
         print("distanceB: " + str(distanceB))
