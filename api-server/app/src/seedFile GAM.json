@@ -203,7 +203,7 @@
     ],
     "user_attributes": [
         {
-            "att_name": "demographics.gender",
+            "att_name": "demographics.Gender",
             "att_type": "String"
         },
         {
