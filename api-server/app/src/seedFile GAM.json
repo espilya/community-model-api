@@ -1,0 +1,30 @@
+{
+    "artwork_attributes": [
+        
+    ],
+    "user_attributes": [
+        {
+            "att_name": "demographics.gender",
+            "att_type": "String"
+        },
+        {
+            "att_name": "demographics.Age",
+            "att_type": "String"
+        },
+        {
+            "att_name": "demographics.RelationshipWithArt",
+            "att_type": "String"
+        },
+        {
+            "att_name": "demographics.RelationshipWithMuseum",
+            "att_type": "String"
+        },
+        {
+            "att_name": "demographics.ContentInLIS",
+            "att_type": "String"
+        }
+    ],
+    "interaction_similarity_functions": [
+
+    ]
+}
