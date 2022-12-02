@@ -38,9 +38,19 @@ Are implemented using [Python](https://www.python.org)
 
 ## Demo
 
-Demo files are located inside /Demo folder. There are 2 demo files. \
-Test 0: Makes Posts requests with users from one if the data file.  \
-Test 1: Makes Get request to communities and Get request to monitor the job status.
+Demo files are located inside /demo folder. There are 4 demo files. \
+post.py: Makes Posts requests with user demographic data.
+postContribution.py: Makes Posts requests with user contribution data.
+postPerspective.py: Makes Posts requests with perspective data.
+get.py: Makes Get request to communities and monitors the job status.
+
+Data examples can be found inside /demo/data folder. Additionally, database files numerated from previous to oldest state are also provided for quick import.
+Perspective examples can be found inside /demo/perspectives folder.
+
+## Configuration for Case Studies
+
+Configuration seed files can be found inside /api-server/app/src folder. To change it, please update seedFile.json.
+Artwork data can be found inside /server-loader/prototype-clustering/communityModel/data folder. To change it, please update artworks.json.
 
 ## Api Reference
 
