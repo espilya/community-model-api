@@ -10,6 +10,8 @@ class DAO():
         self.data = ""
         self.route = route
         self.extractData()
+        
+        print("self.route: " + str(self.route))
 
 
     def extractData(self):
@@ -23,6 +25,9 @@ class DAO():
         return self.data
 
     def getPandasDataframe(self):
+        print("data: ")
+        print(self.data)
+        print("\n\n")
         return pd.read_json(self.data)
     
 

@@ -13,6 +13,7 @@ mine
 """
 import pandas as pd
 import json
+import os
 
 
 class DAO_db_users(DAO_db):
@@ -39,7 +40,8 @@ class DAO_db_users(DAO_db):
             "id": "xxx",
             "userid": "xxx",
             "origin": "xxx",
-            "source_id": "xxx"
+            "source_id": "xxx",
+            "category": "xxx",
         }
         self.templateFull = {
             "id": "xxx",
@@ -50,12 +52,14 @@ class DAO_db_users(DAO_db):
             "pname": "xxx",
             "pvalue": "xxx",
             "context": "xxx",  # Not required
-            "datapoints": "xxx"  # Not required
+            "datapoints": "xxx",  # Not required
+            "category": "xxx",
         }
         self.templateWithoutP = {
             "id": "xxx",
             "userid": "xxx",
             "origin": "xxx",
+            "category": "xxx",
             "source_id": "xxx",
             "source": "xxx",  # Not required
             "context": "xxx",  # Not required
@@ -71,11 +75,18 @@ class DAO_db_users(DAO_db):
         :Parameters:
             userJSON: JSON value, Type: json <class 'dict'> OR List(<class 'dict'>)
         """
+        """
         if type(userJSON) is list:
             self.__insertMany(userJSON)
         else:
             self.__insertOne(userJSON)
-
+        """
+        temp = copy(userJSON)
+        if type(temp) is list:
+            self.db_users.insert_many(temp)
+        else:
+            self.db_users.insert_one(temp)
+        
     def __insertOne(self, userJSON):
         """
             For every value that the user has, it inserts one document with that value as pname and pvalue
@@ -167,6 +178,21 @@ class DAO_db_users(DAO_db):
             # pname and pvalue
             for item in data:
                 user[item["pname"]] = item["pvalue"]
+                
+            # Update 20221130 (Alan new data & GAM interaction data)
+            # There can be identical pname for different values. Now, it requires category + pname
+            # If the attribute is an interaction_attribute (origin != userid), create two list attributes: category.pname_id (with the ids documented in origin) and category.pname (attribute value)
+            for item in data:
+                attributeLabel = item["category"] + "." + item["pname"]
+                if (item["origin"] != item["userid"]):
+                    if (attributeLabel not in user):
+                        user[attributeLabel] = []
+                        user[attributeLabel + "_origin"] = []
+                    
+                    user[attributeLabel].append(item["pvalue"])
+                    user[attributeLabel + "_origin"].append(item["origin"])
+                else:
+                    user[attributeLabel] = item["pvalue"]
 
         return user
 
@@ -278,7 +304,21 @@ class DAO_db_users(DAO_db):
         mine
     """
     def getPandasDataframe(self):
+        # Normal users
         users = self.getUsers()
+        
+        # Update 20221130 (users with interaction data)
+        abspath = os.path.dirname(__file__)
+        relpath = "dao_log/users.json"
+        route = os.path.normpath(os.path.join(abspath, relpath))
+        
+        with open(route, "w") as outfile:
+            #json.dump(user_interactions.to_dict('records'), outfile, indent=4)
+            json.dump(users, outfile, indent=4)
+
+        
+        
+        
         data = json.dumps(users)
 
         return pd.read_json(data)
