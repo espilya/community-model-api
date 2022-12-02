@@ -20,7 +20,8 @@ class IconClassSimilarityDAO(SimilarityDAO):
 
     def elemLayer(self,elem):
         return len(elem)
-        
+    
+    """
     def getIconClassList2(self,iconClassString):
         iconClassList = iconClassString.split("; ")
         iconClassList = [iconClass.split(" ")[0] for iconClass in iconClassList if iconClass]
@@ -29,6 +30,8 @@ class IconClassSimilarityDAO(SimilarityDAO):
     def getIconClassList(self, elem):
         iconClassString = self.data.loc[elem][self.similarityColumn]
         return self.getIconClassList2(iconClassString)
+    
+    """
     
     def taxonomyDistance(self,elemA,elemB):
         """Method to obtain the distance between two taxonomy members.
@@ -132,9 +135,26 @@ class IconClassSimilarityDAO(SimilarityDAO):
         if (elemA != elemB or self.data.loc[elemA]['_id'] != '35433'):
             return 1.0
         """
-            
+         
+        """
         iconClassListA = self.getIconClassList(elemA)
         iconClassListB = self.getIconClassList(elemB)
+        """
+        
+        """
+        print("icon class distance")
+        print("elemA: " + str(elemA) + " ; " + "elemB: " + str(elemB))
+        """
+        
+        iconClassListA = self.data.loc[elemA][self.similarityColumn]
+        iconClassListB = self.data.loc[elemB][self.similarityColumn]
+        
+        """
+        print("iconclassListA: " + str(iconClassListA))
+        print("iconclassListB: " + str(iconClassListB))
+        print("\n")
+        """
+        
         
         # Set largest list to be A and the other B
         if (len(iconClassListB) > len(iconClassListA)):
@@ -172,10 +192,11 @@ class IconClassSimilarityDAO(SimilarityDAO):
     
     def dominantValue(self, iconClassListA, iconClassListB):
         explainable_iconclassValues = []
-
+        
+        """
         iconClassListA = self.getIconClassList2(iconClassListA)
         iconClassListB = self.getIconClassList2(iconClassListB)
-
+        """
         
         try:
             

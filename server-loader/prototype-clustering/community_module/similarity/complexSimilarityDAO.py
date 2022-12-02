@@ -41,13 +41,28 @@ class ComplexSimilarityDAO(SimilarityDAO):
             weight = similarityFunction.get('weight',0.5)
             
             simDistance = similarity.distance(elemA,elemB)
+            
+            """
+            print("similarity: " + str(similarity))
+            print("similarityFunction: " + str(similarityFunction))
+            print("elemA: " + str(self.data.loc[elemA]['userid']))
+            print("elemB: " + str(self.data.loc[elemB]['userid']))
+            print("sim distance: " + str(simDistance))
+            print("\n")
+            """
+            
             # Different mode (return 1 - originalDistance)
             simDistance = similarity.dissimilarFlag(simDistance)
             simDistance2 = simDistance * weight
             
             complexDistance += simDistance2
             complexWeight = complexWeight + weight 
-
+            
+        # print("complexDistance: " + str(complexDistance))
+        
         complexDistance = complexDistance / complexWeight
+        
+        # print("complexDistance: " + str(complexDistance))
+        # print("\n")
         
         return complexDistance

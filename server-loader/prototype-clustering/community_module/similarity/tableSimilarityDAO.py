@@ -28,10 +28,11 @@ class TableSimilarityDAO(SimilarityDAO):
         """
         super().__init__(dao)
         self.similarityCol = similarityFunction['on_attribute']['att_name']
-
+        self.getSimilarityTable()
+        
+    def getSimilarityTable(self):
         dao_csv = DAO_csv(os.path.dirname(os.path.abspath(getsourcefile(lambda:0))) + "/distanceTables/" + self.similarityCol + ".csv")
         self.similarityTable = dao_csv.getPandasDataframe().set_index('Key')
-        
     
     def distance(self,elemA, elemB):
         """
