@@ -102,4 +102,34 @@ exports.getJobs = getJobs
 exports.addJob = addJob;
 exports.removeJob = removeJob;
 exports.removeJobWithTimeout = removeJobWithTimeout;
-exports.generateId = generateId; 
+exports.generateId = generateId;
+
+
+
+// Refactoring for future
+
+/*
+
+var map = {};
+
+map[Date.now()] = ['a', 'b'];
+console.log(map);
+
+setTimeout(function() {
+  map[Date.now()] = ['c', 'd'];
+  console.log(map);
+}, 5000);
+
+setInterval(function() {
+  var times = Object.keys(map);
+  
+  times.forEach(function(time) {
+    if(Date.now() > (+time + 14000)) {
+      delete map[time];
+    }
+  });
+  
+  console.log(map);
+}, 1000);
+
+*/

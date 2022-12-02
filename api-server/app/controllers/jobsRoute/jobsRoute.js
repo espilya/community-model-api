@@ -134,7 +134,7 @@ router.get('/:job_id', function (req, res, next) {
         // }
         // Checks for specific flag
         let filter = ["getPerspectives", "getCommunities", "getFilesIndex"]
-        if (request in filter) {
+        if (filter.includes(request)) {
             Flags.getFlags()
                 .then(function (data) {
                     if (data == null) {
