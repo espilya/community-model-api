@@ -205,9 +205,9 @@ class Handler(BaseHTTPRequestHandler):
             communitiesSimilarityModel = CommunitiesSimilarityModel(perspectiveId,data)
         
         # Delete updated flags (cannot delete the whole collection because new flags may have been added while CM was updating)
-        # for flag in flags:
-            # # Remove flag
-            # daoFlags.deleteFlag(flag)
+        for flag in flags:
+            # Remove flag
+            daoFlags.deleteFlag(flag)
         
     def __set_response(self, code, dataType='text/html'):
         self.send_response(code)
@@ -393,8 +393,8 @@ if __name__ == '__main__':
     
     
     # To prepare things
-    #clearDatabase()
-    # initializeDatabase()
+    # clearDatabase()
+    #initializeDatabase()
     
     #importDatabase()
 
