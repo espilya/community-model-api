@@ -1,4 +1,5 @@
 import json
+import requests
 
 def main():
 
@@ -12,11 +13,11 @@ def main():
     #    Change data file
     #--------------------------------------------------------------------------------------------------------------------------
     
-    museum = 'HECHT'
-    filename = 'hecht3.json'
+    museum = 'GAM'
+    filename = 'gam1.json'
 
     #--------------------------------------------------------------------------------------------------------------------------
-    #    Read HECHT user data: all users except the last one
+    #    Insert perspective
     #--------------------------------------------------------------------------------------------------------------------------
 
     route = "perspectives/" + museum + "/" + filename

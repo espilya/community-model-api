@@ -1,9 +1,4 @@
-from context import dao
-# First one is for local, second one for remote.
-from dao.dao_api import DAO_api
-
 import requests
-
 import json
 
 #--------------------------------------------------------------------------------------------------------------------------
@@ -21,12 +16,9 @@ def main():
     #--------------------------------------------------------------------------------------------------------------------------
     #    Change data file
     #--------------------------------------------------------------------------------------------------------------------------
-    
+
     museum = 'HECHT'
-    filename = 'linked data hub.json'
-    
-    museum = 'GAM'
-    filename = 'ugcUsers.json'
+    filename = 'linkedDataHub.json'
     
     #--------------------------------------------------------------------------------------------------------------------------
     #    Read data
@@ -42,7 +34,6 @@ def main():
     
     postDict = data
 
-    postDictKeys = ["English translation", "plutchik_emotions"]
     postDictKeys = postDict.keys()
     for userid in postDictKeys:
         userArray = postDict[userid]
