@@ -23,25 +23,32 @@ class CommunityJsonGenerator:
         self.community_detection = community_detection
         self.perspective = perspective
         
+        """
+        print("community json generator")
+        print("artworks dominant")
+        print(self.json_df['dominantArtworksDominantInteractionGenerated'].tolist())
+        print(self.json_df.columns)
+        print("artworks dominant community")
+        print(self.json_df['community_dominantArtworks'].tolist())
+        """
+        
+        
+        
         # Adapt self.json_df
-        self.json_df['id'] = self.json_df['user']
-        self.json_df['label'] = self.json_df['user']
+        #print(self.json_df)
+        self.json_df['userid'] = self.json_df['userid']
+        self.json_df['label'] = self.json_df['userid']
         self.json_df['group'] = communityDict['users'].values()
         self.json_df['explicit_community'] = self.json_df[communityDict['userAttributes']].to_dict(orient='records')
-        #self.generateUserInteractionColumnMaster()
+        self.json_df['community_dominantArtworks'] = [[] for _ in range(len(self.json_df))]
         
-        if (len(self.perspective['interaction_similarity_functions']) > 0):
-            self.generateUserInteractionColumn()
-        else:
-            #self.json_df['interactions'] = [{}] * self.json_df.shape[0
-            self.json_df['interactions'] = [[]] * self.json_df.shape[0]
-
-                                                   
-        """
+        
         # Extra to make it work with Marco Visualization
+        #self.io_df['year'] = self.io_df['year'].astype(str)
+        """
         self.io_df['Year'] = self.io_df['Year'].astype(str)
         
-        self.io_df.rename(columns = {'_id':'id'}, inplace = True)
+        self.io_df.rename(columns = {}, inplace = True)
         self.io_df.rename(columns = {'Title':'tittle'}, inplace = True)
         self.io_df.rename(columns = {'Author':'author'}, inplace = True)
         self.io_df.rename(columns = {'Year':'year'}, inplace = True)
@@ -57,7 +64,7 @@ class CommunityJsonGenerator:
         
         #return {
     
-    def generateUserInteractionColumnMaster(self):
+    def generateUserMaster(self):
         # Get IO_attributes
         IO_id = self.perspective['interaction_similarity_functions'][0]['sim_function']['interaction_object']['att_name']
         IO_similarityFeatures = [IO_id]
@@ -119,11 +126,54 @@ class CommunityJsonGenerator:
         
         #user_interactions = self.json_df.apply(lambda row: list(map(self.generateDict, list(zip(row[IO_id], row['emotions'])))), axis = 1)
         self.json_df['interactions'] = user_interactions
+      
+    
+    def generateUserCommunityInteractions(self, row):
+        # Get community dominant artworks
+        dominantArtworks = row['community_dominantArtworks']
         
-        
-    def generateUserInteractionColumn(self):
-        # Get interaction columns
+        """
+        # Get IO_id
         IO_id = self.perspective['interaction_similarity_functions'][0]['sim_function']['interaction_object']['att_name']
+        
+        # Get similarity features
+        IO_similarityFeatures = []
+        for similarity_function in self.perspective['interaction_similarity_functions']:
+            IO_similarityFeature = similarity_function['sim_function']['on_attribute']['att_name']
+            IO_similarityFeatures.append(IO_similarityFeature)
+        """
+        
+        # NEW ONE
+        self.interactionAttribute = self.perspective['interaction_similarity_functions'][0]['sim_function']['on_attribute']['att_name']
+        self.interactionAttributeOrigin = self.interactionAttribute + "_origin"
+        self.interactionAttributeText = self.interactionAttribute.rsplit(".",1)[0] + ".text"
+
+        # Get trilogy associated to dominant artworks (artworkId, itMakesMeThinkAbout, itMakesMeThinkAbout.emotions)
+        userCommunityInteractions = []
+        print("row IO_id: " + str(row[self.interactionAttributeOrigin]))
+        print("\n\n")
+        for artworkId in dominantArtworks:
+            artworkIndex = row[self.interactionAttributeOrigin].index(artworkId)
+            
+        
+            communityInteraction = self.generateDict([artworkId, row[self.interactionAttribute][artworkIndex], row[self.interactionAttributeText][artworkIndex]])
+            userCommunityInteractions.append(communityInteraction)
+            #{'artwork_id': str(element[0]), 'feelings': element[2], 'extracted_emotions': element[1]} 
+        
+        return userCommunityInteractions
+        
+    
+    def generateUserCommunityInteractionsColumn(self):
+        user_interactions = self.json_df.apply(lambda row: self.generateUserCommunityInteractions(row), axis = 1)
+        return user_interactions
+
+        
+    def generateUserInteractionColumn(self, IO_id = ""):
+        """
+        OLD ONE
+        # Get interaction columns
+        if IO_id == "":
+            IO_id = self.perspective['interaction_similarity_functions'][0]['sim_function']['interaction_object']['att_name']
         IO_similarityFeatures = []
         for similarity_function in self.perspective['interaction_similarity_functions']:
             IO_similarityFeature = similarity_function['sim_function']['on_attribute']['att_name']
@@ -134,11 +184,21 @@ class CommunityJsonGenerator:
         IO_columns.append(IO_id)
         IO_columns.extend(IO_similarityFeatures)
         print("IO_columns: " + str(IO_columns))
+        """
+        
+        # NEW ONE
+        self.interactionAttribute = self.perspective['interaction_similarity_functions'][0]['sim_function']['on_attribute']['att_name']
+        self.interactionAttributeOrigin = self.interactionAttribute + "_origin"
+        self.interactionAttributeText = self.interactionAttribute.rsplit(".",1)[0] + ".text"
             
-        user_interactions = self.json_df.apply(lambda row: list(map(self.generateDict, list(zip(row[IO_id], row[IO_similarityFeatures[0]], row['ItMakesMeFeel'])))), axis = 1)
+        #user_interactions = self.json_df.apply(lambda row: list(map(self.generateDict, list(zip(row[IO_id], row[IO_similarityFeatures[0]], row['itMakesMeThinkAbout'])))), axis = 1)
+        user_interactions = self.json_df.apply(lambda row: list(map(self.generateDict, list(zip(row[self.interactionAttributeOrigin], row[self.interactionAttribute], row[self.interactionAttributeText])))), axis = 1)
+        
+        
+        
         #user_interactions = self.json_df.apply(lambda row: list(map(self.generateDict, list(zip(row[IO_id], row['emotions'])))), axis = 1)
         
-        self.json_df['interactions'] = user_interactions
+        return user_interactions
         
         
         """
@@ -174,6 +234,31 @@ class CommunityJsonGenerator:
         self.communityJson = {}
         
         self.communityJSON()
+        
+        if (self.containsInteractions()):
+            # Generate interactions column used in self.userJSON()
+            #self.generateUserInteractionColumnMaster()
+            self.json_df['interactions'] = self.generateUserInteractionColumn()
+            
+            """
+            print("checking dominantArtworks")
+            print(self.json_df[['userName','community_dominantArtworks']])
+            print("\n")
+            """
+            
+            # Generate interactions with the artworks used for detecting the community (artworks similar to other members of the community)
+            self.json_df['community_interactions'] = self.generateUserCommunityInteractionsColumn()
+            
+            # Remove from interactions the ones that are in community_interactions
+            # https://stackoverflow.com/questions/35187165/python-how-to-subtract-2-dictionaries
+            #self.json_df['no_community_interactions'] = self.json_df.apply(lambda row:  all(map( row['interactions'].pop, row['community_interactions'] ))    , axis = 1)
+            self.json_df['no_community_interactions'] = self.json_df.apply(lambda row:  [ i for i in row['interactions'] if i not in row['community_interactions'] ]    , axis = 1)
+        else:
+            self.json_df['interactions'] = [[] for _ in range(len(self.json_df))]
+            self.json_df['community_interactions'] = [[] for _ in range(len(self.json_df))]
+            self.json_df['no_community_interactions'] = [[] for _ in range(len(self.json_df))]
+        
+        
         self.userJSON()
         self.similarityJSON()
         self.interactionObjectJSON()
@@ -204,7 +289,6 @@ class CommunityJsonGenerator:
         
     def communityJSON(self):
         self.skipPropertyValue = False
-        
         
         
         # Community Data
@@ -254,21 +338,64 @@ class CommunityJsonGenerator:
                         #communityPropertiesList.append("'" + str(k) + "'"  + ': ' + "'" + str(community_data['explanation'][0][k]) + "'")
                         #communityPropertiesList.append(community_data['explanation'][0][k])
                         
+                        print("implicit attribute explanations")
+                        print(community_data['explanation'][key])
+                        print(community_data['explanation'][key]['explanation'])
+                        print("\n")
                         
-                        keyValueList = community_data['explanation'][key].split("\n")
-                        print("keyValueList: " + str(keyValueList))
+                        #keyValueList = community_data['explanation'][key].split("\n")
+                        keyValueList = community_data['explanation'][key]['explanation'].split("\n")
+                        
+                        percentageTotal = 0
+                        
+                        #print("keyValueList: " + str(keyValueList))
                         for keyValue in keyValueList:
                             pattern = r'\W+'
                             # empty character " " one or more times
                             pattern = r'\s+'
+                            
+                            """
                             #keyValueSplit = keyValue.split("    ")
-                            keyValueSplit = re.split(pattern, keyValue)
+                            #keyValueSplit = re.split(pattern, keyValue)
+                            keyValueSplit = keyValue.rsplit(" ",1)
+                            print("keyValueList 2: " + str(keyValueSplit))
+                            
                             key2 = keyValueSplit[0]
-                            value = keyValueSplit[1]
+                            key2 = re.split(pattern, key2, 2)
+                            print("key2 : " + str(key2))
+                            key2 = key2[0]
+                            """
+                            
+                            keyValueSplit = re.split(pattern, keyValue)
+                            indexes = range(len(keyValueSplit) - 1)
+                            keySublist = [keyValueSplit[index] for index in indexes]
+                            key2 = " ".join(keySublist)
+                            
+                            
+                            #key2 = keyValueSplit[0]
+                            value = keyValueSplit[-1]
                             value = float(value)
+                            value = value * 100
+                            value = int(value)
+                            value = value / 100
+                            percentageTotal += value
+                            
+                            #print("keyValueSplit: " + str(keyValueSplit))
+                            #print("key2:" + str(key2) + "  ;  " + "value: " + str(value))
                             communityPropertiesDict[key2] = value
+                            
+                        if (percentageTotal != 100 and percentageTotal > 0):
+                            #print("percentage total is different than 100: " + str(percentageTotal))
+                            value = communityPropertiesDict[key2]
+                            newValue = value + 100 - percentageTotal
+                            newValue = newValue * 100
+                            newValue = int(newValue)
+                            newValue = newValue / 100
+                            communityPropertiesDict[key2] = newValue
                         
-                        implicitPropertyExplanations[key] = communityPropertiesDict
+                        implicitPropertyExplanations[key] = dict()
+                        implicitPropertyExplanations[key]['label'] = community_data['explanation'][key]['label']
+                        implicitPropertyExplanations[key]['explanation'] = communityPropertiesDict
                 
                 
                 # Implicit attribute (explanation)
@@ -278,8 +405,12 @@ class CommunityJsonGenerator:
                     explanationJson['explanation_type'] = 'implicit_attributes'
                     explanationJson['explanation_data'] = {}
                     
-                    explanationJson['explanation_data']['label'] = 'Percentage distribution of the implicit attribute ' + "(" + implicitAttribute + ")" + ":"
-                    explanationJson['explanation_data']['data'] = implicitPropertyExplanations[implicitAttribute]
+                    #explanationJson['explanation_data']['label'] = 'Percentage distribution of the implicit attribute ' + "(" + implicitAttribute + ")" + ":"
+                    #explanationJson['explanation_data']['data'] = implicitPropertyExplanations[implicitAttribute]
+                    
+                    explanationJson['explanation_data']['label'] = implicitPropertyExplanations[implicitAttribute]['label']
+                    explanationJson['explanation_data']['data'] = implicitPropertyExplanations[implicitAttribute]['explanation']
+                    
 
                     explanationJson['visible'] = True
                     
@@ -301,9 +432,37 @@ class CommunityJsonGenerator:
                 # add it to communities
                 self.communityJson['communities'].append(communityDictionary)
                 
+                print("community " + str(communityDictionary['id']))
+                print("members: " + str(community_data['members']))
+                print("\n")
+                
                 # Update the group to which the users belong
-                self.json_df.loc[ self.json_df['id'].isin(community_data['members']), 'group'] = len(self.communityJson['communities']) - 1
-                    
+                self.json_df.loc[ self.json_df['userid'].isin(community_data['members']), 'group'] = len(self.communityJson['communities']) - 1
+                
+                # Update the user's interacted artworks which have been considered to detect the community
+                if (self.containsInteractions()):
+                    aux_df = community_data['data'].copy().set_index('real_index')[['community_' + 'dominantArtworks']]
+                    self.json_df.update(aux_df)
+                
+
+
+                
+                """
+                
+                community_json_df = self.json_df.loc[ self.json_df['id'].isin(community_data['members']) ]
+                print("Community_json_df")
+                print(community_json_df[['community_' + 'dominantArtworks']])
+                print("\n")
+                community_json_df['community_dominantArtworks'] = community_data['data']['community_dominantArtworks']
+                community_json_df.loc['community_dominantArtworks']
+                #deaf_users.loc[deaf_users[column] == italianValue,  column] = englishValue
+                print("Community_json_df (after assignment)")
+                print(community_json_df[['community_' + 'dominantArtworks']])
+                print("\n")
+                
+                self.json_df.loc[ self.json_df['id'].isin(community_data['members']), 'community_dominantArtworks'] = community_data['data']['community_dominantArtworks']
+                """
+                
             else:
                 usersWithoutCommunity.extend(community_data['members'])
         
@@ -312,24 +471,28 @@ class CommunityJsonGenerator:
         # Add users without community
         if (len(usersWithoutCommunity) > 0):
             communityJson = {}
-            communityJson['id'] = self.communityDict['perspective']['id'] + "-" + str(len(self.communityJson['communities'])) #+ '-(Users_without_community)'
+            communityJson['id'] = self.communityDict['perspective']['id'] + "-" + str(len(self.communityJson['communities'])) + ' (Users without community)'
             communityJson['perspectiveId'] = self.communityDict['perspective']['id']
             communityJson['community-type'] = 'inexistent'
             communityJson['name'] = 'Community ' + str(len(self.communityJson['communities'])) + ' (Users without community)'
             communityJson['explanations'] = []
             communityJson['users'] = usersWithoutCommunity
             
-            # Add a dummy medoid for integration purposes
-            medoid = usersWithoutCommunity[0]
-            medoidJson = {'explanation_type': 'medoid', 'explanation_data': {'id': medoid}, 'visible': False}
+            # medoid (set first one for now since it is not a real community)
+            medoidJson = {'explanation_type': 'medoid', 'explanation_data': {'id': usersWithoutCommunity[0]}, 'visible': True}
             communityJson['explanations'].append(medoidJson)
             
             self.communityJson['communities'].append(communityJson)
         
         # Update the group value for the users not belonging to any community
-        self.json_df.loc[ self.json_df['id'].isin(usersWithoutCommunity), 'group'] = len(self.communityJson['communities']) - 1
+        self.json_df.loc[ self.json_df['userid'].isin(usersWithoutCommunity), 'group'] = len(self.communityJson['communities']) - 1
       
 
+        """
+        print("community_dominantArtworks")
+        print(self.json_df['community_dominantArtworks'])
+        print("\n")
+        """
 
 
       
@@ -337,7 +500,13 @@ class CommunityJsonGenerator:
     def userJSON(self):
         # User Data
         self.communityJson["users"] = []
-        self.communityJson['users'] = self.json_df[['id','label','group','explicit_community','interactions']].to_dict('records')
+        #self.communityJson['users'] = self.json_df[['id','label','group','explicit_community','interactions']].to_dict('records')
+        
+        df = self.json_df.copy()
+        df['id'] = df['userid']
+        
+        self.communityJson['users'] = df[['id','label','group','explicit_community','interactions', 'community_interactions', 'no_community_interactions']].to_dict('records')
+        
         #self.communityJson
     
     def similarityJSON(self):
@@ -354,33 +523,39 @@ class CommunityJsonGenerator:
                 self.communityJson['similarity'].append(dicti)           
                     
     def interactionObjectJSON(self):
-        # https://www.leocon.dev/blog/2021/09/how-to-flatten-a-python-list-array-and-which-one-should-you-use/
-        # self.io_df2 = self.io_df.filter(regex = '^(?!.*timestamp).*$')
-        # key = 'IdArtefact'
-        #key = 'artworkId'
-        if (len(self.perspective['interaction_similarity_functions']) > 0):
+        if (self.containsInteractions()):
+            # https://www.leocon.dev/blog/2021/09/how-to-flatten-a-python-list-array-and-which-one-should-you-use/
+            # self.io_df2 = self.io_df.filter(regex = '^(?!.*timestamp).*$')
+            # key = 'IdArtefact'
+            #key = 'id'
             key = self.perspective['interaction_similarity_functions'][0]['sim_function']['interaction_object']['att_name']
             
             """
             print("interaction object json part")
             print("key: " + str(key))
             """
-
-
             
-            interactedIO = self.json_df[key].tolist()
+            # NEW ONE
+            self.interactionAttribute = self.perspective['interaction_similarity_functions'][0]['sim_function']['on_attribute']['att_name']
+            self.interactionAttributeOrigin = self.interactionAttribute + "_origin"
+            self.interactionAttributeText = self.interactionAttribute.rsplit(".",1)[0] + ".text"
+     
+            interactedIO = self.json_df[self.interactionAttributeOrigin].tolist()
             interactedIO = list(sum(interactedIO, []))
             interactedIO = list(map(str, interactedIO))
             
             # @id is for ints
-            io_df2 = self.io_df[self.io_df['id'].isin(interactedIO)]
+            aux_df = self.io_df.copy()
+            aux_df['id'] = self.io_df['id'].astype(str)
+            
+            io_df2 = aux_df[aux_df['id'].isin(interactedIO)]
             self.communityJson['artworks'] = io_df2.to_dict('records')
         else:
             self.communityJson['artworks'] = []
-        
 
         
-    
+    def containsInteractions(self):
+        return len(self.perspective['interaction_similarity_functions']) > 0
             
             
             
