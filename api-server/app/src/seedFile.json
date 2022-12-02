@@ -25,7 +25,7 @@
                 "name": "EqualSimilarityDAO",
                 "params": [],
                 "on_attribute": {
-                    "att_name": "Author",
+                    "att_name": "author",
                     "att_type": "String"
                 }
             }
@@ -35,7 +35,7 @@
                 "name": "NumberSimilarityDAO",
                 "params": [],
                 "on_attribute": {
-                    "att_name": "Year",
+                    "att_name": "year",
                     "att_type": "float"
                 }
             }

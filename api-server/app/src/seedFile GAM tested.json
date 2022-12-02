@@ -25,7 +25,7 @@
                 "name": "EqualSimilarityDAO",
                 "params": [],
                 "on_attribute": {
-                    "att_name": "author",
+                    "att_name": "Author",
                     "att_type": "String"
                 }
             }
@@ -35,7 +35,7 @@
                 "name": "NumberSimilarityDAO",
                 "params": [],
                 "on_attribute": {
-                    "att_name": "year",
+                    "att_name": "Year",
                     "att_type": "float"
                 }
             }
@@ -231,21 +231,6 @@
             ],
             "on_attribute": {
               "att_name": "interest.itMakesMeThinkAbout.emotions",
-              "att_type": "dict"
-            },
-            "interaction_object": {
-              "att_name": "id",
-              "att_type": "String"
-            }
-          }
-        },
-        {
-          "sim_function": {
-            "name": "SentimentSimilarityDAO",
-            "params": [
-            ],
-            "on_attribute": {
-              "att_name": "interest.itMakesMeThinkAbout.sentiment",
               "att_type": "dict"
             },
             "interaction_object": {
