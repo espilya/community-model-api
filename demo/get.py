@@ -28,13 +28,10 @@ def main():
         # When the CM stops updating, the job will change to status (COMPLETED) and include the requested data.
         while jobStatus != 'COMPLETED':
             wait(2)
-            print("jobStatus: " + str(jobStatus))
             
             jobResponse = daoAPI.jobDescription(jobId)
             jobStatus = jobResponse[0]['job']['job-state']
-        
-        print("jobStatus finished: " + str(jobStatus))
-        
+                
         # Retrieve requested data from the job json object
         requestedData = jobResponse[0]['job']['data']
         
