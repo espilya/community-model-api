@@ -1,8 +1,3 @@
-from context import dao
-# First one is for local, second one for remote.
-from dao.dao_api import DAO_api
-
-
 import json
 
 def main():
@@ -27,11 +22,8 @@ def main():
     route = "perspectives/" + museum + "/" + filename
     file = open(route)
     perspective = json.load(file)
-
-    daoAPI = DAO_api()
     
-    print("add perspective")
-    response = daoAPI.addPerspective(perspective)
+    response = requests.post("{}/v1.1/perspective".format(server), json=perspective)
     print(response)
     print(response.text)
     
