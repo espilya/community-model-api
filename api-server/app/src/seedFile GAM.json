@@ -132,7 +132,7 @@
         },
         {
             "sim_function": {
-                "name": "TaxonomySimilarityDAO",
+                "name": "EqualSimilarityDAO",
                 "params": [],
                 "on_attribute": {
                     "att_name": "Technique",
