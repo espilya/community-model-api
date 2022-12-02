@@ -282,7 +282,8 @@ class ExplainedCommunitiesDetection:
                     """
                     
                 return list(set(array2))
-            elif (isinstance(communityMembers_interactionAttributeList[0],str)):
+            #elif (isinstance(communityMembers_interactionAttributeList[0],str)):
+            elif (isinstance(communityMembers_interactionAttributeList[0],list) == False):
                 return statistics.mode(communityMembers_interactionAttributeList)
             # iconclass attribute
             else:
