@@ -555,6 +555,10 @@ class ExplainedCommunitiesDetection:
                             
                             """
                             
+                            print("before entering iconclass extra functionality")
+                            print(col)
+                            print("\n")
+                            
                             if (col == "community_" + "iconclassArrayIDs"):
                                 for iconclassID in result:
                                     iconclassText = self.daoAPI_iconclass.getIconclassText(iconclassID)
@@ -562,7 +566,7 @@ class ExplainedCommunitiesDetection:
                             
                             #result2.append(str(array) + " " + "0.0")
                                 
-                            #print("result2: " + str(result2))
+                            print("result2: " + str(result2))
                             
                             
                             #explainedCommunityProperties[col] = "\n".join(result2)
