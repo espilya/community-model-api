@@ -148,8 +148,8 @@ class Handler(BaseHTTPRequestHandler):
                         """
                         attributeLabel = user["category"] + "." + user["pname"]
                         if (similarityFunction['sim_function']['on_attribute']['att_name'] == attributeLabel):
-                            flag = {'perspectiveId': perspective['id'], 'userid': user['userid'], 'flag': True}
-                            #flag = {'perspectiveId': perspective['id'], 'userid': 'flagAllUsers', 'flag': True}
+                            #flag = {'perspectiveId': perspective['id'], 'userid': user['userid'], 'flag': True}
+                            flag = {'perspectiveId': perspective['id'], 'userid': 'flagAllUsers', 'flag': True}
                             daoFlags.updateFlag(flag)
 
         elif first_arg == "update_CM":
@@ -393,7 +393,7 @@ if __name__ == '__main__':
     
     
     # To prepare things
-    # clearDatabase()
+    clearDatabase()
     #initializeDatabase()
     
     #importDatabase()
