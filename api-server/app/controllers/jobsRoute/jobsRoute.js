@@ -100,7 +100,7 @@ function generateProgressResponse(job) {
     response["job"]["path"] = "/v1.1/jobs/" + job.jobId;
     response["job"]["jobId"] = job.jobId;
     response["job"]["start-time"] = job["start-time"];
-    var timeLeft = (job["start-time"].getTime() + (30 * 60 * 1000)) - (new Date().getTime());
+    var timeLeft = (job["start-time"].getTime() + (30 * 60 * 1000)) - (new Date().getTime()); 
     response["job"]["time-to-autoremove-job"] = timeLeft / (1000 * 60) + " minutes";
 
     return response
@@ -113,9 +113,11 @@ function generateProgressResponse(job) {
  * 
  */
 router.get('/:job_id', function (req, res, next) {
-    console.log(jobManager.getJobs())
-    var jobId = req.params.job_id
-    var job = jobManager.getJob(req.params.job_id)
+    console.log("List of current jobs: ");
+    console.log(JSON.stringify(jobManager.getJobs(), null, " "));
+
+    var jobId = req.params.job_id;
+    var job = jobManager.getJob(req.params.job_id);
 
     if (job == null) {
         res.status(404).send("JobsManager: Job not found");
@@ -143,7 +145,7 @@ router.get('/:job_id', function (req, res, next) {
                         getData(request, param)
                             .then(function (data) {
                                 if (!job.autoremove) {
-                                    jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                    jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min = 60 * 5
                                 }
                                 res.status(200).send(generateCompletedResponse(job, data));
                             })

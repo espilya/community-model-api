@@ -97,12 +97,10 @@ module.exports.PostPerspective = function PostPerspective(req, res, next) {
         .then(function (perspectiveId) {
           console.log(perspectiveId)
           var response = { insertedPerspectiveId: perspectiveId };
-          res.status(202);
-          res.send(response);
+          res.status(202).send(response);
         })
         .catch(function (response) {
-          res.status(400);
-          res.send(response);
+          res.status(400).send(response);
         });
     });
     

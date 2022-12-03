@@ -10,9 +10,10 @@ module.exports.updateUsers = function updateUsers(req, res, next) {
       Users.updateUsers(req.body)
         .then(function (response) {
           res.status(204);
-          res.send(response);
+          res.send(); 
         })
         .catch(function (response) {
+          console.log(response)
           res.status(500);
           res.send(response);
         });

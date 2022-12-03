@@ -17,7 +17,7 @@ exports.getCommunities = function() {
         CommunityDAO.all( (communities) => {
           result['application/json'] = communities;
           if (Object.keys(result).length > 0) {
-            console.log("resolve")
+
             resolve(result[Object.keys(result)[0]]);
           } else {
             resolve();

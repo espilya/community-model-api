@@ -45,7 +45,7 @@ addJob = function (jobId, request, param) {
     }
     jobsList.push(job);
 
-    removeJobWithTimeout(jobId, 60 * 30); // 30 min
+    removeJobWithTimeout(jobId, 60 * 30); // 30 min = 60 * 30
 };
 
 /**
@@ -54,6 +54,7 @@ addJob = function (jobId, request, param) {
 removeJob = function (jobId) {
     var job = jobsList.find(element => element.jobId == jobId);
     if (job != undefined) { //if still not removed removed by timeout
+        console.log(`<JobsQueue> removing job => ${jobId}`);
         const index = jobsList.indexOf(job);
         if (index > -1) { // only splice array when item is found
             jobsList.splice(index, 1); // 2nd parameter means remove one item only
@@ -62,17 +63,17 @@ removeJob = function (jobId) {
 };
 
 removeJobWithTimeout = removeTimeout = function (jobId, seconds) {
-    if (!getJob(jobId).autoremove) {
-        getJob(jobId).autoremove = true;
-        setTimeout(() => {
-            console.log(`<JobsQueue> auto-removing job => ${jobId}`);
-            try {
-                removeJob(jobId)
-            } catch (error) {
-                console.log(error)
-            }
-        }, seconds * 1000, jobId, jobsList);
-    }
+    // if (!getJob(jobId).autoremove) {
+    getJob(jobId).autoremove = true;
+    setTimeout(() => {
+        // console.log(`<JobsQueue> auto-removing job => ${jobId}`);
+        try {
+            removeJob(jobId)
+        } catch (error) {
+            console.log(error)
+        }
+    }, seconds * 1000, jobId, jobsList);
+    // }
 
 }
 

@@ -57,6 +57,9 @@ router.get('/file/:fileId', function (req, res, next) {
                 CommunitiesVis.getById(fileId)
                     .then(function (response) {
                         res.status(200).send(response);
+                    })
+                    .catch(function (response) {
+                        res.status(400).send(response);
                     });
             }
             else { //flag exist

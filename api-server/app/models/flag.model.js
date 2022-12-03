@@ -35,7 +35,7 @@ module.exports = mongoose => {
           onError("checkFlag:" + error);
         } else {
           if (data) {
-            console.log(data.toJSON())
+            // console.log(data.toJSON())
             onSuccess(data.toJSON());
           }
           else {
@@ -45,7 +45,7 @@ module.exports = mongoose => {
       });
     },
     checkFlagById: function (id, onSuccess, onError) {
-      console.log("id " + id)
+      // console.log("id " + id)
       Flags.findOne({ "perspectiveId": id }, { projection: { _id: 0 } }, function (error, data) {
         if (error) {
           console.log("errorHere")
