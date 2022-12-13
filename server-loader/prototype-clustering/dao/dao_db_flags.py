@@ -62,10 +62,13 @@ class DAO_db_flags(DAO_db):
             self.db_flags.insert_many(temp)
         else:
             self.db_flags.insert_one(temp)
+
+    def replaceFlag(self, flagJSON):
+        self.db_flags.replace_one({'perspectiveId': flagJSON['perspectiveId']}, flagJSON)
             
     def updateFlag(self, flagJSON):
         key = {'perspectiveId': flagJSON['perspectiveId'], 'userid': flagJSON['userid']}
-        self.db_flags.update_one(key,{"$set": flagJSON},upsert=True)
+        self.db_flags.update_one(key, {"$set": flagJSON}, upsert=True)
  
     def getFlags(self):
         """

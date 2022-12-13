@@ -1,7 +1,6 @@
 const idParam = 'communityId';
 const Communities = require('../service/CommunitiesService.js');
 const Flags = require('../service/FlagsService.js');
-var post = require('./postUpdateCM');
 var jobManager = require('./jobsRoute/jobsManager.js');
 
 module.exports.getCommunities = function getCommunities(req, res, next) {
@@ -17,9 +16,13 @@ module.exports.getCommunities = function getCommunities(req, res, next) {
           });
       }
       else {
-        post.update_CM("allPerspectives");
-        var data = jobManager.createJob(0, "getCommunities")
-        res.status(202).send(data);
+        jobManager.createJob(0, "getCommunities")
+          .then(function (path) {
+            res.status(202).send(path);
+          })
+          .catch(function (error) {
+            res.status(400).send(error);
+          });
       }
     })
     .catch(function (response) {
@@ -39,9 +42,13 @@ module.exports.getCommunityById = function getCommunityById(req, res, next) {
             res.status(200).send(community);
           }
           else { //flag exist
-            post.update_CM(community.perspectiveI);
-            var data = jobManager.createJob(communityId, "getCommunityById")
-            res.status(202).send(data);
+            jobManager.createJob(communityId, "getCommunityById")
+              .then(function (path) {
+                res.status(202).send(path);
+              })
+              .catch(function (error) {
+                res.status(400).send(error);
+              });
           }
         })
         .catch(function (response) {
@@ -69,9 +76,13 @@ module.exports.listCommunityUsers = function listCommunityUsers(req, res, next) 
                 res.status(200).send(users);
               }
               else { //flag exist
-                post.update_CM(community.perspectiveId);
-                var data = jobManager.createJob(communityId, "listCommunityUsers")
-                res.status(202).send(data);
+                jobManager.createJob(communityId, "listCommunityUsers")
+                  .then(function (path) {
+                    res.status(202).send(path);
+                  })
+                  .catch(function (error) {
+                    res.status(400).send(error);
+                  });
               }
             })
             .catch(function (response) {

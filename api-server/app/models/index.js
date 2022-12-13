@@ -11,7 +11,6 @@ db.similarityDAO = require("./similarity.model.js")(mongoose);
 db.usersDAO = require("./users.model.js")(mongoose);
 db.perspectivesDAO = require("./perspective.model.js")(mongoose);
 db.flagDAO = require("./flag.model.js")(mongoose);
-db.DatabaseModelDAO = require("./database.model.js")(mongoose);
 
 // Connects to mongoDB
 module.exports = {

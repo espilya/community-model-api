@@ -2,7 +2,6 @@
 // const Perspectives = require('../../service/PerspectivesService.js');
 const CommunitiesVis = require('../service/CommunitiesVisualizationService.js');
 const Flags = require('../service/FlagsService.js');
-var post = require('./postUpdateCM');
 var jobManager = require('./jobsRoute/jobsManager.js');
 
 var express = require('express');
@@ -29,9 +28,18 @@ router.get('/index', function (req, res, next) {
                     });
             }
             else {
-                post.update_CM("allPerspectives");
-                var data = jobManager.createJob(0, "getFilesIndex")
-                res.status(202).send(data);
+                try {
+                    jobManager.createJob(0, "getFilesIndex")
+                        .then(function (path) {
+                            res.status(202).send(path);
+                        })
+                        .catch(function (error) {
+                            res.status(400).send(error);
+                        });
+
+                } catch (error) {
+                    console.log("aa " + error)
+                }
             }
         })
         .catch(function (response) {
@@ -63,9 +71,13 @@ router.get('/file/:fileId', function (req, res, next) {
                     });
             }
             else { //flag exist
-                post.update_CM(fileId);
-                var data = jobManager.createJob(fileId, "getFileById")
-                res.status(202).send(data);
+                jobManager.createJob(fileId, "getFileById")
+                    .then(function (path) {
+                        res.status(202).send(path);
+                    })
+                    .catch(function (error) {
+                        res.status(400).send(error);
+                    });
             }
         })
         .catch(function (response) {

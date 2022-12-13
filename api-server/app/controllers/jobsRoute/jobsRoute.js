@@ -72,6 +72,7 @@ var jobCompleted = {
     }
 }
 
+var jobPrefix = "/v1.1/jobs/";
 
 /**
  * Returns filled response template 
@@ -80,7 +81,7 @@ var jobCompleted = {
  */
 function generateCompletedResponse(job, data) {
     var response = jobCompleted;
-    response["job"]["path"] = "/v1.1/jobs/" + job.jobId;
+    response["job"]["path"] = jobPrefix + job.jobId;
     response["job"]["jobId"] = job.jobId;
     response["job"]["data"] = data;
     response["job"]["start-time"] = job["start-time"];
@@ -97,7 +98,7 @@ function generateCompletedResponse(job, data) {
  */
 function generateProgressResponse(job) {
     var response = jobStarted;
-    response["job"]["path"] = "/v1.1/jobs/" + job.jobId;
+    response["job"]["path"] = jobPrefix + job.jobId;
     response["job"]["jobId"] = job.jobId;
     response["job"]["start-time"] = job["start-time"];
     var timeLeft = (job["start-time"].getTime() + (30 * 60 * 1000)) - (new Date().getTime()); 

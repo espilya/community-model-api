@@ -148,8 +148,8 @@ class Handler(BaseHTTPRequestHandler):
                         """
                         attributeLabel = user["category"] + "." + user["pname"]
                         if (similarityFunction['sim_function']['on_attribute']['att_name'] == attributeLabel):
-                            #flag = {'perspectiveId': perspective['id'], 'userid': user['userid'], 'flag': True}
-                            flag = {'perspectiveId': perspective['id'], 'userid': 'flagAllUsers', 'flag': True}
+                            flag = {'perspectiveId': perspective['id'], 'userid': user['userid'], 'needToprocess': True}
+                            # flag = {'perspectiveId': perspective['id'], 'userid': 'flagAllUsers', 'flag': True}
                             daoFlags.updateFlag(flag)
 
         elif first_arg == "update_CM":
@@ -190,10 +190,17 @@ class Handler(BaseHTTPRequestHandler):
             if flag["perspectiveId"] not in perspectiveFlagsDict:
                 perspectiveFlagsDict[flag["perspectiveId"]] = []
             perspectiveFlagsDict[flag["perspectiveId"]].append(flag['userid'])
+            # needToprocess to false
+            flag["needToprocess"] = False
+            daoFlags.replaceFlag(flag)
 
             
         # Update each perspective communities
         for perspectiveId in perspectiveFlagsDict:
+
+            # update "needToprocess" from True to False
+            # daoFlags.updateFlag(flag, upsert=False)
+
             perspective = daoPerspectives.getPerspective(perspectiveId)
             
             # Call to the community model
