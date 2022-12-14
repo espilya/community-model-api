@@ -72,6 +72,7 @@ var jobCompleted = {
     }
 }
 
+var jobPrefix = "/v1.1/jobs/";
 
 /**
  * Returns filled response template 
@@ -79,8 +80,11 @@ var jobCompleted = {
  * @returns Completed response
  */
 function generateCompletedResponse(job, data) {
+    advanceState(job);
+    // job["job-state"] = "COMPLETED";
+    // job["job-status"] = "SUCCESS";
     var response = jobCompleted;
-    response["job"]["path"] = "/v1.1/jobs/" + job.jobId;
+    response["job"]["path"] = jobPrefix + job.jobId;
     response["job"]["jobId"] = job.jobId;
     response["job"]["data"] = data;
     response["job"]["start-time"] = job["start-time"];
@@ -97,7 +101,7 @@ function generateCompletedResponse(job, data) {
  */
 function generateProgressResponse(job) {
     var response = jobStarted;
-    response["job"]["path"] = "/v1.1/jobs/" + job.jobId;
+    response["job"]["path"] = jobPrefix + job.jobId;
     response["job"]["jobId"] = job.jobId;
     response["job"]["start-time"] = job["start-time"];
     var timeLeft = (job["start-time"].getTime() + (30 * 60 * 1000)) - (new Date().getTime()); 
@@ -144,13 +148,13 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                if (!job.autoremove) {
-                                    jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min = 60 * 5
-                                }
+                                // if (!job.autoremove) {
+                                //     jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min = 60 * 5
+                                // }
                                 res.status(200).send(generateCompletedResponse(job, data));
                             })
-                            .catch(function (data) {
-                                res.status(404).send("JobsManager: getData exception");
+                            .catch(function (error) {
+                                res.status(404).send("JobsManager: getData exception: " + error);
                             });
                     }
                     else {
@@ -169,9 +173,9 @@ router.get('/:job_id', function (req, res, next) {
                         // Get data from mongodb if flag is positive
                         getData(request, param)
                             .then(function (data) {
-                                if (!job.autoremove) {
-                                    jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
-                                }
+                                // if (!job.autoremove) {
+                                //     jobManager.removeJobWithTimeout(jobId, 60 * 5); // 5 min
+                                // }
                                 res.status(200).send(generateCompletedResponse(job, data));
                             })
                             .catch(function (error) {

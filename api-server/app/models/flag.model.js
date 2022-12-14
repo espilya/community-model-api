@@ -2,7 +2,8 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       perspectiveId: String,
-      userid: String
+      userid: String,
+      needToprocess: Boolean
     }
   );
 
@@ -29,14 +30,14 @@ module.exports = mongoose => {
       });
     },
     checkFlag: function (onSuccess, onError) {
-      Flags.findOne({}, function (error, data) {
+      Flags.find({}, function (error, data) {
         // var res = JSON.stringify(data)
         if (error) {
           onError("checkFlag:" + error);
         } else {
-          if (data) {
+          if (Object.keys(data).length > 0) {
             // console.log(data.toJSON())
-            onSuccess(data.toJSON());
+            onSuccess(data);
           }
           else {
             onSuccess(null);

@@ -4,91 +4,13 @@
  */
 
 const Flags = require('../../service/FlagsService.js');
-var post = require('./postUpdateCM');
 
 var jobsList = []
 
-var jobPrefix = "/v1.1/jobs/";
-
-jobTemplate = {
-    "job": {
-        "path": "xxx",                  // path to id
-        "jobId": "xx",                  // id
-        "name": "CM Update",            // request type
-        "job-state": "STARTED",         // INQUEUE,     STARTED,    COMPLETED 
-        "job-status": "INPROGRESS",     // INQUEUE,     INPROGRESS, SUCCESS/ERROR -- state=completed -> status=SUCCESS/ERROR
-        "start-time": "",               // new Date
-        "time-to-autoremove-job": "",   // timeleft
-        "data": {}                      // data
-    }
-}
-
-
-/*
-    Main loop
-*/
-startJobManager = function () {
-    // repeat 
-    setInterval(function () {
-        checkAndStartNewJob();
-        autoremoveJobs();
-    }, 2000);
-};
-
-
-advanceState = function (job) {
-    if (job["job-state"] == "INQUEUE") {
-        job["job-state"] = "STARTED";
-        job["job-status"] = "INPROGRESS";
-    }
-    else if (job["job-state"] == "STARTED") {
-        job["job-state"] = "COMPLETED";
-        job["job-status"] = "SUCCESS";
-    }
-    // else{
-    //     throw 'Incorrect use of "advanceState()" function';
-    // }
-}
-
-checkAndStartNewJob = function () {
-    return new Promise(function (resolve, reject) {
-        Flags.getFlags()
-            .then(function (flags) {
-                if (flags != null) {
-                    // check if CM is updating
-                    var updatesNow = false;
-                    flags.forEach(flag => {
-                        if (!flag["needToprocess"])
-                            updatesNow = true;
-                    });
-                    
-                    // find first job that need an update
-                    var jobToUpdate = jobsList.find(job => (job["job-state"] == "INQUEUE" && job["job-status"] == "INQUEUE"));
-                    console.log(jobToUpdate);
-                    
-                    if (!updatesNow && jobToUpdate != undefined) {
-                        post.update_CM(jobToUpdate["param"]);
-                        advanceState(jobToUpdate);
-                    }
-                }
-                resolve();
-            })
-            .catch(function (error) {
-                console.log("<JobsQueue> ERROR checkAndStartNewJobs: " + error);
-                reject(error);
-            });
-    });
-};
-
-
-autoremoveJobs = function () {
-    // if actualtime > timecreation+livetime then remove job
-};
-
-
 /**
- * Returns a path for an existing or a new job.
- * jobPath 
+ * Returns a boolean and a jobPath. A path for an existing or a new job.
+ * [Boolean, jobPath] 
+ * Boolean = existence of the same job
  */
 createJob = function (param, requestTypeName) {
     return new Promise(function (resolve, reject) {
@@ -100,18 +22,18 @@ createJob = function (param, requestTypeName) {
                     console.log("<JobsQueue> generateId: " + jobId)
                     console.log("<JobsQueue> param: " + param)
                     addJob(jobId, requestTypeName, param);
-                    var path = jobPrefix + jobId
+                    var path = "/v1.1/jobs/" + jobId
                     var data = {
                         "path": path
                     }
-                    resolve(data);
+                    resolve([false, data]);
                 }
                 else {
-                    var path = jobPrefix + existingJob["jobId"]
+                    var path = "/v1.1/jobs/" + existingJob["jobId"]
                     var data = {
                         "path": path
                     }
-                    resolve(data);
+                    resolve([true, data]);
                 }
             })
             .catch(function (error) {
@@ -131,10 +53,8 @@ findExistingJob = function (param, requestTypeName) {
                 var job = null;
                 console.log(flags)
                 jobsList.forEach(elem => {
-                    if (elem["request"] == requestTypeName && elem["param"] == param) {
-                        if (JSON.stringify(elem["flags_id"]) == JSON.stringify(flags)) {
-                            job = elem;
-                        }
+                    if (elem["request"] == requestTypeName && elem["param"] == param && JSON.stringify(elem["flags_id"]) == JSON.stringify(flags)) {
+                        job = elem;
                     }
                 });
                 resolve(job);
@@ -166,25 +86,21 @@ getJobs = function () {
 addJob = function (jobId, request, param) {
     Flags.getFlags()
         .then(function (data) {
-
-            // data.forEach(element => {
-
-            // });
-
+            
+            data.forEach(element => {
+                
+            });
             var job = {
-                path: "",
                 jobId: jobId,
-                name: "CM Update",
-                "job-state": "INQUEUE",
-                "job-status": "INQUEUE",
-                "start-time": new Date(),
-                "time-to-autoremove-job": "",
                 request: request,
                 param: param,
+                "start-time": new Date(),
                 autoremove: false,
                 flags_id: data
             }
             jobsList.push(job);
+
+            removeJobWithTimeout(jobId, 60 * 30); // 30 min = 60 * 30
         })
         .catch(function (error) {
             console.log("<JobsQueue> ERROR addJob.Flags.getFlags: " + error)
@@ -207,15 +123,15 @@ removeJob = function (jobId) {
 
 removeJobWithTimeout = removeTimeout = function (jobId, seconds) {
     // if (!getJob(jobId).autoremove) {
-    // getJob(jobId).autoremove = true;
-    // setTimeout(() => {
-    //     // console.log(`<JobsQueue> auto-removing job => ${jobId}`);
-    //     try {
-    //         removeJob(jobId)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }, seconds * 1000, jobId, jobsList);
+    getJob(jobId).autoremove = true;
+    setTimeout(() => {
+        // console.log(`<JobsQueue> auto-removing job => ${jobId}`);
+        try {
+            removeJob(jobId)
+        } catch (error) {
+            console.log(error)
+        }
+    }, seconds * 1000, jobId, jobsList);
     // }
 
 }
@@ -239,8 +155,7 @@ generateId = function (jobId) {
 };
 
 
-exports.advanceState = advanceState;
-exports.startJobManager = startJobManager;
+
 exports.createJob = createJob;
 // exports.findExistingJob = findExistingJob;
 exports.getJob = getJob;
@@ -251,3 +166,31 @@ exports.removeJobWithTimeout = removeJobWithTimeout;
 exports.generateId = generateId;
 
 
+
+// Refactoring for future
+
+/*
+
+var map = {};
+
+map[Date.now()] = ['a', 'b'];
+console.log(map);
+
+setTimeout(function() {
+  map[Date.now()] = ['c', 'd'];
+  console.log(map);
+}, 5000);
+
+setInterval(function() {
+  var times = Object.keys(map);
+  
+  times.forEach(function(time) {
+    if(Date.now() > (+time + 14000)) {
+      delete map[time];
+    }
+  });
+  
+  console.log(map);
+}, 1000);
+
+*/

@@ -60,7 +60,8 @@ function oldPost(data = "empty") {
 
 module.exports = {
   update_CM: function (data) {
-    console.log("data" + data)
-    oldPost(data)
+    if (data == 0) data = "0";
+    console.log("postData: " + data);
+    oldPost(data);
   }
 };

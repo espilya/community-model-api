@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 require("dotenv").config();
 
 const path = require('path');
+const jobManager = require('./controllers/jobsRoute/jobsManager.js');
 
 const {
   middleware: openApiMiddleware,
@@ -80,6 +81,7 @@ module.exports = {
         }
       });
     });
+    jobManager.startJobManager();
     await initDatabaseConnection(() => app.emit("ready"));
   },
   test: async function (onReady) {
