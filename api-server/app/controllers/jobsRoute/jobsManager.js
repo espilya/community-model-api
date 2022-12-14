@@ -28,34 +28,47 @@ jobTemplate = {
     Main loop
 */
 startJobManager = function () {
-    // repeat every second
+    // repeat 
     setInterval(function () {
-        checkAndStartNewJob()
-            .then(function () {
-                autoremoveJobs();
-            })
+        checkAndStartNewJob();
+        autoremoveJobs();
     }, 2000);
 };
+
+
+advanceState = function (job) {
+    if (job["job-state"] == "INQUEUE") {
+        job["job-state"] = "STARTED";
+        job["job-status"] = "INPROGRESS";
+    }
+    else if (job["job-state"] == "STARTED") {
+        job["job-state"] = "COMPLETED";
+        job["job-status"] = "SUCCESS";
+    }
+    // else{
+    //     throw 'Incorrect use of "advanceState()" function';
+    // }
+}
 
 checkAndStartNewJob = function () {
     return new Promise(function (resolve, reject) {
         Flags.getFlags()
             .then(function (flags) {
                 if (flags != null) {
+                    // check if CM is updating
                     var updatesNow = false;
                     flags.forEach(flag => {
                         if (!flag["needToprocess"])
                             updatesNow = true;
                     });
-                    if (!updatesNow && jobsList.length > 0) {
-                        //      jobToUpdate = getFirstJobFromList()
-                        //      postUpdate(jobToUpdate.getAttributes())
-                        //      jobToUpdate.changeToNextState() // en cola -> procesando 
-                        var jobToUpdate = jobsList[0];
-                        console.log(jobToUpdate)
+                    
+                    // find first job that need an update
+                    var jobToUpdate = jobsList.find(job => (job["job-state"] == "INQUEUE" && job["job-status"] == "INQUEUE"));
+                    console.log(jobToUpdate);
+                    
+                    if (!updatesNow && jobToUpdate != undefined) {
                         post.update_CM(jobToUpdate["param"]);
-                        jobToUpdate["job-state"] = "STARTED"
-                        jobToUpdate["job-status"] = "INPROGRESS"
+                        advanceState(jobToUpdate);
                     }
                 }
                 resolve();
@@ -172,8 +185,6 @@ addJob = function (jobId, request, param) {
                 flags_id: data
             }
             jobsList.push(job);
-
-            removeJobWithTimeout(jobId, 60 * 30); // 30 min = 60 * 30
         })
         .catch(function (error) {
             console.log("<JobsQueue> ERROR addJob.Flags.getFlags: " + error)
@@ -228,7 +239,7 @@ generateId = function (jobId) {
 };
 
 
-
+exports.advanceState = advanceState;
 exports.startJobManager = startJobManager;
 exports.createJob = createJob;
 // exports.findExistingJob = findExistingJob;

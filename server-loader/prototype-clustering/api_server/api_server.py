@@ -198,9 +198,6 @@ class Handler(BaseHTTPRequestHandler):
         # Update each perspective communities
         for perspectiveId in perspectiveFlagsDict:
 
-            # update "needToprocess" from True to False
-            # daoFlags.updateFlag(flag, upsert=False)
-
             perspective = daoPerspectives.getPerspective(perspectiveId)
             
             # Call to the community model
