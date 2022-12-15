@@ -28,6 +28,8 @@ class DecadeSimilarity(SimilarityDAO):
         double
             Distance between the two elements.
         """
-    
-        return (abs(elemA - elemB))
+        decadeA = int(elemA / 10)
+        decadeB = int(elemB / 10)
+        
+        return (abs(decadeA - decadeB)) / max(decadeA,decadeB)
 
