@@ -24,37 +24,37 @@ class ExplainedCommunitiesDetection:
             sim (str/Class, optional): Similarity function used in clustering
             technique. Defaults to 'euclidean'.
         """
+        # To get iconclass data
+        self.daoAPI_iconclass = DAO_api_iconclass()
+        
+        # Initialization
         self.algorithm = algorithm
         self.data = data.copy()
         self.distanceMatrix = distanceMatrix
         self.perspective = perspective
         
-        # To get iconclass data
-        self.daoAPI_iconclass = DAO_api_iconclass()
-        
+        self.user_attributes = []
+        self.interaction_attributes = []
+        self.artwork_attributes = []
         
         if (len(self.perspective) == 0):
             self.explanaible_attributes = self.data.columns
-            self.user_attributes = []
+            
         else:
         
-                      
-            
-            #for similarityFunction in self.perspective['similarity_functions']:
-            self.interaction_attributes = []
-            for similarityFunction in self.perspective['interaction_similarity_functions']:
-                self.interaction_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])
-
-            # artwork similarity features
-            self.artwork_attributes = []
-            for similarityFunction in self.perspective['similarity_functions']:
-                self.artwork_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])
-            #self.artwork_attributes = []
-            
-            self.user_attributes = []
+            # user's explicit attributes
             for userAttribute in self.perspective['user_attributes']:
                 self.user_attributes.append(userAttribute['att_name'])
-            
+                
+            # user's interaction features
+            for similarityFunction in self.perspective['interaction_similarity_functions']:
+                self.interaction_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])
+                
+            # artwork's similarity features
+            for similarityFunction in self.perspective['similarity_functions']:
+                self.artwork_attributes.append(similarityFunction['sim_function']['on_attribute']['att_name'])
+
+            # explainable attributes
             self.explanaible_attributes = []              
             if (self.explainInteractionAttributes() == False):
                 self.explanaible_attributes = self.artwork_attributes
@@ -130,9 +130,7 @@ class ExplainedCommunitiesDetection:
                     print(community[['userNameAuxiliar','community']])
                     print("\n")
             """
-            
-        
-        
+
         # Get medoids
         medoids_communities = self.getMedoidsCommunities(result2)
         
