@@ -64,7 +64,7 @@ class DAO_db_flags(DAO_db):
             self.db_flags.insert_one(temp)
 
     def replaceFlag(self, flagJSON):
-        self.db_flags.replace_one({'perspectiveId': flagJSON['perspectiveId']}, flagJSON)
+        self.db_flags.replace_one({'perspectiveId': flagJSON['perspectiveId'], 'userid': flagJSON['userid']}, flagJSON)
             
     def updateFlag(self, flagJSON):
         key = {'perspectiveId': flagJSON['perspectiveId'], 'userid': flagJSON['userid']}
@@ -83,7 +83,8 @@ class DAO_db_flags(DAO_db):
         :Parameters:
             flagJSON: Flag/s, Type: <class 'dict'> OR List[<class 'dict'>]
         """
-        self.db_flags.delete_one(flagJSON)
+        # self.db_flags.delete_one(flagJSON)
         #self.db_flags.delete_one({'id': flagId})
+        self.db_flags.delete_one({'perspectiveId': flagJSON['perspectiveId'], 'userid': flagJSON['userid']})
         
         
