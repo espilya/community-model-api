@@ -1,7 +1,0 @@
-Key;ANatPridePro;BReligousPro;CRealisticPro;DExtremistNeg;EReligousNeg;FRealisticNeg
-ANatPridePro;0.0;0.2;0.4;1.0;0.9;1.0
-BReligousPro;0.2;0.0;0.4;0.9;1.0;1.0
-CRealisticPro;0.4;0.4;0.0;1.0;1.0;1.0
-DExtremistNeg;1.0;0.9;1.0;0.0;0.2;0.4
-EReligousNeg;0.9;1.0;1.0;0.2;0.0;0.4
-FRealisticNeg;1.0;1.0;1.0;0.4;0.4;0.0

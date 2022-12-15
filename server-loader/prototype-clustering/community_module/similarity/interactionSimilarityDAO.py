@@ -76,66 +76,25 @@ class InteractionSimilarityDAO(SimilarityDAO):
             df2 = df.explode([self.interactionAttribute, self.interactionAttributeOrigin, self.interactionAttributeText])
             df3 = df2.loc[ df2[self.similarityColumn].str.len() != 0 ]
             
-            print("df sim column")
-            print(df[['userid', self.similarityColumn]])
-            print("\n")
-            
-            print("df2 sim column")
-            print(df2[['userid', self.similarityColumn]])
-            print("\n")
-            
-            print("df3 sim column")
-            print(df3[['userid', self.similarityColumn]])
-            print("\n")
-            
-            print("df2")
-            print(df2)
-            print("\n")
-            
-            print("df3")
-            print(df3)
-            print("\n")
-            
-            print("self.IO_data")
-            print(str(type(self.IO_data)))
-            print(self.IO_data)
-            print("\n")
-            
             # Remove NaN values
             df3 = df3.dropna(subset=[self.interactionAttribute])
             
             # Remove False emotion
             
-            
-            print("df3 sim column after removing NaN")
-            print(df3[['userid', self.similarityColumn]])
-            print("\n")
-            
             # Remove interactions with artworks that are not in artworks.json
             df3 = df3.loc[ df3[self.interactionAttributeOrigin].isin(self.IO_data['id'].to_list()) ]
             
+            groupList = []
+            groupList.append('userid')
+            groupList.extend(self.citizenAttributes)
             
-            
-            print("df3 sim column after removing interactions with artworks not in catalogue")
-            print(df3[['userid', self.similarityColumn]])
-            #print(df3)
-            print("\n")
-            
-            
-            
-
-            df4 = df3.groupby(['userid', 'RelationshipWithArt', 'RelationshipWithMuseum']).agg(list)         
+            df4 = df3.groupby(groupList).agg(list)         
             df4 = df4.reset_index() 
             
-            print("df4 sim column")
-            print(df4[['userid', self.similarityColumn]])
-            print("\n")
-            
             """
-            print("df4")
-            print(df4)
-            print("\n")
+            Reset userid to str (to stop encoding problems)
             """
+            df4['userid'] = df4['userid'].astype(str)
             
             
             # Add columns to save dominant interaction attributes
@@ -233,10 +192,6 @@ class InteractionSimilarityDAO(SimilarityDAO):
         
         with open(exportFile, "w") as outfile:
             json.dump(IO_distanceDict, outfile, indent=4)
-            
-        print("artworks distance matrix:")
-        print(IO_distanceDict['distanceMatrix'])
-        print("\n\n")
         
         return IO_distanceDict
         

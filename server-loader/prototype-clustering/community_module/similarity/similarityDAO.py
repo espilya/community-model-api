@@ -55,7 +55,7 @@ class SimilarityDAO:
         
 
     def distance(self,elemA, elemB):
-        """Method to obtain the distance between two element.
+        """Method to obtain the distance between two elements whose information is given as a row of a pandas dataframe.
 
         Parameters
         ----------
