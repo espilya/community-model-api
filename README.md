@@ -1,3 +1,4 @@
+Check the updated repository: https://github.com/gjimenezUCM/SPICE-CommunityModel
 
 # SPICE Community Model
 
